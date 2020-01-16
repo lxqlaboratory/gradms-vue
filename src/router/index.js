@@ -101,7 +101,7 @@ export const constantRoutes = [
         path: 'examAffairPersonManage',
         name: 'examAffairPersonManage',
         component: () => import('@/views/coursenew/examAffairPersonManage'),
-        meta: { title: '监考人员库'}
+        meta: { title: '监考人员管理'}
       },
       {
         path: 'examAffairPersonManageAdd',
