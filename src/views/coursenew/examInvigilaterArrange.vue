@@ -34,6 +34,42 @@
           </template>
         </el-table-column>
         <el-table-column
+          label="校区"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.campusName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="考场"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.examNo }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="科目"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.courseName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="教室"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.roomName }}
+          </template>
+        </el-table-column>
+        <el-table-column
           label="监考老师1"
           align="center"
           color="black"
