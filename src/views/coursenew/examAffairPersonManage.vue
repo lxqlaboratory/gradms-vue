@@ -39,6 +39,60 @@
             </template>
           </el-table-column>
           <el-table-column
+            label="学院"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.collegeName }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="二级学院"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.collegeName1 }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="聘任类型"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.employType }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="公司名称"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.employUnit }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="银行账号"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.bankNo }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="开户行"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.bankName }}
+            </template>
+          </el-table-column>
+          <el-table-column
             label="操作"
             align="center"
             color="black"

@@ -27,12 +27,12 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="学院名"
+          label="教师工号"
           align="center"
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.collegeName }}
+            {{ scope.row.perNum }}
           </template>
         </el-table-column>
         <el-table-column
@@ -45,12 +45,21 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="二级学院名"
+          label="学院名"
           align="center"
           color="black"
         >
           <template slot-scope="scope">
             {{ scope.row.collegeName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="二级学院"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.collegeName1 }}
           </template>
         </el-table-column>
       </el-table>
