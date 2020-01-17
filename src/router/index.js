@@ -74,10 +74,22 @@ export const constantRoutes = [
         meta: { title: '考务材料导出' }
       },
       {
+        path: 'examInvigilaterArrange',
+        name: 'examInvigilaterArrange',
+        component: () => import('@/views/coursenew/examInvigilaterArrange'),
+        meta: { title: '监考人员安排 '}
+      },
+      {
         path: 'examTourArrange',
         name: 'examTourArrange',
         component: () => import('@/views/coursenew/examTourArrange'),
         meta: { title: '巡考人员安排 '}
+      },
+      {
+        path: 'examAffairArrange',
+        name: 'examAffairArrange',
+        component: () => import('@/views/coursenew/examAffairArrange'),
+        meta: { title: '考务人员安排 '}
       },
       {
         path: 'teacherCourseTaskQuery',
@@ -101,7 +113,7 @@ export const constantRoutes = [
         path: 'examAffairPersonManage',
         name: 'examAffairPersonManage',
         component: () => import('@/views/coursenew/examAffairPersonManage'),
-        meta: { title: '监考人员管理'}
+        meta: { title: '监考人库管理'}
       },
       {
         path: 'examAffairPersonManageAdd',
