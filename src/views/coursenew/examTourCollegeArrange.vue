@@ -2,7 +2,7 @@
   <div class="app-container">
     <div class="container">
       <el-table
-        :data="examList"
+        :data="tourList"
         border
         style="width: 100%;"
         size="mini"
@@ -38,16 +38,16 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="考场"
+          label="科目"
           align="center"
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.examNo }}
+            {{ scope.row.coureName }}
           </template>
         </el-table-column>
         <el-table-column
-          label="科目"
+          label="巡考人员"
           align="center"
           color="black"
         >
@@ -56,37 +56,12 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="教室"
-          align="center"
-          color="black"
-        >
-          <template slot-scope="scope">
-            {{ scope.row.roomName }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="监考老师1"
+          label="添加人员"
           align="center"
           color="black"
         >
           <template slot-scope="scope">
             <el-select v-model="scope.row.invigilater1" placeholder="请选择">
-              <el-option
-                v-for="item in selectList"
-                :key="item.personId"
-                :label="item.perNumName"
-                :value="item.personId">
-              </el-option>
-            </el-select>
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="监考老师2"
-          align="center"
-          color="black"
-        >
-          <template slot-scope="scope">
-            <el-select v-model="scope.row.invigilater2" placeholder="请选择">
               <el-option
                 v-for="item in selectList"
                 :key="item.personId"
@@ -105,8 +80,8 @@
 </template>
 
 <script>
-import { newCultivateExamInvigilaterArrangeInit } from '@/api/coursenew'
-import { newCultivateExamInvigilaterArrangeSubmit } from '@/api/coursenew'
+import { newCultivateExamTourCollegeArrangeInit } from '@/api/coursenew'
+import { newCultivateExamTourCollegeArrangeSubmit } from '@/api/coursenew'
 export default {
   name: 'ExamTourCollegeArrange',
   data() {
@@ -120,13 +95,13 @@ export default {
   },
   methods: {
     fetchData() {
-      newCultivateExamInvigilaterArrangeInit({ 'session': document.cookie }).then(res => {
+      newCultivateExamTourCollegeArrangeInit({ 'session': document.cookie }).then(res => {
         this.examList = res.data.examList
         this.selectList = res.data.selectList
       })
     },
     submitTableData() {
-      newCultivateExamInvigilaterArrangeSubmit({ 'session': document.cookie, 'examList': this.examList }).then(res => {
+      newCultivateExamTourCollegeArrangeAdd({ 'session': document.cookie, 'examList': this.examList }).then(res => {
         console.log(res);
         if(res.code == '0'){
           this.$message({

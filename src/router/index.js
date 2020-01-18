@@ -80,9 +80,9 @@ export const constantRoutes = [
         meta: { title: '监考人员安排 '}
       },
       {
-        path: 'examTourArrange',
-        name: 'examTourArrange',
-        component: () => import('@/views/coursenew/examTourArrange'),
+        path: 'examTourCollegeArrange',
+        name: 'examTourCollegeArrange',
+        component: () => import('@/views/coursenew/examTourCollegeArrange'),
         meta: { title: '巡考人员安排 '}
       },
       {

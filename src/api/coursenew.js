@@ -57,19 +57,70 @@ export function getPersonInfoListByPerNumNameQuery(data) {
   })
 }
 
-//考试安排管理
-export function newCultivateExamexamInvigilaterArrangeInit(data) {
+//监考安排管理
+export function newCultivateExamInvigilaterArrangeInit(data) {
   return request({
-    url: '/api/coursenew/newCultivateExamexamInvigilaterArrangeInit',
+    url: '/api/coursenew/newCultivateExamInvigilaterArrangeInit',
     method: 'POST',
     data
   })
 }
 
-export function newCultivateExamexamInvigilaterArrangeSubmit(data) {
+export function newCultivateExamInvigilaterArrangeSubmit(data) {
   return request({
-    url: '/api/coursenew/newCultivateExamexamInvigilaterArrangeSubmit',
+    url: '/api/coursenew/newCultivateExamInvigilaterArrangeSubmit',
     method: 'POST',
     data
   })
 }
+
+//巡考安排管理
+export function newCultivateExamTourCollegeArrangeInit(data) {
+  return request({
+    url: '/api/coursenew/newCultivateExamTourCollegeArrangeInit',
+    method: 'POST',
+    data
+  })
+}
+
+export function newCultivateExamTourCollegeArrangePersonAdd(data) {
+  return request({
+    url: '/api/coursenew/newCultivateExamTourCollegeArrangePersonAdd',
+    method: 'POST',
+    data
+  })
+}
+
+export function newCultivateExamTourCollegeArrangePersonDelete(data) {
+  return request({
+    url: '/api/coursenew/newCultivateExamTourCollegeArrangePersonDelete',
+    method: 'POST',
+    data
+  })
+}
+
+//考务安排管理
+export function newCultivateExamAffairArrangeInit(data) {
+  return request({
+    url: '/api/coursenew/newCultivateExamAffairArrangeInit',
+    method: 'POST',
+    data
+  })
+}
+
+export function newCultivateExamAffairArrangePersonAdd(data) {
+  return request({
+    url: '/api/coursenew/newCultivateExamAffairArrangePersonAdd',
+    method: 'POST',
+    data
+  })
+}
+
+export function newCultivateExamAffairArrangePersonDelete(data) {
+  return request({
+    url: '/api/coursenew/newCultivateExamAffairArrangePersonDelete',
+    method: 'POST',
+    data
+  })
+}
+
