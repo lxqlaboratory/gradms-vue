@@ -108,7 +108,7 @@
 import { newCultivateExamInvigilaterArrangeInit } from '@/api/coursenew'
 import { newCultivateExamInvigilaterArrangeSubmit } from '@/api/coursenew'
 export default {
-  name: 'ExamTourCollegeArrange',
+  name: 'ExamInvigilaterArrange',
   data() {
     return {
       examList: [],

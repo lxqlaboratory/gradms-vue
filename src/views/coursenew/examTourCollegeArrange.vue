@@ -43,7 +43,7 @@
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.coureName }}
+            {{ scope.row.courseName }}
           </template>
         </el-table-column>
         <el-table-column
@@ -51,8 +51,10 @@
           align="center"
           color="black"
         >
-          <template slot-scope="scope">
-            {{ scope.row.courseName }}
+          <template slot-scope="scope" >
+            <template v-for="item in scope.row.personList" >
+              <el-button type="text" @click="deletePerson(scope.row.tourId,item.personId)" size="mini">{{ item.perName }}</el-button>  
+            </template>
           </template>
         </el-table-column>
         <el-table-column
@@ -61,7 +63,7 @@
           color="black"
         >
           <template slot-scope="scope">
-            <el-select v-model="scope.row.invigilater1" placeholder="请选择">
+            <el-select v-model="scope.row.personId" placeholder="请选择">
               <el-option
                 v-for="item in selectList"
                 :key="item.personId"
@@ -69,25 +71,24 @@
                 :value="item.personId">
               </el-option>
             </el-select>
+            <el-button type="text" @click="addPerson(scope.row.tourId,scope.row.personId)" size="mini">添加</el-button>
           </template>
         </el-table-column>
       </el-table>
-    </div>
-    <div align="center">
-      <el-button type="primary" @click="submitTableData">提交</el-button>
     </div>
   </div>
 </template>
 
 <script>
 import { newCultivateExamTourCollegeArrangeInit } from '@/api/coursenew'
-import { newCultivateExamTourCollegeArrangeSubmit } from '@/api/coursenew'
+import { newCultivateExamTourCollegeArrangePersonAdd } from '@/api/coursenew'
+import { newCultivateExamTourCollegeArrangePersonDelete } from '@/api/coursenew'
 export default {
   name: 'ExamTourCollegeArrange',
   data() {
     return {
-      examList: [],
-      selectList: []
+      selectList: [],
+      tourList: []
     }
   },
   created() {
@@ -96,24 +97,38 @@ export default {
   methods: {
     fetchData() {
       newCultivateExamTourCollegeArrangeInit({ 'session': document.cookie }).then(res => {
-        this.examList = res.data.examList
         this.selectList = res.data.selectList
+        this.tourList = res.data.tourList
       })
     },
-    submitTableData() {
-      newCultivateExamTourCollegeArrangeAdd({ 'session': document.cookie, 'examList': this.examList }).then(res => {
-        console.log(res);
+    addPerson(tourId,personId) {
+      newCultivateExamTourCollegeArrangePersonAdd({ 'session': document.cookie ,'tourId': tourId ,'personId': personId }).then(res=>{
         if(res.code == '0'){
           this.$message({
-            message: '提交成功',
+            message: '添加成功',
             type: 'success'
           });
-          this.fetchData()
-        }
-        else{
+         this.fetchData()
+        }else {
           this.$message({
             message: res.msg,
-            type: 'error'
+            type: 'warning'
+          });
+        }
+      })
+    },
+    deletePerson(tourId,personId) {
+      newCultivateExamTourCollegeArrangePersonDelete({ 'session': document.cookie ,'tourId': tourId ,'personId': personId }).then(res=>{
+        if(res.code == '0'){
+          this.$message({
+            message: '删除成功',
+            type: 'success'
+          });
+         this.fetchData()
+        }else {
+          this.$message({
+            message: res.msg,
+            type: 'warning'
           });
         }
       })
