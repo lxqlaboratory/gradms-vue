@@ -124,3 +124,12 @@ export function newCultivateExamAffairArrangePersonDelete(data) {
   })
 }
 
+//考务信息查询
+export function newCultivateExamAffairInfoQuery(data) {
+  return request({
+    url: '/api/coursenew/newCultivateExamAffairInfoQuery',
+    method: 'POST',
+    data
+  })
+}
+
