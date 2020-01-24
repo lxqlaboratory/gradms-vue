@@ -47,13 +47,49 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="巡考人员"
+          label="主考老师"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            <el-select v-model="scope.row.chiefExaminerId" placeholder="请选择">
+              <el-option
+                v-for="item in selectList"
+                :key="item.personId"
+                :label="item.perNumName"
+                :value="item.personId">
+              </el-option>
+            </el-select>
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="是否需要计算器"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            <el-checkbox v-model="scope.row.isComputer" >
+              </el-checkbox> 
+           </template>
+        </el-table-column>
+       <el-table-column
+          label="是否需要计算器"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            <el-checkbox v-model="scope.row.isScratchPaper"  ></el-checkbox> 
+           </template>
+        </el-table-column>
+
+        <el-table-column
+          label="巡考人员"  
           align="center"
           color="black"
         >
           <template slot-scope="scope" >
             <template v-for="item in scope.row.personList" >
-              <el-button type="text" @click="deletePerson(scope.row.tourId,item.personId)" size="mini">{{ item.perName }}</el-button>  
+              <el-button type="text" @click="deletePerson(scope.row.tourId,item.personId)" size="mini"> {{ item.perName }}</el-button>  
             </template>
           </template>
         </el-table-column>
@@ -76,6 +112,9 @@
         </el-table-column>
       </el-table>
     </div>
+    <div align="center">
+      <el-button type="primary" @click="submitTableData">提交</el-button>
+    </div>
   </div>
 </template>
 
@@ -83,6 +122,7 @@
 import { newCultivateExamTourCollegeArrangeInit } from '@/api/coursenew'
 import { newCultivateExamTourCollegeArrangePersonAdd } from '@/api/coursenew'
 import { newCultivateExamTourCollegeArrangePersonDelete } from '@/api/coursenew'
+import { newCultivateExamTourCollegeArrangeSubmit} from '@/api/coursenew'
 export default {
   name: 'ExamTourCollegeArrange',
   data() {
@@ -129,6 +169,24 @@ export default {
           this.$message({
             message: res.msg,
             type: 'warning'
+          });
+        }
+      })
+    },    
+    submitTableData() {
+      newCultivateExamTourCollegeArrangeSubmit({ 'session': document.cookie, 'tourList': this.tourList }).then(res => {
+        console.log(res);
+        if(res.code == '0'){
+          this.$message({
+            message: '提交成功',
+            type: 'success'
+          });
+          this.fetchData()
+        }
+        else{
+          this.$message({
+            message: res.msg,
+            type: 'error'
           });
         }
       })

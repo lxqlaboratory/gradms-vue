@@ -98,6 +98,14 @@ export function newCultivateExamTourCollegeArrangePersonDelete(data) {
     data
   })
 }
+export function newCultivateExamTourCollegeArrangeSubmit(data) {
+  return request({
+    url: '/api/coursenew/newCultivateExamTourCollegeArrangeSubmit',
+    method: 'POST',
+    data
+  })
+}
+
 
 //考务安排管理
 export function newCultivateExamAffairArrangeInit(data) {
