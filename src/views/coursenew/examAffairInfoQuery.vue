@@ -75,7 +75,8 @@
 <script>
 
 
-import XLSX from 'xlsx';
+import XlsxPopulate from 'xlsx-populate';
+import { saveAs } from 'file-saver';
 import { newCultivateExamAffairInfoQuery } from '@/api/coursenew'
 export default {
   name: 'ExamAffairInfoQuery',
@@ -101,49 +102,57 @@ export default {
       var sheetName = "监考表";
 
       // head定义了整个xlsx的顺序，里面的内容时json object的key
-      var header = ["examDate", "campusName", "courseName", "roomName", "affairType"];
-      
-      var ws = XLSX.utils.aoa_to_sheet([[sheetName]]
-        , {header: header, skipHeader: true});
+      const header = ["examDate", "campusName", "courseName", "roomName", "affairType"];
+      const headerExcel = ["考试日期", "校区", "科目", "考试地点", "工作类型"];
 
-      // 定义了json和key和xlxs和header的对应关系
-      XLSX.utils.sheet_add_json(ws,
-        [{courseName: "科目", affairType: "工作类型", examDate: "考试日期", campusName: "校区", roomName: "考试地点"}]
-        , {header: header, skipHeader: true, origin: "A2"});
+      const XlsxPopulate = require('xlsx-populate');
 
-      // 添加数据
-      XLSX.utils.sheet_add_json(ws, this.affairList,
-        {
-          header: header,
-          skipHeader:true, origin: "A3"});
+      // Load a new blank workbook, refer:https://github.com/dtjohnson/xlsx-populate
+      XlsxPopulate.fromBlankAsync()
+        .then(workbook => {
+        
+        // Set worksheet mame
+        var ws = workbook.sheet(0);
+        ws.name(sheetName);
+        
+        // Set table name
+        const r = ws.range("A1:E1");
+        r.merged(true);
+        r.value(sheetName);
+        r.style({horizontalAlignment: "center", verticalAlignment : "center"});
+        ws.row(1).height(30);
 
-      // 更改列宽度
-      var wscols = [
-        {wch:20},
-        {wch:20},
-        {wch:20},
-        {wch:20},
-        {wch:20}
-      ];
+        // set header
+        ws.cell("A2").value([headerExcel]);
 
-      ws['!cols'] = wscols;
-      
-      // Merge A1 to E1,  s = start, r = row, c=col, e= end
-      const merge = [
-        { s: { r: 0, c: 0 }, e: { r: 0, c: 4 } }
-      ];
-      ws["!merges"] = merge;
+        // set column width, it can be auto adjust with calculate max of data
+        ws.column("A").width(20);
+        ws.column("B").width(20);
+        ws.column("C").width(20);
+        ws.column("D").width(20);
+        ws.column("E").width(20);
 
-      ws["A1"].v = sheetName;
-      
-      // 创建工作簿
-      var wb = XLSX.utils.book_new();
+        // create data from array of json object to array of array
+        var valueArray = this.affairList.map(
+          item => {
+            var va = [];
+            header.forEach(element => {
+              va.push(item[element])
+            });
+            return va;
+          }
+        )
 
-      // 将工作表添加到工作簿
-      XLSX.utils.book_append_sheet(wb, ws, sheetName);
+        // set data
+        ws.cell("A3").value(valueArray);
+        
+        // Write to blob.
+        return workbook.outputAsync();
+        }).then(blob => {
+          // wrtie to file
+          saveAs(blob, filename)
 
-      // 输出到文件
-      XLSX.writeFile(wb, filename);
+        })
     },
 
   }
