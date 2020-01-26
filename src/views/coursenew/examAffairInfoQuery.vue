@@ -67,7 +67,7 @@
       </el-table>
     </div>
     <div align="center">
-      <el-button type="primary" @click="exportXlsx" >添加</el-button>
+      <el-button type="primary" @click="exportXlsx" >导出</el-button>
     </div>
     </div>
 </template>
@@ -97,24 +97,45 @@ export default {
 
       // 下载显示的文件名
       var filename = "监考信息.xlsx";
-
       // 工作簿中工作表的名字
-      var sheetName = "监考信息";
+      var sheetName = "监考表";
 
       // head定义了整个xlsx的顺序，里面的内容时json object的key
       var header = ["examDate", "campusName", "courseName", "roomName", "affairType"];
+      
+      var ws = XLSX.utils.aoa_to_sheet([[sheetName]]
+        , {header: header, skipHeader: true});
 
       // 定义了json和key和xlxs和header的对应关系
-      var ws = XLSX.utils.json_to_sheet([
-        { courseName: "科目", affairType: "工作类型", examDate: "考试日期", campusName: "校区", roomName: "考试地点"}
-        ], {header: header, skipHeader: true});
+      XLSX.utils.sheet_add_json(ws,
+        [{courseName: "科目", affairType: "工作类型", examDate: "考试日期", campusName: "校区", roomName: "考试地点"}]
+        , {header: header, skipHeader: true, origin: "A2"});
 
       // 添加数据
       XLSX.utils.sheet_add_json(ws, this.affairList,
         {
           header: header,
-          skipHeader:true, origin: "A2"});
+          skipHeader:true, origin: "A3"});
 
+      // 更改列宽度
+      var wscols = [
+        {wch:20},
+        {wch:20},
+        {wch:20},
+        {wch:20},
+        {wch:20}
+      ];
+
+      ws['!cols'] = wscols;
+      
+      // Merge A1 to E1,  s = start, r = row, c=col, e= end
+      const merge = [
+        { s: { r: 0, c: 0 }, e: { r: 0, c: 4 } }
+      ];
+      ws["!merges"] = merge;
+
+      ws["A1"].v = sheetName;
+      
       // 创建工作簿
       var wb = XLSX.utils.book_new();
 
