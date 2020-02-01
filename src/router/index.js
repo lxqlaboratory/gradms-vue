@@ -129,6 +129,29 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/tutor',
+    component: Layout,
+    name: 'tutor',
+    meta: {
+      title: '导师管理',
+      icon: 'example'
+    },
+    children: [
+      {
+        path: 'degreeCollegeTutorMemberManage',
+        name: 'degreeCollegeTutorMemberManage',
+        component: () => import('@/views/tutor/degreeCollegeTutorMemberManage'),
+        meta: { title: '监考人库管理'}
+      },
+      {
+        path: 'degreeCollegeTutorMemberManageAdd',
+        name: 'degreeCollegeTutorMemberManageAdd',
+        component: () => import('@/views/tutor/degreeCollegeTutorMemberManageAdd'),
+        meta: { title: '监考人员添加'}
+      },
+    ]
+  },
   {path: '/', redirect: '/login' ,hidden: true },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
