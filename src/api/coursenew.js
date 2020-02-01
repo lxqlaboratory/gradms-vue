@@ -41,21 +41,6 @@ export function newCultivateExamAffairPersonAdd(data) {
 }
 
 
-export function getPersonInfoListByPerNumName(data) {
-  return request({
-    url: '/api/personinfo/getPersonInfoListByPerNumName',
-    method: 'POST',
-    data
-  })
-}
-
-export function getPersonInfoListByPerNumNameQuery(data) {
-  return request({
-    url: '/api/personinfo/getPersonInfoListByPerNumName',
-    method: 'POST',
-    data
-  })
-}
 
 //监考安排管理
 export function newCultivateExamInvigilaterArrangeInit(data) {

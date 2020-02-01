@@ -68,13 +68,14 @@
 </template>
 
 <script>
-  import { getPersonInfoListByPerNumName } from '@/api/coursenew'
-  import { getPersonInfoListByPerNumNameQuery } from '@/api/coursenew'
-  import { newCultivateExamAffairPersonAdd } from '@/api/coursenew'
+  import { getPersonInfoListByPerNumName } from '@/api/personinfo'
+  import { getPersonInfoListByPerNumNameQuery } from '@/api/personinfo'
+  import { degreeCollegeTutorMemberPersonAdd } from '@/api/tutor'
 export default {
-  name: 'ExamAffairPersonManageAdd',
+  name: 'DegreeCollegeTutorMemberManageAdd',
   data() {
     return {
+      memberType:this.$route.query.memberType,
       perNum: '',
       perName: '',
       tableList: []
@@ -95,10 +96,10 @@ export default {
       })
     },
     addPerson(personId) {
-      newCultivateExamAffairPersonAdd({ 'session': document.cookie ,'personId': personId }).then(res=>{
+      degreeCollegeTutorMemberPersonAdd({ 'session': document.cookie ,'memberType':this.memberType,'personId': personId }).then(res=>{
         if(res.code == '0')
         {
-          this.$router.push({ path: 'examAffairPersonManage' })
+          this.$router.push({ path: 'degreeCollegeTutorMemberManage' })
         }else {
           this.$message({
             message: '已经存在不能添加！',

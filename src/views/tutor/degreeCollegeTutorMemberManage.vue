@@ -1,9 +1,21 @@
 <template>
   <div class="app-container">
+      <div style="margin-left: 30px">
+      学期
+      <el-select v-model="memberType" placeholder="请选择类别" class="filter-item" style="width: 20%;">
+        <el-option
+          v-for="item in typeList"
+          :key="item.memberType"
+          :label="item.memberName"
+          :value="item.memberType">
+        </el-option>
+      </el-select>
+      <el-button type="primary" @click="doQuery" >查询</el-button>
+      </div>
     <div>
       <div class="container">
         <el-table
-          :data="tableList"
+          :data="memberList"
           border
           style="width: 100%;"
           size="mini"
@@ -35,7 +47,16 @@
             color="black"
           >
             <template slot-scope="scope">
-              <el-button type="text" @click="modifyPersonInfo(scope.row.personId)" size="mini">{{ scope.row.perName }}</el-button>
+              {{ scope.row.perName }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="职称"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.proTechPositionName }}
             </template>
           </el-table-column>
           <el-table-column
@@ -57,39 +78,12 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="聘任类型"
+            label="三级学院"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.employType }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="公司名称"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.employUnit }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="银行账号"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.bankNo }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="开户行"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.bankName }}
+              {{ scope.row.collegeName2 }}
             </template>
           </el-table-column>
           <el-table-column
@@ -98,14 +92,16 @@
             color="black"
           >
             <template slot-scope="scope">
-              <el-button type="danger" @click="deletePerson(scope.row.affairPersonId)" size="mini" >删除</el-button>
+              <el-button type="danger" @click="deletePerson(scope.row.memberId)" size="mini" >删除</el-button>
             </template>
           </el-table-column>
         </el-table>
       </div>
 
       <div align="center">
-        <el-button type="primary" @click="addPerson" >添加</el-button>
+        <el-button type="primary" @click="clearMember" >清空</el-button>
+        <el-button type="primary" @click="initMember" >初始</el-button>
+        <el-button type="primary" @click="addPerson(memberType)" >添加</el-button>
       </div>
     </div>
   </div>
@@ -113,12 +109,15 @@
 
 <script>
 import { degreeCollegeTutorMemberManageInit } from '@/api/tutor'
+import { degreeCollegeTutorMemberQuery} from '@/api/tutor'
 import { degreeCollegeTutorMemberPersonDelete } from '@/api/tutor'
 export default {
   name: 'DegreeCollegeTutorMemberManage',
   data() {
     return {
-      tableList:[]
+      memberType:'',
+      typeList:[],
+      memberList:[]
     }
   },
   created() {
@@ -127,20 +126,26 @@ export default {
   methods: {
     fetchData() {
       degreeCollegeTutorMemberManageInit({ 'session': document.cookie }).then(res => {
-        this.tableList = res.data
+        this.memberList = res.data.memberList
+        this.typeList = res.data.typeList
+        this.memberType=res.data.memberType
       })
     },
-    deletePerson(affairPersonId){
-       degreeCollegeTutorMemberDelete({ 'session': document.cookie, 'affairPersonId': affairPersonId}).then(res => {
+    doQuery(){
+      degreeCollegeTutorMemberQuery({ 'session': document.cookie, 'memberType': this.memberType
+      }).then(res => {
+        this.memberList = res.data.memberList
+      })
+    },
+    deletePerson(memberId){
+       degreeCollegeTutorMemberPersonDelete({ 'session': document.cookie, 'memberId': memberId}).then(res => {
          this.fetchData()
       })
     },
-    addPerson(){
-      this.$router.push({ path: ' degreeCollegeTutorMemberManageAdd'})
+    addPerson(memberType){
+      console.log(memberType);
+      this.$router.push({ path: 'degreeCollegeTutorMemberManageAdd', query: { memberType }})
     },
-    modifyPersonInfo(personId){
-      this.$router.push({ path: '/personinfo/personAuxiliaryMaintain', query: { personId }})
-    }
   }
 }
 </script>

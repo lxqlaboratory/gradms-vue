@@ -68,8 +68,8 @@
 </template>
 
 <script>
-  import { getPersonInfoListByPerNumName } from '@/api/coursenew'
-  import { getPersonInfoListByPerNumNameQuery } from '@/api/coursenew'
+  import { getPersonInfoListByPerNumName } from '@/api/personinfo'
+  import { getPersonInfoListByPerNumNameQuery } from '@/api/personinfo'
   import { newCultivateExamAffairPersonAdd } from '@/api/coursenew'
 export default {
   name: 'ExamAffairPersonManageAdd',
