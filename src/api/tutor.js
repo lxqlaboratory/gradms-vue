@@ -32,4 +32,20 @@ export function degreeCollegeTutorMemberPersonAdd(data) {
   })
 }
 
+export function degreeCollegeTutorMemberClear(data) {
+  return request({
+    url: '/api/tutor/degreeCollegeTutorMemberClear',
+    method: 'POST',
+    data
+  })
+}
+
+export function degreeCollegeTutorMemberInit(data) {
+  return request({
+    url: '/api/tutor/degreeCollegeTutorMemberInit',
+    method: 'POST',
+    data
+  })
+}
+
 

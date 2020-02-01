@@ -99,8 +99,8 @@
       </div>
 
       <div align="center">
-        <el-button type="primary" @click="clearMember" >清空</el-button>
-        <el-button type="primary" @click="initMember" >初始</el-button>
+        <el-button type="primary" @click="memberClear(memberType)" >清空</el-button>
+        <el-button type="primary" @click="memberInit(memberType)" >初始</el-button>
         <el-button type="primary" @click="addPerson(memberType)" >添加</el-button>
       </div>
     </div>
@@ -111,6 +111,8 @@
 import { degreeCollegeTutorMemberManageInit } from '@/api/tutor'
 import { degreeCollegeTutorMemberQuery} from '@/api/tutor'
 import { degreeCollegeTutorMemberPersonDelete } from '@/api/tutor'
+import { degreeCollegeTutorMemberClear } from '@/api/tutor'
+import { degreeCollegeTutorMemberInit } from '@/api/tutor'
 export default {
   name: 'DegreeCollegeTutorMemberManage',
   data() {
@@ -139,6 +141,16 @@ export default {
     },
     deletePerson(memberId){
        degreeCollegeTutorMemberPersonDelete({ 'session': document.cookie, 'memberId': memberId}).then(res => {
+         this.fetchData()
+      })
+    },
+    memberClear(memberType){
+       degreeCollegeTutorMemberClear({ 'session': document.cookie, 'memberType': memberType}).then(res => {
+         this.fetchData()
+      })
+    },
+    memberInit(memberType){
+       degreeCollegeTutorMemberInit({ 'session': document.cookie, 'memberType': memberType}).then(res => {
          this.fetchData()
       })
     },
