@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
       <div style="margin-left: 30px">
-      学期
+      类别
       <el-select v-model="memberType" placeholder="请选择类别" class="filter-item" style="width: 20%;">
         <el-option
           v-for="item in typeList"
