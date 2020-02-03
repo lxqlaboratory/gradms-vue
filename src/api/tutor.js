@@ -48,4 +48,35 @@ export function degreeCollegeTutorMemberInit(data) {
   })
 }
 
+export function collegeMaintainStudentTutor(data) {
+  return request({
+    url: '/api/tutor/collegeMaintainStudentTutor',
+    method: 'POST',
+    data
+  })
+}
+
+export function collegeMaintainStudentTutorInit(data) {
+  return request({
+    url: '/api/tutor/collegeMaintainStudentTutorInit',
+    method: 'POST',
+    data
+  })
+}
+export function collegeMaintainStudentTutorQuery(data) {
+  return request({
+    url: '/api/tutor/collegeMaintainStudentTutorQuery',
+    method: 'POST',
+    data
+  })
+}
+
+export function collegeMaintainStudentTutorSubmit(data) {
+  return request({
+    url: '/api/tutor/collegeMaintainStudentTutorSubmit',
+    method: 'POST',
+    data
+  })
+}
+
 

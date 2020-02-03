@@ -45,12 +45,20 @@ export const constantRoutes = [
     path: '/personinfo',
     component: Layout,
     name: 'personinfo',
-    children: [{
+    children: [
+      {
       path: 'personAuxiliaryMaintain',
       name: 'personAuxiliaryMaintain',
       component: () => import('@/views/personinfo/personAuxiliaryMaintain'),
       meta: { title: '辅助信息维护'}
-    }]
+    },
+    {
+      path: 'tutorDetailInfoShow',
+      name: 'tutorDetailInfoShow',
+      component: () => import('@/views/personinfo/tutorDetailInfoShow'),
+      meta: { title: '导师详细信息'}
+    }
+  ]
   },
   {
     path: '/coursenew',
@@ -142,14 +150,32 @@ export const constantRoutes = [
         path: 'degreeCollegeTutorMemberManage',
         name: 'degreeCollegeTutorMemberManage',
         component: () => import('@/views/tutor/degreeCollegeTutorMemberManage'),
-        meta: { title: '监考人库管理'}
+        meta: { title: '学院导师组管理'}
       },
       {
         path: 'degreeCollegeTutorMemberManageAdd',
         name: 'degreeCollegeTutorMemberManageAdd',
         component: () => import('@/views/tutor/degreeCollegeTutorMemberManageAdd'),
-        meta: { title: '监考人员添加'}
+        meta: { title: '导师组成员添加'}
       },
+      {
+        path: 'collegeMaintainStudentTutor',
+        name: 'collegeMaintainStudentTutor',
+        component: () => import('@/views/tutor/collegeMaintainStudentTutor'),
+        meta: { title: '学院维护学生导师'}
+      },
+      {
+        path: 'studentViewCollegeTutor',
+        name: 'studentViewCollegeTutor',
+        component: () => import('@/views/tutor/studentViewCollegeTutor'),
+        meta: { title: '查看导师信息'}
+      },
+      {
+        path: 'degreeCollegeStuAndTutorQuery',
+        name: 'degreeCollegeStuAndTutorQuery',
+        component: () => import('@/views/tutor/degreeCollegeStuAndTutorQuery'),
+        meta: { title: '导师查询'}
+      }
     ]
   },
   {path: '/', redirect: '/login' ,hidden: true },
