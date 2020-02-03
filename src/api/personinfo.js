@@ -30,3 +30,12 @@ export function getPersonInfoListByPerNumNameQuery(data) {
     data
   })
 }
+
+export function tutorDetailInfoShow(data) {
+  return request({
+    url: '/api/personinfo/tutorDetailInfoShow',
+    method: 'POST',
+    data
+  })
+}
+

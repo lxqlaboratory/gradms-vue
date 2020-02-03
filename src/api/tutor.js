@@ -63,6 +63,14 @@ export function collegeMaintainStudentTutorInit(data) {
     data
   })
 }
+export function collegeMaintainStudentTutorMajor(data) {
+  return request({
+    url: '/api/tutor/collegeMaintainStudentTutorMajor',
+    method: 'POST',
+    data
+  })
+}
+
 export function collegeMaintainStudentTutorQuery(data) {
   return request({
     url: '/api/tutor/collegeMaintainStudentTutorQuery',
@@ -80,3 +88,17 @@ export function collegeMaintainStudentTutorSubmit(data) {
 }
 
 
+export function studentViewCollegeTutorInit(data) {
+  return request({
+    url: '/api/tutor/studentViewCollegeTutor',
+    method: 'POST',
+    data
+  })
+}
+export function studentViewCollegeTutorQuery(data) {
+  return request({
+    url: '/api/tutor/studentViewCollegeTutor',
+    method: 'POST',
+    data
+  })
+}

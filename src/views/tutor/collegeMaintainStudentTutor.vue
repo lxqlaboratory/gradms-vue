@@ -2,7 +2,7 @@
   <div class="app-container">
       <div style="margin-left: 30px">
         学生类型
-        <el-select v-model="stuTypeCode" placeholder="请选择学生类型" class="filter-item" style="width: 8%;">
+        <el-select v-model="stuTypeCode" @change="changeMajor" placeholder="请选择学生类型" class="filter-item" style="width: 8%;">
           <el-option
             v-for="item in stuTypeList"
             :key="item.value"
@@ -11,7 +11,7 @@
           </el-option>
         </el-select>
         专业
-        <el-select v-model="majorId" placeholder="请选择类别" class="filter-item" style="width: 10%;">
+        <el-select v-model="majorId" placeholder="请选择专业" class="filter-item" style="width: 10%;">
           <el-option
             v-for="item in majorList"
             :key="item.majorId"
@@ -20,7 +20,7 @@
           </el-option>
         </el-select>
         年级
-        <el-select v-model="grade" placeholder="请选择类别" class="filter-item" style="width: 5%;">
+        <el-select v-model="grade" placeholder="请选择年级" class="filter-item" style="width: 5%;">
           <el-option
             v-for="item in gradeList"
             :key="item.value"
@@ -162,6 +162,7 @@
 Init
 <script>
 import { collegeMaintainStudentTutorInit } from '@/api/tutor'
+import { collegeMaintainStudentTutorMajor} from '@/api/tutor'
 import { collegeMaintainStudentTutorQuery} from '@/api/tutor'
 import { collegeMaintainStudentTutorSubmit} from '@/api/tutor'
 export default {
@@ -200,6 +201,12 @@ export default {
         'grade': this.grade, 'majorId': this.majorId, 'perNum': this.perNum, 'perName': this.perName
       }).then(res => {
         this.studentList = res.data
+      })
+    },
+    changeMajor(){
+      collegeMaintainStudentTutorMajor({ 'session': document.cookie, 'stuTypeCode': this.stuTypeCode
+      }).then(res => {
+        this.majorList = res.data
       })
     },
     submitTableData() {
