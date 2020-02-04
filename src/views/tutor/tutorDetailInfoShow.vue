@@ -55,6 +55,12 @@
         </td>
       </tr>
       <tr>
+        <td colspan="1" >研究方向</td>
+        <td colspan="3">
+          {{form.researchDirection}}
+        </td>
+      </tr>
+      <tr>
         <td colspan="4" >个人简介</td>
       </tr>
       <tr>
@@ -85,6 +91,7 @@ export default {
           website:'',
           perAddress:'',
           perPostalCode:'',
+          researchDirection:'',
           personIntroduction:'',
           majorName:'',
           perBirthday:'',

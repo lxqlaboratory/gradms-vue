@@ -47,7 +47,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.perName }}
+              <el-button type="text" @click="showPersonInfo(scope.row.personId)" size="mini">{{ scope.row.perName }}</el-button>
             </template>
           </el-table-column>
           <el-table-column
@@ -158,6 +158,9 @@ export default {
       console.log(memberType);
       this.$router.push({ path: 'degreeCollegeTutorMemberManageAdd', query: { memberType }})
     },
+    showPersonInfo(personId){
+      this.$router.push({ path: '/tutor/tutorDetailInfoShow', query: { personId }})
+    }
   }
 }
 </script>

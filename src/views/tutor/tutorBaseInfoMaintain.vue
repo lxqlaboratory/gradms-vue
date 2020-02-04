@@ -123,6 +123,12 @@
         </td>
       </tr>
       <tr>
+        <td colspan="1" >研究方向</td>
+        <td colspan="3">
+          <el-input v-model="form.researchDirection" placeholder="请输入研究方向" style="width: 90%"></el-input>
+        </td>
+      </tr>
+      <tr>
         <td colspan="4" >个人简介</td>
       </tr>
       <tr>
@@ -159,6 +165,7 @@ export default {
           website:'',
           perAddress:'',
           perPostalCode:'',
+          researchDirection:'',
           personIntroduction:'',
           majorName:'',
           perBirthday:'',
@@ -187,7 +194,7 @@ export default {
       })
     },
     submit(){
-      tutorBaseInfoMaintain({'session': document.cookie , 'form': this.frorm,
+      tutorBaseInfoMaintain({'session': document.cookie , 'form': this.form,
         'personId': this.$route.query.personId
       }).then(res => {
        if(res.code == '0'){

@@ -1,0 +1,168 @@
+<template>
+  <div class="app-container">
+      <div style="margin-left: 30px">
+        学院
+        <el-select v-model="collegeId" @change="changeMajor" placeholder="请选择学院" class="filter-item" style="width: 8%;">
+          <el-option
+            v-for="item in collegeList"
+            :key="item.collegeId"
+            :label="item.collegeName"
+            :value="item.collegeId">
+          </el-option>
+        </el-select>
+        专业研究方向
+        <el-input v-model="perNum" placeholder="请输入专业或研究方向" style="width: 5%;" class="filter-item" />
+        导师姓名
+        <el-input v-model="perName" placeholder="请输入导师姓名" style="width: 5%;" class="filter-item" />
+        <el-button type="primary" @click="doQuery" >查询</el-button>
+      </div>
+      <div class="container">
+         <el-table
+          :data="tutorList"
+          border
+          style="width: 100%;"
+          size="mini"
+          :header-cell-style="{background:'#eef1f6',color:'#606266',fontSize: '14px'}"
+        >
+          <el-table-column
+            label="序号"
+            fixed="left"
+            width="70"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.$index+1 }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="工号"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.perNum }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="姓名"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              <el-button type="text" @click="showPersonInfo(scope.row.personId)" size="mini">{{ scope.row.perName }}</el-button>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="学院"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.collegeName }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="导师类型"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.tutorType }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="性别"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.genderName }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="年龄"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.age }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="职称"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.proTechPositionName }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="学历"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.lastStudyLevel }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="邮箱"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.email }}
+            </template>
+          </el-table-column>
+       </el-table>
+      </div>
+  </div>
+</template>
+Init
+<script>
+import { tutorInfoQueryBrowseInit } from '@/api/tutor'
+import { tutorInfoQueryBrowseQuery} from '@/api/tutor'
+export default {
+  name: 'tutorInfoQueryBrowse',
+  data() {
+    return {
+      collegeId:-1,
+      research:'',
+      perName:'',
+      collegeList:[],
+      tutorList:[]
+    }
+  },
+  created() {
+    this.fetchData()
+  },
+  methods: {
+    fetchData() {
+      tutorInfoQueryBrowseInit({ 'session': document.cookie }).then(res => {
+        this.collegeList = res.data.collegeList
+        this.collegeId = res.data.collegeId;
+        this.tutorList=res.data.tutorList
+      })
+    },
+    doQuery(){
+      tutorInfoQueryBrowseQuery({ 'session': document.cookie, 'collegeId': this.collegeId, 
+        'research': this.research, 'perName': this.perName
+      }).then(res => {
+        this.tutorList = res.data
+      })
+    },
+    showPersonInfo(personId){
+      this.$router.push({ path: '/tutor/tutorDetailInfoShow', query: { personId }})
+    }
+
+  }
+}
+</script>
+
+<style scoped>
+  .container{
+    margin :20px;
+  }
+</style>

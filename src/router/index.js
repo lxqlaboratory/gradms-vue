@@ -152,10 +152,10 @@ export const constantRoutes = [
         meta: { title: '查看导师信息'}
       },
       {
-        path: 'degreeCollegeStuAndTutorQuery',
-        name: 'degreeCollegeStuAndTutorQuery',
-        component: () => import('@/views/tutor/degreeCollegeStuAndTutorQuery'),
-        meta: { title: '导师查询'}
+        path: 'tutorInfoQueryBrowse',
+        name: 'tutorInfoQueryBrowse',
+        component: () => import('@/views/tutor/tutorInfoQueryBrowse'),
+        meta: { title: '导师查询浏览'}
       },
       {
         path: 'tutorBaseInfoMaintain',

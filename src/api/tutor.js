@@ -142,3 +142,18 @@ export function tutorAuxiliaryMaintain(data) {
     data
   })
 }
+
+export function tutorInfoQueryBrowseInit(data) {
+  return request({
+    url: '/api/tutor/tutorInfoQueryBrowseInit',
+    method: 'POST',
+    data
+  })
+}
+export function tutorInfoQueryBrowseQuery(data) {
+  return request({
+    url: '/api/tutor/tutorInfoQueryBrowseQuery',
+    method: 'POST',
+    data
+  })
+}
