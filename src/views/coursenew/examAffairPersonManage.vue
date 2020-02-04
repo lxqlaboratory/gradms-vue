@@ -139,7 +139,7 @@ export default {
       this.$router.push({ path: 'examAffairPersonManageAdd'})
     },
     modifyPersonInfo(personId){
-      this.$router.push({ path: '/personinfo/personAuxiliaryMaintain', query: { personId }})
+      this.$router.push({ path: '/tutor/tutorAuxiliaryMaintain', query: { personId }})
     }
   }
 }

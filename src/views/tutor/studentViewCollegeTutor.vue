@@ -166,7 +166,7 @@ export default {
       })
     },
       showPersonInfo(personId){
-      this.$router.push({ path: '/personinfo/tutorDetailInfoShow', query: { personId }})
+      this.$router.push({ path: '/tutor/tutorDetailInfoShow', query: { personId }})
     }
   
   }

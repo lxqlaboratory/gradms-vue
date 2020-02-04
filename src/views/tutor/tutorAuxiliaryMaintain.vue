@@ -42,9 +42,10 @@
 </template>
 
 <script>
-import { tutorDetailInfoShow } from '@/api/personinfo'
+import { tutorAuxiliaryMaintainInit } from '@/api/tutor'
+import { tutorAuxiliaryMaintain } from '@/api/tutor'
 export default {
-  name: 'tutorDetailInfoShow',
+  name: 'tutorAuxiliaryMaintain',
   data() {
     return {
       data: {
@@ -61,12 +62,26 @@ export default {
   },
   methods: {
     fetchData() {
-      tutorDetailInfoShow({ 'session': document.cookie ,'personId': this.$route.query.personId }).then(res => {
+      tutorAuxiliaryMaintainInit({ 'session': document.cookie ,'personId': this.$route.query.personId }).then(res => {
         this.employList = res.data.employList
         this.data.employUnit = res.data.employUnit
         this.data.bankNo = res.data.bankNo
         this.data.bankName = res.data.bankName
         this.data.employType = res.data.employType
+      })
+    },
+    submit(){
+      tutorAuxiliaryMaintain({'session': document.cookie , 'employType': this.data.employType,
+        'employUnit': this.data.employUnit,'bankNo': this.data.bankNo,'bankName': this.data.bankName,
+        'personId': this.$route.query.personId
+      }).then(res => {
+       if(res.code == '0'){
+         this.$message({
+           message: '提交成功',
+           type: 'success',
+           offset: '30'
+         });
+       }
       })
     }
   }

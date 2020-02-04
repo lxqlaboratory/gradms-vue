@@ -102,3 +102,43 @@ export function studentViewCollegeTutorQuery(data) {
     data
   })
 }
+
+export function tutorDetailInfoShow(data) {
+  return request({
+    url: '/api/tutor/tutorDetailInfoShow',
+    method: 'POST',
+    data
+  })
+}
+
+export function tutorBaseInfoMaintainInit(data) {
+  return request({
+    url: '/api/tutor/tutorBaseInfoMaintainInit',
+    method: 'POST',
+    data
+  })
+}
+
+export function tutorBaseInfoMaintain(data) {
+  return request({
+    url: '/api/tutor/tutorBaseInfoMaintain',
+    method: 'POST',
+    data
+  })
+}
+
+export function tutorAuxiliaryMaintainInit(data) {
+  return request({
+    url: '/api/tutor/tutorAuxiliaryMaintainInit',
+    method: 'POST',
+    data
+  })
+}
+
+export function tutorAuxiliaryMaintain(data) {
+  return request({
+    url: '/api/tutor/tutorAuxiliaryMaintain',
+    method: 'POST',
+    data
+  })
+}

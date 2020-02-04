@@ -42,25 +42,6 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '/personinfo',
-    component: Layout,
-    name: 'personinfo',
-    children: [
-      {
-      path: 'personAuxiliaryMaintain',
-      name: 'personAuxiliaryMaintain',
-      component: () => import('@/views/personinfo/personAuxiliaryMaintain'),
-      meta: { title: '辅助信息维护'}
-    },
-    {
-      path: 'tutorDetailInfoShow',
-      name: 'tutorDetailInfoShow',
-      component: () => import('@/views/personinfo/tutorDetailInfoShow'),
-      meta: { title: '导师详细信息'}
-    }
-  ]
-  },
-  {
     path: '/coursenew',
     component: Layout,
     name: 'coursenew',
@@ -175,6 +156,24 @@ export const constantRoutes = [
         name: 'degreeCollegeStuAndTutorQuery',
         component: () => import('@/views/tutor/degreeCollegeStuAndTutorQuery'),
         meta: { title: '导师查询'}
+      },
+      {
+        path: 'tutorBaseInfoMaintain',
+        name: 'tutorBaselInfoMaintain',
+        component: () => import('@/views/tutor/tutorBaseInfoMaintain'),
+        meta: { title: '导师详细信息'}
+      },  
+      {
+        path: 'tutorDetailInfoShow',
+        name: 'tutorDetailInfoShow',
+        component: () => import('@/views/tutor/tutorDetailInfoShow'),
+        meta: { title: '导师详细信息'}
+      },
+      {
+        path: 'tutorAuxiliaryMaintain',
+        name: 'tutorAuxiliaryMaintain',
+        component: () => import('@/views/tutor/tutorAuxiliaryMaintain'),
+        meta: { title: '辅助信息维护'}
       }
     ]
   },
