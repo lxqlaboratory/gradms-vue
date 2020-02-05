@@ -1,8 +1,8 @@
 <template>
   <div class="app-container">
-      <div style="margin-left: 30px">
+      <div style="margin-left: 30px font-size: 10px" >
         学院
-        <el-select v-model="collegeId" @change="changeMajor" placeholder="请选择学院" class="filter-item" style="width: 8%;">
+        <el-select v-model="collegeId" @change="changeMajor" placeholder="请选择学院" class="filter-item" style="width: 15%;">
           <el-option
             v-for="item in collegeList"
             :key="item.collegeId"
@@ -11,9 +11,9 @@
           </el-option>
         </el-select>
         专业研究方向
-        <el-input v-model="perNum" placeholder="请输入专业或研究方向" style="width: 5%;" class="filter-item" />
+        <el-input v-model="perNum" placeholder="请输入专业或研究方向" style="width: 15%;" class="filter-item" />
         导师姓名
-        <el-input v-model="perName" placeholder="请输入导师姓名" style="width: 5%;" class="filter-item" />
+        <el-input v-model="perName" placeholder="请输入导师姓名" style="width: 10%;" class="filter-item" />
         <el-button type="primary" @click="doQuery" >查询</el-button>
       </div>
       <div class="container">
@@ -22,7 +22,7 @@
           border
           style="width: 100%;"
           size="mini"
-          :header-cell-style="{background:'#eef1f6',color:'#606266',fontSize: '14px'}"
+          :header-cell-style="{background:'#eef1f6',color:'#606266',fontSize: '13px'}"
         >
           <el-table-column
             label="序号"
@@ -33,15 +33,6 @@
           >
             <template slot-scope="scope">
               {{ scope.$index+1 }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="工号"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.perNum }}
             </template>
           </el-table-column>
           <el-table-column
@@ -63,12 +54,39 @@
             </template>
           </el-table-column>
           <el-table-column
+            label="职称"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.proTechPositionName }}
+            </template>
+          </el-table-column>
+          <el-table-column
             label="导师类型"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
               {{ scope.row.tutorType }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="专业"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.majorName }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="研究方向"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.researchDirection }}
             </template>
           </el-table-column>
           <el-table-column
@@ -90,21 +108,12 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="职称"
+            label="学位"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.proTechPositionName }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="学历"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.lastStudyLevel }}
+              {{ scope.row.lastDegre }}
             </template>
           </el-table-column>
           <el-table-column
@@ -163,6 +172,6 @@ export default {
 
 <style scoped>
   .container{
-    margin :20px;
+    margin :14px;
   }
 </style>
