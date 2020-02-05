@@ -2,7 +2,7 @@
   <div class="app-container">
     <table class="content">
       <tr>
-        <td colspan="4" style="font-size: 16px;font-weight: bold;color: #304156 ">基本信息</td>
+        <td colspan="4" >基本信息</td>
       </tr>
       <tr>
         <td colspan="1" >编号</td>
@@ -59,9 +59,6 @@
         <td colspan="3">
           {{form.researchDirection}}
         </td>
-      </tr>
-      <tr>
-        <td colspan="4" >个人简介</td>
       </tr>
       <tr>
         <td colspan="4">
@@ -121,22 +118,5 @@ export default {
 </script>
 
 <style scoped>
-  .content{
-    width:100%;
-    border-top: 1px solid #EBEEF5;
-    border-left: 1px solid #EBEEF5;
-    border-spacing: 0;/*去掉单元格间隙*/
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-  .content tr {
-    width : 100% !important;
-  }
-  .content td {
-    padding: 10px 10px;
-    border-bottom: 1px solid #EBEEF5;
-    border-right: 1px solid #EBEEF5;
-    text-align: center;
-    font-size: 16px;
-  }
+
 </style>

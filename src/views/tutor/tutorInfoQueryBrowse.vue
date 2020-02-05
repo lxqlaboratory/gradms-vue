@@ -16,7 +16,7 @@
         <el-input v-model="perName" placeholder="请输入导师姓名" style="width: 10%;" class="filter-item" />
         <el-button type="primary" @click="doQuery" >查询</el-button>
       </div>
-      <div class="container">
+      <div class="table-container">
          <el-table
           :data="tutors"
           border
@@ -170,8 +170,3 @@ export default {
 }
 </script>
 
-<style scoped>
-  .container{
-    margin :14px;
-  }
-</style>

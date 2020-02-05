@@ -13,7 +13,7 @@
       <el-button type="primary" @click="doQuery" >查询</el-button>
       </div>
     <div>
-      <div class="container">
+      <div class="table-container">
         <el-table
           :data="memberList"
           border
@@ -177,7 +177,4 @@ export default {
 </script>
 
 <style scoped>
-  .container{
-    margin :20px;
-  }
 </style>

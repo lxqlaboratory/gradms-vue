@@ -63,3 +63,26 @@ div:focus {
 .app-container {
   padding: 20px;
 }
+
+.table-container{
+  margin :14px;
+}
+
+.content{
+  width:100%;
+  border-top: 1px solid #EBEEF5;
+  border-left: 1px solid #EBEEF5;
+  border-spacing: 0;/*去掉单元格间隙*/
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.content tr {
+  width : 100% !important;
+}
+.content td {
+  padding: 10px 10px;
+  border-bottom: 1px solid #EBEEF5;
+  border-right: 1px solid #EBEEF5;
+  text-align: center;
+  font-size: 16px;
+}

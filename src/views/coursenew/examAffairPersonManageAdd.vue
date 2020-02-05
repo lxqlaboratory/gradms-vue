@@ -7,7 +7,7 @@
       <el-input v-model="perName" placeholder="姓名" style="width: 20%;" class="filter-item" />
       <el-button type="primary" @click="selectPerson">查询</el-button>
     </div>
-    <div class="container">
+    <div class="table-container">
       <el-table
         :data="tableList"
         border
@@ -111,8 +111,3 @@ export default {
 }
 </script>
 
-<style scoped>
-  .container{
-    margin :20px;
-  }
-</style>

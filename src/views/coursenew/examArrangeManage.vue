@@ -6,7 +6,7 @@
       姓名
       <el-input v-model="perName" placeholder="姓名" style="width: 20%;" class="filter-item" />
     </div>
-    <div class="container">
+    <div class="table-container">
       <el-table
         :data="tableList"
         border
@@ -98,8 +98,3 @@
   }
 </script>
 
-<style scoped>
-  .container{
-    margin :20px;
-  }
-</style>

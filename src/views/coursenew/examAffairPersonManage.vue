@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div>
-      <div class="container">
+      <div class="table-container">
         <el-table
           :data="tableList"
           border
@@ -145,8 +145,3 @@ export default {
 }
 </script>
 
-<style scoped>
-  .container{
-    margin :20px;
-  }
-</style>

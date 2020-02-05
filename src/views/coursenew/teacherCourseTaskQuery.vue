@@ -20,7 +20,7 @@
         导出
       </el-button>
       </div>
-     <div class="container">
+     <div class="table-container">
       <el-table
         :data="taskList"
         border
@@ -169,8 +169,3 @@ export default {
 }
 </script>
 
-<style scoped>
-  .container{
-    margin :20px;
-  }
-</style>

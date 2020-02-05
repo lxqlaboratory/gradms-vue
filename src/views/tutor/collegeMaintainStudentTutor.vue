@@ -34,7 +34,7 @@
         <el-input v-model="perName" placeholder="请输入姓名" style="width: 5%;" class="filter-item" />
         <el-button type="primary" @click="doQuery" >查询</el-button>
       </div>
-      <div class="container">
+      <div class="table-container">
         <el-table
           :data="studentList"
           border
@@ -233,7 +233,4 @@ export default {
 </script>
 
 <style scoped>
-  .container{
-    margin :20px;
-  }
 </style>
