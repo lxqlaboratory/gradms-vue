@@ -18,7 +18,7 @@
       </div>
       <div class="container">
          <el-table
-          :data="tutorList"
+          :data="tutors"
           border
           style="width: 100%;"
           size="mini"
@@ -132,7 +132,7 @@ export default {
       research:'',
       perName:'',
       collegeList:[],
-      tutorList:[]
+      tutors:[]
     }
   },
   created() {
@@ -143,14 +143,14 @@ export default {
       tutorInfoQueryBrowseInit({ 'session': document.cookie }).then(res => {
         this.collegeList = res.data.collegeList
         this.collegeId = res.data.collegeId;
-        this.tutorList=res.data.tutorList
+        this.tutors=res.data.tutors
       })
     },
     doQuery(){
       tutorInfoQueryBrowseQuery({ 'session': document.cookie, 'collegeId': this.collegeId, 
         'research': this.research, 'perName': this.perName
       }).then(res => {
-        this.tutorList = res.data
+        this.tutors = res.data
       })
     },
     showPersonInfo(personId){
