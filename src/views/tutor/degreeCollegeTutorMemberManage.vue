@@ -145,9 +145,20 @@ export default {
       })
     },
     memberClear(memberType){
-       degreeCollegeTutorMemberClear({ 'session': document.cookie, 'memberType': memberType}).then(res => {
-         this.fetchData()
-      })
+        this.$confirm('此操作将清除导师组中所有成员, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+		      degreeCollegeTutorMemberClear({ 'session': document.cookie, 'memberType': memberType}).then(res => {
+          this.fetchData()
+        })  
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
+        });
     },
     memberInit(memberType){
        degreeCollegeTutorMemberInit({ 'session': document.cookie, 'memberType': memberType}).then(res => {

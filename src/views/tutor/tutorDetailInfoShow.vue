@@ -68,6 +68,11 @@
                 <p v-html='form.personIntroduction'></p>
         </td>
       </tr>
+      <tr>
+        <td colspan="4">
+                <p v-html='form.achievement'></p>
+        </td>
+      </tr>
     </table>
   </div>
 </template>

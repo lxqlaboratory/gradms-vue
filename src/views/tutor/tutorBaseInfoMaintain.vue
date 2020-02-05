@@ -38,7 +38,14 @@
         </td>
         <td colspan="1" >出生年月</td>
         <td colspan="1">
-          <el-input v-model="form.perBirthday" placeholder="请输入出生年月" style="width: 90%"></el-input>
+          <template>
+            <el-date-picker
+              v-model="form.perBirthday"
+              type="date"
+              value-format="yyyy-MM-dd"
+              placeholder="选择出生年月">
+            </el-date-picker>
+          </template>
         </td>
       </tr>
       <tr>
