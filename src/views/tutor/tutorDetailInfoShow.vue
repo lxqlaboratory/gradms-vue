@@ -61,14 +61,10 @@
         </td>
       </tr>
       <tr>
-        <td colspan="4">
-                <p v-html='form.personIntroduction'></p>
-        </td>
+        <td colspan="4" v-html='form.personIntroduction' />
       </tr>
       <tr>
-        <td colspan="4">
-                <p v-html='form.achievement'></p>
-        </td>
+        <td colspan="4" v-html='form.achievement'/>
       </tr>
     </table>
   </div>
