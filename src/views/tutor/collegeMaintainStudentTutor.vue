@@ -155,7 +155,21 @@
         </el-table>
       </div>
     <div align="center">
-      <el-button type="primary" @click="submitTableData">提交</el-button>
+      <tr>
+        <td>
+          <el-button type="primary" @click="submitTableData">提交</el-button>
+          <a style="color:#20a0ff" href="/downloads/tutor/tutuorAndStuInfoList.xls" >导入模板下载</a>
+          <fileupload
+            url="/api/tutor/importDegreeCollegeStuAndTutorData"
+            :data="{'docType': xls }"
+            accepttype=".xls"
+            @successcallback="onSuccess"
+            style="float: right"
+            @preview="onPreview"
+          >学生导师关系导入
+          </fileupload>
+          </td>
+        </tr>
     </div>
   </div>
 </template>
@@ -165,8 +179,10 @@ import { collegeMaintainStudentTutorInit } from '@/api/tutor'
 import { collegeMaintainStudentTutorMajor} from '@/api/tutor'
 import { collegeMaintainStudentTutorQuery} from '@/api/tutor'
 import { collegeMaintainStudentTutorSubmit} from '@/api/tutor'
+import fileupload from '../../components/upload/fileupload'
 export default {
   name: 'CollegeMaintainStudentTutor',
+  components: { fileupload },
   data() {
     return {
       stuTypeCode:'',
@@ -227,7 +243,26 @@ export default {
           });
         }
       })
-    }
+    },
+    onPreview: function(file) {
+    },
+    onSuccess(res, file) {
+        if(res.code == '0'){
+          this.$message({
+            message: '导入成功',
+            type: 'success'
+          });
+          this.fetchData()
+        }
+        else{
+          this.$message({
+            message: res.msg,
+            type: 'error'
+          });
+        }
+        
+    },
+
   }
 }
 </script>

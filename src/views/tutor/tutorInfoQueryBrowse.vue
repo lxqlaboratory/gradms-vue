@@ -129,7 +129,6 @@
       </div>
   </div>
 </template>
-Init
 <script>
 import { tutorInfoQueryBrowseInit } from '@/api/tutor'
 import { tutorInfoQueryBrowseQuery} from '@/api/tutor'
