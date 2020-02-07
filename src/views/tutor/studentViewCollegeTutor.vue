@@ -87,12 +87,12 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="学历"
+            label="专业"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.lastStudyLevel }}
+              {{ scope.row.majorName }}
             </template>
           </el-table-column>
           <el-table-column

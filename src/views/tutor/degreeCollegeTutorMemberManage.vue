@@ -69,24 +69,6 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="二级学院"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.collegeName1 }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="三级学院"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.collegeName2 }}
-            </template>
-          </el-table-column>
-          <el-table-column
             label="操作"
             align="center"
             color="black"
