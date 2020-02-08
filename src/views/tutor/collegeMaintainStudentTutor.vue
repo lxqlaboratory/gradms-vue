@@ -11,7 +11,7 @@
           </el-option>
         </el-select>
         专业
-        <el-select v-model="majorId" placeholder="请选择专业" class="filter-item" style="width: 10%;">
+        <el-select v-model="majorId" placeholder="请选择专业" class="filter-item" style="width: 12%;">
           <el-option
             v-for="item in majorList"
             :key="item.majorId"
@@ -20,7 +20,7 @@
           </el-option>
         </el-select>
         年级
-        <el-select v-model="grade" placeholder="请选择年级" class="filter-item" style="width: 5%;">
+        <el-select v-model="grade" placeholder="请选择年级" class="filter-item" style="width: 8%;">
           <el-option
             v-for="item in gradeList"
             :key="item.value"
@@ -29,9 +29,9 @@
           </el-option>
         </el-select>
         学号
-        <el-input v-model="perNum" placeholder="请输入学号" style="width: 5%;" class="filter-item" />
+        <el-input v-model="perNum" placeholder="请输入学号" style="width: 10%;" class="filter-item" />
         姓名
-        <el-input v-model="perName" placeholder="请输入姓名" style="width: 5%;" class="filter-item" />
+        <el-input v-model="perName" placeholder="请输入姓名" style="width: 10%;" class="filter-item" />
         <el-button type="primary" @click="doQuery" >查询</el-button>
       </div>
       <div class="table-container">
@@ -90,7 +90,7 @@
               <el-option  
                 v-for="item in doctorTutorList"
                 :key="item.personId"
-                :label="item.Name"
+                :label="item.perNumName"
                 :value="item.personId">
               </el-option>
             </el-select>
@@ -114,7 +114,7 @@
               <el-option  
                 v-for="item in doctorTutorList"
                 :key="item.personId"
-                :label="item.Name"
+                :label="item.perNumName"
                 :value="item.personId">
               </el-option>
             </el-select>
@@ -138,7 +138,7 @@
               <el-option  
                 v-for="item in doctorTutorList"
                 :key="item.personId"
-                :label="item.Name"
+                :label="item.perNumName"
                 :value="item.personId">
               </el-option>
             </el-select>

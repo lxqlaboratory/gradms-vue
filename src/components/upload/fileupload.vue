@@ -70,10 +70,6 @@ export default {
     },
     uploadSuccess(response, file, fileList) {
       this.$emit('successcallback', response, file)
-      this.$message({
-        type: 'success',
-        message: '上传成功'
-      })
     },
     uploadError(err, file, fileList) {
       console.log(err)
