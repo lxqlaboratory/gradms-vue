@@ -161,7 +161,7 @@ export const constantRoutes = [
         path: 'tutorBaseInfoMaintain',
         name: 'tutorBaselInfoMaintain',
         component: () => import('@/views/tutor/tutorBaseInfoMaintain'),
-        meta: { title: '导师详细信息'}
+        meta: { title: '导师基本信息维护'}
       },  
       {
         path: 'tutorDetailInfoShow',
@@ -174,6 +174,29 @@ export const constantRoutes = [
         name: 'tutorAuxiliaryMaintain',
         component: () => import('@/views/tutor/tutorAuxiliaryMaintain'),
         meta: { title: '辅助信息维护'}
+      }
+    ]
+  },
+  {
+    path: '/student',
+    component: Layout,
+    name: 'student',
+    meta: {
+      title: '学生管理',
+      icon: 'example'
+    },
+    children: [
+      {
+        path: 'studentBaseInfoMaintain',
+        name: 'studentBaselInfoMaintain',
+        component: () => import('@/views/student/studentBaseInfoMaintain'),
+        meta: { title: '学生基本详细维护'}
+      },  
+      {
+        path: 'studentDetailInfoShow',
+        name: 'studentDetailInfoShow',
+        component: () => import('@/views/student/studentDetailInfoShow'),
+        meta: { title: '学生详细信息'}
       }
     ]
   },
