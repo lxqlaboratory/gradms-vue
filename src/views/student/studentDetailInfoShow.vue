@@ -15,9 +15,9 @@
         </td>
       </tr>
       <tr>
-        <td colspan="1" >性别</td>
+        <td colspan="1" >学生类型</td>
         <td colspan="1">
-          {{form.genderCode}}
+          {{form.stuTypeCode}}
         </td>
         <td colspan="1" >学院</td>
         <td colspan="1">
@@ -25,46 +25,37 @@
         </td>
       </tr>
       <tr>
-        <td colspan="1" >专业</td>
-        <td colspan="1">
-          {{form.majorName}}
-        </td>
-        <td colspan="1" >职称</td>
-        <td colspan="1">
-          {{form.proTechPositionCode}}
-        </td>
-      </tr>
-      <tr>
-        <td colspan="1" >最后学历</td>
+        <td colspan="1" >性别</td>
         <td colspan="1">
           {{form.lastStudyLevel}}
         </td>
-        <td colspan="1" >最后学位</td>
+        <td colspan="1" >证件号码</td>
         <td colspan="1">
           {{form.lastDegree}}
         </td>
       </tr>
       <tr>
-        <td colspan="1" >邮箱</td>
+        <td colspan="1" >专业</td>
+        <td colspan="1">
+          {{form.majorName}}
+        </td>
+        <td colspan="1" >年级</td>
+        <td colspan="1">
+          {{form.grade}}
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1" >手机号</td>
         <td colspan="1">
           {{form.email}}
         </td>
-        <td colspan="1" >主页</td>
+        <td colspan="1" >微信号</td>
         <td colspan="1">
           {{form.website}}
         </td>
       </tr>
       <tr>
-        <td colspan="1" >研究方向</td>
-        <td colspan="3">
-          {{form.researchDirection}}
-        </td>
-      </tr>
-      <tr>
         <td colspan="4" v-html='form.personIntroduction' />
-      </tr>
-      <tr>
-        <td colspan="4" v-html='form.achievement'/>
       </tr>
     </table>
   </div>
@@ -80,12 +71,12 @@ export default {
           perNum:'',
           perName:'',
           stuTypeCodeName:'',
-          grade:'',
-          genderCode:'',
-          majorName:'',
-          campusName:'',
           collegeName:'',
+          majorName:'',
+          genderCode:'',
           perIdCard:'',
+          grade:'',
+          campusName:'',
           perTelephone:'',
  	  	    email:'',
           qq:'',
@@ -93,14 +84,8 @@ export default {
           wechat:'',
           website:'',
           perAddress:'',
-          perPostalCode:'',
-          researchDirection:'',
           personIntroduction:'',
-          perBirthday:'',
-          genderCode:'',
-          proTechPositionCode:'',
-          lastDegree:'',
-          lastStudyLevel:''
+          genderCode:''
         }
     }
   },

@@ -2,7 +2,7 @@
   <div class="app-container">
     <table class="content">
       <tr>
-        <td colspan="4" style="font-size: 16px;font-weight: bold;color: #304156 ">基本信息</td>
+        <td colspan="6" style="font-size: 16px;font-weight: bold;color: #304156 ">基本信息</td>
       </tr>
       <tr>
         <td colspan="1" >学号</td>
@@ -13,18 +13,23 @@
         <td colspan="1">
           {{form.perName}}
         </td>
+        <td colspan="1" >政治面貌</td>
+        <td colspan="1">
+          <el-select v-model="form.politicsCode" placeholder="政治面貌" style="width: 90%">
+            <el-option
+              v-for="item in politicsCodeList"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </td>
       </tr>
       <tr>
         <td colspan="1" >移动电话</td>
         <td colspan="1">
           <el-input v-model="form.mobilePhone" placeholder="请输入移动电话" style="width: 90%"></el-input>
         </td>
-      </tr>
-        <td colspan="1" >紧急联系人电话</td>
-        <td colspan="1">
-          <el-input v-model="form.contactTelephone" placeholder="请输入联系电话" style="width: 90%"></el-input>
-        </td>
-      <tr>
         <td colspan="1" >QQ</td>
         <td colspan="1">
           <el-input v-model="form.qq" placeholder="请输入QQ" style="width: 90%"></el-input>
@@ -35,9 +40,19 @@
         </td>
       </tr>
       <tr>
+        <td colspan="1" >电子邮箱</td>
+        <td colspan="3">
+          <el-input v-model="form.email" placeholder="请输入电子邮箱" style="width: 90%"></el-input>
+        </td>
+        <td colspan="1" >紧急联系人电话</td>
+        <td colspan="1">
+          <el-input v-model="form.contactTelephone" placeholder="请输入紧急联系人电话" style="width: 90%"></el-input>
+        </td>
+      </tr>
+      <tr>
        <td colspan="1">现住地</td>
         <td colspan="3" >
-          <v-distpicker :province="form.perProvince" :city ="form.city " :area="form.town"  @selected='onSelected'></v-distpicker>
+          <v-distpicker :province="form.perProvince" :city ="form.perCity " :area="form.perTown"  @selected='onSelectedPer'></v-distpicker>
         </td>
         <td colspan="1" >现住地址</td>
         <td colspan="1">
@@ -45,11 +60,21 @@
         </td>
       </tr>
       <tr>
-        <td colspan="4" >个人简介</td>
+       <td colspan="1">户籍所在地</td>
+        <td colspan="3" >
+          <v-distpicker :province="form.hujiProvince" :city ="form.hujiCity " :area="form.hujiTown"  @selected='onSelectedHuji'></v-distpicker>
+        </td>
+        <td colspan="1" >户籍地址</td>
+        <td colspan="1">
+          <el-input v-model="form.hujiAddress" placeholder="请输入通讯地址" style="width: 90%"></el-input>
+        </td>
       </tr>
       <tr>
-        <td colspan="4">
-             <tinymce v-model="form.personIntroduction" :height="300" />
+        <td colspan="6" >个人简介</td>
+      </tr>
+      <tr>
+        <td colspan="6">
+             <tinymce v-model="form.personIntroduction" :height="100" />
         </td>
       </tr>
     </table>
@@ -63,25 +88,32 @@
 import { studentBaseInfoMaintainInit } from '@/api/student'
 import { studentBaseInfoMaintain } from '@/api/student'
 import Tinymce from '@/components/Tinymce'
+import VDistpicker from 'v-distpicker'
 export default {
   name: 'studentBaseInfoMaintain',
-  components: { Tinymce },
+  components: { Tinymce,VDistpicker },
   data() {
     return {
         form:{
           perNum:'',
           perName:'',
-          perTelephone:'',
-          contactTelephone,
+          politicsCode:'',
+          mobilePhone:'',
           qq:'',
           wechat:'',
-          mobilePhone:'',
-          province:'',
-          city:'',
-          town:'',
+          email:'',
+          contactTelephone:'',
+          perProvince:'',
+          perCity:'',
+          perTown:'',
           perAddress:'',
+          hujiProvince:'',
+          hujiCity:'',
+          hujiTown:'',
+          hujiAddress:'',
           personIntroduction:''
-        }
+        },
+        politicsCodeList:[]
     }
   },
   created() {
@@ -90,7 +122,9 @@ export default {
   methods: {
     fetchData() {
       studentBaseInfoMaintainInit({ 'session': document.cookie ,'personId': this.$route.query.personId }).then(res => {
+        console.log(res.data)
         this.form = res.data.form
+        this.politicsCodeList = res.data.politicsCodeList
       })
     },
     submit(){
@@ -106,12 +140,18 @@ export default {
        }
       })
     },
-    onSelected(data){
-        this.form.province= data.province.value
-        this.form.city=data.city.value
-        this.form.town=data.area.value
+    onSelectedPer(data){
+        this.form.perProvince= data.province.value
+        this.form.perCity=data.city.value
+        this.form.perTown=data.area.value
         console.log(data)
-      }
+    },
+    onSelectedHuji(data){
+      this.form.hujiProvince= data.province.value
+      this.form.hujiCity=data.city.value
+      this.form.hujiTown=data.area.value
+      console.log(data)
+    }
 
   }
 }
