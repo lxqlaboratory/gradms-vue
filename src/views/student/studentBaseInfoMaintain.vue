@@ -15,7 +15,7 @@
         </td>
         <td colspan="1" >政治面貌</td>
         <td colspan="1">
-          <el-select v-model="form.politicsCode" placeholder="政治面貌" style="width: 90%">
+          <el-select v-model="form.politicsCode" placeholder="请选择政治面貌" style="width: 90%">
             <el-option
               v-for="item in politicsCodeList"
               :key="item.value"
@@ -70,6 +70,22 @@
         </td>
       </tr>
       <tr>
+        <td colspan="1" >健康状况</td>
+        <td colspan="1">
+          <el-select v-model="form.healthyState" placeholder="请选择健康状态" style="width: 90%">
+            <el-option
+              v-for="item in healthyStateList"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </td>
+        <td colspan="4">
+          <el-input v-model="form.note" placeholder="请输入备注" style="width: 90%"></el-input>
+        </td>
+      </tr>
+      <tr>
         <td colspan="6" >个人简介</td>
       </tr>
       <tr>
@@ -111,6 +127,8 @@ export default {
           hujiCity:'',
           hujiTown:'',
           hujiAddress:'',
+          healthyState:'',
+          note:'',
           personIntroduction:''
         },
         politicsCodeList:[]
@@ -125,6 +143,7 @@ export default {
         console.log(res.data)
         this.form = res.data.form
         this.politicsCodeList = res.data.politicsCodeList
+        this.healthyStateList = res.data.healthyStateList;
       })
     },
     submit(){
