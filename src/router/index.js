@@ -200,6 +200,23 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/graduate',
+    component: Layout,
+    name: 'graduate',
+    meta: {
+      title: '学位管理',
+      icon: 'example'
+    },
+    children: [
+      {
+        path: 'degreeTutorCheckStudentGraduateApply',
+        name: 'degreeTutorCheckStudentGraduateApply',
+        component: () => import('@/views/graduate/degreeTutorCheckStudentGraduateApply'),
+        meta: { title: '学生基本详细维护'}
+      } 
+    ]
+  },
   {path: '/', redirect: '/login' ,hidden: true },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }

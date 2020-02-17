@@ -98,7 +98,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              <el-button type="danger" @click="deletePerson(scope.row.affairPersonId)" size="mini" >删除</el-button>
+              <el-button type="primary" @click="deletePerson(scope.row.affairPersonId)" size="mini" >删除</el-button>
             </template>
           </el-table-column>
         </el-table>
