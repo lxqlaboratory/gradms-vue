@@ -213,10 +213,76 @@ export const constantRoutes = [
         path: 'degreeTutorCheckStudentGraduateApply',
         name: 'degreeTutorCheckStudentGraduateApply',
         component: () => import('@/views/graduate/degreeTutorCheckStudentGraduateApply'),
-        meta: { title: '学生基本详细维护'}
+        meta: { title: '导师审核毕业申请'}
       } 
     ]
   },
+  {
+    path: '/thesisreview',
+    component: Layout,
+    name: 'thesisreview',
+    meta: {
+      title: '论文评阅',
+      icon: 'example'
+    },
+    children: [
+      {
+        path: 'thesisReviewPasswordUpdate',
+        name: 'thesisReviewPasswordUpdate',
+        component: () => import('@/views/thesisreview/thesisReviewPasswordUpdate'),
+        meta: { title: '密码修改'}
+      },
+      {
+        path: 'thesisReviewExpertInfoMaintain',
+        name: 'thesisReviewExpertInfoMaintain',
+        component: () => import('@/views/thesisreview/thesisReviewExpertInfoMaintain'),
+        meta: { title: '基本信息'}
+      }, 
+      {
+        path: 'thesisReviewOnlineReview',
+        name: 'thesisReviewOnlineReview',
+        component: () => import('@/views/thesisreview/thesisReviewOnlineReview'),
+        meta: { title: '论文评阅'}
+      }, 
+      {
+        path: 'thesisReviewExpertManage',
+        name: 'thesisReviewExpertManage',
+        component: () => import('@/views/thesisreview/thesisReviewExpertManage'),
+        meta: { title: '评阅专家管理'}
+      }, 
+      {
+        path: 'thesisReviewDirectionManage',
+        name: 'thesisReviewDirectionManage',
+        component: () => import('@/views/thesisreview/thesisReviewDirectionManage'),
+        meta: { title: '评阅方向管理'}
+      }, 
+      {
+        path: 'thesisReviewConfigManage',
+        name: 'thesisReviewConfigManage',
+        component: () => import('@/views/thesisreview/thesisReviewConfigManage'),
+        meta: { title: '评阅配置管理'}
+      }, 
+      {
+        path: 'thesisReviewReviewInfoManage',
+        name: 'thesisReviewReviewInfoManage',
+        component: () => import('@/views/thesisreview/thesisReviewReviewInfoManage'),
+        meta: { title: '评阅信息管理'}
+      }, 
+      {
+        path: 'thesisReviewReviewInfoQuery',
+        name: 'thesisReviewReviewInfoQuery',
+        component: () => import('@/views/thesisreview/thesisReviewReviewInfoQuery'),
+        meta: { title: '评阅信息查询'}
+      }, 
+      {
+        path: 'thesisReviewReviewFeeManage',
+        name: 'thesisReviewReviewFeeManage',
+        component: () => import('@/views/thesisreview/thesisReviewReviewFeeManage'),
+        meta: { title: '评阅费用管理'}
+      } 
+    ]
+  },
+
   {path: '/', redirect: '/login' ,hidden: true },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
