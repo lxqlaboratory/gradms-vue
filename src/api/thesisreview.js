@@ -9,6 +9,14 @@ export function thesisReviewPasswordUpdate(data) {
   })
 }
 
+export function thesisReviewExpertInfoMaintainInit(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewExpertInfoMaintainInit',
+    method: 'POST',
+    data
+  })
+}
+
 export function thesisReviewExpertInfoMaintain(data) {
   return request({
     url: '/api/thesisreview/thesisReviewExpertInfoMaintain',
@@ -25,9 +33,23 @@ export function thesisReviewOnlineReview(data) {
   })
 }
 
-export function thesisReviewExpertManage(data) {
+export function thesisReviewExpertManageInit(data) {
   return request({
-    url: '/api/thesisreview/thesisReviewExpertManage',
+    url: '/api/thesisreview/thesisReviewExpertManageInit',
+    method: 'POST',
+    data
+  })
+}
+export function thesisReviewExpertManagequery(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewExpertManageQuery',
+    method: 'POST',
+    data
+  })
+}
+export function thesisReviewExpertManagePersonDelete(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewExpertManagePersonDelete',
     method: 'POST',
     data
   })
