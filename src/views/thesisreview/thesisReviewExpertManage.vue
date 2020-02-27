@@ -33,7 +33,7 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="工号"
+            label="帐号"
             align="center"
             color="black"
           >
@@ -47,25 +47,34 @@
             color="black"
           >
             <template slot-scope="scope">
-              <el-button type="text" @click="showPersonInfo(scope.row.personId)" size="mini">{{ scope.row.perName }}</el-button>
+              <el-button type="text" @click="updateExpertInfo(scope.row.personId)" size="mini">{{ scope.row.perName }}</el-button>
             </template>
           </el-table-column>
           <el-table-column
-            label="职称"
+            label="所在单位"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.proTechPositionName }}
+              {{ scope.row.personUnit }}
             </template>
           </el-table-column>
           <el-table-column
-            label="学院"
+            label="专业"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.collegeName }}
+              {{ scope.row.majorName }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="研究方向"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.researchDirection }}
             </template>
           </el-table-column>
           <el-table-column
@@ -74,14 +83,14 @@
             color="black"
           >
             <template slot-scope="scope">
-              <el-button type="primary" @click="deletePerson(scope.row.memberId)" size="mini" >删除</el-button>
+              <el-button type="primary" @click="deletePerson(scope.row.expertId)" size="mini" >删除</el-button>
             </template>
           </el-table-column>
         </el-table>
       </div>
 
       <div align="center">
-        <el-button type="primary" @click="addPerson(majorId)" >添加</el-button>
+        <el-button type="primary" @click="addExpert(majorId)" >添加</el-button>
       </div>
     </div>
   </div>
@@ -113,7 +122,7 @@ export default {
     doQuery(){
       thesisReviewExpertManageQuery({ 'session': document.cookie, 'majorId': this.majorId
       }).then(res => {
-        this.majorList = res.data.majorList
+        this.expertList = res.data
       })
     },
     deletePerson(expertId){
@@ -121,11 +130,11 @@ export default {
          this.fetchData()
       })
     },
-    addPerson(majorId){
+    addExpert(majorId){
       this.$router.push({ path: 'thesisReviewExpertManageAdd', query: { majorId }})
     },
-    showPersonInfo(personId){
-      this.$router.push({ path: '/tutor/tutorDetailInfoShow', query: { personId }})
+    updateExpertInfo(personId){
+      this.$router.push({ path: 'thesisReviewExpertInfoMaintain', query: { personId }})
     }
   }
 }

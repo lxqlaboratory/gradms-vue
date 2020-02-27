@@ -55,6 +55,30 @@ export function thesisReviewExpertManagePersonDelete(data) {
   })
 }
 
+export function getExportInfoListByPerNumName(data) {
+  return request({
+    url: '/api/thesisreview/getExportInfoListByPerNumName',
+    method: 'POST',
+    data
+  })
+}
+
+export function getExportInfoListByPerNumNameQuery(data) {
+  return request({
+    url: '/api/thesisreview/getExportInfoListByPerNumName',
+    method: 'POST',
+    data
+  })
+}
+export function thesisReviewExpertManageExpertAdd(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewExpertManageExpertAdd',
+    method: 'POST',
+    data
+  })
+}
+
+
 export function thesisReviewDirectionManage(data) {
   return request({
     url: '/api/thesisreview/thesisReviewDirectionManage',
