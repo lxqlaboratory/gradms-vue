@@ -15,7 +15,7 @@
     <div>
       <div class="table-container">
         <el-table
-          :data="exportList"
+          :data="expertList"
           border
           style="width: 100%;"
           size="mini"
@@ -90,7 +90,8 @@
       </div>
 
       <div align="center">
-        <el-button type="primary" @click="addExpert(majorId)" >添加</el-button>
+        <el-button type="primary" @click="addExpert(majorId)" >添加已有专家</el-button>
+        <el-button type="primary" @click="newExpert(majorId)" >创建新评审专家</el-button>
       </div>
     </div>
   </div>
@@ -135,7 +136,11 @@ export default {
     },
     updateExpertInfo(personId){
       this.$router.push({ path: 'thesisReviewExpertInfoMaintain', query: { personId }})
+    },
+    newExpert(majorId){
+      this.$router.push({ path: 'thesisReviewExpertInfoMaintain', query: { majorId }})
     }
+
   }
 }
 </script>

@@ -18,7 +18,7 @@
     </div>
     <div class="table-container">
       <el-table
-        :data="tableList"
+        :data="expertList"
         border
         style="width: 100%;"
         size="mini"
@@ -54,28 +54,16 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="学院名"
+          label="所在单位"
           align="center"
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.collegeName }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="二级学院"
-          align="center"
-          color="black"
-        >
-          <template slot-scope="scope">
-            {{ scope.row.collegeName1 }}
+            {{ scope.row.personUnit }}
           </template>
         </el-table-column>
       </el-table>
     </div>
-    <div align="center">
-        <el-button type="primary" @click="addNewExpert(majorId)" >添加</el-button>
-      </div>
 
   </div>
 </template>
@@ -120,8 +108,7 @@ export default {
     },
     addExpert(personId) {
       thesisReviewExpertManageExpertAdd({ 'session': document.cookie ,'majorId':this.majorId,'personId': personId }).then(res=>{
-        if(res.code == '0')
-        {
+        if(res.code == '0'){
           this.$router.push({ path: 'thesisReviewExpertManage' })
         }else {
           this.$message({
@@ -131,9 +118,6 @@ export default {
         }
       })
     },
-    addNewExpert(majorId){
-      this.$router.push({ path: 'thesisReviewExpertInfoMaintain', query: { majorId }})
-    }
   }
 }
 </script>
