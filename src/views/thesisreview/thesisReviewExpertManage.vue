@@ -127,8 +127,20 @@ export default {
       })
     },
     deletePerson(expertId){
-       thesisReviewExpertManagePersonDelete({ 'session': document.cookie, 'expertId': expertId}).then(res => {
-         this.fetchData()
+        this.$confirm('确认从评审库里删除吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+           thesisReviewExpertManagePersonDelete({ 'session': document.cookie, 'expertId': expertId}).then(res => {
+           this.fetchData()
+        })  
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
+        });
       })
     },
     addExpert(majorId){
