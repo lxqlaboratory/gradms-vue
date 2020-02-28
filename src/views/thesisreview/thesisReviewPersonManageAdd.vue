@@ -50,7 +50,7 @@
           color="black"
         >
           <template slot-scope="scope">
-            <el-button type="text" @click="addExpert(scope.row.personId)" size="mini">{{ scope.row.perName }}</el-button>
+            <el-button type="text" @click="addExpert(this.majorId,scope.row.personId)" size="mini">{{ scope.row.perName }}</el-button>
           </template>
         </el-table-column>
         <el-table-column
@@ -71,7 +71,7 @@
 <script>
   import { getExportInfoListByPerNumName } from '@/api/thesisreview'
   import { getExportInfoListByPerNumNameQuery } from '@/api/thesisreview'
-  import { thesisReviewExpertManageExpertAdd } from '@/api/thesisreview'
+  import { thesisReviewPersonAdd } from '@/api/thesisreview'
 export default {
   name: 'thesisReviewExpertManageAdd',
   data() {
@@ -106,10 +106,10 @@ export default {
         this.expertList = res.data
       })
     },
-    addExpert(personId) {
-      thesisReviewExpertManageExpertAdd({ 'session': document.cookie ,'majorId':this.majorId,'personId': personId }).then(res=>{
+    addExpert(majorId,personId) {
+      thesisReviewPersonAdd({ 'session': document.cookie ,'majorId':majorId,'personId': personId }).then(res=>{
         if(res.code == '0'){
-          this.$router.push({ path: 'thesisReviewExpertManage' })
+          this.$router.push({ path: 'thesisReviewPersonManage',  query: { majorId }})
         }else {
           this.$message({
             message: '已经存在不能添加！',

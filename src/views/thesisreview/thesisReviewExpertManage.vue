@@ -1,15 +1,10 @@
 <template>
   <div class="app-container">
       <div style="margin-left: 30px">
-      类别
-      <el-select v-model="memberType" placeholder="请选择专业" class="filter-item" style="width: 20%;">
-        <el-option
-          v-for="item in majorList"
-          :key="item.majorId"
-          :label="item.majorName"
-          :value="item.majorId">
-        </el-option>
-      </el-select>
+      单位
+      <el-input v-model="personUnit" placeholder="请输入单位" style="width: 20%;" class="filter-item" />
+      姓名
+      <el-input v-model="perName" placeholder="请输入姓名" style="width: 20%;" class="filter-item" />
       <el-button type="primary" @click="doQuery" >查询</el-button>
       </div>
     <div>
@@ -46,8 +41,8 @@
             align="center"
             color="black"
           >
-            <template slot-scope="scope">
-              <el-button type="text" @click="updateExpertInfo(scope.row.personId)" size="mini">{{ scope.row.perName }}</el-button>
+          <template slot-scope="scope">
+              {{ scope.row.perName }}
             </template>
           </el-table-column>
           <el-table-column
@@ -55,26 +50,35 @@
             align="center"
             color="black"
           >
-            <template slot-scope="scope">
+          <template slot-scope="scope">
               {{ scope.row.personUnit }}
             </template>
           </el-table-column>
           <el-table-column
-            label="专业"
+            label="身份证号"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.majorName }}
+              {{ scope.row.perIdCard }}
             </template>
           </el-table-column>
           <el-table-column
-            label="研究方向"
+            label="手机号"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.researchDirection }}
+              {{ scope.row.mobilePhone }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="邮箱"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.email }}
             </template>
           </el-table-column>
           <el-table-column
@@ -83,30 +87,31 @@
             color="black"
           >
             <template slot-scope="scope">
-              <el-button type="primary" @click="deletePerson(scope.row.expertId)" size="mini" >删除</el-button>
+              <el-button type="primary" @click="resetPwd(scope.row.personId)" size="mini" >密码重置</el-button>
+              <el-button type="primary" @click="updateExpert(scope.row.personId)" size="mini" >查看修改</el-button>
+              <el-button type="primary" @click="deleteExpert(scope.row.personId)" size="mini" >删除</el-button>
             </template>
           </el-table-column>
         </el-table>
       </div>
 
       <div align="center">
-        <el-button type="primary" @click="addExpert(majorId)" >添加已有专家</el-button>
-        <el-button type="primary" @click="newExpert(majorId)" >创建新评审专家</el-button>
+        <el-button type="primary" @click="addExpert()" >添加外审专家</el-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { thesisReviewExpertManageInit } from '@/api/thesisreview'
-import { thesisReviewExpertManageQuery} from '@/api/thesisreview'
-import { thesisReviewExpertManagePersonDelete } from '@/api/thesisreview'
+import { thesisReviewExpertManage } from '@/api/thesisreview'
+import { thesisReviewExpertManageDelete } from '@/api/thesisreview'
+import { thesisReviewExpertManageResetPwd } from '@/api/thesisreview'
 export default {
   name: 'thesisReviewExpertManage',
   data() {
     return {
-      majorId:-1,
-      majorList:[],
+      personUnit:'',
+      perName:'',
       expertList:[]
     }
   },
@@ -115,24 +120,40 @@ export default {
   },
   methods: {
     fetchData() {
-      thesisReviewExpertManageInit({ 'session': document.cookie }).then(res => {
-        this.expertList = res.data.expertList
-        this.majorList = res.data.majorList
+      thesisReviewExpertManage({ 'session': document.cookie }).then(res => {
+        this.expertList = res.data
       })
     },
     doQuery(){
-      thesisReviewExpertManageQuery({ 'session': document.cookie, 'majorId': this.majorId
+      thesisReviewExpertManage({ 'session': document.cookie, 'personUnit': this.personUnit,'perName':this.perName
       }).then(res => {
         this.expertList = res.data
       })
     },
-    deletePerson(expertId){
-        this.$confirm('确认从评审库里删除吗?', '提示', {
+    
+    resetPwd(personId){
+        this.$confirm('确认重置密码吗?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-           thesisReviewExpertManagePersonDelete({ 'session': document.cookie, 'expertId': expertId}).then(res => {
+           thesisReviewExpertResetPwd({ 'session': document.cookie, 'personId': personId}).then(res => {
+           this.fetchData()
+        })  
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消重置'
+          });          
+        });
+    },
+    deleteExpert(personId){
+        this.$confirm('确认删除外审专家吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+           thesisReviewExpertDelete({ 'session': document.cookie, 'personId': personId}).then(res => {
            this.fetchData()
         })  
         }).catch(() => {
@@ -141,18 +162,13 @@ export default {
             message: '已取消删除'
           });          
         });
-      })
     },
-    addExpert(majorId){
-      this.$router.push({ path: 'thesisReviewExpertManageAdd', query: { majorId }})
-    },
-    updateExpertInfo(personId){
+    updateExpert(personId){
       this.$router.push({ path: 'thesisReviewExpertInfoMaintain', query: { personId }})
     },
-    newExpert(majorId){
-      this.$router.push({ path: 'thesisReviewExpertInfoMaintain', query: { majorId }})
+    addExpert(){
+      this.$router.push({ path: 'thesisReviewExpertInfoMaintain'})
     }
-
   }
 }
 </script>

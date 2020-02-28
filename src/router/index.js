@@ -251,10 +251,10 @@ export const constantRoutes = [
         meta: { title: '评阅专家管理'}
       }, 
       {
-        path: 'thesisReviewExpertManageAdd',
-        name: 'thesisReviewExpertManageAdd',
-        component: () => import('@/views/thesisreview/thesisReviewExpertManageAdd'),
-        meta: { title: '评阅专家添加'}
+        path: 'thesisReviewConfigManage',
+        name: 'thesisReviewConfigManage',
+        component: () => import('@/views/thesisreview/thesisReviewConfigManage'),
+        meta: { title: '评阅配置管理'}
       }, 
       {
         path: 'thesisReviewDirectionManage',
@@ -263,10 +263,16 @@ export const constantRoutes = [
         meta: { title: '评阅方向管理'}
       }, 
       {
-        path: 'thesisReviewConfigManage',
-        name: 'thesisReviewConfigManage',
-        component: () => import('@/views/thesisreview/thesisReviewConfigManage'),
-        meta: { title: '评阅配置管理'}
+        path: 'thesisReviewPersonManage',
+        name: 'thesisReviewPersonManage',
+        component: () => import('@/views/thesisreview/thesisReviewPersonManage'),
+        meta: { title: '评阅人管理'}
+      }, 
+      {
+        path: 'thesisReviewPersonManageAdd',
+        name: 'thesisReviewPersonManageAdd',
+        component: () => import('@/views/thesisreview/thesisReviewPersonManageAdd'),
+        meta: { title: '评阅人添加'}
       }, 
       {
         path: 'thesisReviewReviewInfoManage',

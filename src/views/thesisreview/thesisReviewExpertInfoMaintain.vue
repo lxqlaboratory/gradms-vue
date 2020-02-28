@@ -62,13 +62,14 @@
 </template>
 
 <script>
-import { thesisReviewExpertInfoMaintainInit } from '@/api/thesisreview'
 import { thesisReviewExpertInfoMaintain } from '@/api/thesisreview'
+import { thesisReviewExpertInfoMaintainSubmit } from '@/api/thesisreview'
 export default {
   name: 'thesisReviewExpertInfoMaintain',
   data() {
     return {
       form: {
+        personId:null,
         perNum: '',
         perName: '',
         perIdCard:'',
@@ -78,7 +79,8 @@ export default {
         majorName:'',
         researchDirection:'',
         bankNo:'',
-        bankName:''
+        bankName:'',
+        isManage:false
       }
     }
   },
@@ -87,13 +89,12 @@ export default {
   },
   methods: {
     fetchData() {
-      thesisReviewExpertInfoMaintainInit({ 'session': document.cookie ,'personId': this.$route.query.personId }).then(res => {
+      thesisReviewExpertInfoMaintain({ 'session': document.cookie ,'personId': this.$route.query.personId }).then(res => {
         this.form = res.data
       })
     },
     submit(){
-      thesisReviewExpertInfoMaintain({'session': document.cookie , 'form': this.form,
-        'personId': this.$route.query.personId
+      thesisReviewExpertInfoMaintainSubmit({'session': document.cookie , 'form': this.form
       }).then(res => {
        if(res.code == '0'){
          this.$message({
@@ -102,6 +103,9 @@ export default {
            offset: '30'
          });
        }
+//       if(this.form.isManage) {
+//        this.$router.push({ path: 'thesisReviewExpertManage'})
+//       }
       })
     }
   }

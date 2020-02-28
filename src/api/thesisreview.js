@@ -9,17 +9,17 @@ export function thesisReviewPasswordUpdate(data) {
   })
 }
 
-export function thesisReviewExpertInfoMaintainInit(data) {
+export function thesisReviewExpertInfoMaintain(data) {
   return request({
-    url: '/api/thesisreview/thesisReviewExpertInfoMaintainInit',
+    url: '/api/thesisreview/thesisReviewExpertInfoMaintain',
     method: 'POST',
     data
   })
 }
 
-export function thesisReviewExpertInfoMaintain(data) {
+export function thesisReviewExpertInfoMaintainSubmit(data) {
   return request({
-    url: '/api/thesisreview/thesisReviewExpertInfoMaintain',
+    url: '/api/thesisreview/thesisReviewExpertInfoMaintainSubmit',
     method: 'POST',
     data
   })
@@ -33,27 +33,52 @@ export function thesisReviewOnlineReview(data) {
   })
 }
 
-export function thesisReviewExpertManageInit(data) {
+export function thesisReviewExpertManage(data) {
   return request({
-    url: '/api/thesisreview/thesisReviewExpertManageInit',
+    url: '/api/thesisreview/thesisReviewExpertManage',
     method: 'POST',
     data
   })
 }
-export function thesisReviewExpertManagequery(data) {
+export function thesisReviewExpertResetPwd(data) {
   return request({
-    url: '/api/thesisreview/thesisReviewExpertManageQuery',
+    url: '/api/thesisreview/thesisReviewExpertResetPwd',
     method: 'POST',
     data
   })
 }
-export function thesisReviewExpertManagePersonDelete(data) {
+
+export function thesisReviewExpertDelete(data) {
   return request({
-    url: '/api/thesisreview/thesisReviewExpertManagePersonDelete',
+    url: '/api/thesisreview/thesisReviewExpertDelete',
     method: 'POST',
     data
   })
 }
+
+export function thesisReviewPersonManage(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewPersonManage',
+    method: 'POST',
+    data
+  })
+}
+export function thesisReviewPersonQuery(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewPersonQuery',
+    method: 'POST',
+    data
+  })
+}
+
+export function thesisReviewPersonDelete(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewPersonDelete',
+    method: 'POST',
+    data
+  })
+}
+
 
 export function getExportInfoListByPerNumName(data) {
   return request({
@@ -70,9 +95,9 @@ export function getExportInfoListByPerNumNameQuery(data) {
     data
   })
 }
-export function thesisReviewExpertManageExpertAdd(data) {
+export function thesisReviewPersonAdd(data) {
   return request({
-    url: '/api/thesisreview/thesisReviewExpertManageExpertAdd',
+    url: '/api/thesisreview/thesisReviewPersonAdd',
     method: 'POST',
     data
   })
