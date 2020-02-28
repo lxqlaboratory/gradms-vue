@@ -104,8 +104,8 @@
 
 <script>
 import { thesisReviewExpertManage } from '@/api/thesisreview'
-import { thesisReviewExpertManageDelete } from '@/api/thesisreview'
-import { thesisReviewExpertManageResetPwd } from '@/api/thesisreview'
+import { thesisReviewExpertDelete } from '@/api/thesisreview'
+import { thesisReviewExpertResetPwd } from '@/api/thesisreview'
 export default {
   name: 'thesisReviewExpertManage',
   data() {
