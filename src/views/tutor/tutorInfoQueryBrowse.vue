@@ -14,8 +14,11 @@
         <el-input v-model="perNum" placeholder="请输入专业或研究方向" style="width: 15%;" class="filter-item" />
         导师姓名
         <el-input v-model="perName" placeholder="请输入导师姓名" style="width: 10%;" class="filter-item" />
-        <el-button type="primary" @click="doQuery" class="filter-item" >查询</el-button>
+        <el-button  type="primary" @click="doQuery" class="filter-item" >查询</el-button>
       </div>
+    <div class="konghang">
+
+    </div>
       <div class="table-container">
          <el-table
           :data="tutors"
@@ -155,7 +158,7 @@ export default {
       })
     },
     doQuery(){
-      tutorInfoQueryBrowseQuery({ 'session': document.cookie, 'collegeId': this.collegeId, 
+      tutorInfoQueryBrowseQuery({ 'session': document.cookie, 'collegeId': this.collegeId,
         'research': this.research, 'perName': this.perName
       }).then(res => {
         this.tutors = res.data
