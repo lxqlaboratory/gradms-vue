@@ -11,7 +11,7 @@
           </el-option>
         </el-select>
         专业研究方向
-        <el-input v-model="perNum" placeholder="请输入专业或研究方向" style="width: 15%;" class="filter-item" />
+        <el-input v-model="research" placeholder="请输入专业或研究方向" style="width: 15%;" class="filter-item" />
         导师姓名
         <el-input v-model="perName" placeholder="请输入导师姓名" style="width: 10%;" class="filter-item" />
         <el-button  type="primary" @click="doQuery" class="filter-item" >查询</el-button>

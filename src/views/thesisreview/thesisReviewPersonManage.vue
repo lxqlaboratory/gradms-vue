@@ -88,7 +88,7 @@
           </el-table-column>
         </el-table>
       </div>
-
+      <div class="konghang"/>
       <div align="center">
         <el-button type="primary" @click="addExpert(majorId)" >添加</el-button>
       </div>
@@ -125,10 +125,33 @@ export default {
         this.expertList = res.data
       })
     },
-    deletePerson(expertId){
+     deletePerson(expertId){
+        this.$confirm('确认删除外审专家吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
            thesisReviewPersonDelete({ 'session': document.cookie, 'expertId': expertId}).then(res => {
-           this.fetchData()
+            if(res.code == '0')
+            {
+              this.$message({
+                message: "删除成功",
+                type: 'sucess'
+              });            
+             this.fetchData()
+            }else {
+              this.$message({
+                message: res.msg,
+                type: 'warning'
+              });
+            }
         })  
+        }).catch(() => {
+          this.$message({
+            type: 'warning',
+            message: '已取消删除'
+          });          
+        });
     },
     addExpert(majorId){
       this.$router.push({ path: 'thesisReviewPersonManageAdd', query: { majorId }})

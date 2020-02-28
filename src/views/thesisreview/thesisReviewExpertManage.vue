@@ -165,8 +165,6 @@ export default {
           type: 'warning'
         }).then(() => {
            thesisReviewExpertDelete({ 'session': document.cookie, 'personId': personId}).then(res => {
-             console.log(res.code)
-             console.log(res.msg)
             if(res.code == '0')
             {
               this.$message({
