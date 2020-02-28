@@ -138,7 +138,18 @@ export default {
           type: 'warning'
         }).then(() => {
            thesisReviewExpertResetPwd({ 'session': document.cookie, 'personId': personId}).then(res => {
-           this.fetchData()
+            if(res.code == '0')
+            {
+              this.$message({
+                message: "重置成功",
+                type: 'sucess'
+              });            
+            }else {
+              this.$message({
+                message: res.msg,
+                type: 'warning'
+              });
+            }
         })  
         }).catch(() => {
           this.$message({
@@ -154,7 +165,21 @@ export default {
           type: 'warning'
         }).then(() => {
            thesisReviewExpertDelete({ 'session': document.cookie, 'personId': personId}).then(res => {
-           this.fetchData()
+             console.log(res.code)
+             console.log(res.msg)
+            if(res.code == '0')
+            {
+              this.$message({
+                message: "删除成功",
+                type: 'sucess'
+              });            
+             this.fetchData()
+            }else {
+              this.$message({
+                message: res.msg,
+                type: 'warning'
+              });
+            }
         })  
         }).catch(() => {
           this.$message({

@@ -102,7 +102,7 @@ export default {
           this.$router.push({ path: 'degreeCollegeTutorMemberManage' })
         }else {
           this.$message({
-            message: '已经存在不能添加！',
+            message: res.msg,
             type: 'warning'
           });
         }
