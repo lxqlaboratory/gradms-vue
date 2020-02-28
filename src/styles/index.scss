@@ -73,8 +73,8 @@ div:focus {
 
 .content{
   width:100%;
-  border-top: 1px solid #EBEEF5;
-  border-left: 1px solid #EBEEF5;
+  border-top: 1px solid #336699;
+  border-left: 1px solid #336699;
   border-spacing: 0;/*去掉单元格间隙*/
   margin-top: 5px;
   margin-bottom: 5px;
@@ -84,8 +84,29 @@ div:focus {
 }
 .content td {
   padding: 2px 2px;
-  border-bottom: 1px solid #EBEEF5;
-  border-right: 1px solid #EBEEF5;
+  border-bottom: 1px solid #336699;
+  border-right: 1px solid #336699;
   text-align: center;
   font-size: 14px;
+}
+.el-input__inner{
+  height: 28px!important;
+  line-height: 28px!important;
+  width: 90%;
+}
+
+.el-button {
+  font-size: 12px;
+  border-radius: 3px;
+  padding: 7px 15px;
+}
+.el-table{
+  border: 1px solid #336699;
+}
+.el-table td,
+.el-table th.is-leaf{
+  border-bottom: 1px solid #336699;
+  border-right:1px solid #336699;
+  color: #333333;
+  background-color: transparent;
 }
