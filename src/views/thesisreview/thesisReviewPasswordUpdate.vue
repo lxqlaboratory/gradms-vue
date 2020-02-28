@@ -1,7 +1,7 @@
 
 <template>
   <div class="app-container">
-    <el-form ref="ruleForm" :model="ruleForm" status-icon :rules="rules" class="demo-ruleForm" label-width="150px">
+    <el-form ref="ruleForm" :model="ruleForm" status-icon :rules="rules"  label-width="150px">
       <el-form-item label="请输入旧密码" prop="oldPass" style="color: #9b0d14">
         <el-input v-model="ruleForm.oldPass" type="password" autocomplete="off" style="width: 25%;" />
       </el-form-item>
