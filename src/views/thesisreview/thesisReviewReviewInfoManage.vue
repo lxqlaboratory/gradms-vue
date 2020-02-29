@@ -2,12 +2,12 @@
   <div class="app-container">
     <div style="margin-left: 30px">
       学生类型
-      <el-select v-model="stuTypes"  placeholder="请选择学生类型" style="width: 20%">
+      <el-select v-model="configId"  placeholder="请选择学生类型" style="width: 20%">
         <el-option
-          v-for="item in stuTypesList"
-          :key="item.stuTypes"
+          v-for="item in configList"
+          :key="item.configId"
           :label="item.stuTypeNames"
-          :value="item.stuTypes">
+          :value="item.configId">
         </el-option>
       </el-select>
       专业
@@ -224,7 +224,7 @@ export default {
   components: { fileupload },
   data() {
     return {
-      stuTypes:'',
+      configId:-1,
       majorId:-1,
       perNum:'',
       perName:'',
@@ -240,11 +240,11 @@ export default {
   methods: {
     fetchData() {
       thesisReviewReviewInfoManage({ 'session': document.cookie }).then(res => {
-        this.stuTypesList = res.data.stuTypesList
+        this.configList = res.data.configList
         this.majorList = res.data.majorList
         this.reviewList = res.data.reviewList
         this.candidateList = res.data.candidateList
-        this.stuTypes = res.data.stuTypes
+        this.configId = res.data.configId
         this.majorId = majorId;
       })
     },
