@@ -31,21 +31,21 @@
       <tr>
         <td colspan="1" >内审送审分数</td>
         <td colspan="1">
-          <el-input v-model="form.inViewCount" placeholder="请输入内审送审分数" style="width: 90%"></el-input>
+          <el-input v-model.number="form.inViewCount" placeholder="请输入内审送审分数" style="width: 90%"></el-input>
         </td>
         <td colspan="1" >内审评审费</td>
         <td colspan="1">
-          <el-input v-model="form.inViewFee" placeholder="请输入内审评审费" style="width: 90%"></el-input>
+          <el-input v-model.number="form.inViewFee" placeholder="请输入内审评审费" style="width: 90%"></el-input>
         </td>
       </tr>
       <tr>
         <td colspan="1" >外审送审分数</td>
         <td colspan="1">
-          <el-input v-model="form.outViewCount" placeholder="请输入外审送审分数" style="width: 90%"></el-input>
+          <el-input v-model.number="form.outViewCount" placeholder="请输入外审送审分数" style="width: 90%"></el-input>
         </td>
         <td colspan="1" >外审评审费</td>
         <td colspan="1">
-          <el-input v-model="form.outViewFee" placeholder="请输入外审评审费" style="width: 90%"></el-input>
+          <el-input v-model.number="form.outViewFee" placeholder="请输入外审评审费" style="width: 90%"></el-input>
         </td>
       </tr>
       <tr>
