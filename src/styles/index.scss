@@ -114,8 +114,9 @@ div:focus {
   border-bottom: 1px solid #336699;
   border-right:1px solid #336699;
   color: #333333;
-  background-color: transparent;
+  //background-color: rgb(236,245,255);
 }
+
 
 .el-form-item__label{
   font-weight: normal !important;
@@ -123,4 +124,10 @@ div:focus {
 
 .el-message-box{
   border: 1px solid #333333;
+}
+.el-message--success{
+  border: 1px solid #333333;
+  height: 130px;
+  font-size: 50px !important;
+  background-color: rgb(236,245,255);
 }
