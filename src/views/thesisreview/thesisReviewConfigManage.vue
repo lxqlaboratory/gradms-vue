@@ -22,7 +22,7 @@
             <el-option
               v-for="item in stuTypesList"
               :key="item.stuTypes"
-              :label="item.stutypeNames"
+              :label="item.stuTypeNames"
               :value="item.stuTypes">
             </el-option>
           </el-select>
@@ -53,7 +53,7 @@
         <td colspan="1">
             <el-date-picker
               v-model="form.studentUploadStartTime"
-              type="date"
+              type="datetime"
               value-format="yyyy-MM-dd HH:mm:ss"
               placeholder="选择学生论文上传开始时间">
             </el-date-picker>
@@ -62,7 +62,7 @@
         <td colspan="1">
             <el-date-picker
               v-model="form.studentUploadEndTime"
-              type="date"
+              type="datetime"
               value-format="yyyy-MM-dd HH:mm:ss"
               placeholder="选择学生论文上传结束时间">
             </el-date-picker>
@@ -73,7 +73,7 @@
         <td colspan="1">
             <el-date-picker
               v-model="form.tutorCheckStartTime"
-              type="date"
+              type="datetime"
               value-format="yyyy-MM-dd HH:mm:ss"
               placeholder="选择导师审核开始时间">
             </el-date-picker>
@@ -82,7 +82,7 @@
         <td colspan="1">
             <el-date-picker
               v-model="form.tutorCheckEndTime"
-              type="date"
+              type="datetime"
               value-format="yyyy-MM-dd HH:mm:ss"
               placeholder="选择导师审核结束时间">
             </el-date-picker>
@@ -93,7 +93,7 @@
         <td colspan="1">
             <el-date-picker
               v-model="form.expertViewStartTime"
-              type="date"
+              type="datetime"
               value-format="yyyy-MM-dd HH:mm:ss"
               placeholder="选择专家评审开始时间">
             </el-date-picker>
@@ -102,7 +102,7 @@
         <td colspan="1">
             <el-date-picker
               v-model="form.expertViewEndTime"
-              type="date"
+              type="datetime"
               value-format="yyyy-MM-dd HH:mm:ss"
               placeholder="选择专家评审结束时间">
             </el-date-picker>
@@ -130,13 +130,13 @@ export default {
   data() {
     return {
       form: {
-        configId:null,
-	      proId:null,
+        configId:-1,
+	      proId:-1,
 	      stuTypes:'',
-      	inViewCount:0,
-	      inViewFee:0,
-	      outViewCount:0,
-	      outViewFee:0,
+      	inViewCount:-1,
+	      inViewFee:-1,
+	      outViewCount:-1,
+	      outViewFee:-1,
 	      studentUploadStartTime:'',
 	      studentUploadEndTime:'',
 	      tutorCheckStartTime:'',
