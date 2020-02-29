@@ -179,7 +179,20 @@
       </div>
       <div class="konghang" />
       <div align="center">
-        <el-button type="primary" @click="addExpert()" >添加外审专家</el-button>
+        <el-button type="primary" @click="addExpert()" >全部分配</el-button>
+        <el-button>
+        <a href="/downloads/thesisreview/thesisreviewList.xls" >导入模板下载</a>
+        </el-button>
+        <fileupload
+          url="/api/thesisview/thesisReviewReviewInfoImport"
+          :data="{'docType': xls }"
+          accepttype=".xls"
+          @successcallback="onSuccess"
+          style="float: right"
+          @preview="onPreview"
+        >论文分发信息导入
+        </fileupload>
+        <el-button type="primary" @click="addExpert()" >全部取消</el-button>
       </div>
     </div>
   </div>
@@ -280,7 +293,25 @@ export default {
     },
     addExpert(){
       this.$router.push({ path: 'thesisReviewExpertInfoMaintain'})
-    }
+    },
+        onPreview: function(file) {
+    },
+    onSuccess(res, file) {
+        if(res.code == '0'){
+          this.$message({
+            message: '导入成功',
+            type: 'success'
+          });
+          this.fetchData()
+        }
+        else{
+          this.$message({
+            message: res.msg,
+            type: 'error'
+          });
+        }
+
+    },
   }
 }
 </script>
