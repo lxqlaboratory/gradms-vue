@@ -119,6 +119,22 @@ export function thesisReviewConfigManage(data) {
     data
   })
 }
+export function thesisReviewConfigQuery(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewConfigQuery',
+    method: 'POST',
+    data
+  })
+}
+
+
+export function thesisReviewConfigSubmit(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewConfigSubmit',
+    method: 'POST',
+    data
+  })
+}
 
 export function thesisReviewReviewInfoManage(data) {
   return request({
