@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: 'thesisReviewReviewInfoQuery'
+    name: 'thesisReviewReviewStateTrace'
   }
 </script>
 

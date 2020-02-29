@@ -2,12 +2,21 @@
   <div class="app-container">
     <div style="margin-left: 30px">
       学生类型
-      <el-select v-model="stuTypeCode" @change="doQuery()" placeholder="请选择学生类型" style="width: 20%">
+      <el-select v-model="stuTypes"  placeholder="请选择学生类型" style="width: 20%">
         <el-option
-          v-for="item in stuTypeList"
-          :key="item.stuTypeCode"
-          :label="item.stuTypeName"
-          :value="item.stuTypeCode">
+          v-for="item in stuTypesList"
+          :key="item.stuTypes"
+          :label="item.stuTypeNames"
+          :value="item.stuTypes">
+        </el-option>
+      </el-select>
+      专业
+      <el-select v-model="majorId"  placeholder="请选择专业" style="width: 20%">
+        <el-option
+          v-for="item in majorList"
+          :key="item.majorId"
+          :label="item.majorName"
+          :value="item.majorId">
         </el-option>
       </el-select>
       学号
@@ -19,7 +28,7 @@
     <div>
       <div class="table-container">
         <el-table
-          :data="distributeList"
+          :data="reviewList"
           border
           style="width: 100%;"
           size="mini"
@@ -104,7 +113,7 @@
       <div class="konghang" />
       <div class="table-container">
         <el-table
-          :data="unDistributeList"
+          :data="candidateList"
           border
           style="width: 100%;"
           size="mini"
@@ -179,20 +188,24 @@
       </div>
       <div class="konghang" />
       <div align="center">
-        <el-button type="primary" @click="addExpert()" >全部分配</el-button>
-        <el-button>
-        <a href="/downloads/thesisreview/thesisreviewList.xls" >导入模板下载</a>
-        </el-button>
-        <fileupload
-          url="/api/thesisview/thesisReviewReviewInfoImport"
-          :data="{'docType': xls }"
-          accepttype=".xls"
-          @successcallback="onSuccess"
-          style="float: right"
-          @preview="onPreview"
-        >论文分发信息导入
-        </fileupload>
-        <el-button type="primary" @click="addExpert()" >全部取消</el-button>
+      <tr>
+        <td>
+          <el-button type="primary" @click="addAll()" >添加全部</el-button>
+          <el-button type="primary" @click="clearAll()" >清除全部</el-button>
+          <el-button>
+          <a href="/downloads/thesisreview/thesisreviewList.xls" >导入模板下载</a>
+          </el-button>
+          <fileupload
+            url="/api/thesisview/thesisReviewReviewInfoImport"
+            :data="{'docType': xls }"
+            accepttype=".xls"
+            @successcallback="onSuccess"
+            style="float: right"
+            @preview="onPreview"
+          >论文分发信息导入
+          </fileupload>
+        </td>
+      </tr>
       </div>
     </div>
   </div>
@@ -201,20 +214,24 @@
 <script>
 import { thesisReviewReviewInfoManage } from '@/api/thesisreview'
 import { thesisReviewReviewInfoQuery } from '@/api/thesisreview'
-import { thesisReviewReviewInfoDistribute } from '@/api/thesisreview'
-import { thesisReviewReviewInfoUnDistribute } from '@/api/thesisreview'
-import { thesisReviewReviewInfoAddStudent } from '@/api/thesisreview'
-import { thesisReviewReviewInfoDeleteStudent } from '@/api/thesisreview'
+import { thesisReviewReviewInfoAddAll } from '@/api/thesisreview'
+import { thesisReviewReviewInfoRemoveAll } from '@/api/thesisreview'
+import { thesisReviewReviewInfoAdd } from '@/api/thesisreview'
+import { thesisReviewReviewInfoRemove } from '@/api/thesisreview'
+import fileupload from '../../components/upload/fileupload'
 export default {
   name: 'thesisReviewReviewInfoManage',
+  components: { fileupload },
   data() {
     return {
-      stuTypeCode:'',
+      stuTypes:'',
+      majorId:-1,
       perNum:'',
       perName:'',
-      stuTypeList:[],
-      distributeList:[],
-      unDistributeList:[]
+      stuTypesList:[],
+      majorList:[],
+      reviewList:[],
+      candidateList:[]
     }
   },
   created() {
@@ -222,30 +239,37 @@ export default {
   },
   methods: {
     fetchData() {
-      thesisReviewExpertManage({ 'session': document.cookie }).then(res => {
-        this.expertList = res.data
+      thesisReviewReviewInfoManage({ 'session': document.cookie }).then(res => {
+        this.stuTypesList = res.data.stuTypesList
+        this.majorList = res.data.majorList
+        this.reviewList = res.data.reviewList
+        this.candidateList = res.data.candidateList
+        this.stuTypes = res.data.stuTypes
+        this.majorId = majorId;
       })
     },
     doQuery(){
-      thesisReviewExpertManage({ 'session': document.cookie, 'personUnit': this.personUnit,'perName':this.perName
+      thesisReviewReviewInfoQuery({ 'session': document.cookie, 'stuTypeCodes': this.stuTypeCodes, 'majorId': this.majorId, 'perNum': this.perNum,'perName':this.perName
       }).then(res => {
-        this.expertList = res.data
+        this.reviewList = res.data.reviewList
+        this.candidateList = res.data.candidateList
       })
     },
     
-    resetPwd(personId){
-        this.$confirm('确认重置密码吗?', '提示', {
+    addAll(){
+        this.$confirm('确认要添加所有需要评审的学生吗?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-           thesisReviewExpertResetPwd({ 'session': document.cookie, 'personId': personId}).then(res => {
+           thesisReviewReviewInfoAddAll({ 'session': document.cookie, 'stuTypeCodes': this.stuTypeCodes, 'majorId': this.majorId, 'perNum': this.perNum,'perName':this.perName}).then(res => {
             if(res.code == '0')
             {
               this.$message({
-                message: "重置成功",
+                message: "添加成功",
                 type: 'sucess'
-              });            
+              }); 
+              doQuery();           
             }else {
               this.$message({
                 message: res.msg,
@@ -256,24 +280,52 @@ export default {
         }).catch(() => {
           this.$message({
             type: 'info',
-            message: '已取消重置'
+            message: '已取消添加'
           });          
         });
     },
-    deleteExpert(personId){
-        this.$confirm('确认删除外审专家吗?', '提示', {
+    removeAll(){
+        this.$confirm('确认要清除所有参加评审的学生吗?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-           thesisReviewExpertDelete({ 'session': document.cookie, 'personId': personId}).then(res => {
+           thesisReviewReviewInfoRemoveAll({ 'session': document.cookie, 'stuTypeCodes': this.stuTypeCodes, 'majorId': this.majorId, 'perNum': this.perNum,'perName':this.perName}).then(res => {
+            if(res.code == '0')
+            {
+              this.$message({
+                message: "清除成功",
+                type: 'sucess'
+              }); 
+              doQuery();           
+            }else {
+              this.$message({
+                message: res.msg,
+                type: 'warning'
+              });
+            }
+        })  
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消清除'
+          });          
+        });
+    },
+    remove(personId){
+        this.$confirm('确认删除已参加的评审的学生吗？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+           thesisReviewReviewInfoRemove({ 'session': document.cookie, 'personId': personId}).then(res => {
             if(res.code == '0')
             {
               this.$message({
                 message: "删除成功",
                 type: 'sucess'
               });            
-             this.fetchData()
+             this.doQuery();
             }else {
               this.$message({
                 message: res.msg,
@@ -288,13 +340,24 @@ export default {
           });          
         });
     },
-    updateExpert(personId){
-      this.$router.push({ path: 'thesisReviewExpertInfoMaintain', query: { personId }})
+    add(personId){
+      thesisReviewReviewInfoAdd({ 'session': document.cookie, 'personId': personId}).then(res => {
+        if(res.code == '0')
+        {
+          this.$message({
+            message: "添加成功",
+            type: 'sucess'
+          });            
+          this.doQuery();
+        }else {
+          this.$message({
+            message: res.msg,
+            type: 'warning'
+          });
+        }
+      });
     },
-    addExpert(){
-      this.$router.push({ path: 'thesisReviewExpertInfoMaintain'})
-    },
-        onPreview: function(file) {
+    onPreview: function(file) {
     },
     onSuccess(res, file) {
         if(res.code == '0'){
@@ -302,7 +365,7 @@ export default {
             message: '导入成功',
             type: 'success'
           });
-          this.fetchData()
+          this.doQuery()
         }
         else{
           this.$message({
@@ -310,7 +373,6 @@ export default {
             type: 'error'
           });
         }
-
     },
   }
 }

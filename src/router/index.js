@@ -281,10 +281,10 @@ export const constantRoutes = [
         meta: { title: '评阅信息管理'}
       }, 
       {
-        path: 'thesisReviewReviewInfoQuery',
-        name: 'thesisReviewReviewInfoQuery',
-        component: () => import('@/views/thesisreview/thesisReviewReviewInfoQuery'),
-        meta: { title: '评阅信息查询'}
+        path: 'thesisReviewReviewStateTrace',
+        name: 'thesisReviewReviewStateTrace',
+        component: () => import('@/views/thesisreview/thesisReviewReviewStateTrace'),
+        meta: { title: '评阅状态追踪'}
       }, 
       {
         path: 'thesisReviewReviewFeeManage',
