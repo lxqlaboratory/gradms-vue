@@ -84,9 +84,8 @@ export default {
 
 <style scoped>
   .styleBtn{
-    background-color: #639b2b;
-    border: none;
-    color: #ffffff;
+    background-color:transparent;
+    color: #336699;
   }
 
 </style>

@@ -87,7 +87,7 @@
         >
           <template slot-scope="scope">
             <el-select v-if="scope.row.isDoctor === true " v-model="scope.row.tutorId" placeholder="请选择">
-              <el-option  
+              <el-option
                 v-for="item in doctorTutorList"
                 :key="item.personId"
                 :label="item.perNumName"
@@ -95,7 +95,7 @@
               </el-option>
             </el-select>
             <el-select v-else v-model="scope.row.tutorId" placeholder="请选择">
-              <el-option  
+              <el-option
                 v-for="item in masterTutorList"
                 :key="item.personId"
                 :label="item.perNumName"
@@ -111,7 +111,7 @@
         >
           <template slot-scope="scope">
             <el-select v-if="scope.row.isDoctor === true " v-model="scope.row.tutorId1" placeholder="请选择">
-              <el-option  
+              <el-option
                 v-for="item in doctorTutorList"
                 :key="item.personId"
                 :label="item.perNumName"
@@ -119,7 +119,7 @@
               </el-option>
             </el-select>
             <el-select v-else v-model="scope.row.tutorId1" placeholder="请选择">
-              <el-option  
+              <el-option
                 v-for="item in masterTutorList"
                 :key="item.personId"
                 :label="item.perNumName"
@@ -135,7 +135,7 @@
         >
           <template slot-scope="scope">
             <el-select v-if="scope.row.isDoctor === true " v-model="scope.row.tutorId2" placeholder="请选择">
-              <el-option  
+              <el-option
                 v-for="item in doctorTutorList"
                 :key="item.personId"
                 :label="item.perNumName"
@@ -143,7 +143,7 @@
               </el-option>
             </el-select>
             <el-select v-else v-model="scope.row.tutorId2" placeholder="请选择">
-              <el-option  
+              <el-option
                 v-for="item in masterTutorList"
                 :key="item.personId"
                 :label="item.perNumName"
@@ -158,7 +158,9 @@
       <tr>
         <td>
           <el-button type="primary" @click="submitTableData">提交</el-button>
-          <a style="color:#20a0ff" href="/downloads/tutor/tutuorAndStuInfoList.xls" >导入模板下载</a>
+          <el-button>
+          <a href="/downloads/tutor/tutuorAndStuInfoList.xls" >导入模板下载</a>
+          </el-button>
           <fileupload
             url="/api/tutor/importDegreeCollegeStuAndTutorData"
             :data="{'docType': xls }"
@@ -213,7 +215,7 @@ export default {
       })
     },
     doQuery(){
-      collegeMaintainStudentTutorQuery({ 'session': document.cookie, 'stuTypeCode': this.stuTypeCode, 
+      collegeMaintainStudentTutorQuery({ 'session': document.cookie, 'stuTypeCode': this.stuTypeCode,
         'grade': this.grade, 'majorId': this.majorId, 'perNum': this.perNum, 'perName': this.perName
       }).then(res => {
         this.studentList = res.data
@@ -260,7 +262,7 @@ export default {
             type: 'error'
           });
         }
-        
+
     },
 
   }
