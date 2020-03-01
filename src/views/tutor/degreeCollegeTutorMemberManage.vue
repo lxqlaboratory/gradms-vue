@@ -19,7 +19,6 @@
           border
           style="width: 100%;"
           size="mini"
-          :header-cell-style="{background:'#eef1f6',color:'#606266',fontSize: '14px'}"
         >
           <el-table-column
             label="序号"
@@ -134,12 +133,12 @@ export default {
         }).then(() => {
 		      degreeCollegeTutorMemberClear({ 'session': document.cookie, 'memberType': memberType}).then(res => {
           this.fetchData()
-        })  
+        })
         }).catch(() => {
           this.$message({
             type: 'info',
             message: '已取消清除'
-          });          
+          });
         });
     },
     memberInit(memberType){

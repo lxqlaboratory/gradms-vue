@@ -14,7 +14,6 @@
           border
           style="width: 100%;"
           size="mini"
-          :header-cell-style="{background:'#eef1f6',color:'#606266',fontSize: '14px'}"
         >
           <el-table-column
             label="序号"
@@ -130,7 +129,7 @@ export default {
         this.expertList = res.data
       })
     },
-    
+
     resetPwd(personId){
         this.$confirm('确认重置密码吗?', '提示', {
           confirmButtonText: '确定',
@@ -143,19 +142,19 @@ export default {
               this.$message({
                 message: "重置成功",
                 type: 'sucess'
-              });            
+              });
             }else {
               this.$message({
                 message: res.msg,
                 type: 'warning'
               });
             }
-        })  
+        })
         }).catch(() => {
           this.$message({
             type: 'info',
             message: '已取消重置'
-          });          
+          });
         });
     },
     deleteExpert(personId){
@@ -170,7 +169,7 @@ export default {
               this.$message({
                 message: "删除成功",
                 type: 'sucess'
-              });            
+              });
              this.fetchData()
             }else {
               this.$message({
@@ -178,12 +177,12 @@ export default {
                 type: 'warning'
               });
             }
-        })  
+        })
         }).catch(() => {
           this.$message({
             type: 'info',
             message: '已取消删除'
-          });          
+          });
         });
     },
     updateExpert(personId){

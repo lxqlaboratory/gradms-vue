@@ -6,7 +6,6 @@
         border
         style="width: 100%;"
         size="mini"
-        :header-cell-style="{background:'#eef1f6',color:'#606266',fontSize: '14px'}"
       >
         <el-table-column
           label="序号"
@@ -110,11 +109,11 @@ export default {
       // Load a new blank workbook, refer:https://github.com/dtjohnson/xlsx-populate
       XlsxPopulate.fromBlankAsync()
         .then(workbook => {
-        
+
         // Set worksheet mame
         var ws = workbook.sheet(0);
         ws.name(sheetName);
-        
+
         // Set table name
         const r = ws.range("A1:E1");
         r.merged(true);
@@ -145,7 +144,7 @@ export default {
 
         // set data
         ws.cell("A3").value(valueArray);
-        
+
         // Write to blob.
         return workbook.outputAsync();
         }).then(blob => {

@@ -19,7 +19,6 @@
           border
           style="width: 100%;"
           size="mini"
-          :header-cell-style="{background:'#eef1f6',color:'#606266',fontSize: '14px'}"
         >
           <el-table-column
             label="序号"
@@ -137,7 +136,7 @@ export default {
               this.$message({
                 message: "删除成功",
                 type: 'sucess'
-              });            
+              });
              this.fetchData()
             }else {
               this.$message({
@@ -145,12 +144,12 @@ export default {
                 type: 'warning'
               });
             }
-        })  
+        })
         }).catch(() => {
           this.$message({
             type: 'warning',
             message: '已取消删除'
-          });          
+          });
         });
     },
     addExpert(majorId){

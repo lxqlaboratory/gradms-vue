@@ -25,7 +25,6 @@
           border
           style="width: 100%;"
           size="mini"
-          :header-cell-style="{background:'#eef1f6',color:'#606266',fontSize: '13px'}"
         >
           <el-table-column
             label="序号"

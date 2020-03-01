@@ -32,7 +32,6 @@
           border
           style="width: 100%;"
           size="mini"
-          :header-cell-style="{background:'#eef1f6',color:'#606266',fontSize: '14px'}"
         >
           <el-table-column
             label="序号"
@@ -117,7 +116,6 @@
           border
           style="width: 100%;"
           size="mini"
-          :header-cell-style="{background:'#eef1f6',color:'#606266',fontSize: '14px'}"
         >
           <el-table-column
             label="序号"
@@ -255,7 +253,7 @@ export default {
         this.candidateList = res.data.candidateList
       })
     },
-    
+
     addAll(){
         this.$confirm('确认要添加所有需要评审的学生吗?', '提示', {
           confirmButtonText: '确定',
@@ -268,20 +266,20 @@ export default {
               this.$message({
                 message: "添加成功",
                 type: 'sucess'
-              }); 
-              doQuery();           
+              });
+              doQuery();
             }else {
               this.$message({
                 message: res.msg,
                 type: 'warning'
               });
             }
-        })  
+        })
         }).catch(() => {
           this.$message({
             type: 'info',
             message: '已取消添加'
-          });          
+          });
         });
     },
     removeAll(){
@@ -296,20 +294,20 @@ export default {
               this.$message({
                 message: "清除成功",
                 type: 'sucess'
-              }); 
-              doQuery();           
+              });
+              doQuery();
             }else {
               this.$message({
                 message: res.msg,
                 type: 'warning'
               });
             }
-        })  
+        })
         }).catch(() => {
           this.$message({
             type: 'info',
             message: '已取消清除'
-          });          
+          });
         });
     },
     remove(personId){
@@ -324,7 +322,7 @@ export default {
               this.$message({
                 message: "删除成功",
                 type: 'sucess'
-              });            
+              });
              this.doQuery();
             }else {
               this.$message({
@@ -332,12 +330,12 @@ export default {
                 type: 'warning'
               });
             }
-        })  
+        })
         }).catch(() => {
           this.$message({
             type: 'info',
             message: '已取消删除'
-          });          
+          });
         });
     },
     add(personId){
@@ -347,7 +345,7 @@ export default {
           this.$message({
             message: "添加成功",
             type: 'sucess'
-          });            
+          });
           this.doQuery();
         }else {
           this.$message({

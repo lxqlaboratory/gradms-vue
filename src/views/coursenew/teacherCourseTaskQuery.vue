@@ -24,8 +24,8 @@
       <el-table
         :data="taskList"
         border
+        size="mini"
         style="width: 100%;"
-        :header-cell-style="{background:'#eef1f6',color:'#606266',fontSize: '14px'}"
       >
         <el-table-column
           label="序号"

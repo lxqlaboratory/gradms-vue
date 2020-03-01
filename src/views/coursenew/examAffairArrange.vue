@@ -6,7 +6,6 @@
         border
         style="width: 100%;"
         size="mini"
-        :header-cell-style="{background:'#eef1f6',color:'#606266',fontSize: '14px'}"
       >
         <el-table-column
           label="序号"
@@ -44,7 +43,7 @@
         >
           <template slot-scope="scope" >
             <template v-for="item in scope.row.personList" >
-              <el-button type="text" @click="deletePerson(scope.row.affairId,item.personId)" size="mini">{{ item.perName }}</el-button>  
+              <el-button type="text" @click="deletePerson(scope.row.affairId,item.personId)" size="mini">{{ item.perName }}</el-button>
             </template>
           </template>
         </el-table-column>

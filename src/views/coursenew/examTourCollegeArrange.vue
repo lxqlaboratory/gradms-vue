@@ -6,7 +6,6 @@
         border
         style="width: 100%;"
         size="mini"
-        :header-cell-style="{background:'#eef1f6',color:'#606266',fontSize: '14px'}"
       >
         <el-table-column
           label="序号"
@@ -69,7 +68,7 @@
         >
           <template slot-scope="scope">
             <el-checkbox v-model="scope.row.isComputer" >
-              </el-checkbox> 
+              </el-checkbox>
            </template>
         </el-table-column>
        <el-table-column
@@ -78,18 +77,18 @@
           color="black"
         >
           <template slot-scope="scope">
-            <el-checkbox v-model="scope.row.isScratchPaper"  ></el-checkbox> 
+            <el-checkbox v-model="scope.row.isScratchPaper"  ></el-checkbox>
            </template>
         </el-table-column>
 
         <el-table-column
-          label="巡考人员"  
+          label="巡考人员"
           align="center"
           color="black"
         >
           <template slot-scope="scope" >
             <template v-for="item in scope.row.personList" >
-              <el-button type="text" @click="deletePerson(scope.row.tourId,item.personId)" size="mini"> {{ item.perName }}</el-button>  
+              <el-button type="text" @click="deletePerson(scope.row.tourId,item.personId)" size="mini"> {{ item.perName }}</el-button>
             </template>
           </template>
         </el-table-column>
@@ -172,7 +171,7 @@ export default {
           });
         }
       })
-    },    
+    },
     submitTableData() {
       newCultivateExamTourCollegeArrangeSubmit({ 'session': document.cookie, 'tourList': this.tourList }).then(res => {
         console.log(res);
