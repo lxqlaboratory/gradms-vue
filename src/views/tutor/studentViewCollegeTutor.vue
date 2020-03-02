@@ -1,8 +1,8 @@
 <template>
   <div class="app-container">
-      <div style="margin-left: 30px">
+      <div class="query-container">
       导师类别
-      <el-select v-model="tutorType" placeholder="请选择类别" class="filter-item" style="width: 20%;">
+      <el-select v-model="tutorType" placeholder="请选择类别"  style="width: 20%;">
         <el-option
           v-for="item in typeList"
           :key="item.memberType"

@@ -7,7 +7,7 @@
       <tr>
         <td colspan="3" >聘用类型</td>
         <td colspan="4">
-          <el-select v-model="data.employType" placeholder="请选择聘用类型" style="width: 90%">
+          <el-select v-model="data.employType" placeholder="请选择聘用类型" style="width: 100%">
           <el-option
             v-for="item in employList"
             :key="item.value"
@@ -19,19 +19,19 @@
       <tr>
         <td colspan="3" >聘用单位</td>
         <td colspan="4">
-          <el-input v-model="data.employUnit" placeholder="请输入内容" style="width: 90%"></el-input>
+          <el-input v-model="data.employUnit" placeholder="请输入内容" ></el-input>
         </td>
       </tr>
       <tr>
         <td colspan="3" >开户银行</td>
         <td colspan="4">
-          <el-input v-model="data.bankName" placeholder="请输入内容" style="width: 90%"></el-input>
+          <el-input v-model="data.bankName" placeholder="请输入内容" ></el-input>
         </td>
       </tr>
       <tr>
         <td colspan="3" >银行卡号</td>
         <td colspan="4">
-          <el-input v-model="data.bankNo" placeholder="请输入内容" style="width: 90%"></el-input>
+          <el-input v-model="data.bankNo" placeholder="请输入内容" ></el-input>
         </td>
       </tr>
     </table>

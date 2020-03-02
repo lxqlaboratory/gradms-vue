@@ -27,7 +27,7 @@
       <tr>
         <td colspan="1" >性别</td>
         <td colspan="1">
-          <el-select v-model="form.genderCode" placeholder="请选性别" style="width: 90%">
+          <el-select v-model="form.genderCode" placeholder="请选性别" style="width: 100%">
             <el-option
               v-for="item in genderCodeList"
               :key="item.value"
@@ -51,11 +51,11 @@
       <tr>
         <td colspan="1" >专业</td>
         <td colspan="1">
-          <el-input v-model="form.majorName" placeholder="请输入专业" style="width: 90%"></el-input>
+          <el-input v-model="form.majorName" placeholder="请输入专业" ></el-input>
         </td>
         <td colspan="1" >职称</td>
         <td colspan="1">
-          <el-select v-model="form.proTechPositionCode" placeholder="请选职称" style="width: 90%">
+          <el-select v-model="form.proTechPositionCode" placeholder="请选职称" style="width: 100%">
             <el-option
               v-for="item in proTechPositionCodeList"
               :key="item.value"
@@ -68,7 +68,7 @@
       <tr>
         <td colspan="1" >最后学历</td>
         <td colspan="1">
-          <el-select v-model="form.lastStudyLevel" placeholder="请选学历" style="width: 90%">
+          <el-select v-model="form.lastStudyLevel" placeholder="请选学历" style="width: 100%">
             <el-option
               v-for="item in lastStudyLevelList"
               :key="item.value"
@@ -79,7 +79,7 @@
         </td>
         <td colspan="1" >最后学位</td>
         <td colspan="1">
-          <el-select v-model="form.lastDegree" placeholder="请选学位" style="width: 90%">
+          <el-select v-model="form.lastDegree" placeholder="请选学位" style="width: 100%">
             <el-option
               v-for="item in lastDegreeList"
               :key="item.value"
@@ -92,47 +92,47 @@
       <tr>
         <td colspan="1" >联系电话</td>
         <td colspan="1">
-          <el-input v-model="form.perTelephone" placeholder="请输入联系电话" style="width: 90%"></el-input>
+          <el-input v-model="form.perTelephone" placeholder="请输入联系电话" ></el-input>
         </td>
         <td colspan="1" >移动电话</td>
         <td colspan="1">
-          <el-input v-model="form.mobilePhone" placeholder="请输入移动电话" style="width: 90%"></el-input>
+          <el-input v-model="form.mobilePhone" placeholder="请输入移动电话" ></el-input>
         </td>
       </tr>
       <tr>
         <td colspan="1" >QQ</td>
         <td colspan="1">
-          <el-input v-model="form.qq" placeholder="请输入QQ" style="width: 90%"></el-input>
+          <el-input v-model="form.qq" placeholder="请输入QQ" ></el-input>
         </td>
         <td colspan="1" >微信</td>
         <td colspan="1">
-          <el-input v-model="form.wechat" placeholder="请输入微信" style="width: 90%"></el-input>
+          <el-input v-model="form.wechat" placeholder="请输入微信" ></el-input>
         </td>
       </tr>
       <tr>
         <td colspan="1" >邮箱</td>
         <td colspan="1">
-          <el-input v-model="form.email" placeholder="请输入邮箱" style="width: 90%"></el-input>
+          <el-input v-model="form.email" placeholder="请输入邮箱" ></el-input>
         </td>
         <td colspan="1" >主页</td>
         <td colspan="1">
-          <el-input v-model="form.website" placeholder="请输入主页" style="width: 90%"></el-input>
+          <el-input v-model="form.website" placeholder="请输入主页" ></el-input>
         </td>
       </tr>
       <tr>
         <td colspan="1" >通信地址</td>
         <td colspan="1">
-          <el-input v-model="form.perAddress" placeholder="请输入通讯地址" style="width: 90%"></el-input>
+          <el-input v-model="form.perAddress" placeholder="请输入通讯地址" ></el-input>
         </td>
         <td colspan="1" >邮编</td>
         <td colspan="1">
-          <el-input v-model="form.perPostalCode" placeholder="请输入邮编" style="width: 90%"></el-input>
+          <el-input v-model="form.perPostalCode" placeholder="请输入邮编" ></el-input>
         </td>
       </tr>
       <tr>
         <td colspan="1" >研究方向</td>
         <td colspan="3">
-          <el-input v-model="form.researchDirection" placeholder="请输入研究方向" style="width: 90%"></el-input>
+          <el-input v-model="form.researchDirection" placeholder="请输入研究方向" ></el-input>
         </td>
       </tr>
       <tr>

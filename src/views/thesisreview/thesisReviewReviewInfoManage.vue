@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div style="margin-left: 30px">
+    <div class="query-container">
       学生类型
       <el-select v-model="configId"  placeholder="请选择学生类型" style="width: 20%">
         <el-option
@@ -20,9 +20,9 @@
         </el-option>
       </el-select>
       学号
-      <el-input v-model="perNum" placeholder="请输入学号" style="width: 15%;" class="filter-item" />
+      <el-input v-model="perNum" placeholder="请输入学号" style="width: 15%;" />
       姓名
-      <el-input v-model="perName" placeholder="请输入姓名" style="width: 15%;" class="filter-item" />
+      <el-input v-model="perName" placeholder="请输入姓名" style="width: 15%;"  />
       <el-button type="primary" @click="doQuery" >查询</el-button>
     </div>
     <div>
@@ -109,7 +109,6 @@
           </el-table-column>
         </el-table>
       </div>
-      <div class="konghang" />
       <div class="table-container">
         <el-table
           :data="candidateList"
@@ -190,7 +189,7 @@
         <td>
           <el-button type="primary" @click="addAll()" >添加全部</el-button>
           <el-button type="primary" @click="clearAll()" >清除全部</el-button>
-          <el-button>
+          <el-button style="border: 1px solid rgb(64,158,255)">
           <a href="/downloads/thesisreview/thesisreviewList.xls" >导入模板下载</a>
           </el-button>
           <fileupload

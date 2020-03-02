@@ -1,9 +1,9 @@
 <template>
   <div class="app-container">
     <div >
-      <div style="margin-left: 30px">
+      <div class="query-container">
       学期
-      <el-select v-model="termId" placeholder="请选择学期" class="filter-item" style="width: 20%;">
+      <el-select v-model="termId" placeholder="请选择学期"  style="width: 20%;">
         <el-option
           v-for="item in termList"
           :key="item.termId"
@@ -12,11 +12,11 @@
         </el-option>
       </el-select>
       课程号
-      <el-input v-model="courseNum" placeholder="请输入课程号" style="width: 20%;" class="filter-item" />
+      <el-input v-model="courseNum" placeholder="请输入课程号" style="width: 20%;"  />
       课程名
-      <el-input v-model="courseName" placeholder="请输入课程名" style="width: 20%;" class="filter-item" />
+      <el-input v-model="courseName" placeholder="请输入课程名" style="width: 20%;"  />
       <el-button type="primary" @click="selectCourse" >查询</el-button>
-      <el-button v-waves :loading="downloadLoading" class="filter-item" type="success" icon="el-icon-download" @click="handleDownload">
+      <el-button v-waves :loading="downloadLoading"  type="success" icon="el-icon-download" @click="handleDownload">
         导出
       </el-button>
       </div>

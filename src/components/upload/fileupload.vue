@@ -86,6 +86,8 @@ export default {
   .styleBtn{
     background-color:transparent;
     color: #336699;
+    border:  1px solid rgb(64,158,255);
+    padding: 7px 6px;
   }
 
 </style>

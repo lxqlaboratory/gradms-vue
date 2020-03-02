@@ -15,7 +15,7 @@
         </td>
         <td colspan="1" >政治面貌</td>
         <td colspan="1">
-          <el-select v-model="form.politicsCode" placeholder="请选择政治面貌" style="width: 90%">
+          <el-select v-model="form.politicsCode" placeholder="请选择政治面貌" style="width: 100%">
             <el-option
               v-for="item in politicsCodeList"
               :key="item.value"
@@ -28,25 +28,25 @@
       <tr>
         <td colspan="1" >移动电话</td>
         <td colspan="1">
-          <el-input v-model="form.mobilePhone" placeholder="请输入移动电话" style="width: 90%"></el-input>
+          <el-input v-model="form.mobilePhone" placeholder="请输入移动电话" ></el-input>
         </td>
         <td colspan="1" >QQ</td>
         <td colspan="1">
-          <el-input v-model="form.qq" placeholder="请输入QQ" style="width: 90%"></el-input>
+          <el-input v-model="form.qq" placeholder="请输入QQ" ></el-input>
         </td>
         <td colspan="1" >微信</td>
         <td colspan="1">
-          <el-input v-model="form.wechat" placeholder="请输入微信" style="width: 90%"></el-input>
+          <el-input v-model="form.wechat" placeholder="请输入微信" ></el-input>
         </td>
       </tr>
       <tr>
         <td colspan="1" >电子邮箱</td>
         <td colspan="3">
-          <el-input v-model="form.email" placeholder="请输入电子邮箱" style="width: 90%"></el-input>
+          <el-input v-model="form.email" placeholder="请输入电子邮箱" ></el-input>
         </td>
         <td colspan="1" >紧急联系人电话</td>
         <td colspan="1">
-          <el-input v-model="form.contactTelephone" placeholder="请输入紧急联系人电话" style="width: 90%"></el-input>
+          <el-input v-model="form.contactTelephone" placeholder="请输入紧急联系人电话" ></el-input>
         </td>
       </tr>
       <tr>
@@ -56,7 +56,7 @@
         </td>
         <td colspan="1" >现住地址</td>
         <td colspan="1">
-          <el-input v-model="form.perAddress" placeholder="请输入通讯地址" style="width: 90%"></el-input>
+          <el-input v-model="form.perAddress" placeholder="请输入通讯地址" ></el-input>
         </td>
       </tr>
       <tr>
@@ -66,13 +66,13 @@
         </td>
         <td colspan="1" >户籍地址</td>
         <td colspan="1">
-          <el-input v-model="form.hujiAddress" placeholder="请输入通讯地址" style="width: 90%"></el-input>
+          <el-input v-model="form.hujiAddress" placeholder="请输入通讯地址" ></el-input>
         </td>
       </tr>
       <tr>
         <td colspan="1" >健康状况</td>
         <td colspan="1">
-          <el-select v-model="form.healthyState" placeholder="请选择健康状态" style="width: 90%">
+          <el-select v-model="form.healthyState" placeholder="请选择健康状态" >
             <el-option
               v-for="item in healthyStateList"
               :key="item.value"
@@ -82,7 +82,7 @@
           </el-select>
         </td>
         <td colspan="4">
-          <el-input v-model="form.note" placeholder="请输入备注" style="width: 90%"></el-input>
+          <el-input v-model="form.note" placeholder="请输入备注"></el-input>
         </td>
       </tr>
       <tr>

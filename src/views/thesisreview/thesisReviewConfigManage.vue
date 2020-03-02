@@ -7,7 +7,7 @@
       <tr>
         <td colspan="1" >学位授予进程</td>
         <td colspan="1">
-          <el-select v-model="form.proId" @change="doQuery()" placeholder="请选择学位授予进程" style="width: 90%">
+          <el-select v-model="form.proId" @change="doQuery()" placeholder="请选择学位授予进程" style="width: 100% ">
             <el-option
               v-for="item in proList"
               :key="item.proId"
@@ -18,7 +18,7 @@
         </td>
         <td colspan="1" >学生类型</td>
         <td colspan="1">
-          <el-select v-model="form.stuTypes" @change="doQuery()" placeholder="请选择学生类型" style="width: 90%">
+          <el-select v-model="form.stuTypes" @change="doQuery()" placeholder="请选择学生类型" style="width: 100%">
             <el-option
               v-for="item in stuTypesList"
               :key="item.stuTypes"
@@ -31,21 +31,21 @@
       <tr>
         <td colspan="1" >内审送审分数</td>
         <td colspan="1">
-          <el-input v-model.number="form.inViewCount" placeholder="请输入内审送审分数" style="width: 90%"></el-input>
+          <el-input v-model.number="form.inViewCount" placeholder="请输入内审送审分数" ></el-input>
         </td>
         <td colspan="1" >内审评审费</td>
         <td colspan="1">
-          <el-input v-model.number="form.inViewFee" placeholder="请输入内审评审费" style="width: 90%"></el-input>
+          <el-input v-model.number="form.inViewFee" placeholder="请输入内审评审费" ></el-input>
         </td>
       </tr>
       <tr>
         <td colspan="1" >外审送审分数</td>
         <td colspan="1">
-          <el-input v-model.number="form.outViewCount" placeholder="请输入外审送审分数" style="width: 90%"></el-input>
+          <el-input v-model.number="form.outViewCount" placeholder="请输入外审送审分数" ></el-input>
         </td>
         <td colspan="1" >外审评审费</td>
         <td colspan="1">
-          <el-input v-model.number="form.outViewFee" placeholder="请输入外审评审费" style="width: 90%"></el-input>
+          <el-input v-model.number="form.outViewFee" placeholder="请输入外审评审费" ></el-input>
         </td>
       </tr>
       <tr>
@@ -111,7 +111,7 @@
       <tr>
         <td colspan="1" >评审说明</td>
         <td colspan="3">
-          <el-input v-model="form.reviewDes" placeholder="请输入评审说明" style="width: 90%"></el-input>
+          <el-input v-model="form.reviewDes" placeholder="请输入评审说明" ></el-input>
         </td>
       </tr>
     </table>

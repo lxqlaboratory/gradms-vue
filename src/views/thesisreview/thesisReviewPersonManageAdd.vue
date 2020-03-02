@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div style="margin-left: 30px">
+    <div class="query-container">
       专家类型
       <el-select v-model="expertType" size="mini" class="elinput" disabled>
           <el-option
@@ -11,9 +11,9 @@
           </el-option>
       </el-select>
       工号
-      <el-input v-model="perNum" placeholder="请输入工号" style="width: 20%;" class="filter-item" />
+      <el-input v-model="perNum" placeholder="请输入工号" style="width: 20%;"  />
       姓名
-      <el-input v-model="perName" placeholder="姓名" style="width: 20%;" class="filter-item" />
+      <el-input v-model="perName" placeholder="姓名" style="width: 20%;"  />
       <el-button type="primary" @click="selectExpert">查询</el-button>
     </div>
     <div class="table-container">

@@ -2,7 +2,7 @@
   <div class="app-container">
       <div class="query-container" >
         学院
-        <el-select v-model="collegeId" @change="changeMajor" placeholder="请选择学院" class="filter-item" style="width: 15%;">
+        <el-select v-model="collegeId" @change="changeMajor" placeholder="请选择学院"  style="width: 15%;">
           <el-option
             v-for="item in collegeList"
             :key="item.collegeId"
@@ -11,14 +11,12 @@
           </el-option>
         </el-select>
         专业研究方向
-        <el-input v-model="research" placeholder="请输入专业或研究方向" style="width: 15%;" class="filter-item" />
+        <el-input v-model="research" placeholder="请输入专业或研究方向" style="width: 15%;"  />
         导师姓名
-        <el-input v-model="perName" placeholder="请输入导师姓名" style="width: 10%;" class="filter-item" />
-        <el-button  type="primary" @click="doQuery" class="filter-item" >查询</el-button>
+        <el-input v-model="perName" placeholder="请输入导师姓名" style="width: 10%;"  />
+        <el-button  type="primary" @click="doQuery"  >查询</el-button>
       </div>
-    <div class="konghang">
 
-    </div>
       <div class="table-container">
          <el-table
           :data="tutors"

@@ -11,47 +11,47 @@
         </td>
         <td colspan="1" >姓名</td>
         <td colspan="1">
-          <el-input v-model="form.perName" placeholder="请输入内容" style="width: 90%"></el-input>
+          <el-input v-model="form.perName" placeholder="请输入内容" ></el-input>
         </td>
       </tr>
       <tr>
         <td colspan="1" >证件编号</td>
         <td colspan="1">
-          <el-input v-model="form.perIdCard" placeholder="请输入内容" style="width: 90%"></el-input>
+          <el-input v-model="form.perIdCard" placeholder="请输入内容" ></el-input>
         </td>
         <td colspan="1" >工作单位</td>
         <td colspan="1">
-          <el-input v-model="form.personUnit" placeholder="请输入内容" style="width: 90%"></el-input>
+          <el-input v-model="form.personUnit" placeholder="请输入内容" ></el-input>
         </td>
       </tr>
       <tr>
         <td colspan="1" >手机号</td>
         <td colspan="1">
-          <el-input v-model="form.mobilePhone" placeholder="请输入内容" style="width: 90%"></el-input>
+          <el-input v-model="form.mobilePhone" placeholder="请输入内容" ></el-input>
         </td>
         <td colspan="1" >电子邮箱</td>
         <td colspan="1">
-          <el-input v-model="form.email" placeholder="请输入内容" style="width: 90%"></el-input>
+          <el-input v-model="form.email" placeholder="请输入内容" ></el-input>
         </td>
       </tr>
       <tr>
         <td colspan="1" >专业</td>
         <td colspan="1">
-          <el-input v-model="form.majorName" placeholder="请输入内容" style="width: 90%"></el-input>
+          <el-input v-model="form.majorName" placeholder="请输入内容" ></el-input>
         </td>
         <td colspan="1" >研究方向</td>
         <td colspan="1">
-          <el-input v-model="form.researchDirection" placeholder="请输入内容" style="width: 90%"></el-input>
+          <el-input v-model="form.researchDirection" placeholder="请输入内容" ></el-input>
         </td>
       </tr>
       <tr>
         <td colspan="1" >开户银行</td>
         <td colspan="1">
-          <el-input v-model="form.bankName" placeholder="请输入内容" style="width: 90%"></el-input>
+          <el-input v-model="form.bankName" placeholder="请输入内容" ></el-input>
         </td>
         <td colspan="1" >银行卡号</td>
         <td colspan="1">
-          <el-input v-model="form.bankNo" placeholder="请输入内容" style="width: 90%"></el-input>
+          <el-input v-model="form.bankNo" placeholder="请输入内容" ></el-input>
         </td>
       </tr>
     </table>

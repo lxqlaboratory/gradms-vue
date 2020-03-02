@@ -65,19 +65,33 @@ div:focus {
   padding: 20px;
 }
 
+//条件查询搜索
 .query-container{
-  margin-left: 30px;
-  font-size: 10px;
+  font-size: 15px;
   text-align: center;
+  .el-button{
+    margin-bottom: 2px!important;
+    padding-bottom: 5px;
+    padding-top: 9px;
+    padding-right: 6px;
+    padding-left: 6px;
+    text-align: center;
+  }
+  .el-input__inner{
+    border:  1px solid rgb(64,158,255);
+  }
 }
 
-.content{
+.content {
   width:100%;
   border-top: 1px solid #336699;
   border-left: 1px solid #336699;
   border-spacing: 0;/*去掉单元格间隙*/
   margin-top: 5px;
   margin-bottom: 5px;
+  .el-input__inner{
+    border: none !important;
+  }
 }
 .content tr {
   width : 100% !important;
