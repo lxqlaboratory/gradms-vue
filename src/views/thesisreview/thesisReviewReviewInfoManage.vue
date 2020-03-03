@@ -104,7 +104,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              <el-button type="primary" @click="deleteStudent(scope.row.personId)" size="mini" >删除</el-button>
+              <el-button type="primary" @click="remove(scope.row.thesisId)" size="mini" >删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -151,7 +151,16 @@
             color="black"
           >
           <template slot-scope="scope">
-              {{ scope.row.personUnit }}
+              {{ scope.row.stuTypeName }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="专业"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.majorName }}
             </template>
           </el-table-column>
           <el-table-column
@@ -160,16 +169,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.perIdCard }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="论文题目"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.mobilePhone }}
+              {{ scope.row.tutorName }}
             </template>
           </el-table-column>
           <el-table-column
@@ -178,7 +178,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              <el-button type="primary" @click="addStudent(scope.row.personId)" size="mini" >添加</el-button>
+              <el-button type="primary" @click="add(scope.row.personId)" size="mini" >添加</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -225,7 +225,6 @@ export default {
       majorId:-1,
       perNum:'',
       perName:'',
-      stuTypesList:[],
       majorList:[],
       reviewList:[],
       candidateList:[]
@@ -309,13 +308,13 @@ export default {
           });
         });
     },
-    remove(personId){
+    remove(thesisId){
         this.$confirm('确认删除已参加的评审的学生吗？', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-           thesisReviewReviewInfoRemove({ 'session': document.cookie, 'personId': personId}).then(res => {
+           thesisReviewReviewInfoRemove({ 'session': document.cookie, 'thesisId': thesisId}).then(res => {
             if(res.code == '0')
             {
               this.$message({
@@ -338,7 +337,7 @@ export default {
         });
     },
     add(personId){
-      thesisReviewReviewInfoAdd({ 'session': document.cookie, 'personId': personId}).then(res => {
+      thesisReviewReviewInfoAdd({ 'session': document.cookie, 'configId': this.configId,'personId': personId}).then(res => {
         if(res.code == '0')
         {
           this.$message({
