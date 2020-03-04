@@ -49,7 +49,7 @@
           color="black"
         >
           <template slot-scope="scope">
-            <el-button type="text" @click="addExpert(this.majorId,scope.row.personId)" size="mini">{{ scope.row.perName }}</el-button>
+            <el-button type="text" @click="addExpert(scope.row.personId)" size="mini">{{ scope.row.perName }}</el-button>
           </template>
         </el-table-column>
         <el-table-column
@@ -96,6 +96,7 @@ export default {
   },
   methods: {
     fetchData() {
+      console.log(this.majorId)
       getExportInfoListByPerNumName({ 'session': document.cookie }).then(res => {
         this.expertList = res.data
     })
@@ -105,8 +106,9 @@ export default {
         this.expertList = res.data
       })
     },
-    addExpert(majorId,personId) {
-      thesisReviewPersonAdd({ 'session': document.cookie ,'majorId':majorId,'personId': personId }).then(res=>{
+    addExpert(personId) {
+      console.log(this.majorId)
+      thesisReviewPersonAdd({ 'session': document.cookie ,'majorId':this.majorId,'personId': personId }).then(res=>{
         if(res.code == '0'){
           this.$router.push({ path: 'thesisReviewPersonManage',  query: { majorId }})
         }else {

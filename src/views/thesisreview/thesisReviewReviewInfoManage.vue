@@ -63,12 +63,12 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="学生类型"
+            label="专业"
             align="center"
             color="black"
           >
           <template slot-scope="scope">
-              {{ scope.row.personUnit }}
+              {{ scope.row.majorName }}
             </template>
           </el-table-column>
           <el-table-column
@@ -77,7 +77,7 @@
             color="black"
           >
           <template slot-scope="scope">
-              {{ scope.row.perIdCard }}
+              {{ scope.row.thesisNum }}
             </template>
           </el-table-column>
           <el-table-column
@@ -86,16 +86,25 @@
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.mobilePhone }}
+              {{ scope.row.thesisName }}
             </template>
           </el-table-column>
           <el-table-column
-            label="评审专家"
+            label="研究方向"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.researchDirection }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="评审数"
             align="center"
             color="black"
           >
           <template slot-scope="scope">
-              {{ scope.row.email }}
+              {{ scope.row.reviewCount }}
             </template>
           </el-table-column>
           <el-table-column
@@ -104,9 +113,78 @@
             color="black"
           >
             <template slot-scope="scope">
+              <el-button type="primary" @click="reviewerUpdate(scope.row.thesisId)" size="mini" >评审专家维护</el-button>
               <el-button type="primary" @click="remove(scope.row.thesisId)" size="mini" >删除</el-button>
             </template>
           </el-table-column>
+          <el-table-column
+            label="评审专家列表"
+            align="center"
+            color="black"
+            width="80"
+            type="expand"
+          >
+            <template slot-scope="scope">
+              <el-table
+                border
+                style="width: 100%;"
+                :data="scope.row.commentList"
+                :header-cell-style="{background:'#eef1f6',color:'#606266',fontSize: '14px'}"
+              >
+                <el-table-column
+                  label="编号"
+                  fixed="left"
+                  align="center"
+                  color="black"
+                >
+                  <template slot-scope="scope">
+                    {{ scope.row.perNum }}
+                  </template>
+                </el-table-column>
+                <el-table-column
+                  label="姓名"
+                  fixed="left"
+                  align="center"
+                  color="black"
+                >
+                  <template slot-scope="scope">
+                    {{ scope.row.perName }}
+                  </template>
+                </el-table-column>
+                <el-table-column
+                  label="工作单位"
+                  fixed="left"
+                  align="center"
+                  color="black"
+                >
+                  <template slot-scope="scope">
+                    {{ scope.row.personUnit }}
+                  </template>
+                </el-table-column>
+                <el-table-column
+                  label="专业"
+                  fixed="left"
+                  align="center"
+                  color="black"
+                >
+                  <template slot-scope="scope">
+                    {{ scope.row.majorName }}
+                  </template>
+                </el-table-column>
+                <el-table-column
+                  label="研究方向"
+                  fixed="left"
+                  align="center"
+                  color="black"
+                >
+                <template slot-scope="scope">
+                    {{ scope.row.researchDiction }}
+                  </template>
+                </el-table-column>
+              </el-table>
+            </template>
+          </el-table-column>
+         
         </el-table>
       </div>
       <div class="table-container">
@@ -352,6 +430,9 @@ export default {
           });
         }
       });
+    },
+    reviewerUpdate(thesisId){
+      this.$router.push({ path: 'thesisReviewReviewInfoExpertMaintain', query: { thesisId }});
     },
     onPreview: function(file) {
     },

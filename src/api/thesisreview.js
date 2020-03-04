@@ -187,6 +187,30 @@ export function thesisReviewReviewInfoImport(data) {
   })
 }
 
+export function thesisReviewReviewInfoExpertMaintain(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewReviewInfoExpertMaintain',
+    method: 'POST',
+    data
+  })
+}
+
+export function thesisReviewReviewInfoExpertAdd(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewReviewInfoExpertAdd',
+    method: 'POST',
+    data
+  })
+}
+
+export function thesisReviewReviewInfoExpertRemove(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewReviewInfoExpertRemove',
+    method: 'POST',
+    data
+  })
+}
+
 export function thesisReviewReviewStateTrace(data) {
   return request({
     url: '/api/thesisreview/thesisReviewReviewStateTrace',
