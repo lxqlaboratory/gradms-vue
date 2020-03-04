@@ -127,7 +127,7 @@ export default {
     submitTableData() {
       newCultivateExamInvigilaterArrangeSubmit({ 'session': document.cookie, 'examList': this.examList }).then(res => {
         console.log(res);
-        if(res.code == '0'){
+        if(res.code === '0'){
           this.$message({
             message: '提交成功',
             type: 'success'

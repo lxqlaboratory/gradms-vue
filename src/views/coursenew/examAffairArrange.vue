@@ -93,7 +93,7 @@ export default {
     },
     addPerson(affairId,personId) {
       newCultivateExamAffairArrangePersonAdd({ 'session': document.cookie ,'affairId': affairId ,'personId': personId }).then(res=>{
-        if(res.code == '0'){
+        if(res.code === '0'){
           this.$message({
             message: '添加成功',
             type: 'success'
@@ -109,7 +109,7 @@ export default {
     },
     deletePerson(affairId,personId) {
       newCultivateExamAffairArrangePersonDelete({ 'session': document.cookie ,'affairId': affairId ,'personId': personId }).then(res=>{
-        if(res.code == '0'){
+        if(res.code === '0'){
           this.$message({
             message: '删除成功',
             type: 'success'

@@ -137,7 +137,7 @@ export default {
           type: 'warning'
         }).then(() => {
            thesisReviewExpertResetPwd({ 'session': document.cookie, 'personId': personId}).then(res => {
-            if(res.code == '0')
+            if(res.code === '0')
             {
               this.$message({
                 message: "重置成功",
@@ -164,7 +164,7 @@ export default {
           type: 'warning'
         }).then(() => {
            thesisReviewExpertDelete({ 'session': document.cookie, 'personId': personId}).then(res => {
-            if(res.code == '0')
+            if(res.code === '0')
             {
               this.$message({
                 message: "删除成功",

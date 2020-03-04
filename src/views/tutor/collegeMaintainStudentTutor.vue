@@ -230,7 +230,7 @@ export default {
       console.log(this.studentList)
       collegeMaintainStudentTutorSubmit({ 'session': document.cookie, 'studentList': this.studentList }).then(res => {
         console.log(res);
-        if(res.code == '0'){
+        if(res.code === '0'){
           this.$message({
             message: '提交成功',
             type: 'success'
@@ -248,7 +248,7 @@ export default {
     onPreview: function(file) {
     },
     onSuccess(res, file) {
-        if(res.code == '0'){
+        if(res.code === '0'){
           this.$message({
             message: '导入成功',
             type: 'success'

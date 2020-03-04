@@ -75,7 +75,7 @@ export default {
         'employUnit': this.data.employUnit,'bankNo': this.data.bankNo,'bankName': this.data.bankName,
         'personId': this.$route.query.personId
       }).then(res => {
-       if(res.code == '0'){
+       if(res.code === '0'){
          this.$message({
            message: '提交成功',
            type: 'success',

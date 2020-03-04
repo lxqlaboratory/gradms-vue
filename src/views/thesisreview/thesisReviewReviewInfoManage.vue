@@ -337,7 +337,7 @@ export default {
           type: 'warning'
         }).then(() => {
            thesisReviewReviewInfoAddAll({ 'session': document.cookie, 'stuTypeCodes': this.stuTypeCodes, 'majorId': this.majorId, 'perNum': this.perNum,'perName':this.perName}).then(res => {
-            if(res.code == '0')
+            if(res.code === '0')
             {
               this.$message({
                 message: "添加成功",
@@ -365,7 +365,7 @@ export default {
           type: 'warning'
         }).then(() => {
            thesisReviewReviewInfoRemoveAll({ 'session': document.cookie, 'stuTypeCodes': this.stuTypeCodes, 'majorId': this.majorId, 'perNum': this.perNum,'perName':this.perName}).then(res => {
-            if(res.code == '0')
+            if(res.code === '0')
             {
               this.$message({
                 message: "清除成功",
@@ -393,7 +393,7 @@ export default {
           type: 'warning'
         }).then(() => {
            thesisReviewReviewInfoRemove({ 'session': document.cookie, 'thesisId': thesisId}).then(res => {
-            if(res.code == '0')
+            if(res.code === '0')
             {
               this.$message({
                 message: "删除成功",
@@ -416,7 +416,7 @@ export default {
     },
     add(personId){
       thesisReviewReviewInfoAdd({ 'session': document.cookie, 'configId': this.configId,'personId': personId}).then(res => {
-        if(res.code == '0')
+        if(res.code === '0')
         {
           this.$message({
             message: "添加成功",
@@ -437,7 +437,7 @@ export default {
     onPreview: function(file) {
     },
     onSuccess(res, file) {
-        if(res.code == '0'){
+        if(res.code === '0'){
           this.$message({
             message: '导入成功',
             type: 'success'

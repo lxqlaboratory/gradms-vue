@@ -96,7 +96,7 @@ export default {
     },
     addPerson(personId) {
       degreeCollegeTutorMemberPersonAdd({ 'session': document.cookie ,'memberType':this.memberType,'personId': personId }).then(res=>{
-        if(res.code == '0')
+        if(res.code === '0')
         {
           this.$router.push({ path: 'degreeCollegeTutorMemberManage' })
         }else {

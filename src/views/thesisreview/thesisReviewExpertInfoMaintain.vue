@@ -96,7 +96,7 @@ export default {
     submit(){
       thesisReviewExpertInfoMaintainSubmit({'session': document.cookie , 'form': this.form
       }).then(res => {
-       if(res.code == '0'){
+       if(res.code === '0'){
          this.$message({
            message: '提交成功',
            type: 'success',

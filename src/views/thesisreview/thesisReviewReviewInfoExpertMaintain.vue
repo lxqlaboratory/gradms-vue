@@ -79,7 +79,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              <el-button type="primary" @click="remove(scope.row.thesisId)" size="mini" >删除</el-button>
+              <el-button type="primary" @click="remove(scope.row.reviewId)" size="mini" >删除</el-button>
             </template>
           </el-table-column>
      
@@ -172,7 +172,7 @@
       <div align="center">
       <tr>
         <td>
-          <el-button type="primary" @click="doReturn(this.configId)" >返回</el-button>
+          <el-button type="primary" @click="doReturn()" >返回</el-button>
         </td>
       </tr>
       </div>
@@ -211,8 +211,8 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-           thesisReviewReviewInfoExpertRemove({ 'session': document.cookie, 'thesisId': reviewId}).then(res => {
-            if(res.code == '0')
+           thesisReviewReviewInfoExpertRemove({ 'session': document.cookie, 'reviewId': reviewId}).then(res => {
+            if(res.code === '0')
             {
               this.$message({
                 message: "删除成功",
@@ -235,7 +235,7 @@ export default {
     },
     add(personId){
       thesisReviewReviewInfoExpertAdd({ 'session': document.cookie, 'thesisId': this.thesisId,'personId': personId}).then(res => {
-        if(res.code == '0')
+        if(res.code === '0')
         {
           this.$message({
             message: "添加成功",
@@ -250,8 +250,8 @@ export default {
         }
       });
     },
-    doReturn(configId){
-      this.$router.push({ path: 'thesisReviewReviewInfoManage', query: { configId }});
+    doReturn(){
+      this.$router.push({ path: 'thesisReviewReviewInfoManage', query: { 'configId':this.configId }});
     },
   }
 }

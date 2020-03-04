@@ -142,7 +142,7 @@ export default {
     },
     addPerson(tourId,personId) {
       newCultivateExamTourCollegeArrangePersonAdd({ 'session': document.cookie ,'tourId': tourId ,'personId': personId }).then(res=>{
-        if(res.code == '0'){
+        if(res.code === '0'){
           this.$message({
             message: '添加成功',
             type: 'success'
@@ -158,7 +158,7 @@ export default {
     },
     deletePerson(tourId,personId) {
       newCultivateExamTourCollegeArrangePersonDelete({ 'session': document.cookie ,'tourId': tourId ,'personId': personId }).then(res=>{
-        if(res.code == '0'){
+        if(res.code === '0'){
           this.$message({
             message: '删除成功',
             type: 'success'
@@ -175,7 +175,7 @@ export default {
     submitTableData() {
       newCultivateExamTourCollegeArrangeSubmit({ 'session': document.cookie, 'tourList': this.tourList }).then(res => {
         console.log(res);
-        if(res.code == '0'){
+        if(res.code === '0'){
           this.$message({
             message: '提交成功',
             type: 'success'

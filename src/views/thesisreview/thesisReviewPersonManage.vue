@@ -131,7 +131,7 @@ export default {
           type: 'warning'
         }).then(() => {
            thesisReviewPersonDelete({ 'session': document.cookie, 'expertId': expertId}).then(res => {
-            if(res.code == '0')
+            if(res.code === '0')
             {
               this.$message({
                 message: "删除成功",

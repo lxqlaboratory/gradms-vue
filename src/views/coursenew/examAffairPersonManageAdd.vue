@@ -95,7 +95,7 @@ export default {
     },
     addPerson(personId) {
       newCultivateExamAffairPersonAdd({ 'session': document.cookie ,'personId': personId }).then(res=>{
-        if(res.code == '0')
+        if(res.code === '0')
         {
           this.$router.push({ path: 'examAffairPersonManage' })
         }else {
