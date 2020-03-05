@@ -1,6 +1,9 @@
 <template>
   <div class="app-container">
     <div>
+      <tr>
+        <td colspan="8" align="center" >学位论文评审列表</td>
+      </tr>
       <div class="table-container">
         <el-table
           :data="reviewList"
@@ -79,7 +82,9 @@
             color="black"
           >
             <template slot-scope="scope">
-              <el-button type="primary" @click="review(scope.row.reviewId)" size="mini" >评审</el-button>
+              <el-button v-if="scope.row.reviewState != 1" type="primary" @click="download(scope.row.reviewId)" size="mini">论文下载</el-button>
+              <el-button v-if="scope.row.reviewState != 1" type="primary" @click="review(scope.row.reviewId)" size="mini" >评审</el-button>
+              <el-button v-if="scope.row.reviewState == 1" type="primary" @click="print(scope.row.reviewId)" size="mini">评阅表下载</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -91,6 +96,7 @@
 <script>
 import { thesisReviewOnlineReviewList } from '@/api/thesisreview'
 import { thesisReviewOnlineReviewDownload} from '@/api/thesisreview'
+import { thesisReviewOnlineReviewPrint} from '@/api/thesisreview'
 export default {
   name: 'thesisReviewOnlineReview',
   data() {
@@ -109,6 +115,11 @@ export default {
     },
     download(reviewId){
       thesisReviewOnlineReviewDownload({ 'session': document.cookie, 'reviewId': this.reviewId
+      }).then(res => {
+      })
+    },
+    print(reviewId){
+      thesisReviewOnlineReviewPrint({ 'session': document.cookie, 'reviewId': this.reviewId
       }).then(res => {
       })
     },

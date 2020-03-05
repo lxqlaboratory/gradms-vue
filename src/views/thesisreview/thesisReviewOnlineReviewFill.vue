@@ -13,7 +13,8 @@
       <tr>
         <td colspan="1" >评阅意见</td>
         <td colspan="6">
-          <el-input v-model="form.reviewDes" placeholder="请输入评阅意见" ></el-input>
+            <textarea placeholder="请输入评阅意见" maxlength="1000"  v-model="form.reviewDes" style="width: 100%;height:300px"/>
+
         </td>
       </tr>
       <tr>
