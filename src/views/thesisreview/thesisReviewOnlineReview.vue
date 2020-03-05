@@ -3,7 +3,7 @@
     <div>
       <div class="table-container">
         <el-table
-          :data="thesisList"
+          :data="reviewList"
           border
           style="width: 100%;"
           size="mini"
@@ -34,7 +34,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              <el-button type="text" @click="updateExpertInfo(scope.row.attachId)" size="mini">{{ scope.row.thesisName }}</el-button>
+              <el-button type="text" @click="updateExpertInfo(scope.row.reviewId)" size="mini">{{ scope.row.thesisName }}</el-button>
             </template>
           </el-table-column>
           <el-table-column
@@ -61,7 +61,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.commentResult }}
+              {{ scope.row.result }}
             </template>
           </el-table-column>
           <el-table-column
@@ -70,7 +70,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.thesisLevel }}
+              {{ scope.row.level }}
             </template>
           </el-table-column>
           <el-table-column
@@ -79,14 +79,10 @@
             color="black"
           >
             <template slot-scope="scope">
-              <el-button type="primary" @click="review(scope.row.thesisId)" size="mini" >删除</el-button>
+              <el-button type="primary" @click="review(scope.row.reviewId)" size="mini" >评审</el-button>
             </template>
           </el-table-column>
         </el-table>
-      </div>
-      <div class="konghang"/>
-      <div align="center">
-        <el-button type="primary" @click="submit()" >提交</el-button>
       </div>
     </div>
   </div>
@@ -99,7 +95,7 @@ export default {
   name: 'thesisReviewOnlineReview',
   data() {
     return {
-      thesisList:[],
+      reviewList:[],
     }
   },
   created() {
@@ -108,17 +104,16 @@ export default {
   methods: {
     fetchData() {
       thesisReviewOnlineReviewList({ 'session': document.cookie }).then(res => {
-        this.thesisList = res.data
+        this.reviewList = res.data
       })
     },
-    download(){
-      thesisReviewOnlineReviewDownload({ 'session': document.cookie, 'majorId': this.majorId
+    download(reviewId){
+      thesisReviewOnlineReviewDownload({ 'session': document.cookie, 'reviewId': this.reviewId
       }).then(res => {
-        this.expertList = res.data
       })
     },
-    review(thesisId){
-      this.$router.push({ path: 'thesisReviewOnlineReviewFill', query: { thesisId }})
+    review(reviewId){
+      this.$router.push({ path: 'thesisReviewOnlineReviewFill', query: { reviewId }})
     },
   }
 }
