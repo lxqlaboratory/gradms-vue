@@ -26,10 +26,10 @@
       <el-button type="primary" @click="doQuery" >查询</el-button>
     </div>
     <div>
-      <div class="table-container">
-      <tr>
-        <td colspan="8" align="center" >参与评审学生列表</td>
-      </tr>
+      <div class="table-headline">
+      <table class="headline">
+        <tr><td  >与评审学生列表</td></tr>
+      </table>
         <el-table
           :data="reviewList"
           border
@@ -187,13 +187,13 @@
               </el-table>
             </template>
           </el-table-column>
-         
+
         </el-table>
       </div>
-      <div class="table-container">
-      <tr>
-        <td colspan="8" align="center" >待评审学生列表</td>
-      </tr>
+      <div class="table-headline">
+        <table class="headline">
+          <tr><td  >待评审学生列表</td></tr>
+        </table>
         <el-table
           :data="candidateList"
           border

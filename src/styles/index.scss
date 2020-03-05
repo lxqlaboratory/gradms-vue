@@ -104,6 +104,32 @@ div:focus {
   font-size: 14px;
 }
 
+
+//表格标题
+.table-headline{
+  margin-top: 3px;
+  .el-table{
+    margin-top: 0px !important;
+  }
+}
+
+.headline{
+  width:100%;
+  border-top: 1px solid #336699;
+  border-left: 1px solid #336699;
+  border-right: 1px solid #336699;
+  line-height: 25px;
+  text-align: center;
+}
+.headline tr {
+  width : 100% ;
+}
+.headline td {
+  text-align: center;
+  font-weight: bolder;
+  font-size: 15px;
+}
+
 //输入框
 .el-input__inner{
   background-color:transparent;
