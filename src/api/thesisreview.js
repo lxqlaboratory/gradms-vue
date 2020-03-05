@@ -25,13 +25,36 @@ export function thesisReviewExpertInfoMaintainSubmit(data) {
   })
 }
 
-export function thesisReviewOnlineReview(data) {
+export function thesisReviewOnlineReviewList(data) {
   return request({
-    url: '/api/thesisreview/thesisReviewOnlineReview',
+    url: '/api/thesisreview/thesisReviewOnlineReviewList',
     method: 'POST',
     data
   })
 }
+export function thesisReviewOnlineReviewDownload(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewOnlineReviewDownload',
+    method: 'POST',
+    data
+  })
+}
+export function thesisReviewOnlineReviewFill(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewOnlineReviewFill',
+    method: 'POST',
+    data
+  })
+}
+export function thesisReviewOnlineReviewFillSubmit(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewOnlineReviewFillSubmit',
+    method: 'POST',
+    data
+  })
+}
+
+
 
 export function thesisReviewExpertManage(data) {
   return request({

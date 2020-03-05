@@ -245,6 +245,12 @@ export const constantRoutes = [
         meta: { title: '论文评阅'}
       }, 
       {
+        path: 'thesisReviewOnlineReviewFill',
+        name: 'thesisReviewOnlineReviewFill',
+        component: () => import('@/views/thesisreview/thesisReviewOnlineReviewFill'),
+        meta: { title: '论文评阅填写'}
+      }, 
+      {
         path: 'thesisReviewExpertManage',
         name: 'thesisReviewExpertManage',
         component: () => import('@/views/thesisreview/thesisReviewExpertManage'),
