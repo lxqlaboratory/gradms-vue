@@ -1,10 +1,19 @@
 <template>
   <div class="app-container">
-    <div>
+    
+     <div class="table-headline">
+    <table class="content"  align="left">
       <tr>
-        <td colspan="8" align="center" >学位论文评审列表</td>
+        <td  style="font-size: 16px;color: red;text-align:left; ">
+          评阅说明:<br>
+          &nbsp;&nbsp;1.点击下载论文，可以下载学生论<br>
+          &nbsp;&nbsp;2.点击评审，可以填写评审意见，保存后可以继续修改，选择提交按钮则不能在进行修改，只可以下下载评阅书。
+        </td>
       </tr>
-      <div class="table-container">
+    </table>
+        <table class="headline">
+          <tr><td  >评审学生列表</td></tr>
+        </table>
         <el-table
           :data="reviewList"
           border
@@ -90,7 +99,6 @@
         </el-table>
       </div>
     </div>
-  </div>
 </template>
 
 <script>

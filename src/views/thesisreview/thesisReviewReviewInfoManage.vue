@@ -28,7 +28,7 @@
     <div>
       <div class="table-headline">
       <table class="headline">
-        <tr><td  >与评审学生列表</td></tr>
+        <tr><td  >评审学生列表</td></tr>
       </table>
         <el-table
           :data="reviewList"
@@ -309,6 +309,7 @@ export default {
       majorId:-1,
       perNum:'',
       perName:'',
+      configList:[],
       majorList:[],
       reviewList:[],
       candidateList:[]
@@ -320,12 +321,12 @@ export default {
   methods: {
     fetchData() {
       thesisReviewReviewInfoManage({ 'session': document.cookie }).then(res => {
+        this.configId = res.data.configId
+        this.majorId = res.data.majorId;
         this.configList = res.data.configList
         this.majorList = res.data.majorList
         this.reviewList = res.data.reviewList
         this.candidateList = res.data.candidateList
-        this.configId = res.data.configId
-        this.majorId = majorId;
       })
     },
     doQuery(){
