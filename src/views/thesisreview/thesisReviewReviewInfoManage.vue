@@ -208,7 +208,7 @@
           <el-table-column
             label="序号"
             fixed="left"
-            width="70"
+            width="50"
             align="center"
             color="black"
           >

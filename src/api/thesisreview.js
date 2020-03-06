@@ -255,6 +255,20 @@ export function thesisReviewReviewStateTraceExport(data) {
     data
   })
 }
+export function thesisReviewExpertReviewQuery(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewExpertReviewQuery',
+    method: 'POST',
+    data
+  })
+}
+export function thesisReviewExpertReviewQueryQuery(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewExpertReviewQueryQuery',
+    method: 'POST',
+    data
+  })
+}
 
 
 export function thesisReviewReviewFeeManage(data) {
@@ -265,3 +279,10 @@ export function thesisReviewReviewFeeManage(data) {
   })
 }
 
+export function thesisReviewReviewFeeQuery(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewReviewFeeQuery',
+    method: 'POST',
+    data
+  })
+}
