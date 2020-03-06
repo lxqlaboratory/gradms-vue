@@ -15,7 +15,7 @@
         </td>
       </tr>
       <tr>
-        <td colspan="1" >证件编号</td>
+        <td colspan="1" >证件号码</td>
         <td colspan="1">
           {{form.perIdCard}}
         </td>

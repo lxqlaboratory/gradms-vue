@@ -23,7 +23,7 @@
           <el-table-column
             label="序号"
             fixed="left"
-            width="70"
+            width="50"
             align="center"
             color="black"
           >
@@ -35,6 +35,7 @@
             label="论文编号"
             align="center"
             color="black"
+            width="120"
           >
             <template slot-scope="scope">
               {{ scope.row.thesisNum }}

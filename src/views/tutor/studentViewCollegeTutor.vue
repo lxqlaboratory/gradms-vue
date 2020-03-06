@@ -23,7 +23,7 @@
           <el-table-column
             label="序号"
             fixed="left"
-            width="70"
+            width="50"
             align="center"
             color="black"
           >
@@ -35,6 +35,7 @@
             label="工号"
             align="center"
             color="black"
+            width="120"
           >
             <template slot-scope="scope">
               {{ scope.row.perNum }}
@@ -44,6 +45,7 @@
             label="姓名"
             align="center"
             color="black"
+            width="70"
           >
             <template slot-scope="scope">
               <el-button type="text" @click="showPersonInfo(scope.row.personId)" size="mini">{{ scope.row.perName }}</el-button>

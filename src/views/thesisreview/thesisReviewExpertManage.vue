@@ -18,7 +18,7 @@
           <el-table-column
             label="序号"
             fixed="left"
-            style="width: 5%;"
+            width="50"
             align="center"
             color="black"
           >
@@ -30,7 +30,7 @@
             label="帐号"
             align="center"
             color="black"
-            style="width: 8%;"
+            width="120"
           >
             <template slot-scope="scope">
               {{ scope.row.perNum }}
@@ -40,7 +40,7 @@
             label="姓名"
             align="center"
             color="black"
-            style="width: 8%;"
+            width="70"
           >
           <template slot-scope="scope">
               {{ scope.row.perName }}
@@ -50,7 +50,6 @@
             label="所在单位"
             align="center"
             color="black"
-            style="width: 15%;"
           >
           <template slot-scope="scope">
               {{ scope.row.personUnit }}
@@ -60,7 +59,6 @@
             label="身份证号"
             align="center"
             color="black"
-            style="width: 15%;"
           >
             <template slot-scope="scope">
               {{ scope.row.perIdCard }}
@@ -70,7 +68,6 @@
             label="手机号"
             align="center"
             color="black"
-            style="width: 15%;"
           >
             <template slot-scope="scope">
               {{ scope.row.mobilePhone }}
@@ -80,7 +77,6 @@
             label="邮箱"
             align="center"
             color="black"
-            style="width: 15%;"
           >
             <template slot-scope="scope">
               {{ scope.row.email }}
@@ -90,7 +86,7 @@
             label="操作"
             align="center"
             color="black"
-            style="width: 20%;"
+            width="235"
           >
             <template slot-scope="scope">
               <el-button type="primary" @click="resetPwd(scope.row.personId)" size="mini" >密码重置</el-button>

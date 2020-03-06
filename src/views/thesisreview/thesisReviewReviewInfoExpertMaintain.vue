@@ -11,7 +11,7 @@
           <el-table-column
             label="序号"
             fixed="left"
-            width="70"
+            width="50"
             align="center"
             color="black"
           >
@@ -23,6 +23,7 @@
             label="编号"
             align="center"
             color="black"
+            width="120"
           >
             <template slot-scope="scope">
               {{ scope.row.perNum }}
@@ -30,6 +31,7 @@
           </el-table-column>
           <el-table-column
             label="姓名"
+            width="70"
             align="center"
             color="black"
           >
@@ -95,7 +97,7 @@
           <el-table-column
             label="序号"
             fixed="left"
-            width="70"
+            width="50"
             align="center"
             color="black"
           >
@@ -107,6 +109,7 @@
             label="编号"
             align="center"
             color="black"
+            width="120"
           >
             <template slot-scope="scope">
               {{ scope.row.perNum }}
@@ -116,6 +119,7 @@
             label="姓名"
             align="center"
             color="black"
+            width="70"
           >
           <template slot-scope="scope">
               {{ scope.row.perName }}
