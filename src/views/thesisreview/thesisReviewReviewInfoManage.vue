@@ -126,10 +126,10 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="评审列表"
+            label="评审表"
             align="center"
             color="black"
-            width="60"
+            width="70"
             type="expand"
           >
             <template slot-scope="scope">
@@ -280,10 +280,11 @@
       <div align="center">
       <tr>
         <td>
+          <el-button type="primary" @click="autoDistribute()" >自动分发</el-button>
           <el-button type="primary" @click="addAll()" >添加全部</el-button>
           <el-button type="primary" @click="clearAll()" >清除全部</el-button>
           <el-button style="border: 1px solid rgb(64,158,255)">
-          <a href="/downloads/thesisreview/thesisreviewList.xls" >导入模板下载</a>
+          <a href="/downloads/degree/importComment.xls" >导入模板下载</a>
           </el-button>
           <fileupload
             url="/api/thesisview/thesisReviewReviewInfoImport"
@@ -308,6 +309,8 @@ import { thesisReviewReviewInfoAddAll } from '@/api/thesisreview'
 import { thesisReviewReviewInfoRemoveAll } from '@/api/thesisreview'
 import { thesisReviewReviewInfoAdd } from '@/api/thesisreview'
 import { thesisReviewReviewInfoRemove } from '@/api/thesisreview'
+import { thesisReviewReviewInfoAutoDistribute} from '@/api/thesisreview'
+
 import fileupload from '../../components/upload/fileupload'
 export default {
   name: 'thesisReviewReviewInfoManage',
@@ -344,6 +347,35 @@ export default {
         this.reviewList = res.data.reviewList
         this.candidateList = res.data.candidateList
       })
+    },
+
+    autoDistribute(){
+        this.$confirm('自动分发前要清除所有的评审信息，确认要重新分发吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+           thesisReviewReviewInfoAutoDistribute({ 'session': document.cookie}).then(res => {
+            if(res.code === '0')
+            {
+              this.$message({
+                message: "分发成功",
+                type: 'sucess'
+              });
+              doQuery();
+            }else {
+              this.$message({
+                message: res.msg,
+                type: 'warning'
+              });
+            }
+        })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消分发'
+          });
+        });
     },
 
     addAll(){

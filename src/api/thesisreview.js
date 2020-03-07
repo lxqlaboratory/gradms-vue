@@ -202,6 +202,15 @@ export function thesisReviewReviewInfoRemoveAll(data) {
     data
   })
 }
+
+export function thesisReviewReviewInfoAutoDistribute(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewReviewInfoAutoDistribute',
+    method: 'POST',
+    data
+  })
+}
+
 export function thesisReviewReviewInfoImport(data) {
   return request({
     url: '/api/thesisreview/thesisReviewReviewInfoImport',
@@ -248,9 +257,16 @@ export function thesisReviewReviewStateTraceQuery(data) {
     data
   })
 }
-export function thesisReviewReviewStateTraceExport(data) {
+export function thesisReviewReviewStateTraceTableExport(data) {
   return request({
-    url: '/api/thesisreview/thesisReviewReviewStateTraceExport',
+    url: '/api/thesisreview/thesisReviewReviewStateTableDataExport',
+    method: 'POST',
+    data
+  })
+}
+export function thesisReviewReviewStateTraceDataExport(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewReviewStateTraceDataExport',
     method: 'POST',
     data
   })

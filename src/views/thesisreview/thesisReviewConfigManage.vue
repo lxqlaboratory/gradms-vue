@@ -143,7 +143,10 @@ export default {
       	tutorCheckEndTime:'',
 	      expertViewStartTime:'',
 	      expertViewEndTime:'',
-	      reviewDes:''
+        reviewDes:'',
+        inNotFax:0,
+        outNotFax:0,
+        distributeApi:''
       },
       proList:[],
       stuTypesList:[]
@@ -172,7 +175,7 @@ export default {
          this.$message({
            message: '提交成功',
            type: 'success',
-           offset: '30'
+           offset: '10'
          });
        }
       })

@@ -93,8 +93,7 @@
             width="180"
           >
             <template slot-scope="scope">
-              <el-button  type="primary" >
-<!--                <a :href="'http://localhost:8080/api/thesisreview/thesisReviewOnlineReviewDownload?reviewId='+scope.row.reviewId" :download="scope.row.fileName">论文下载</a> -->
+              <el-button  type="primary" v-if="scope.row.canDownload" >
                 <a :href="serverAddres+'/api/thesisreview/thesisReviewOnlineReviewDownload?reviewId='+scope.row.reviewId" :download="scope.row.fileName">论文下载</a>
               </el-button>
               <el-button v-if="scope.row.reviewState != 1" type="primary" @click="review(scope.row.reviewId)" >评审</el-button>

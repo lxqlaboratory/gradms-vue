@@ -79,25 +79,29 @@
             label="上传时间"
             align="center"
             color="black"
-            width="120"
+            width="180"
           >
-          <template slot-scope="scope">
-              {{ scope.row.uploadTime }}
+          <template slot-scope="scope" > 
+              <el-button  type="primary"  >
+                <a :href="serverAddres+'/api/thesisreview/thesisReviewOnlineReviewDownload?thesisId='+scope.row.thesisId" :download="scope.row.fileName">{{ scope.row.uploadTime }}</a>
+              </el-button>
             </template>
           </el-table-column>
           <el-table-column
             label="导师审核时间"
             align="center"
             color="black"
+            width="180"
           >
             <template slot-scope="scope">
               {{ scope.row.checkTime }}
             </template>
           </el-table-column>
           <el-table-column
-            label="评审分数"
+            label="份数"
             align="center"
             color="black"
+            width="80"
           >
             <template slot-scope="scope">
               {{ scope.row.reviewTotal }}
@@ -205,7 +209,8 @@
       <div align="center">
       <tr>
         <td>
-          <el-button type="primary" @click="exportData()" >数据导出</el-button>
+          <el-button type="primary" @click="reviewTableExport()" >评阅数下载</el-button>
+          <el-button type="primary" @click="reviewDataExport()" >评阅信息导出</el-button>
         </td>
       </tr>
       </div>
@@ -216,7 +221,9 @@
 <script>
 import { thesisReviewReviewStateTrace } from '@/api/thesisreview'
 import { thesisReviewReviewStateTraceQuery } from '@/api/thesisreview'
-import { thesisReviewReviewStateTraceExport } from '@/api/thesisreview'
+import { thesisReviewReviewStateTraceTableExport } from '@/api/thesisreview'
+import { thesisReviewReviewStateTraceDataExport } from '@/api/thesisreview'
+
 export default {
   name: 'thesisReviewReviewStateTrace',
   data() {
@@ -225,6 +232,7 @@ export default {
       majorId:-1,
       perNum:'',
       perName:'',
+      serverAddres:'',
       configList:[],
       majorList:[],
       studentList:[],
@@ -235,6 +243,7 @@ export default {
   },
   methods: {
     fetchData() {
+        this.serverAddres = this.GLOBAL.servicePort
       thesisReviewReviewStateTrace({ 'session': document.cookie }).then(res => {
         this.configId = res.data.configId
         this.majorId = res.data.majorId
@@ -250,17 +259,12 @@ export default {
       })
     },
 
-    exportData(){
-        this.$confirm('确认要添加所有需要评审的学生吗?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-           thesisReviewReviewStateTraceExport({ 'session': document.cookie, 'stuTypeCodes': this.stuTypeCodes, 'majorId': this.majorId, 'perNum': this.perNum,'perName':this.perName}).then(res => {
+    reviewTableExport(){
+           thesisReviewReviewStateTraceTableExport({ 'session': document.cookie, 'configId': this.configId}).then(res => {
             if(res.code === '0')
             {
               this.$message({
-                message: "添加成功",
+                message: "导出成功",
                 type: 'sucess'
               });
               doQuery();
@@ -270,12 +274,23 @@ export default {
                 type: 'warning'
               });
             }
-        })
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消添加'
-          });
+        });
+    },
+    reviewDataExport(){
+           thesisReviewReviewStateTraceDataExport({ 'session': document.cookie, 'configId': this.configId}).then(res => {
+            if(res.code === '0')
+            {
+              this.$message({
+                message: "导出成功",
+                type: 'sucess'
+              });
+              doQuery();
+            }else {
+              this.$message({
+                message: res.msg,
+                type: 'warning'
+              });
+            }
         });
     },
   }
