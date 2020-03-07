@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-upload
-      style="margin-left: 15px;"
+      style="margin-left: 3px;"
       :action="baseUrl+url"
       :multiple="false"
       :data="data"
@@ -88,6 +88,7 @@ export default {
     color: #336699;
     border:  1px solid rgb(64,158,255);
     padding: 7px 6px;
+    margin-left: 0px !important;
   }
 
 </style>
