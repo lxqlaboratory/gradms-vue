@@ -8,7 +8,7 @@
             &nbsp;&nbsp;2.对国内外学术和实务动态、本学科领域前沿知识及本专业理论与技术的了解程度；对文献资料和事实材料（如案例背景）的掌握及综述能力；<br>
             &nbsp;&nbsp;3.基础理论和专业知识水平；发现、分析、解决问题能力；科学研究工作的能力或独立担负专门工作的能力；调查报告的广度或案例研究的深度；研究论文的新见解、新观点、新方法、新数据、新资料；研究成果的理论或实用价值；<br>
             &nbsp;&nbsp;4.概念清晰与分析严谨的程度；材料的真实性和结论的合理性；论文规范性与文字、图表表达能力；<br>
-            &nbsp;&nbsp;5.论文是否达到硕士专业学位论文水平要求；是否同意组织论文答辩。                    
+            &nbsp;&nbsp;5.论文是否达到硕士专业学位论文水平要求；是否同意组织论文答辩。
 		  </td>
       </tr>
       <tr>
@@ -107,46 +107,44 @@ export default {
             message: '保存成功',
             type: 'success',
             offset: '10'
-          }); 
+          });
        }
       })
     },
     submit(){
-      console.log(this.form.reviewResult)
-        if(this.form.reviewResult==='') {
+        if(this.form.reviewResult === undefined) {
                 this.$message({
             message: '对学位论文的总体评价等级不能为空',
             type: 'success',
             offset: '10'
-          }); 
-          return;
+          });
         }
-        if(this.form.reviewLevel==='') {
+        else if(this.form.reviewLevel === undefined) {
                 this.$message({
             message: '对本学位论文的评价结论不能为空',
             type: 'success',
             offset: '10'
-          }); 
-          return;
+          });
         }
-        if(this.form.reviewDes==='') {
+        else if(this.form.reviewDes === undefined) {
                 this.$message({
             message: '评阅意见不能为空',
             type: 'success',
             offset: '10'
-          }); 
-          return;
+          });
         }
-      thesisReviewOnlineReviewFillSubmit({'session': document.cookie , 'form': this.form,'reviewState':1
-      }).then(res => {
-       if(res.code === '0'){
-          this.$message({
-            message: '提交成功',
-            type: 'success',
-          }); 
-          this.$router.push({ path: 'thesisReviewOnlineReview'});
-       }
-      })
+        else{
+          thesisReviewOnlineReviewFillSubmit({'session': document.cookie , 'form': this.form,'reviewState':1
+          }).then(res => {
+            if(res.code === '0'){
+              this.$message({
+                message: '提交成功',
+                type: 'success',
+              });
+              this.$router.push({ path: 'thesisReviewOnlineReview'});
+            }
+          })
+        }
     }
   }
 }
