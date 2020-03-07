@@ -2,17 +2,13 @@
   <div class="app-container">
     <table class="content">
       <tr>
-        <td colspan="6" style="font-size: 16px;font-weight: bold;color: #304156 ">
-          			\n评\n\n阅\n\n提\n\n纲" 
-			\n1.论文选题所具有的理论意义或实用价值；揭示所涉及专业的内在规律；有无新意；
-                         \n2.对国内外学术和实务动态、本学科领域前沿知识及本专业理论与技术的了解程度；对文献资料和事实材料
-                                                                                    （如案例背景）的掌握及综述能力；
-                         \n3.基础理论和专业知识水平；发现、分析、解决问题能力；科学研究工作的能力或独立担负专门工作的能力
-                              ；调查报告的广度或案例研究的深度；研究论文的新见解、新观点、新方法、新数据、新资料；研究成果的
-                                                                                       理论或实用价值；
-                         \n4.概念清晰与分析严谨的程度；材料的真实性和结论的合理性；论文规范性与文字、图表表达能力；
-                         \n5.论文是否达到硕士专业学位论文水平要求；是否同意组织论文答辩。
-                    
+        <td colspan="6" style="font-size: 12px;color:black;text-align:left;">
+          	评阅提纲:<br>
+            &nbsp;&nbsp;1.论文选题所具有的理论意义或实用价值；揭示所涉及专业的内在规律；有无新意；<br>
+            &nbsp;&nbsp;2.对国内外学术和实务动态、本学科领域前沿知识及本专业理论与技术的了解程度；对文献资料和事实材料（如案例背景）的掌握及综述能力；<br>
+            &nbsp;&nbsp;3.基础理论和专业知识水平；发现、分析、解决问题能力；科学研究工作的能力或独立担负专门工作的能力；调查报告的广度或案例研究的深度；研究论文的新见解、新观点、新方法、新数据、新资料；研究成果的理论或实用价值；<br>
+            &nbsp;&nbsp;4.概念清晰与分析严谨的程度；材料的真实性和结论的合理性；论文规范性与文字、图表表达能力；<br>
+            &nbsp;&nbsp;5.论文是否达到硕士专业学位论文水平要求；是否同意组织论文答辩。                    
 		  </td>
       </tr>
       <tr>
@@ -116,6 +112,31 @@ export default {
       })
     },
     submit(){
+      console.log(this.form.reviewResult)
+        if(this.form.reviewResult==='') {
+                this.$message({
+            message: '对学位论文的总体评价等级不能为空',
+            type: 'success',
+            offset: '10'
+          }); 
+          return;
+        }
+        if(this.form.reviewLevel==='') {
+                this.$message({
+            message: '对本学位论文的评价结论不能为空',
+            type: 'success',
+            offset: '10'
+          }); 
+          return;
+        }
+        if(this.form.reviewDes==='') {
+                this.$message({
+            message: '评阅意见不能为空',
+            type: 'success',
+            offset: '10'
+          }); 
+          return;
+        }
       thesisReviewOnlineReviewFillSubmit({'session': document.cookie , 'form': this.form,'reviewState':1
       }).then(res => {
        if(res.code === '0'){

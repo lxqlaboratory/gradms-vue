@@ -35,7 +35,7 @@
             label="论文编号"
             align="center"
             color="black"
-            width="120"
+            width="130"
           >
             <template slot-scope="scope">
               {{ scope.row.thesisNum }}
@@ -90,6 +90,7 @@
             label="操作"
             align="center"
             color="black"
+            width="180"
           >
             <template slot-scope="scope">
               <el-button v-if="scope.row.reviewState != 1" type="primary" @click="download(scope.row.reviewId)" size="mini">论文下载</el-button>

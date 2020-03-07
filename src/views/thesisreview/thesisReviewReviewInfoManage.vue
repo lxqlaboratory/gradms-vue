@@ -80,7 +80,7 @@
             label="论文编号"
             align="center"
             color="black"
-            width="120"
+            width="140"
           >
           <template slot-scope="scope">
               {{ scope.row.thesisNum }}
@@ -117,14 +117,15 @@
             label="操作"
             align="center"
             color="black"
+            width = "130"
           >
             <template slot-scope="scope">
-              <el-button type="primary" @click="reviewerUpdate(scope.row.thesisId)" size="mini" >评审专家维护</el-button>
+              <el-button type="primary" @click="reviewerUpdate(scope.row.thesisId)" size="mini" >修改</el-button>
               <el-button type="primary" @click="remove(scope.row.thesisId)" size="mini" >删除</el-button>
             </template>
           </el-table-column>
           <el-table-column
-            label="评审专家列表"
+            label="评审列表"
             align="center"
             color="black"
             width="80"
@@ -267,6 +268,7 @@
             label="操作"
             align="center"
             color="black"
+            width = "80"
           >
             <template slot-scope="scope">
               <el-button type="primary" @click="add(scope.row.personId)" size="mini" >添加</el-button>
@@ -337,7 +339,7 @@ export default {
       })
     },
     doQuery(){
-      thesisReviewReviewInfoQuery({ 'session': document.cookie, 'stuTypeCodes': this.stuTypeCodes, 'majorId': this.majorId, 'perNum': this.perNum,'perName':this.perName
+      thesisReviewReviewInfoQuery({ 'session': document.cookie, 'configId': this.configId, 'majorId': this.majorId, 'perNum': this.perNum,'perName':this.perName
       }).then(res => {
         this.reviewList = res.data.reviewList
         this.candidateList = res.data.candidateList
