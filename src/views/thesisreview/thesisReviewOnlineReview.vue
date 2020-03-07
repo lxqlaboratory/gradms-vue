@@ -93,7 +93,9 @@
             width="180"
           >
             <template slot-scope="scope">
-              <el-button v-if="scope.row.reviewState != 1" type="primary" @click="download(scope.row.reviewId)" >论文下载</el-button>
+              <el-button v-if="scope.row.canDownload" type="primary" >
+                <a :href="serverAddress+'/api/thesisreview/thesisReviewOnlineReviewDownload?reviewId='+scope.row.reviewId" :download="scope.row.fileName">论文下载</a>
+              </el-button>
               <el-button v-if="scope.row.reviewState != 1" type="primary" @click="review(scope.row.reviewId)" >评审</el-button>
               <el-button v-if="scope.row.reviewState == 1" type="primary" @click="print(scope.row.reviewId)" >评阅表下载</el-button>
             </template>
@@ -111,6 +113,7 @@ export default {
   name: 'thesisReviewOnlineReview',
   data() {
     return {
+      serverAddres:'',
       reviewList:[],
     }
   },
@@ -119,6 +122,7 @@ export default {
   },
   methods: {
     fetchData() {
+      this.serverAddres = this.GLOBAL.servicePort
       thesisReviewOnlineReviewList({ 'session': document.cookie }).then(res => {
         this.reviewList = res.data
       })

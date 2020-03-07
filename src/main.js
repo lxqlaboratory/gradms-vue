@@ -40,3 +40,6 @@ new Vue({
   router,
   render: h => h(App)
 })
+
+import globalVariable from '@/api/globalVariable'
+Vue.prototype.GLOBAL = globalVariable
