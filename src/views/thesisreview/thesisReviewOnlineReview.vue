@@ -47,7 +47,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              <el-button type="text" @click="updateExpertInfo(scope.row.reviewId)" size="mini">{{ scope.row.thesisName }}</el-button>
+              <el-button type="text" @click="updateExpertInfo(scope.row.reviewId)" >{{ scope.row.thesisName }}</el-button>
             </template>
           </el-table-column>
           <el-table-column
@@ -93,9 +93,9 @@
             width="180"
           >
             <template slot-scope="scope">
-              <el-button v-if="scope.row.reviewState != 1" type="primary" @click="download(scope.row.reviewId)" size="mini">论文下载</el-button>
-              <el-button v-if="scope.row.reviewState != 1" type="primary" @click="review(scope.row.reviewId)" size="mini" >评审</el-button>
-              <el-button v-if="scope.row.reviewState == 1" type="primary" @click="print(scope.row.reviewId)" size="mini">评阅表下载</el-button>
+              <el-button v-if="scope.row.reviewState != 1" type="primary" @click="download(scope.row.reviewId)" >论文下载</el-button>
+              <el-button v-if="scope.row.reviewState != 1" type="primary" @click="review(scope.row.reviewId)" >评审</el-button>
+              <el-button v-if="scope.row.reviewState == 1" type="primary" @click="print(scope.row.reviewId)" >评阅表下载</el-button>
             </template>
           </el-table-column>
         </el-table>

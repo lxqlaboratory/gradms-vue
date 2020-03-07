@@ -81,7 +81,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              <el-button type="primary" @click="remove(scope.row.reviewId)" size="mini" >删除</el-button>
+              <el-button type="primary" @click="remove(scope.row.reviewId)"  >删除</el-button>
             </template>
           </el-table-column>
      
@@ -167,7 +167,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              <el-button type="primary" @click="add(scope.row.personId)" size="mini" >添加</el-button>
+              <el-button type="primary" @click="add(scope.row.personId)"  >添加</el-button>
             </template>
           </el-table-column>
         </el-table>

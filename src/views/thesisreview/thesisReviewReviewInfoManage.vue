@@ -121,12 +121,12 @@
             width = "130"
           >
             <template slot-scope="scope">
-              <el-button type="primary" @click="reviewerUpdate(scope.row.thesisId)" size="mini" >修改</el-button>
-              <el-button type="primary" @click="remove(scope.row.thesisId)" size="mini" >删除</el-button>
+              <el-button type="primary" @click="reviewerUpdate(scope.row.thesisId)"  >修改</el-button>
+              <el-button type="primary" @click="remove(scope.row.thesisId)"  >删除</el-button>
             </template>
           </el-table-column>
           <el-table-column
-            label="列表"
+            label="评审列表"
             align="center"
             color="black"
             width="60"
@@ -137,7 +137,6 @@
                 border
                 style="width: 100%;"
                 :data="scope.row.commentList"
-                :header-cell-style="{background:'#eef1f6',color:'#606266',fontSize: '14px'}"
               >
                 <el-table-column
                   label="编号"
@@ -272,7 +271,7 @@
             width = "80"
           >
             <template slot-scope="scope">
-              <el-button type="primary" @click="add(scope.row.personId)" size="mini" >添加</el-button>
+              <el-button type="primary" @click="add(scope.row.personId)"  >添加</el-button>
             </template>
           </el-table-column>
         </el-table>

@@ -36,7 +36,7 @@
             width="70"
           >
             <template slot-scope="scope">
-              <el-button type="text" @click="modifyPersonInfo(scope.row.personId)" size="mini">{{ scope.row.perName }}</el-button>
+              <el-button type="text" @click="modifyPersonInfo(scope.row.personId)" >{{ scope.row.perName }}</el-button>
             </template>
           </el-table-column>
           <el-table-column
@@ -99,7 +99,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              <el-button type="primary" @click="deletePerson(scope.row.affairPersonId)" size="mini" >删除</el-button>
+              <el-button type="primary" @click="deletePerson(scope.row.affairPersonId)"  >删除</el-button>
             </template>
           </el-table-column>
         </el-table>

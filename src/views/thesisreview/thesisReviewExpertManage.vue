@@ -86,12 +86,12 @@
             label="操作"
             align="center"
             color="black"
-            width="235"
+            width="210"
           >
             <template slot-scope="scope">
-              <el-button type="primary" @click="resetPwd(scope.row.personId)" size="mini" >密码重置</el-button>
-              <el-button type="primary" @click="updateExpert(scope.row.personId)" size="mini" >查看修改</el-button>
-              <el-button type="primary" @click="deleteExpert(scope.row.personId)" size="mini" >删除</el-button>
+              <el-button type="primary" @click="resetPwd(scope.row.personId)"  >密码重置</el-button>
+              <el-button type="primary" @click="updateExpert(scope.row.personId)"  >查看修改</el-button>
+              <el-button type="primary" @click="deleteExpert(scope.row.personId)"  >删除</el-button>
             </template>
           </el-table-column>
         </el-table>

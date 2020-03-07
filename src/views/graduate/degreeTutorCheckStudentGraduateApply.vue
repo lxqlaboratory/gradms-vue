@@ -90,7 +90,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              <el-button type="primary" @click="cancelCheck(scope.row.personId)" size="mini" >取消审核</el-button>
+              <el-button type="primary" @click="cancelCheck(scope.row.personId)"  >取消审核</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -182,7 +182,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              <el-button type="primary" @click="checkPass(scope.row.personId)" size="mini" >审核通过</el-button>
+              <el-button type="primary" @click="checkPass(scope.row.personId)"  >审核通过</el-button>
             </template>
           </el-table-column>
         </el-table>

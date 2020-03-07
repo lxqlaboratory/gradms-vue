@@ -111,7 +111,6 @@
                 border
                 style="width: 100%;"
                 :data="scope.row.reviewList"
-                :header-cell-style="{background:'#eef1f6',color:'#606266',fontSize: '14px'}"
               >
                 <el-table-column
                   label="论文编号"

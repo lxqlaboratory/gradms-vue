@@ -88,7 +88,7 @@
         >
           <template slot-scope="scope" >
             <template v-for="item in scope.row.personList" >
-              <el-button type="text" @click="deletePerson(scope.row.tourId,item.personId)" size="mini"> {{ item.perName }}</el-button>
+              <el-button type="text" @click="deletePerson(scope.row.tourId,item.personId)" > {{ item.perName }}</el-button>
             </template>
           </template>
         </el-table-column>
@@ -106,7 +106,7 @@
                 :value="item.personId">
               </el-option>
             </el-select>
-            <el-button type="text" @click="addPerson(scope.row.tourId,scope.row.personId)" size="mini">添加</el-button>
+            <el-button type="text" @click="addPerson(scope.row.tourId,scope.row.personId)" >添加</el-button>
           </template>
         </el-table-column>
       </el-table>

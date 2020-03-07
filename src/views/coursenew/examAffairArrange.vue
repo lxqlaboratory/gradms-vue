@@ -43,7 +43,7 @@
         >
           <template slot-scope="scope" >
             <template v-for="item in scope.row.personList" >
-              <el-button type="text" @click="deletePerson(scope.row.affairId,item.personId)" size="mini">{{ item.perName }}</el-button>
+              <el-button type="text" @click="deletePerson(scope.row.affairId,item.personId)" >{{ item.perName }}</el-button>
             </template>
           </template>
         </el-table-column>
