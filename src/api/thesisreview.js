@@ -211,13 +211,6 @@ export function thesisReviewReviewInfoAutoDistribute(data) {
   })
 }
 
-export function thesisReviewReviewInfoImport(data) {
-  return request({
-    url: '/api/thesisreview/thesisReviewReviewInfoImport',
-    method: 'POST',
-    data
-  })
-}
 
 export function thesisReviewReviewInfoExpertMaintain(data) {
   return request({

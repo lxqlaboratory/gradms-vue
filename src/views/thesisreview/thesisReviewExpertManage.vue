@@ -90,7 +90,7 @@
           >
             <template slot-scope="scope">
               <el-button type="primary" @click="resetPwd(scope.row.personId)"  >密码重置</el-button>
-              <el-button type="primary" @click="updateExpert(scope.row.personId)"  >查看修改</el-button>
+              <el-button type="primary" @click="updateExpert(scope.row.personId)"  >编辑</el-button>
               <el-button type="primary" @click="deleteExpert(scope.row.personId)"  >删除</el-button>
             </template>
           </el-table-column>

@@ -287,8 +287,8 @@
           <a href="/downloads/degree/importComment.xls" >导入模板下载</a>
           </el-button>
           <fileupload
-            url="/api/thesisview/thesisReviewReviewInfoImport"
-            :data="{'docType': xls }"
+            url="/api/thesisreview/thesisReviewReviewInfoImport"
+            :data="{'docType': xls,'configId':configId }"
             accepttype=".xls"
             @successcallback="onSuccess"
             style="float: right"
@@ -355,7 +355,7 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-           thesisReviewReviewInfoAutoDistribute({ 'session': document.cookie}).then(res => {
+           thesisReviewReviewInfoAutoDistribute({ 'session': document.cookie, 'configId': this.configId}).then(res => {
             if(res.code === '0')
             {
               this.$message({
