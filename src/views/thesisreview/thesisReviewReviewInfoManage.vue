@@ -105,9 +105,10 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="评审数"
+            label="份数"
             align="center"
             color="black"
+            width="70"
           >
           <template slot-scope="scope">
               {{ scope.row.reviewCount }}
@@ -125,10 +126,10 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="评审列表"
+            label="列表"
             align="center"
             color="black"
-            width="80"
+            width="60"
             type="expand"
           >
             <template slot-scope="scope">
