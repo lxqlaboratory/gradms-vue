@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    
+
      <div class="table-headline">
     <table class="content"  align="left">
       <tr>
@@ -93,9 +93,9 @@
             width="180"
           >
             <template slot-scope="scope">
-              <el-button v-if="scope.row.canDownload" type="primary" >
+              <el-button  type="primary" >
 <!--                <a :href="'http://localhost:8080/api/thesisreview/thesisReviewOnlineReviewDownload?reviewId='+scope.row.reviewId" :download="scope.row.fileName">论文下载</a> -->
-                <a :href="this.serverAddres +'/api/thesisreview/thesisReviewOnlineReviewDownload?reviewId='+scope.row.reviewId" :download="scope.row.fileName">论文下载</a>
+                <a :href="serverAddres+'/api/thesisreview/thesisReviewOnlineReviewDownload?reviewId='+scope.row.reviewId" :download="scope.row.fileName">论文下载</a>
               </el-button>
               <el-button v-if="scope.row.reviewState != 1" type="primary" @click="review(scope.row.reviewId)" >评审</el-button>
               <el-button v-if="scope.row.reviewState == 1" type="primary" @click="print(scope.row.reviewId)" >评阅表下载</el-button>
@@ -123,8 +123,7 @@ export default {
   },
   methods: {
     fetchData() {
-      this.serverAddres = this.GLOBAL.servicePort
-      console.log(this.serverAddres)
+        this.serverAddres = this.GLOBAL.servicePort
       thesisReviewOnlineReviewList({ 'session': document.cookie }).then(res => {
         this.reviewList = res.data
       })
