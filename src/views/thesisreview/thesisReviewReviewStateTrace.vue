@@ -150,6 +150,7 @@
                 </el-table-column>
                 <el-table-column
                   label="论文等级"
+                  fixed="left"
                   align="center"
                   color="black"
                 >
@@ -159,6 +160,7 @@
                 </el-table-column>
                 <el-table-column
                   label="论文结论"
+                  fixed="left"
                   align="center"
                   color="black"
                 >

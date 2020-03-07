@@ -136,6 +136,7 @@
                 </el-table-column>
                 <el-table-column
                   label="评审等级"
+                  fixed="left"
                   align="center"
                   color="black"
                   width = "90"
@@ -146,9 +147,10 @@
                 </el-table-column>
                 <el-table-column
                   label="评审结论"
+                  fixed="left"
                   align="center"
                   color="black"
-                  width = "120"
+                  width = "180"
                 >
                   <template slot-scope="scope">
                     {{ scope.row.reviewLevel }}
