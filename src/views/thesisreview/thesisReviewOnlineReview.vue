@@ -45,6 +45,7 @@
             label="论文题目"
             align="center"
             color="black"
+            width="300"
           >
             <template slot-scope="scope">
               <el-button type="text" @click="updateExpertInfo(scope.row.reviewId)" >{{ scope.row.thesisName }}</el-button>
@@ -97,7 +98,9 @@
                 <a :href="serverAddres+'/api/thesisreview/thesisReviewOnlineReviewDownload?reviewId='+scope.row.reviewId" :download="scope.row.fileName">论文下载</a>
               </el-button>
               <el-button v-if="scope.row.reviewState != 1" type="primary" @click="review(scope.row.reviewId)" >评审</el-button>
-              <el-button v-if="scope.row.reviewState == 1" type="primary" @click="print(scope.row.reviewId)" >评阅表下载</el-button>
+              <el-button v-if="scope.row.reviewState == 1" type="primary" >
+                <a :href="serverAddres+'/api/thesisreview/thesisReviewOnlineReviewPrint?reviewId='+scope.row.reviewId" :download="scope.row.printName">评阅表下载</a>
+               </el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -107,8 +110,6 @@
 
 <script>
 import { thesisReviewOnlineReviewList } from '@/api/thesisreview'
-import { thesisReviewOnlineReviewDownload} from '@/api/thesisreview'
-import { thesisReviewOnlineReviewPrint} from '@/api/thesisreview'
 export default {
   name: 'thesisReviewOnlineReview',
   data() {
@@ -125,16 +126,6 @@ export default {
         this.serverAddres = this.GLOBAL.servicePort
       thesisReviewOnlineReviewList({ 'session': document.cookie }).then(res => {
         this.reviewList = res.data
-      })
-    },
-    download(reviewId){
-      thesisReviewOnlineReviewDownload({ 'session': document.cookie, 'reviewId': this.reviewId
-      }).then(res => {
-      })
-    },
-    print(reviewId){
-      thesisReviewOnlineReviewPrint({ 'session': document.cookie, 'reviewId': this.reviewId
-      }).then(res => {
       })
     },
     review(reviewId){

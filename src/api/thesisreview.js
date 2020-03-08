@@ -32,13 +32,6 @@ export function thesisReviewOnlineReviewList(data) {
     data
   })
 }
-export function thesisReviewOnlineReviewDownload(data) {
-  return request({
-    url: '/api/thesisreview/thesisReviewOnlineReviewDownload',
-    method: 'POST',
-    data
-  })
-}
 export function thesisReviewOnlineReviewFill(data) {
   return request({
     url: '/api/thesisreview/thesisReviewOnlineReviewFill',
