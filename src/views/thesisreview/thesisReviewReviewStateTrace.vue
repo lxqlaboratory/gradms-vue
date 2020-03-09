@@ -82,7 +82,7 @@
             width="180"
           >
           <template slot-scope="scope" > 
-              <el-button  type="primary"  >
+              <el-button  type="primary"  v-if = "scope.row.uploadTime != ''">
                 <a :href="serverAddres+'/api/thesisreview/thesisReviewOnlineReviewDownload?thesisId='+scope.row.thesisId" :download="scope.row.fileName">{{ scope.row.uploadTime }}</a>
               </el-button>
             </template>
@@ -209,7 +209,9 @@
       <div align="center">
       <tr>
         <td>
-          <el-button type="primary" @click="reviewTableExport()" >评阅数下载</el-button>
+          <el-button  type="primary" >
+            <a :href="serverAddres+'/api/thesisreview/thesisReviewReviewStatePrintAll?configId='+configId" :download="downloadFielName">评阅表下载</a>
+          </el-button>
           <el-button type="primary" @click="reviewDataExport()" >评阅信息导出</el-button>
         </td>
       </tr>
@@ -219,10 +221,11 @@
 </template>
 
 <script>
+import XlsxPopulate from 'xlsx-populate';
+import { saveAs } from 'file-saver';
 import { thesisReviewReviewStateTrace } from '@/api/thesisreview'
 import { thesisReviewReviewStateTraceQuery } from '@/api/thesisreview'
 import { thesisReviewReviewStateTraceTableExport } from '@/api/thesisreview'
-import { thesisReviewReviewStateTraceDataExport } from '@/api/thesisreview'
 
 export default {
   name: 'thesisReviewReviewStateTrace',
@@ -233,6 +236,7 @@ export default {
       perNum:'',
       perName:'',
       serverAddres:'',
+      downloadFielName:'评阅书.zip',
       configList:[],
       majorList:[],
       studentList:[],
@@ -259,39 +263,65 @@ export default {
       })
     },
 
-    reviewTableExport(){
-           thesisReviewReviewStateTraceTableExport({ 'session': document.cookie, 'configId': this.configId}).then(res => {
-            if(res.code === '0')
-            {
-              this.$message({
-                message: "导出成功",
-                type: 'sucess'
-              });
-              doQuery();
-            }else {
-              this.$message({
-                message: res.msg,
-                type: 'warning'
-              });
-            }
-        });
-    },
     reviewDataExport(){
-           thesisReviewReviewStateTraceDataExport({ 'session': document.cookie, 'configId': this.configId}).then(res => {
-            if(res.code === '0')
-            {
-              this.$message({
-                message: "导出成功",
-                type: 'sucess'
-              });
-              doQuery();
-            }else {
-              this.$message({
-                message: res.msg,
-                type: 'warning'
-              });
-            }
-        });
+      var filename = "评阅信息表.xlsx";
+      // 工作簿中工作表的名字
+      var sheetName = "评阅信息表";
+
+      // head定义了整个xlsx的顺序，里面的内容时json object的key
+      const header = ["perNum", "perName", "thesisNum", "uploadTime", "checkTime", "reviewTotal", "reviewResult"];
+      const headerExcel = ["学号", "姓名", "论文编号", "上传时间", "导师审核时间", "评审分数", "评审结果"];
+
+      const XlsxPopulate = require('xlsx-populate');
+
+      // Load a new blank workbook, refer:https://github.com/dtjohnson/xlsx-populate
+      XlsxPopulate.fromBlankAsync()
+        .then(workbook => {
+
+        // Set worksheet mame
+        var ws = workbook.sheet(0);
+        ws.name(sheetName);
+
+        // Set table name
+        const r = ws.range("A1:G1");
+        r.merged(true);
+        r.value(sheetName);
+        r.style({horizontalAlignment: "center", verticalAlignment : "center"});
+        ws.row(1).height(30);
+
+        // set header
+        ws.cell("A2").value([headerExcel]);
+
+        // set column width, it can be auto adjust with calculate max of data
+        ws.column("A").width(15);
+        ws.column("B").width(10);
+        ws.column("C").width(20);
+        ws.column("D").width(25);
+        ws.column("E").width(25);
+        ws.column("F").width(10);
+        ws.column("G").width(40);
+
+        // create data from array of json object to array of array
+        var valueArray = this.studentList.map(
+          item => {
+            var va = [];
+            header.forEach(element => {
+              va.push(item[element])
+            });
+            return va;
+          }
+        )
+
+        // set data
+        ws.cell("A3").value(valueArray);
+
+        // Write to blob.
+        return workbook.outputAsync();
+        }).then(blob => {
+          // wrtie to file
+          saveAs(blob, filename)
+
+        })
     },
   }
 }

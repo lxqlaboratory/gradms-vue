@@ -115,6 +115,15 @@
             </template>
           </el-table-column>
           <el-table-column
+            label="份数"
+            align="center"
+            color="black"
+          >
+          <template slot-scope="scope">
+              {{ scope.row.reviewers }}
+            </template>
+          </el-table-column>
+          <el-table-column
             label="操作"
             align="center"
             color="black"
@@ -280,6 +289,7 @@
       <div align="center">
       <tr>
         <td>
+          <el-button type="primary" @click="reviewDataExport()" >评审信息导出</el-button>
           <el-button type="primary" @click="autoDistribute()" >自动分发</el-button>
           <el-button type="primary" @click="addAll()" >添加全部</el-button>
           <el-button type="primary" @click="clearAll()" >清除全部</el-button>
@@ -303,6 +313,8 @@
 </template>
 
 <script>
+import XlsxPopulate from 'xlsx-populate';
+import { saveAs } from 'file-saver';
 import { thesisReviewReviewInfoManage } from '@/api/thesisreview'
 import { thesisReviewReviewInfoQuery } from '@/api/thesisreview'
 import { thesisReviewReviewInfoAddAll } from '@/api/thesisreview'
@@ -498,6 +510,67 @@ export default {
             type: 'error'
           });
         }
+    },
+    reviewDataExport(){
+      var filename = "分配信息表.xlsx";
+      // 工作簿中工作表的名字
+      var sheetName = "分配信息表";
+
+      // head定义了整个xlsx的顺序，里面的内容时json object的key
+      const header = ["perNum", "perName", "majorName","thesisNum", "thesisName", "researchDiction", "reviewCount", "reviewers"];
+      const headerExcel = ["学号", "姓名", "专业","论文编号", "论文题目", "研究方向", "份数", "评阅人信息"];
+
+      const XlsxPopulate = require('xlsx-populate');
+
+      // Load a new blank workbook, refer:https://github.com/dtjohnson/xlsx-populate
+      XlsxPopulate.fromBlankAsync()
+        .then(workbook => {
+
+        // Set worksheet mame
+        var ws = workbook.sheet(0);
+        ws.name(sheetName);
+
+        // Set table name
+        const r = ws.range("A1:H1");
+        r.merged(true);
+        r.value(sheetName);
+        r.style({horizontalAlignment: "center", verticalAlignment : "center"});
+        ws.row(1).height(25);
+
+        // set header
+        ws.cell("A2").value([headerExcel]);
+
+        // set column width, it can be auto adjust with calculate max of data
+        ws.column("A").width(15);
+        ws.column("B").width(10);
+        ws.column("C").width(20);
+        ws.column("D").width(20);
+        ws.column("E").width(40);
+        ws.column("F").width(30);
+        ws.column("G").width(10);
+        ws.column("H").width(80);
+
+        // create data from array of json object to array of array
+        var valueArray = this.reviewList.map(
+          item => {
+            var va = [];
+            header.forEach(element => {
+              va.push(item[element])
+            });
+            return va;
+          }
+        )
+
+        // set data
+        ws.cell("A3").value(valueArray);
+
+        // Write to blob.
+        return workbook.outputAsync();
+        }).then(blob => {
+          // wrtie to file
+          saveAs(blob, filename)
+
+        })
     },
   }
 }
