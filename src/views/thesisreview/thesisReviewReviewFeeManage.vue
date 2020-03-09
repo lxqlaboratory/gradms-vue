@@ -15,7 +15,7 @@
     </div>
       <div class="table-headline">
         <table class="headline">
-          <tr><td  >评审费用列表</td></tr>
+          <tr><td  >评阅费用列表</td></tr>
         </table>
         <el-table
           :data="feeList"
@@ -100,7 +100,7 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="评审份数"
+            label="评阅份数"
             align="center"
             color="black"
           >

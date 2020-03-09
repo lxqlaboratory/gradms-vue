@@ -2,7 +2,7 @@
   <div class="app-container">
     <table class="content">
       <tr>
-        <td colspan="4" style="font-size: 16px;font-weight: bold;color: #304156 ">评审配置信息</td>
+        <td colspan="4" style="font-size: 16px;font-weight: bold;color: #304156 ">评阅配置信息</td>
       </tr>
       <tr>
         <td colspan="1" >学位授予进程</td>
@@ -33,9 +33,9 @@
         <td colspan="1">
           <el-input v-model.number="form.inViewCount" placeholder="请输入内审送审分数" ></el-input>
         </td>
-        <td colspan="1" >内审评审费</td>
+        <td colspan="1" >内审评阅费</td>
         <td colspan="1">
-          <el-input v-model.number="form.inViewFee" placeholder="请输入内审评审费" ></el-input>
+          <el-input v-model.number="form.inViewFee" placeholder="请输入内审评阅费" ></el-input>
         </td>
       </tr>
       <tr>
@@ -43,9 +43,9 @@
         <td colspan="1">
           <el-input v-model.number="form.outViewCount" placeholder="请输入外审送审分数" ></el-input>
         </td>
-        <td colspan="1" >外审评审费</td>
+        <td colspan="1" >外审评阅费</td>
         <td colspan="1">
-          <el-input v-model.number="form.outViewFee" placeholder="请输入外审评审费" ></el-input>
+          <el-input v-model.number="form.outViewFee" placeholder="请输入外审评阅费" ></el-input>
         </td>
       </tr>
       <tr>
@@ -89,29 +89,29 @@
         </td>
       </tr>
       <tr>
-        <td colspan="1" >专家评审开始时间</td>
+        <td colspan="1" >专家评阅开始时间</td>
         <td colspan="1">
             <el-date-picker
               v-model="form.expertViewStartTime"
               type="datetime"
               value-format="yyyy-MM-dd HH:mm:ss"
-              placeholder="选择专家评审开始时间">
+              placeholder="选择专家评阅开始时间">
             </el-date-picker>
         </td>
-        <td colspan="1" >专家评审结束时间</td>
+        <td colspan="1" >专家评阅结束时间</td>
         <td colspan="1">
             <el-date-picker
               v-model="form.expertViewEndTime"
               type="datetime"
               value-format="yyyy-MM-dd HH:mm:ss"
-              placeholder="选择专家评审结束时间">
+              placeholder="选择专家评阅结束时间">
             </el-date-picker>
         </td>
       </tr>
       <tr>
-        <td colspan="1" >评审说明</td>
+        <td colspan="1" >评阅说明</td>
         <td colspan="3">
-          <el-input v-model="form.reviewDes" placeholder="请输入评审说明" ></el-input>
+          <el-input v-model="form.reviewDes" placeholder="请输入评阅说明" ></el-input>
         </td>
       </tr>
     </table>

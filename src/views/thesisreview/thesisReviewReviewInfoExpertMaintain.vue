@@ -67,7 +67,7 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="评审论文数"
+            label="评阅论文数"
             align="center"
             color="black"
           >
@@ -153,7 +153,7 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="评审论文数"
+            label="评阅论文数"
             align="center"
             color="black"
           >
@@ -210,7 +210,7 @@ export default {
       })
     },
     remove(reviewId){
-        this.$confirm('确认删除已参加的评审的学生吗？', '提示', {
+        this.$confirm('确认删除已参加的评阅的学生吗？', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'

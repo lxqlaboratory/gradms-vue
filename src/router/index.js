@@ -302,7 +302,7 @@ export const constantRoutes = [
         path: 'thesisReviewExpertReviewQuery',
         name: 'thesisReviewExpertReviewQuery',
         component: () => import('@/views/thesisreview/thesisReviewExpertReviewQuery'),
-        meta: { title: '专家评审查询'}
+        meta: { title: '专家评阅查询'}
       }, 
         
       {

@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-//在线评审
+//在线评阅
 export function thesisReviewPasswordUpdate(data) {
   return request({
     url: '/api/thesisreview/thesisReviewPasswordUpdate',

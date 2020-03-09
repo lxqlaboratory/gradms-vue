@@ -15,7 +15,7 @@
     </div>
       <div class="table-headline">
         <table class="headline">
-          <tr><td  >评审专家列表</td></tr>
+          <tr><td  >评阅专家列表</td></tr>
         </table>
         <el-table
           :data="expertList"
@@ -134,7 +134,7 @@
                   </template>
                 </el-table-column>
                 <el-table-column
-                  label="评审等级"
+                  label="评阅等级"
                   fixed="left"
                   align="center"
                   color="black"
@@ -145,7 +145,7 @@
                   </template>
                 </el-table-column>
                 <el-table-column
-                  label="评审结论"
+                  label="评阅结论"
                   fixed="left"
                   align="center"
                   color="black"
@@ -156,7 +156,7 @@
                   </template>
                 </el-table-column>
                 <el-table-column
-                  label="评审状态"
+                  label="评阅状态"
                   fixed="left"
                   align="center"
                   color="black"
@@ -177,7 +177,7 @@
                   </template>
                 </el-table-column>
                 <el-table-column
-                  label="评审时间"
+                  label="评阅时间"
                   fixed="left"
                   align="center"
                   color="black"

@@ -28,7 +28,7 @@
     <div>
       <div class="table-headline">
       <table class="headline">
-        <tr><td  >评审学生列表</td></tr>
+        <tr><td  >评阅学生列表</td></tr>
       </table>
         <el-table
           :data="reviewList"
@@ -135,7 +135,7 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="评审表"
+            label="评阅表"
             align="center"
             color="black"
             width="70"
@@ -207,7 +207,7 @@
       </div>
       <div class="table-headline">
         <table class="headline">
-          <tr><td  >待评审学生列表</td></tr>
+          <tr><td  >待评阅学生列表</td></tr>
         </table>
         <el-table
           :data="candidateList"
@@ -289,7 +289,7 @@
       <div align="center">
       <tr>
         <td>
-          <el-button type="primary" @click="reviewDataExport()" >评审信息导出</el-button>
+          <el-button type="primary" @click="reviewDataExport()" >评阅信息导出</el-button>
           <el-button type="primary" @click="autoDistribute()" >自动分发</el-button>
           <el-button type="primary" @click="addAll()" >添加全部</el-button>
           <el-button type="primary" @click="clearAll()" >清除全部</el-button>
@@ -362,7 +362,7 @@ export default {
     },
 
     autoDistribute(){
-        this.$confirm('自动分发前要清除所有的评审信息，确认要重新分发吗?', '提示', {
+        this.$confirm('自动分发前要清除所有的评阅信息，确认要重新分发吗?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
@@ -391,7 +391,7 @@ export default {
     },
 
     addAll(){
-        this.$confirm('确认要添加所有需要评审的学生吗?', '提示', {
+        this.$confirm('确认要添加所有需要评阅的学生吗?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
@@ -419,7 +419,7 @@ export default {
         });
     },
     removeAll(){
-        this.$confirm('确认要清除所有参加评审的学生吗?', '提示', {
+        this.$confirm('确认要清除所有参加评阅的学生吗?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
@@ -447,7 +447,7 @@ export default {
         });
     },
     remove(thesisId){
-        this.$confirm('确认删除已参加的评审的学生吗？', '提示', {
+        this.$confirm('确认删除已参加的评阅的学生吗？', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'

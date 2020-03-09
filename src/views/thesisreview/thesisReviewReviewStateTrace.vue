@@ -192,7 +192,7 @@
                   </template>
                 </el-table-column>
                 <el-table-column
-                  label="评审时间"
+                  label="评阅时间"
                   fixed="left"
                   align="center"
                   color="black"
@@ -270,7 +270,7 @@ export default {
 
       // head定义了整个xlsx的顺序，里面的内容时json object的key
       const header = ["perNum", "perName", "thesisNum", "uploadTime", "checkTime", "reviewTotal", "reviewResult"];
-      const headerExcel = ["学号", "姓名", "论文编号", "上传时间", "导师审核时间", "评审分数", "评审结果"];
+      const headerExcel = ["学号", "姓名", "论文编号", "上传时间", "导师审核时间", "评阅分数", "评阅结果"];
 
       const XlsxPopulate = require('xlsx-populate');
 
