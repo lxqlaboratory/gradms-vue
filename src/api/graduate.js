@@ -24,3 +24,11 @@ export function degreeTutorCheckStudentGraduateApplyCancel(data) {
     data
   })
 }
+
+export function degreeNotNormalDegreeStudentQuery(data) {
+  return request({
+    url: '/api/graduate/degreeNotNormalDegreeStudentQuery',
+    method: 'POST',
+    data
+  })
+}

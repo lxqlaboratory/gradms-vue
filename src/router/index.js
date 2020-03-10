@@ -214,6 +214,12 @@ export const constantRoutes = [
         name: 'degreeTutorCheckStudentGraduateApply',
         component: () => import('@/views/graduate/degreeTutorCheckStudentGraduateApply'),
         meta: { title: '导师审核毕业申请'}
+      }, 
+      {
+        path: 'degreeNotNormalDegreeStudentQuery',
+        name: 'degreeNotNormalDegreeStudentQuery',
+        component: () => import('@/views/graduate/degreeNotNormalDegreeStudentQuery'),
+        meta: { title: '未正常授位学生查询'}
       } 
     ]
   },
