@@ -125,7 +125,23 @@ export default {
     fetchData() {
         this.serverAddres = this.GLOBAL.servicePort
       thesisReviewOnlineReviewList({ 'session': document.cookie }).then(res => {
-        this.reviewList = res.data
+        if(res.code === '0') {
+          this.reviewList = res.data
+        }else {
+          if(res.msg === "isInitedPwd") {
+            this.$message({
+              type: 'warning',
+              message: '密码为初始密码，请先修改密码后再进行评阅。'
+            })
+           this.$router.push({ path: 'thesisReviewPasswordUpdate'})
+          }else {            
+            this.$message({
+              type: 'warning',
+              message: '个人信息不完整，请先完善好银行信息和证件号码，再进行评阅，以方便评审费银行转账。'
+            })
+           this.$router.push({ path: 'thesisReviewExpertInfoMaintain'})
+          }
+        }
       })
     },
     review(reviewId){

@@ -97,15 +97,15 @@ export default {
   methods: {
     submitForm() {
       thesisReviewPasswordUpdate({  'session': document.cookie,'oldpassword': this.ruleForm.oldPass, 'newpassword': this.ruleForm.newPass }).then(res => {
-        if (res.re == -1) {
-          this.$message({
-            type: 'error',
-            message: '旧密码不正确请重新输入'
-          })
-        } else {
+        if (res.re === '0') {
           this.$message({
             type: 'success',
             message: '修改成功'
+          })
+        } else {
+          this.$message({
+            type: 'error',
+            message: '旧密码不正确请重新输入'
           })
         }
       }).catch(e => {
