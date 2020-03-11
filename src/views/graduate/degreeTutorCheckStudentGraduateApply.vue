@@ -218,7 +218,7 @@ export default {
          this.$message({
            message: '已审核通过',
            type: 'success',
-           offset: '30'
+           offset: '10'
          });
          this.fetchData()
       })
@@ -228,7 +228,7 @@ export default {
          this.$message({
            message: '已成功取消',
            type: 'success',
-           offset: '30'
+           offset: '10'
          });
          this.fetchData()
       })

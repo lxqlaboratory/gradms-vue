@@ -94,15 +94,17 @@ export default {
       })
     },
     submit(){
-      thesisReviewExpertInfoMaintainSubmit({'session': document.cookie , 'form': this.form
+     this.isDisable = true
+     thesisReviewExpertInfoMaintainSubmit({'session': document.cookie , 'form': this.form
       }).then(res => {
        if(res.code === '0'){
          this.$message({
-           message: '提交成功',
+           message: '保存成功',
            type: 'success',
-           offset: '30'
+           offset: '40'
          });
        }
+    this.isDisable = false   
 //       if(this.form.isManage) {
 //        this.$router.push({ path: 'thesisReviewExpertManage'})
 //       }
