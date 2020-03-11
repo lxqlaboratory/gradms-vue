@@ -1,21 +1,31 @@
 
 <template>
   <div class="app-container">
-    <el-form ref="ruleForm" :model="ruleForm" status-icon :rules="rules"  label-width="150px">
-      <el-form-item label="请输入旧密码" prop="oldPass" style="color: #9b0d14">
-        <el-input v-model="ruleForm.oldPass" type="password" autocomplete="off" style="width: 25%;" />
-      </el-form-item>
-      <el-form-item label="请输入新密码" prop="newPass">
-        <el-input v-model="ruleForm.newPass" type="password" autocomplete="off" style="width: 25%;" />
-      </el-form-item>
-      <el-form-item label="请确认新密码" prop="checkPass" class="leftSpan" style="color: #9b0d14">
-        <el-input v-model="ruleForm.checkPass" type="password" autocomplete="off" style="width: 25%;" />
-      </el-form-item>
-      <el-form-item>
+    <table class="content">
+      <tr>
+        <td colspan="1" >旧密码</td>
+        <td colspan="1">
+          <el-input v-model="ruleForm.oldPass" type="password" autocomplete="off" placeholder="请输入旧密码" ></el-input>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1" >新密码</td>
+        <td colspan="1">
+          <el-input v-model="ruleForm.newPass" type="password" autocomplete="off" placeholder="请输入新密码" ></el-input>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1" >确认密码</td>
+        <td colspan="1">
+          <el-input v-model="ruleForm.checkPass" type="password" autocomplete="off" placeholder="请输入确认密码" ></el-input>
+        </td>
+      </tr>
+    </table>
+       <div align="center">
         <el-button class="primary" @click="submitForm()">提交</el-button>
         <el-button class="primary" @click="resetForm('ruleForm')">重置</el-button>
-      </el-form-item>
-    </el-form>
+    </div>
+ 
   </div>
 </template>
 
