@@ -56,7 +56,7 @@
       </tr>
     </table>
     <div align="center">
-    <el-button type="primary" @click="submit" >提交</el-button>
+    <el-button type="primary" @click="submit" :disabled="isDisable">提交</el-button>
     </div>
   </div>
 </template>
@@ -81,7 +81,8 @@ export default {
         bankNo:'',
         bankName:'',
         isManage:false
-      }
+      },
+      isDisable: false
     }
   },
   created() {
@@ -94,7 +95,7 @@ export default {
       })
     },
     submit(){
-     this.isDisable = true
+      this.isDisable = true
      thesisReviewExpertInfoMaintainSubmit({'session': document.cookie , 'form': this.form
       }).then(res => {
        if(res.code === '0'){
@@ -104,7 +105,7 @@ export default {
            offset: '40'
          });
        }
-    this.isDisable = false   
+       this.isDisable = false
 //       if(this.form.isManage) {
 //        this.$router.push({ path: 'thesisReviewExpertManage'})
 //       }
