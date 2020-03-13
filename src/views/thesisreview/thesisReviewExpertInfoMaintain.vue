@@ -95,22 +95,22 @@ export default {
       })
     },
     submit(){
-      // if(this.form.bankNo === undefined || this.form.bankNo==='') {
-      //         this.$message({
-      //     message: '银行卡号不能为空',
-      //     type: 'success',
-      //     offset: '10'
-      //   });
-      //   return;
-      // }
-      // if(this.form.bankName === undefined || this.form.bankName==='') {
-      //         this.$message({
-      //     message: '开户行不能为空',
-      //     type: 'success',
-      //     offset: '10'
-      //   });
-      //   return;
-      // }
+       if(this.form.bankNo === undefined || this.form.bankNo==='') {
+               this.$message({
+           message: '银行卡号不能为空',
+           type: 'success',
+           offset: '10'
+         });
+         return;
+       }
+       if(this.form.bankName === undefined || this.form.bankName==='') {
+               this.$message({
+           message: '开户行不能为空',
+           type: 'success',
+           offset: '10'
+         });
+         return;
+       }
         this.isDisable = true
      thesisReviewExpertInfoMaintainSubmit({'session': document.cookie , 'form': this.form
       }).then(res => {
