@@ -9,6 +9,14 @@ export function thesisReviewPasswordUpdate(data) {
   })
 }
 
+export function thesisReviewPasswordUpdate(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewPasswordUpdate',
+    method: 'POST',
+    data
+  })
+}
+
 export function thesisReviewExpertInfoMaintain(data) {
   return request({
     url: '/api/thesisreview/thesisReviewExpertInfoMaintain',

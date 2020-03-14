@@ -5,6 +5,15 @@
         <td colspan="4" style="font-size: 16px;font-weight: bold;color: #304156 ">评阅配置信息</td>
       </tr>
       <tr>
+        <td colspan="1" >评阅类型</td>
+        <td colspan="3"  >
+          <span v-for="(item,index) in reviewTypes" :key="item.id" >
+            <input v-model="form.reviewType" :value="item.value" class="input-radio" :checked='item.isChecked'  @click="check(index)" type="radio">
+               {{item.label}}
+          <span>
+        </td>
+      </tr>
+      <tr>
         <td colspan="1" >学位授予进程</td>
         <td colspan="1">
           <el-select v-model="form.proId" @change="doQuery()" placeholder="请选择学位授予进程" style="width: 100% ">
@@ -109,6 +118,26 @@
         </td>
       </tr>
       <tr>
+        <td colspan="1" >学生查看开始时间</td>
+        <td colspan="1">
+            <el-date-picker
+              v-model="form.studentViewStartTime"
+              type="datetime"
+              value-format="yyyy-MM-dd HH:mm:ss"
+              placeholder="选择专家评阅开始时间">
+            </el-date-picker>
+        </td>
+        <td colspan="1" >学生查看结束时间</td>
+        <td colspan="1">
+            <el-date-picker
+              v-model="form.studentViewEndTime"
+              type="datetime"
+              value-format="yyyy-MM-dd HH:mm:ss"
+              placeholder="选择专家评阅结束时间">
+            </el-date-picker>
+        </td>
+      </tr>
+      <tr>
         <td colspan="1" >评阅说明</td>
         <td colspan="3">
           <el-input v-model="form.reviewDes" placeholder="请输入评阅说明" ></el-input>
@@ -131,7 +160,8 @@ export default {
     return {
       form: {
         configId:-1,
-	      proId:-1,
+        proId:-1,
+        reviewType:'1',
 	      stuTypes:'',
       	inViewCount:-1,
 	      inViewFee:-1,
@@ -143,11 +173,25 @@ export default {
       	tutorCheckEndTime:'',
 	      expertViewStartTime:'',
 	      expertViewEndTime:'',
+	      studentViewStartTime:'',
+	      studentViewEndTime:'',
         reviewDes:'',
         inNotFax:0,
         outNotFax:0,
         distributeApi:''
       },
+      reviewTypes:[
+      {
+        label: '正式评审',
+        value:'1',
+        isChecked: true,
+      },
+      {
+        label: '论文预审',
+        value:'2',
+        isChecked: false,
+      }
+      ],
       proList:[],
       stuTypesList:[]
     }
@@ -179,6 +223,17 @@ export default {
          });
        }
       })
+    },
+    check(index) {
+      // 先取消所有选中项
+      this.reviewTypes.forEach((item) => {
+        item.isChecked = false;
+      });
+      //再设置当前点击项选中
+      this.form.reviewType = this.reviewTypes[index].value;
+      // 设置值，以供传递
+      this.reviewTypes[index].isChecked = true;
+      console.log(this.form.reviewType);
     }
   }
 }

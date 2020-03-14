@@ -239,6 +239,13 @@ export const constantRoutes = [
         meta: { title: '密码修改'}
       },
       {
+        path: 'thesisReviewStudentThesisUpload',
+        name: 'thesisReviewStudentThesisUpload',
+        component: () => import('@/views/thesisreview/thesisReviewStudentThesisUpload'),
+        meta: { title: '论文上传'}
+      },
+      
+      {
         path: 'thesisReviewExpertInfoMaintain',
         name: 'thesisReviewExpertInfoMaintain',
         component: () => import('@/views/thesisreview/thesisReviewExpertInfoMaintain'),
