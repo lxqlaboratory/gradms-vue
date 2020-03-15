@@ -1,9 +1,9 @@
 import request from '@/utils/request'
 
 //在线评阅
-export function thesisReviewPasswordUpdate(data) {
+export function thesisReviewStudentThesisUpload(data) {
   return request({
-    url: '/api/thesisreview/thesisReviewPasswordUpdate',
+    url: '/api/thesisreview/thesisReviewStudentThesisUpload',
     method: 'POST',
     data
   })
