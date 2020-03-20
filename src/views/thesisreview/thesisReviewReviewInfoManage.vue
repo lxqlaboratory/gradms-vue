@@ -105,7 +105,27 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="份数"
+            label="上传状态"
+            align="center"
+            color="black"
+            width="70"
+          >
+          <template slot-scope="scope">
+              {{ scope.row.uploadStateName }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="审核状态"
+            align="center"
+            color="black"
+            width="70"
+          >
+          <template slot-scope="scope">
+              {{ scope.row.tutorCheckStateName }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="分数"
             align="center"
             color="black"
             width="70"
@@ -115,7 +135,7 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="份数"
+            label="评阅人"
             align="center"
             color="black"
           >
@@ -374,7 +394,7 @@ export default {
                 message: "分发成功",
                 type: 'sucess'
               });
-              doQuery();
+              this.doQuery();
             }else {
               this.$message({
                 message: res.msg,
@@ -396,14 +416,13 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-           thesisReviewReviewInfoAddAll({ 'session': document.cookie, 'stuTypeCodes': this.stuTypeCodes, 'majorId': this.majorId, 'perNum': this.perNum,'perName':this.perName}).then(res => {
-            if(res.code === '0')
-            {
+           thesisReviewReviewInfoAddAll({ 'session': document.cookie, 'configId': this.configId, 'candidateList': this.candidateList}).then(res => {
+            if(res.code === '0'){
               this.$message({
                 message: "添加成功",
                 type: 'sucess'
               });
-              doQuery();
+              this.doQuery();
             }else {
               this.$message({
                 message: res.msg,
@@ -424,14 +443,14 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-           thesisReviewReviewInfoRemoveAll({ 'session': document.cookie, 'stuTypeCodes': this.stuTypeCodes, 'majorId': this.majorId, 'perNum': this.perNum,'perName':this.perName}).then(res => {
+           thesisReviewReviewInfoRemoveAll({ 'session': document.cookie, 'configId': this.configId, 'majorId': this.majorId, 'perNum': this.perNum,'perName':this.perName}).then(res => {
             if(res.code === '0')
             {
               this.$message({
                 message: "清除成功",
                 type: 'sucess'
               });
-              doQuery();
+              this.doQuery();
             }else {
               this.$message({
                 message: res.msg,

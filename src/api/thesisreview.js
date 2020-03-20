@@ -191,7 +191,7 @@ export function thesisReviewReviewInfoRemove(data) {
 }
 export function thesisReviewReviewInfoAddAll(data) {
   return request({
-    url: '/api/thesisreview/thesisReviewReviewInfo',
+    url: '/api/thesisreview/thesisReviewReviewInfoAddAll',
     method: 'POST',
     data
   })
@@ -292,6 +292,30 @@ export function thesisReviewReviewFeeManage(data) {
 export function thesisReviewReviewFeeQuery(data) {
   return request({
     url: '/api/thesisreview/thesisReviewReviewFeeQuery',
+    method: 'POST',
+    data
+  })
+}
+
+export function thesisReviewTutorCheckStudentThesisInit(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewTutorCheckStudentThesisInit',
+    method: 'POST',
+    data
+  })
+}
+
+export function thesisReviewTutorCheckStudentThesisCheckPass(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewTutorCheckStudentThesisCheckPass',
+    method: 'POST',
+    data
+  })
+}
+
+export function thesisReviewTutorCheckStudentThesisCancel(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewTutorCheckStudentThesisCancel',
     method: 'POST',
     data
   })

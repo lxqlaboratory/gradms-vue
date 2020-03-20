@@ -11,14 +11,9 @@
         </td>
         </tr>
         <tr>
-          <td colspan="1" width = "10%">评审类型</td>
-          <td colspan="1" width = "10%" > 
-            {{form.reviewType}}
-          </td>
-          <td colspan="1" width = "10%" >论文题目</td>
-          <td colspan="1" width = "70%" >
-            {{form.thesisName}}
-          </td>
+          <td colspan="1" width = "15%">评审类型{{form.reviewType}}</td>
+          <td colspan="1" width = "70%" >论文题目：{{form.thesisName}}</td>
+          <td colspan="1" width = "15%" >导师审核状态：{{form.tutorCheckStateName}}</td>
         </tr>
       </table>
     </div>
@@ -103,6 +98,7 @@ export default {
         isCanView:false,
         reviewType:'',
         thesisName: '',
+        tutorCheckStateName:'',
         fileName:'',
         attachId:'',
         reviewResult1:'',
