@@ -32,6 +32,7 @@
       </table>
         <el-table
           :data="reviewList"
+          :default-sort = "{prop: 'perNum', order: 'ascending'}"
           border
           style="width: 100%;"
           size="mini"
@@ -52,6 +53,8 @@
             align="center"
             color="black"
             width="120"
+            prop="perNum"
+            sortable
           >
             <template slot-scope="scope">
               {{ scope.row.perNum }}
@@ -71,6 +74,8 @@
             label="专业"
             align="center"
             color="black"
+            prop="majorNum"
+            sortable
           >
           <template slot-scope="scope">
               {{ scope.row.majorName }}
@@ -109,6 +114,8 @@
             align="center"
             color="black"
             width="70"
+            prop="uploadStateName"
+            sortable
           >
           <template slot-scope="scope">
               {{ scope.row.uploadStateName }}
@@ -119,6 +126,8 @@
             align="center"
             color="black"
             width="70"
+            prop="tutorCheckStateName"
+            sortable
           >
           <template slot-scope="scope">
               {{ scope.row.tutorCheckStateName }}
