@@ -2,7 +2,7 @@
   <div class="app-container">
     <div class="query-container">
       专家类型
-      <el-select v-model="expertType" size="mini" class="elinput" disabled>
+      <el-select v-model="expertType" size="mini" class="elinput" >
           <el-option
             v-for="item in expertTypes"
             :key="item.value"
@@ -104,7 +104,7 @@ export default {
     })
     },
     selectExpert(){
-      getExportInfoListByPerNumNameQuery({ 'session': document.cookie ,'perNum': this.perNum ,'perName': this.perName,'extertType': this.expertType }).then(res=>{
+      getExportInfoListByPerNumNameQuery({ 'session': document.cookie,'expertType':this.expertType,'perNum': this.perNum ,'perName': this.perName,'extertType': this.expertType }).then(res=>{
         this.expertList = res.data
       })
     },
