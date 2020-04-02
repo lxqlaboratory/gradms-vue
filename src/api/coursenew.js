@@ -126,3 +126,19 @@ export function newCultivateExamAffairInfoQuery(data) {
   })
 }
 
+//学院排课
+export function collegeWorkOutTeachingScheduleInit(data) {
+  return request({
+    url: '/api/coursenew/collegeWorkOutTeachingScheduleInit',
+    method: 'POST',
+    data
+  })
+}
+
+export function collegeWorkOutTeachingScheduleRoomList(data) {
+  return request({
+    url: '/api/coursenew/collegeWorkOutTeachingScheduleRoomList',
+    method: 'POST',
+    data
+  })
+}
