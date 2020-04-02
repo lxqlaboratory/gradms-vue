@@ -82,6 +82,17 @@
             </template>
           </el-table-column>
           <el-table-column
+            label="系所"
+            align="center"
+            color="black"
+            prop="departmentName"
+            sortable
+          >
+          <template slot-scope="scope">
+              {{ scope.row.departmentName }}
+            </template>
+          </el-table-column>
+          <el-table-column
             label="论文编号"
             align="center"
             color="black"
@@ -134,7 +145,7 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="分数"
+            label="份数"
             align="center"
             color="black"
             width="70"

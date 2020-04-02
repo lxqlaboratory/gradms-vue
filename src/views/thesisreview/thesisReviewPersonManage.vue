@@ -52,6 +52,16 @@
             </template>
           </el-table-column>
           <el-table-column
+            label="评审类型"
+            align="center"
+            color="black"
+            width="120"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.expertType }}
+            </template>
+          </el-table-column>
+          <el-table-column
             label="所在单位"
             align="center"
             color="black"
