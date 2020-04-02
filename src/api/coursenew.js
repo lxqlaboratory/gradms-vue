@@ -142,3 +142,43 @@ export function collegeWorkOutTeachingScheduleRoomList(data) {
     data
   })
 }
+
+export function collegeWorkOutTeachingScheduleScheduleList(data) {
+  return request({
+    url: '/api/coursenew/collegeWorkOutTeachingScheduleScheduleList',
+    method: 'POST',
+    data
+  })
+}
+
+export function collegeWorkOutTeachingScheduleTeaList(data) {
+  return request({
+    url: '/api/coursenew/collegeWorkOutTeachingScheduleTeaList',
+    method: 'POST',
+    data
+  })
+}
+
+export function collegeWorkOutTeachingScheduleSave(data) {
+  return request({
+    url: '/api/coursenew/collegeWorkOutTeachingScheduleSave',
+    method: 'POST',
+    data
+  })
+}
+
+export function collegeWorkOutTeachingScheduleDelete(data) {
+  return request({
+    url: '/api/coursenew/collegeWorkOutTeachingScheduleDelete',
+    method: 'POST',
+    data
+  })
+}
+
+export function collegeWorkOutTeachingScheduleAdd(data) {
+  return request({
+    url: '/api/coursenew/collegeWorkOutTeachingScheduleAdd',
+    method: 'POST',
+    data
+  })
+}
