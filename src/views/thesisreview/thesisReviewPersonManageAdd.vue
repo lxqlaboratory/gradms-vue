@@ -51,7 +51,7 @@
             width="70"
         >
           <template slot-scope="scope">
-            <el-button type="text" @click="addExpert(scope.row.personId)" >{{ scope.row.perName }}</el-button>
+            {{ scope.row.perName }}
           </template>
         </el-table-column>
         <el-table-column
@@ -63,6 +63,16 @@
             {{ scope.row.personUnit }}
           </template>
         </el-table-column>
+          <el-table-column
+            label="操作"
+            align="center"
+            color="black"
+            width="320"
+          >
+        <template slot-scope="scope">
+            <el-button type="text" @click="addExpert(scope.row.personId,'1')" >添加学硕评审专家</el-button>
+            <el-button type="text" @click="addExpert(scope.row.personId,'2')" >添加专硕评审专家</el-button>
+        </template>
       </el-table>
     </div>
 
@@ -108,8 +118,8 @@ export default {
         this.expertList = res.data
       })
     },
-    addExpert(personId) {
-      thesisReviewPersonAdd({ 'session': document.cookie ,'majorId':this.majorId,'personId': personId }).then(res=>{
+    addExpert(personId,addType) {
+      thesisReviewPersonAdd({ 'session': document.cookie ,'majorId':this.majorId,'personId': personId ,'addType':addType}).then(res=>{
         if(res.code === '0'){
           this.$router.push({ path: 'thesisReviewPersonManage',  query: { 'majorId':this.majorId }})
         }else {
