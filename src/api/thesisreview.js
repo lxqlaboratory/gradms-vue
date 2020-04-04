@@ -9,6 +9,14 @@ export function thesisReviewStudentThesisUpload(data) {
   })
 }
 
+export function thesisReviewStudentThesisDirectionSave(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewStudentThesisDirectionSave',
+    method: 'POST',
+    data
+  })
+}
+
 export function thesisReviewPasswordUpdate(data) {
   return request({
     url: '/api/thesisreview/thesisReviewPasswordUpdate',
@@ -151,7 +159,6 @@ export function thesisReviewConfigQuery(data) {
   })
 }
 
-
 export function thesisReviewConfigSubmit(data) {
   return request({
     url: '/api/thesisreview/thesisReviewConfigSubmit',
@@ -159,6 +166,7 @@ export function thesisReviewConfigSubmit(data) {
     data
   })
 }
+
 
 export function thesisReviewReviewInfoManage(data) {
   return request({

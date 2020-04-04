@@ -20,6 +20,15 @@
     <div align="center">
       <tr>
         <td >
+          <el-select v-model="form.directionId" placeholder="请选择研究方向"  style="width: 220px;">
+            <el-option
+              v-for="item in directionList"
+              :key="item.directId"
+              :label="item.directName"
+              :value="item.directId">
+            </el-option>
+          </el-select>
+          <el-button type="primary" @click="doSave" >保存研究方向</el-button> 
         <fileupload v-if="form.isCanUpload"
           url="/api/thesisreview/thesisReviewOnlineReviewThesisUpload"
           :data="{'docType': pdf,'thesisId':form.thesisId}"
@@ -87,6 +96,7 @@
 <script>
 import fileupload from '../../components/upload/fileupload'
 import { thesisReviewStudentThesisUpload } from '@/api/thesisreview'
+import { thesisReviewStudentThesisDirectionSave } from '@/api/thesisreview'
 export default {
   name: 'thesisReviewStudentThesisUpload',
   components: { fileupload },
@@ -94,6 +104,7 @@ export default {
     return {
       form: {
         thesisId:-1,
+        directionId:-1,
         isCanUpload:false,
         isCanView:false,
         reviewType:'',
@@ -112,6 +123,7 @@ export default {
         reviewDes3:''
       },
       serverAddres:'',
+      directionList:[],
     }
   },
   created() {
@@ -120,11 +132,30 @@ export default {
   methods: {
     fetchData() {
       this.serverAddres = this.GLOBAL.servicePort
-      thesisReviewStudentThesisUpload({ 'session': document.cookie ,'thesisId': this.thesisId}).then(res => {
-        this.form = res.data
+      thesisReviewStudentThesisUpload({ 'session': document.cookie ,'thesisId': this.form.thesisId}).then(res => {
+        this.form = res.data.form;
+        this.directionList = res.data.directionList;
         console.log(this.form);
       })
     },
+    doSave(){
+      thesisReviewStudentThesisDirectionSave({ 'session': document.cookie, 'thesisId': this.form.thesisId,'directionId': this.form.directionId}).then(res => {
+        if(res.code === '0')
+        {
+          this.$message({
+            message: "保存成功",
+            type: 'sucess'
+          });
+          this.doQuery();
+        }else {
+          this.$message({
+            message: res.msg,
+            type: 'warning'
+          });
+        }
+      });
+    },
+
     onPreview: function(file) {
     },
     onSuccess(res, file) {

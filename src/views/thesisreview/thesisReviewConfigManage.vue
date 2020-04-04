@@ -1,12 +1,28 @@
 <template>
   <div class="app-container">
+    <div class="query-container">
+      类别
+      <el-select v-model="form.configId" placeholder="请选择配置类型" @change="doQuery()" class="filter-item" style="width: 20%;">
+        <el-option
+          v-for="item in configList"
+          :key="item.cofigId"
+          :label="item.configName"
+          :value="item.configId">
+        </el-option>
+      </el-select>
+    </div>
+    <div>
     <table class="content">
       <tr>
         <td colspan="4" style="font-size: 16px;font-weight: bold;color: #304156 ">评阅配置信息</td>
       </tr>
       <tr>
+        <td colspan="1" >评审名称</td>
+        <td colspan="1">
+          <el-input v-model="form.configName" placeholder="请输入评审名称" ></el-input>
+        </td>
         <td colspan="1" >评阅类型</td>
-        <td colspan="3"  >
+        <td colspan="1"  >
           <span v-for="(item,index) in reviewTypes" :key="item.id" >
             <input v-model="form.reviewType" :value="item.value" class="input-radio" :checked='item.isChecked'  @click="check(index)" type="radio">
                {{item.label}}
@@ -16,7 +32,7 @@
       <tr>
         <td colspan="1" >学位授予进程</td>
         <td colspan="1">
-          <el-select v-model="form.proId" @change="doQuery()" placeholder="请选择学位授予进程" style="width: 100% ">
+          <el-select v-model="form.proId" placeholder="请选择学位授予进程" style="width: 100% ">
             <el-option
               v-for="item in proList"
               :key="item.proId"
@@ -27,7 +43,7 @@
         </td>
         <td colspan="1" >学生类型</td>
         <td colspan="1">
-          <el-select v-model="form.stuTypes" @change="doQuery()" placeholder="请选择学生类型" style="width: 100%">
+          <el-select v-model="form.stuTypes"  placeholder="请选择学生类型" style="width: 100%">
             <el-option
               v-for="item in stuTypesList"
               :key="item.stuTypes"
@@ -137,16 +153,29 @@
             </el-date-picker>
         </td>
       </tr>
+        <td>
+          <el-checkbox label="是否需要导师审核" v-model="form.isTutorCheck" />
+       </td>
+        <td>
+          <el-checkbox label="是否需要专家完善信息" v-model="form.isExpertInfoFill" />
+       </td>
+        <td colspan="2">
+          <el-checkbox label="是否需要跨部门评审" v-model="form.isNotDepartment" />
+       </td>
       <tr>
         <td colspan="1" >评阅说明</td>
         <td colspan="3">
           <el-input v-model="form.reviewDes" placeholder="请输入评阅说明" ></el-input>
         </td>
       </tr>
+      <tr>
+      </tr>
     </table>
     <div align="center">
-    <el-button type="primary" @click="submit" >提交</el-button>
+      <el-button type="primary" @click="doAddnew()" >添加新的评审</el-button>
+      <el-button type="primary" @click="submit" >修改保存</el-button>
     </div>
+  </div>
   </div>
 </template>
 
@@ -161,6 +190,7 @@ export default {
       form: {
         configId:-1,
         proId:-1,
+        configName:'',
         reviewType:'1',
 	      stuTypes:'',
       	inViewCount:-1,
@@ -178,7 +208,10 @@ export default {
         reviewDes:'',
         inNotFax:0,
         outNotFax:0,
-        distributeApi:''
+        distributeApi:'',
+        isTutorCheck:false,
+        isExpertInfoFill:false,
+        isNotDepartment:false
       },
       reviewTypes:[
       {
@@ -193,7 +226,8 @@ export default {
       }
       ],
       proList:[],
-      stuTypesList:[]
+      stuTypesList:[],
+      configList:[]
     }
   },
   created() {
@@ -205,15 +239,40 @@ export default {
         this.form = res.data.form
         this.stuTypesList = res.data.stuTypesList
         this.proList = res.data.proList
+        this.configList = res.data.configList;
       })
     },
     doQuery() {
-      thesisReviewConfigQuery({ 'session': document.cookie,'proId':this.proId,'stuTypes':this.stuTypes}).then(res => {
+      thesisReviewConfigQuery({ 'session': document.cookie,'configId':this.configId}).then(res => {
         this.form = res.data.form
       })
     },
+    doAddnew() {
+      this.$confirm('确认要增加一个新的在线评审过程吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        thesisReviewConfigSubmit({'session': document.cookie , 'form': this.form,'isAdd':true
+      }).then(res => {
+         this.$message({
+           message: '添加成功',
+           type: 'success',
+           offset: '10'
+         });
+         console.log(res.data)
+          this.form.configId = res.data.configId
+          this.configList = res.data.configList;
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'warning',
+          message: '已取消添加'
+        });
+      });
+    },
     submit(){
-      thesisReviewConfigSubmit({'session': document.cookie , 'form': this.form
+      thesisReviewConfigSubmit({'session': document.cookie , 'form': this.form,'isAdd':false
       }).then(res => {
        if(res.code === '0'){
          this.$message({
