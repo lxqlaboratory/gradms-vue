@@ -110,6 +110,20 @@ export function thesisReviewPersonDelete(data) {
     data
   })
 }
+export function thesisReviewPersonAdd(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewPersonAdd',
+    method: 'POST',
+    data
+  })
+}
+export function thesisReviewPersonModify(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewPersonModify',
+    method: 'POST',
+    data
+  })
+}
 
 
 export function getExportInfoListByPerNumName(data) {
@@ -123,13 +137,6 @@ export function getExportInfoListByPerNumName(data) {
 export function getExportInfoListByPerNumNameQuery(data) {
   return request({
     url: '/api/thesisreview/getExportInfoListByPerNumName',
-    method: 'POST',
-    data
-  })
-}
-export function thesisReviewPersonAdd(data) {
-  return request({
-    url: '/api/thesisreview/thesisReviewPersonAdd',
     method: 'POST',
     data
   })
