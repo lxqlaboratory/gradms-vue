@@ -68,26 +68,25 @@
 
       <div v-for="event in scheduleList" :key="event.courseNum" :style="genStyleObject(event)" class="session track-2" @click="editSection(event)">
         <h3 class="session-title">{{ event.courseName }}</h3>
-        <span class="session-time">{{ genClassTime(event) }}</span>
         <span class="session-time">{{ genWeekTime(event) }}</span>
         <span class="session-presenter">课程号：{{ event.courseNum }}</span>
         <span class="session-presenter">教师：{{ event.teaName }}</span>
       </div>
     </div>
 
-    <el-dialog title="修改课程" style="text-align: center" :visible.sync="dialogFormVisible">
+    <el-dialog title="修改课程" style="text-align: center;"  :visible.sync="dialogFormVisible" width="35%">
       <el-form :model="section">
         <el-form-item label="课程名称" label-width="200px">
-          <el-input v-model="section.courseName" autocomplete="off" :disabled="true" />
+          <el-input v-model="section.courseName"  :disabled="true" />
         </el-form-item>
-        <el-form-item label="课程开始时间" label-width="200px">
-          <el-input v-model="section.SectionStart" autocomplete="off" />
+        <el-form-item label="课程开始节次" label-width="200px">
+          <el-input v-model="section.SectionStart"  />
         </el-form-item>
         <el-form-item label="课程节数" label-width="200px">
-          <el-input v-model="section.SectionCount" autocomplete="off" />
+          <el-input v-model="section.SectionCount"  />
         </el-form-item>
         <el-form-item label="星期几" label-width="200px">
-          <el-input v-model="section.sectionDay" autocomplete="off" />
+          <el-input v-model="section.sectionDay" />
         </el-form-item>
         <el-form-item label="任课教师" label-width="200px">
           <el-select v-model="section.teaId" placeholder="请选择教师" style="width: 100%">
@@ -108,7 +107,7 @@
     </el-dialog>
 
 
-      <el-dialog title="添加课程" style="text-align: center" :visible.sync="dialogFormAddVisible">
+      <el-dialog title="添加课程" style="text-align: center" :visible.sync="dialogFormAddVisible" width="35%">
         <el-form :model="sectionAdd">
           <el-form-item label="课程列表" label-width="200px">
             <el-select v-model="sectionAdd.taskId" placeholder="请选择课程" style="width: 100%" @change="getTeacherlist">
@@ -120,24 +119,24 @@
               />
             </el-select>
           </el-form-item>
-          <el-form-item label="课程开始时间" label-width="200px">
-            <el-input v-model="sectionAdd.SectionStart" autocomplete="off" />
+          <el-form-item label="课程开始节次" label-width="200px">
+            <el-input v-model="sectionAdd.SectionStart"  />
           </el-form-item>
-          <el-form-item label="课程节数" label-width="200px">
-            <el-input v-model="sectionAdd.SectionCount" autocomplete="off" />
+          <el-form-item label="课程节数" label-width="200px" >
+            <el-input v-model="sectionAdd.SectionCount"  />
           </el-form-item>
           <el-form-item label="星期几" label-width="200px">
-            <el-input v-model="sectionAdd.sectionDay" autocomplete="off" />
+            <el-input v-model="sectionAdd.sectionDay"  />
           </el-form-item>
           <el-form-item label="起始周" label-width="200px">
-            <el-input v-model="sectionAdd.weekStart" autocomplete="off" />
+            <el-input v-model="sectionAdd.weekStart"  />
           </el-form-item>
           <el-form-item label="周数" label-width="200px">
-            <el-input v-model="sectionAdd.weekCount" autocomplete="off" />
+            <el-input v-model="sectionAdd.weekCount"  />
           </el-form-item>
           <el-form-item label="是否单双周" label-width="200px">
-            <el-radio v-model="sectionAdd.isOddorEvenWeek" label="0" border>单周</el-radio>
-            <el-radio v-model="sectionAdd.isOddorEvenWeek" label="1" border>双周</el-radio>
+            <el-radio v-model="sectionAdd.isOddorEvenWeek" label="0" size="mini" border>单周</el-radio>
+            <el-radio v-model="sectionAdd.isOddorEvenWeek" label="1"  size="mini"  border>双周</el-radio>
           </el-form-item>
           <el-form-item label="任课教师" label-width="200px">
             <el-select v-model="sectionAdd.teaId" placeholder="请选择教师" style="width: 100%">
