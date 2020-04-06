@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
       <div class="query-container">
-      类别
+      专业
       <el-select v-model="memberType" placeholder="请选择专业" class="filter-item" style="width: 20%;">
         <el-option
           v-for="item in majorList"
@@ -133,7 +133,7 @@
           >
         <template slot-scope="scope">
             <el-button type="text" @click="doModify(scope.$index)" >修改</el-button>
-            <el-button type="text" @click="doDelete(scope.row.expertId)" >删除</el-button>
+            <el-button type="text" @click="deletePerson(scope.row.expertId)" >删除</el-button>
         </template>
         </el-table>
       </div>
@@ -206,8 +206,8 @@ export default {
                 message: "删除成功",
                 type: 'sucess'
               });
-             this.fetchData()
-            }else {
+              this.doQuery();
+              }else {
               this.$message({
                 message: res.msg,
                 type: 'warning'
@@ -241,10 +241,9 @@ export default {
           message: "添加成功",
           type: 'sucess'
         });
-        doQuery();
+        this.doQuery();
       }
       })
-      this.$router.push({ path: '', query: { 'majorId':this.majorId,'addType':addType }})
     },
     updateExpertInfo(personId){
       this.$router.push({ path: 'thesisReviewExpertInfoMaintain', query: { personId }})

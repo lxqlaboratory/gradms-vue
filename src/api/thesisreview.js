@@ -150,6 +150,27 @@ export function thesisReviewDirectionManage(data) {
     data
   })
 }
+export function thesisReviewDirectionQuery(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewDirectionQuery',
+    method: 'POST',
+    data
+  })
+}
+export function thesisReviewDirectionDelete(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewDirectionDelete',
+    method: 'POST',
+    data
+  })
+}
+export function thesisReviewDirectionAdd(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewDirectionAdd',
+    method: 'POST',
+    data
+  })
+}
 
 export function thesisReviewConfigManage(data) {
   return request({
