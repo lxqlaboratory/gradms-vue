@@ -66,7 +66,7 @@
         <span class="session-presenter" />
       </div>
 
-      <div v-for="event in vueScheduleList" :key="event.courseNum" :style="genStyleObject(event)" class="session track-1" >
+      <div v-for="event in viewList" :key="event.courseNum" :style="genStyleObject(event)" class="session track-1" >
         <h3 class="session-title" style="color: #1f2d3d">{{ event.courseName }}</h3>
         <span class="session-presenter" style="color: #1f2d3d">课程号：{{ event.courseNum }}</span>
         <span class="session-presenter" style="color: #1f2d3d">课序号：{{ event.courseIndex }}</span>
@@ -240,7 +240,7 @@ export default {
       buildingList: [],
       buildingId: '',
       roomList: [],
-      vueScheduleList: [],
+      viewList: [],
       roomId: '',
       scheduleList: [],
       section:
@@ -856,14 +856,14 @@ export default {
         this.roomId = res.data.roomId.toString()
         this.scheduleList = res.data.scheduleList
         this.taskList = res.data.taskList;
-        this.vueScheduleList = res.data.vueScheduleList
+        this.viewList = res.data.viewList
         console.log(this.taskList)
       })
     },
     doQuery() {
       collegeWorkOutTeachingScheduleScheduleList({ 'session': document.cookie, 'termId': this.termId, 'roomId': this.roomId }).then(res => {
         this.scheduleList = res.data.scheduleList
-        this.vueScheduleList = res.data.vueScheduleList
+        this.viewList = res.data.viewList
       })
     },
     buildQuery() {
