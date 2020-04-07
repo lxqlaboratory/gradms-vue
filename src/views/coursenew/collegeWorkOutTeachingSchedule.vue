@@ -66,7 +66,7 @@
         <span class="session-presenter" />
       </div>
 
-      <div v-for="event in viewList" :key="event.courseNum" :style="genStyleObject(event)" class="session track-1" >
+      <div v-for="event in viewList" :key="event.courseNum" :style="genStyleObject(event)" class="session track-1" @click="editSection(event)" >
         <h3 class="session-title" style="color: #1f2d3d">{{ event.courseName }}</h3>
         <span class="session-presenter" style="color: #1f2d3d">课程号：{{ event.courseNum }}</span>
         <span class="session-presenter" style="color: #1f2d3d">课序号：{{ event.courseIndex }}</span>
