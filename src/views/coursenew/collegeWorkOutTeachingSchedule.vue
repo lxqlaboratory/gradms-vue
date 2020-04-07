@@ -200,8 +200,9 @@
           </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="modify">修 改</el-button>
-        <el-button type="danger" @click="deleteSection">删 除</el-button>
+        <el-button v-if="isAdd=true" type="primary" @click="doAdd">修 改</el-button>
+        <el-button v-if="isAdd=false" type="primary" @click="doModify">修 改</el-button>
+        <el-button v-if="isAdd=false" type="danger" @click="doDelete">删 除</el-button>
         <el-button @click="dialogFormVisible = false">取 消</el-button>
       </div>
     </el-dialog>
@@ -221,7 +222,7 @@ export default {
   data() {
     return {
       dialogFormVisible: false,
-      dialogFormAddVisible: false,
+      isAdd:false,
       teacherList: [],
       taskList: [],
       termId: '',
@@ -889,6 +890,7 @@ export default {
       }else {
         collegeWorkOutTeachingScheduleTeaList({ 'session': document.cookie, 'taskId': event.taskId }).then(res => {
           this.dialogFormVisible = true
+          this.isAdd=false
           this.section = event
           this.teacherList = res.data;
         })
@@ -897,6 +899,7 @@ export default {
     addSection(event){
       collegeWorkOutTeachingScheduleTaskList({ 'session': document.cookie, 'termId': this.termId}).then(res => {
         this.dialogFormVisible = true
+        this.isAdd=true
         this.section.setTaskId = ''
         this.section.sectionStart = parseInt(event.start)
         this.section.sectionDay = parseInt(event.dayOfWeek)
@@ -905,8 +908,7 @@ export default {
         this.teacherList = res.data.teacherList;
       })
     },
-    modify() {
-
+    doModify() {
       collegeWorkOutTeachingScheduleSave({ 'session': document.cookie, 'form': this.section}).then(res => {
         this.dialogFormVisible = false
         this.doQuery()
@@ -919,12 +921,11 @@ export default {
         }
       })
     },
-    saveSectionAdd(){
-      // dialogFormAddVisible = false
-      this.sectionAdd.termId = this.termId
-      this.sectionAdd.roomId = this.roomId
-      collegeWorkOutTeachingScheduleSave({ 'session': document.cookie, 'form': this.sectionAdd}).then(res => {
-        this.dialogFormAddVisible = false
+    doAdd(){
+      this.section.termId = this.termId
+      this.section.roomId = this.roomId
+      collegeWorkOutTeachingScheduleSave({ 'session': document.cookie, 'form': this.section}).then(res => {
+        this.dialogFormVisible = false
         this.doQuery()
         if(res.code === '0'){
           this.$message({
@@ -940,7 +941,7 @@ export default {
         }
       })
     },
-    deleteSection(){
+    doDelete(){
       this.$confirm('确认删除课程吗?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
