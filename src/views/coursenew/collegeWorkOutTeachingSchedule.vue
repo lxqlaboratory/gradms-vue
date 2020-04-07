@@ -2,7 +2,7 @@
   <div class="app-container">
     <div class="query-container">
       学期
-      <el-select v-model="termId" placeholder="请选择学期" style="width: 20%;">
+      <el-select v-model="termId" placeholder="请选择学期" style="width: 20%;" @change="getTasklist" > 
         <el-option
           v-for="item in termList"
           :key="item.value"
@@ -68,27 +68,26 @@
 
       <div v-for="event in scheduleList" :key="event.courseNum" :style="genStyleObject(event)" class="session track-2" @click="editSection(event)">
         <h3 class="session-title">{{ event.courseName }}</h3>
-        <span class="session-time">{{ genWeekTime(event) }}</span>
         <span class="session-presenter">课程号：{{ event.courseNum }}</span>
+        <span class="session-presenter">课序号：{{ event.courseIndex }}</span>
         <span class="session-presenter">教师：{{ event.teaName }}</span>
+        <span class="session-time">{{ genWeekTime(event) }}</span>
       </div>
     </div>
 
-    <el-dialog title="修改课程" style="text-align: center;"  :visible.sync="dialogFormVisible" width="35%">
+    <el-dialog title="添加修改修改课程" style="text-align: center;"  :visible.sync="dialogFormVisible" width="35%">
       <el-form :model="section">
-        <el-form-item label="课程名称" label-width="200px">
-          <el-input v-model="section.courseName"  :disabled="true" />
+        <el-form-item label="教学任务" label-width="100px">
+          <el-select v-model="section.taskId" placeholder="请选择课程" style="width: 100%" @change="getTeacherlist"  >
+            <el-option
+              v-for="item in taskList"
+              :key="item.taskId"
+              :label="item.taskName"
+              :value="item.taskId"
+            />
+          </el-select>
         </el-form-item>
-        <el-form-item label="课程开始节次" label-width="200px">
-          <el-input v-model="section.SectionStart"  />
-        </el-form-item>
-        <el-form-item label="课程节数" label-width="200px">
-          <el-input v-model="section.SectionCount"  />
-        </el-form-item>
-        <el-form-item label="星期几" label-width="200px">
-          <el-input v-model="section.sectionDay" />
-        </el-form-item>
-        <el-form-item label="任课教师" label-width="200px">
+        <el-form-item label="任课教师" label-width="100px">
           <el-select v-model="section.teaId" placeholder="请选择教师" style="width: 100%">
             <el-option
               v-for="item in teacherList"
@@ -98,63 +97,113 @@
             />
           </el-select>
         </el-form-item>
+        <el-form-item label="上课日期" label-width="100px">
+          <el-select v-model="section.sectionDay" placeholder="请选择教师" style="width: 100%"   :disabled="true" >
+            <el-option
+              v-for="item in sectionDateList"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="开始节次" label-width="100px">
+          <el-select v-if ="section.SectionStart==1" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"   >
+            <el-option
+              v-for="item in sectionList1"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+          <el-select v-if ="section.SectionStart==2" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"   >
+            <el-option
+              v-for="item in sectionList2"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+          <el-select v-if ="section.SectionStart==3" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"   >
+            <el-option
+              v-for="item in sectionList3"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+          <el-select v-if ="section.SectionStart==4" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"   >
+            <el-option
+              v-for="item in sectionList4"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+          <el-select v-if ="section.SectionStart==5" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"   >
+            <el-option
+              v-for="item in sectionList5"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+          <el-select v-if ="section.SectionStart==6" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"  >
+            <el-option
+              v-for="item in sectionList6"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+          <el-select v-if ="section.SectionStart==7" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"   >
+            <el-option
+              v-for="item in sectionList7"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+          <el-select v-if ="section.SectionStart==8" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"   >
+            <el-option
+              v-for="item in sectionList8"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+          <el-select v-if ="section.SectionStart==9" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"   >
+            <el-option
+              v-for="item in sectionList9"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+          <el-select v-if ="section.SectionStart==10" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"   >
+            <el-option
+              v-for="item in sectionList10"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+        </el-form-item>
+        <el-form-item label=" 起始周" label-width="100px">
+           <el-input v-model="section.weekStart"  />
+        </el-form-item>
+         <el-form-item label="开课周数" label-width="100px">
+            <el-input v-model="section.weekCount"  />
+          </el-form-item>
+          <el-form-item label="" label-width="100px">
+             <el-checkbox label="是否单双周" v-model.number="section.isOddorEvenWeekBoolean" />
+          </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="modify">修 改</el-button>
         <el-button type="danger" @click="deleteSection">删 除</el-button>
         <el-button @click="dialogFormVisible = false">取 消</el-button>
       </div>
-    </el-dialog>
-
-
-      <el-dialog title="添加课程" style="text-align: center" :visible.sync="dialogFormAddVisible" width="35%">
-        <el-form :model="sectionAdd">
-          <el-form-item label="课程列表" label-width="200px">
-            <el-select v-model="sectionAdd.taskId" placeholder="请选择课程" style="width: 100%" @change="getTeacherlist">
-              <el-option
-                v-for="item in taskList"
-                :key="item.taskId"
-                :label="item.taskName"
-                :value="item.taskId"
-              />
-            </el-select>
-          </el-form-item>
-          <el-form-item label="课程开始节次" label-width="200px">
-            <el-input v-model="sectionAdd.SectionStart"  />
-          </el-form-item>
-          <el-form-item label="课程节数" label-width="200px" >
-            <el-input v-model="sectionAdd.SectionCount"  />
-          </el-form-item>
-          <el-form-item label="星期几" label-width="200px">
-            <el-input v-model="sectionAdd.sectionDay"  />
-          </el-form-item>
-          <el-form-item label="起始周" label-width="200px">
-            <el-input v-model="sectionAdd.weekStart"  />
-          </el-form-item>
-          <el-form-item label="周数" label-width="200px">
-            <el-input v-model="sectionAdd.weekCount"  />
-          </el-form-item>
-          <el-form-item label="是否单双周" label-width="200px">
-            <el-radio v-model="sectionAdd.isOddorEvenWeek" label="0" size="mini" border>单周</el-radio>
-            <el-radio v-model="sectionAdd.isOddorEvenWeek" label="1"  size="mini"  border>双周</el-radio>
-          </el-form-item>
-          <el-form-item label="任课教师" label-width="200px">
-            <el-select v-model="sectionAdd.teaId" placeholder="请选择教师" style="width: 100%">
-              <el-option
-                v-for="item in teacherList"
-                :key="item.teaId"
-                :label="item.teaName"
-                :value="item.teaId"
-              />
-            </el-select>
-          </el-form-item>
-        </el-form>
-        <div slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="saveSectionAdd">添加</el-button>
-          <el-button @click="dialogFormAddVisible = false">取 消</el-button>
-        </div>
-
-
     </el-dialog>
   </div>
 </template>
@@ -166,7 +215,7 @@ import { collegeWorkOutTeachingScheduleScheduleList } from '@/api/coursenew'
 import { collegeWorkOutTeachingScheduleTeaList } from '@/api/coursenew'
 import { collegeWorkOutTeachingScheduleSave } from '@/api/coursenew'
 import { collegeWorkOutTeachingScheduleDelete } from '@/api/coursenew'
-import { collegeWorkOutTeachingScheduleAdd } from '@/api/coursenew'
+import { collegeWorkOutTeachingScheduleTaskList } from '@/api/coursenew'
 export default {
   name: 'CollegeWorkOutTeachingSchedule',
   data() {
@@ -188,25 +237,7 @@ export default {
         {
           courseIndex: '',
           isOddorEvenWeek: '',
-          weekCount: '',
-          SectionCount: '',
-          roomId: '',
-          termId: '',
-          courseName: '',
-          teaName: '',
-          weekStart: '',
-          courseNum: '',
-          SectionStart: '',
-          sectionDay: '',
-          scheduleId: '',
-          taskId: '',
-          isCanEdit: '',
-          teaId: ''
-        },
-      sectionAdd:
-        {
-          courseIndex: '',
-          isOddorEvenWeek: '',
+          isOddorEvenWeekBoolean:false,
           weekCount: '',
           SectionCount: '',
           roomId: '',
@@ -639,7 +670,142 @@ export default {
         count: '1',
         dayOfWeek: 7
       }
-      ]
+      ],
+      sectionDateList: [
+        {
+          value: 1,
+          label: '星期一'
+        }, {
+          value: 2,
+          label: '星期二'
+        }, {
+          value: 3,
+          label: '星期三'
+        }, {
+          value: 4,
+          label: '星期四'
+        }, {
+          value: 5,
+          label: '星期五'
+        }, {
+          value: 6,
+          label: '星期六'
+        }, {
+          value: 7,
+          label: '星期日'
+        }
+      ],
+      sectionList1: [
+        {
+          value: 1,
+          label: '1-1节'
+        }, {
+          value: 2,
+          label: '1-2节'
+        }, {
+          value: 3,
+          label: '1-3节'
+        }, {
+          value: 4,
+          label: '1-4节'
+        }, {
+          value: 5,
+          label: '1-5节'
+        }, {
+          value: 6,
+          label: '1-6节'
+        }, {
+          value: 7,
+          label: '1-7节'
+        }, {
+          value: 8,
+          label: '1-8节'
+        }
+      ],
+      sectionList2: [
+        {
+          value: 1,
+          label: '2-2节'
+        }, {
+          value: 2,
+          label: '2-3节'
+        }, {
+          value: 3,
+          label: '2-4节'
+        }
+      ],
+      sectionList3: [
+        {
+          value: 1,
+          label: '3-3节'
+        }, {
+          value: 2,
+          label: '3-4节'
+        }
+      ],
+      sectionList4: [
+        {
+          value: 1,
+          label: '4-4节'
+        }
+      ],
+      sectionList5: [
+        {
+          value: 1,
+          label: '5-5节'
+        }, {
+          value: 2,
+          label: '5-6节'
+        }, {
+          value: 3,
+          label: '5-7节'
+        }, {
+          value: 4,
+          label: '5-8节'
+        }
+      ],
+      sectionList6: [
+        {
+          value: 1,
+          label: '6-6节'
+        }, {
+          value: 2,
+          label: '6-7节'
+        }, {
+          value: 3,
+          label: '6-8节'
+        }
+      ],
+      sectionList7: [
+        {
+          value: 1,
+          label: '7-7节'
+        }, {
+          value: 2,
+          label: '7-8节'
+        }
+      ],
+      sectionList8: [
+        {
+          value: 1,
+          label: '8-8节'
+        }
+      ],
+      sectionList9: [
+        {
+          value: 1,
+          label: '9-9节'
+        }, {
+          value: 2,
+          label: '9-10节'
+        }
+      ],
+      sectionList10: [
+        {
+          value: 1,
+          label: '10-10节'
+        }
+      ],
     }
   },
   created() {
@@ -679,6 +845,8 @@ export default {
         this.roomList = res.data.roomList
         this.roomId = res.data.roomId.toString()
         this.scheduleList = res.data.scheduleList
+        this.taskList = res.data.taskList;
+        console.log(this.taskList)
       })
     },
     doQuery() {
@@ -700,26 +868,41 @@ export default {
         this.roomId = res.data.roomId.toString()
       })
     },
+    getTasklist(){
+      collegeWorkOutTeachingScheduleTaskList({ 'session': document.cookie, 'termId': this.termId }).then(res => {
+        this.taskList = res.data.taskList
+      })
+    },
     getTeacherlist(){
-      collegeWorkOutTeachingScheduleTeaList({ 'session': document.cookie, 'taskId': this.sectionAdd.taskId }).then(res => {
+      collegeWorkOutTeachingScheduleTeaList({ 'session': document.cookie, 'taskId': this.section.taskId }).then(res => {
         this.teacherList = res.data
-        this.sectionAdd.teaId = ''
+        this.section.teaId = ''
       })
     },
     editSection(event) {
-      collegeWorkOutTeachingScheduleTeaList({ 'session': document.cookie, 'taskId': event.taskId }).then(res => {
-        this.dialogFormVisible = true
-        this.section = event
-        this.teacherList = res.data
-      })
+      if(!event.isCanEdit) {
+        this.$message({
+          message: '该教学任务不是您创建，不能调整修改！',
+          type: 'warning',
+          offset: '10'
+        });
+      }else {
+        collegeWorkOutTeachingScheduleTeaList({ 'session': document.cookie, 'taskId': event.taskId }).then(res => {
+          this.dialogFormVisible = true
+          this.section = event
+          this.teacherList = res.data;
+        })
+      }
     },
     addSection(event){
-      collegeWorkOutTeachingScheduleAdd({ 'session': document.cookie, 'termId': this.termId }).then(res => {
-         this.dialogFormAddVisible = true
-        this.sectionAdd.SectionStart = parseInt(event.start)
-        this.sectionAdd.sectionDay = parseInt(event.dayOfWeek)
-        this.sectionAdd.SectionCount = parseInt(event.count)
-        this.taskList = res.data
+      collegeWorkOutTeachingScheduleTaskList({ 'session': document.cookie, 'termId': this.termId}).then(res => {
+        this.dialogFormVisible = true
+        this.section.setTaskId = ''
+        this.section.sectionStart = parseInt(event.start)
+        this.section.sectionDay = parseInt(event.dayOfWeek)
+        this.section.sectionCount = parseInt(event.count)
+        this.taskList = res.data.taskList
+        this.teacherList = res.data.teacherList;
       })
     },
     modify() {

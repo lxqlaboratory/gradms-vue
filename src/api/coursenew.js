@@ -175,9 +175,9 @@ export function collegeWorkOutTeachingScheduleDelete(data) {
   })
 }
 
-export function collegeWorkOutTeachingScheduleAdd(data) {
+export function collegeWorkOutTeachingScheduleTaskList(data) {
   return request({
-    url: '/api/coursenew/collegeWorkOutTeachingScheduleAdd',
+    url: '/api/coursenew/collegeWorkOutTeachingScheduleTaskList',
     method: 'POST',
     data
   })
