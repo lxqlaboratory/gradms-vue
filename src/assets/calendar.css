@@ -103,6 +103,7 @@
       }
 
       .track-1 {
+        border: 1px solid #336699;
         background-color: rgba(236,245,255);
         color: #fff;
       }
