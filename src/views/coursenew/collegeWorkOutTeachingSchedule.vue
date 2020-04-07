@@ -2,7 +2,7 @@
   <div class="app-container">
     <div class="query-container">
       学期
-      <el-select v-model="termId" placeholder="请选择学期" style="width: 20%;" @change="getTasklist" > 
+      <el-select v-model="termId" placeholder="请选择学期" style="width: 20%;" @change="getTasklist" >
         <el-option
           v-for="item in termList"
           :key="item.value"
@@ -64,6 +64,14 @@
         <span class="session-time" />
         <span class="session-presenter" />
         <span class="session-presenter" />
+      </div>
+
+      <div v-for="event in vueScheduleList" :key="event.courseNum" :style="genStyleObject(event)" class="session track-1" >
+        <h3 class="session-title" style="color: #1f2d3d">{{ event.courseName }}</h3>
+        <span class="session-presenter" style="color: #1f2d3d">课程号：{{ event.courseNum }}</span>
+        <span class="session-presenter" style="color: #1f2d3d">课序号：{{ event.courseIndex }}</span>
+        <span class="session-presenter" style="color: #1f2d3d">教师：{{ event.teaName }}</span>
+        <span class="session-time" style="color: #1f2d3d">{{ genWeekTime(event) }}</span>
       </div>
 
       <div v-for="event in scheduleList" :key="event.courseNum" :style="genStyleObject(event)" class="session track-2" @click="editSection(event)">
@@ -232,6 +240,7 @@ export default {
       buildingList: [],
       buildingId: '',
       roomList: [],
+      vueScheduleList: [],
       roomId: '',
       scheduleList: [],
       section:
@@ -847,12 +856,14 @@ export default {
         this.roomId = res.data.roomId.toString()
         this.scheduleList = res.data.scheduleList
         this.taskList = res.data.taskList;
+        this.vueScheduleList = res.data.vueScheduleList
         console.log(this.taskList)
       })
     },
     doQuery() {
       collegeWorkOutTeachingScheduleScheduleList({ 'session': document.cookie, 'termId': this.termId, 'roomId': this.roomId }).then(res => {
-        this.scheduleList = res.data
+        this.scheduleList = res.data.scheduleList
+        this.vueScheduleList = res.data.vueScheduleList
       })
     },
     buildQuery() {
