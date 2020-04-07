@@ -126,6 +126,22 @@ export function newCultivateExamAffairInfoQuery(data) {
   })
 }
 
+//我的课表
+export function studentViewTeachingSchedule(data) {
+  return request({
+    url: '/api/coursenew/studentViewTeachingSchedule',
+    method: 'POST',
+    data
+  })
+}
+export function studentViewTeachingScheduleQuery(data) {
+  return request({
+    url: '/api/coursenew/studentViewTeachingScheduleQuery',
+    method: 'POST',
+    data
+  })
+}
+
 //学院排课
 export function collegeWorkOutTeachingScheduleInit(data) {
   return request({

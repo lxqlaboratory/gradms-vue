@@ -51,6 +51,12 @@ export const constantRoutes = [
     },
     children: [
       {
+        path: 'studentViewTeachingSchedule',
+        name: 'studentViewTeachingSchedule',
+        component: () => import('@/views/coursenew/studentViewTeachingSchedule'),
+        meta: { title: '我的课表' }
+      },
+      {
         path: 'collegeWorkOutTeachingSchedule',
         name: 'collegeWorkOutTeachingSchedule',
         component: () => import('@/views/coursenew/collegeWorkOutTeachingSchedule'),
@@ -85,12 +91,6 @@ export const constantRoutes = [
         name: 'teacherCourseTaskQuery',
         component: () => import('@/views/coursenew/teacherCourseTaskQuery'),
         meta: { title: '教师授课查询'}
-      },
-      {
-        path: 'collegeWorkOutTeachingSchedule',
-        name: 'collegeWorkOutTeachingSchedule',
-        component: () => import('@/views/coursenew/collegeWorkOutTeachingSchedule'),
-        meta: { title: '学院排课'}
       },
       {
         path: 'examAffairInfoQuery',

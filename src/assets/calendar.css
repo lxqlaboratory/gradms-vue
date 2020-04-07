@@ -78,6 +78,10 @@
       .session-presenter {
         display: block;
       }
+      .session-presenterc {
+        display: block;
+        text-align: center
+      }
 
       .session-title,
       .time-slot {

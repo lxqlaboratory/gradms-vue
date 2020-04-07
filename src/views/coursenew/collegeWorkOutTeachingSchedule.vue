@@ -937,13 +937,13 @@ export default {
       this.section.roomId = this.roomId
       collegeWorkOutTeachingScheduleSave({ 'session': document.cookie, 'form': this.section}).then(res => {
         this.dialogFormVisible = false
-        this.doQuery()
         if(res.code === '0'){
           this.$message({
             message: '添加成功',
             type: 'success',
             offset: '10'
           });
+          this.doQuery()
         }else {
           this.$message({
             message: '添加失败',
@@ -960,13 +960,13 @@ export default {
       }).then(() => {
         collegeWorkOutTeachingScheduleDelete({ 'session': document.cookie, 'scheduleId': this.section.scheduleId}).then(res => {
           this.dialogFormVisible = false
-          this.doQuery()
           if(res.code === '0'){
             this.$message({
               message: '删除成功',
               type: 'success',
               offset: '10'
             });
+            this.doQuery()
           }else {
             this.$message({
               message: res.msg,
