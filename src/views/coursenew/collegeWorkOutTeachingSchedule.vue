@@ -75,7 +75,7 @@
       </div>
     </div>
 
-    <el-dialog title="添加修改修改课程" style="text-align: center;"  :visible.sync="dialogFormVisible" width="35%">
+    <el-dialog title="添加修改排课信息" style="text-align: center;"  :visible.sync="dialogFormVisible" width="35%">
       <el-form :model="section">
         <el-form-item label="教学任务" label-width="100px">
           <el-select v-model="section.taskId" placeholder="请选择课程" style="width: 100%" @change="getTeacherlist"  >
@@ -200,10 +200,10 @@
           </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button v-if="isAdd=true" type="primary" @click="doAdd">修 改</el-button>
-        <el-button v-if="isAdd=false" type="primary" @click="doModify">修 改</el-button>
-        <el-button v-if="isAdd=false" type="danger" @click="doDelete">删 除</el-button>
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button v-if="isAdd==true" type="primary" @click="doAdd">添加</el-button>
+        <el-button v-if="isAdd==false" type="primary" @click="doModify">修 改</el-button>
+        <el-button v-if="isAdd==false" type="danger" @click="doDelete">删 除</el-button>
+        <el-button @click="doCancel">取 消</el-button>
       </div>
     </el-dialog>
   </div>
@@ -970,7 +970,11 @@ export default {
         });
       });
 
-    }
+    },
+    doCancel(){
+        this.dialogFormVisible = false
+        this.section = ''
+    },
   }
 }
 </script>
