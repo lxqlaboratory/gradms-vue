@@ -116,7 +116,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="开始节次" label-width="100px">
-          <el-select v-if ="section.SectionStart==1" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"   >
+          <el-select v-if ="section.sectionStart==1" v-model="section.sectionCount" placeholder="请选择上课节次" style="width: 100%"   >
             <el-option
               v-for="item in sectionList1"
               :key="item.value"
@@ -124,7 +124,7 @@
               :value="item.value"
             />
           </el-select>
-          <el-select v-if ="section.SectionStart==2" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"   >
+          <el-select v-if ="section.sectionStart==2" v-model="section.sectionCount" placeholder="请选择上课节次" style="width: 100%"   >
             <el-option
               v-for="item in sectionList2"
               :key="item.value"
@@ -132,7 +132,7 @@
               :value="item.value"
             />
           </el-select>
-          <el-select v-if ="section.SectionStart==3" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"   >
+          <el-select v-if ="section.sectionStart==3" v-model="section.sectionCount" placeholder="请选择上课节次" style="width: 100%"   >
             <el-option
               v-for="item in sectionList3"
               :key="item.value"
@@ -140,7 +140,7 @@
               :value="item.value"
             />
           </el-select>
-          <el-select v-if ="section.SectionStart==4" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"   >
+          <el-select v-if ="section.sectionStart==4" v-model="section.sectionCount" placeholder="请选择上课节次" style="width: 100%"   >
             <el-option
               v-for="item in sectionList4"
               :key="item.value"
@@ -148,7 +148,7 @@
               :value="item.value"
             />
           </el-select>
-          <el-select v-if ="section.SectionStart==5" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"   >
+          <el-select v-if ="section.sectionStart==5" v-model="section.sectionCount" placeholder="请选择上课节次" style="width: 100%"   >
             <el-option
               v-for="item in sectionList5"
               :key="item.value"
@@ -156,7 +156,7 @@
               :value="item.value"
             />
           </el-select>
-          <el-select v-if ="section.SectionStart==6" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"  >
+          <el-select v-if ="section.sectionStart==6" v-model="section.sectionCount" placeholder="请选择上课节次" style="width: 100%"  >
             <el-option
               v-for="item in sectionList6"
               :key="item.value"
@@ -164,7 +164,7 @@
               :value="item.value"
             />
           </el-select>
-          <el-select v-if ="section.SectionStart==7" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"   >
+          <el-select v-if ="section.sectionStart==7" v-model="section.sectionCount" placeholder="请选择上课节次" style="width: 100%"   >
             <el-option
               v-for="item in sectionList7"
               :key="item.value"
@@ -172,7 +172,7 @@
               :value="item.value"
             />
           </el-select>
-          <el-select v-if ="section.SectionStart==8" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"   >
+          <el-select v-if ="section.sectionStart==8" v-model="section.sectionCount" placeholder="请选择上课节次" style="width: 100%"   >
             <el-option
               v-for="item in sectionList8"
               :key="item.value"
@@ -180,7 +180,7 @@
               :value="item.value"
             />
           </el-select>
-          <el-select v-if ="section.SectionStart==9" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"   >
+          <el-select v-if ="section.sectionStart==9" v-model="section.sectionCount" placeholder="请选择上课节次" style="width: 100%"   >
             <el-option
               v-for="item in sectionList9"
               :key="item.value"
@@ -188,7 +188,7 @@
               :value="item.value"
             />
           </el-select>
-          <el-select v-if ="section.SectionStart==10" v-model="section.SectionCount" placeholder="请选择上课节次" style="width: 100%"   >
+          <el-select v-if ="section.sectionStart==10" v-model="section.sectionCount" placeholder="请选择上课节次" style="width: 100%"   >
             <el-option
               v-for="item in sectionList10"
               :key="item.value"
@@ -249,14 +249,14 @@ export default {
           isOddorEvenWeek: '',
           isOddorEvenWeekBoolean:false,
           weekCount: '',
-          SectionCount: '',
+          sectionCount: '',
           roomId: '',
           termId: '',
           courseName: '',
           teaName: '',
           weekStart: '',
           courseNum: '',
-          SectionStart: '',
+          sectionStart: '',
           sectionDay: '',
           scheduleId: '',
           taskId: '',
@@ -830,10 +830,10 @@ export default {
       }
     },
     genStyleObject: (event) => {
-      var star = event.SectionStart + event.SectionCount
+      var star = event.sectionStart + event.sectionCount
       return {
         'grid-column': 'track-' + event.sectionDay.toString(),
-        'grid-row': 'time-' + event.SectionStart.toString() + ' / time-' + star.toString()
+        'grid-row': 'time-' + event.sectionStart.toString() + ' / time-' + star.toString()
       }
     },
     genWeekTime: (event)=> {
@@ -841,8 +841,8 @@ export default {
      return '第' + event.weekStart.toString() + ' - ' + star.toString() + '周'
     },
     genClassTime: (event) => {
-      var star = event.SectionStart + event.SectionCount - 1
-      return '第' + event.SectionStart.toString() + ' - ' + star.toString() + '节'
+      var star = event.sectionStart + event.sectionCount - 1
+      return '第' + event.sectionStart.toString() + ' - ' + star.toString() + '节'
     },
     fetchData() {
       collegeWorkOutTeachingScheduleInit({ 'session': document.cookie }).then(res => {
