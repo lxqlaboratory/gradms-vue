@@ -150,6 +150,8 @@
         </el-select>
        <el-button type="primary" @click="addExpert('1')" >添加学硕评审专家</el-button>
        <el-button type="primary" @click="addExpert('2')" >添加专硕评审专家</el-button>
+       <el-button type="primary" @click="addExpert('12')" >添加评审专家</el-button>
+       <el-button type="primary" @click="addInnerExpert()" >添加校内专家</el-button>
       </div>
     </div>
   </div>
@@ -244,6 +246,10 @@ export default {
         this.doQuery();
       }
       })
+    },
+    
+    addInnerExpert(){
+      this.$router.push({ path: 'thesisReviewExpertManageAdd', query: { 'majorId':this.majorId }})
     },
     updateExpertInfo(personId){
       this.$router.push({ path: 'thesisReviewExpertInfoMaintain', query: { personId }})
