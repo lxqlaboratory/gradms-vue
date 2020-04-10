@@ -363,3 +363,11 @@ export function thesisReviewTutorCheckStudentThesisCancel(data) {
     data
   })
 }
+
+export function thesisReviewTutorQueryStudentReviewInfo(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewTutorQueryStudentReviewInfo',
+    method: 'POST',
+    data
+  })
+}
