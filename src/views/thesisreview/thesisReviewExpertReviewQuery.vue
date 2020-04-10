@@ -186,6 +186,17 @@
                     {{ scope.row.reviewTime }}
                   </template>
                 </el-table-column>
+                <el-table-column
+                  label="操作"
+                  align="center"
+                  color="black"
+                  width="210"
+                >
+                  <template slot-scope="scope">
+                    <el-button type="primary" v-if="scope.row.reviewState==='提交'" @click="updateRevewState(scope.row.reviewId,0)"  >设置保存</el-button>
+                    <el-button type="primary" v-if="scope.row.reviewState==='保存'" @click="updateRevewState(scope.row.reviewId,1)"  >设置提交</el-button>
+                  </template>
+                </el-table-column>
               </el-table>
             </template>
           </el-table-column>
@@ -206,6 +217,7 @@
 <script>
 import { thesisReviewExpertReviewQuery } from '@/api/thesisreview'
 import { thesisReviewExpertReviewQueryQuery } from '@/api/thesisreview'
+import { thesisReviewExpertReviewStateUpdate } from '@/api/thesisreview'
 export default {
   name: 'thesisReviewExpertReviewQuery',
   data() {
@@ -226,6 +238,24 @@ export default {
         this.expertList = res.data.expertList
       })
     },
+    updateRevewState(reviewId, reviewState){
+      thesisReviewExpertReviewStateUpdate({ 'session': document.cookie, 'reviewId': reviewId,'reviewState': reviewState}).then(res => {
+        if(res.code === '0')
+        {
+          this.$message({
+            message: "修改成功",
+            type: 'sucess'
+          });
+          this.doQuery();
+        }else {
+          this.$message({
+            message: res.msg,
+            type: 'warning'
+          });
+        }
+      });
+    },
+
     doQuery(){
       thesisReviewExpertReviewQueryQuery({ 'session': document.cookie, 'configId': this.configId
       }).then(res => {

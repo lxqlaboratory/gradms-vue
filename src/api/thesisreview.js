@@ -315,6 +315,13 @@ export function thesisReviewExpertReviewQueryQuery(data) {
     data
   })
 }
+export function thesisReviewExpertReviewStateUpdate(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewExpertReviewStateUpdate',
+    method: 'POST',
+    data
+  })
+}
 
 
 export function thesisReviewReviewFeeManage(data) {

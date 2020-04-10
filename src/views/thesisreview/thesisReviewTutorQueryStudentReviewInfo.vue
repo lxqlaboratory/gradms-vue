@@ -2,7 +2,7 @@
   <div class="app-container">
     <div align="center">
       <tr>
-        <td> 已审核通过学生列表 </td>
+        <td> 参与评审学生列表 </td>
         </tr>
     </div>
     <div>
@@ -164,12 +164,15 @@
 </template>
 
 <script>
-import { thesisReviewTutorQueryStudentReviewInfo } from '@/api/thesisreview'
+import { thesisReviewTutorCheckStudentThesisInit } from '@/api/thesisreview'
+import { thesisReviewTutorCheckStudentThesisCheckPass } from '@/api/thesisreview'
+import { thesisReviewTutorCheckStudentThesisCancel } from '@/api/thesisreview'
 export default {
-  name: 'thesisReviewTutorQueryStudentReviewInfo',
+  name: 'thesisReviewTutorCheckStudentThesis',
   data() {
     return {
-      reviewList:[],
+      uncheckList:[],
+      checkedList:[],
       serverAddres:'',
     }
   },
@@ -179,8 +182,29 @@ export default {
   methods: {
     fetchData() {
       this.serverAddres = this.GLOBAL.servicePort
-      thesisReviewTutorQueryStudentReviewInfo({ 'session': document.cookie }).then(res => {
-        this.reviewList = res.reviewList
+      thesisReviewTutorCheckStudentThesisInit({ 'session': document.cookie }).then(res => {
+        this.uncheckList = res.data.uncheckList
+        this.checkedList = res.data.checkedList
+      })
+    },
+    checkPass(thesisId,checkState){
+       thesisReviewTutorCheckStudentThesisCheckPass({ 'session': document.cookie, 'thesisId': thesisId,'checkState': checkState}).then(res => {
+         this.$message({
+           message: '已审核',
+           type: 'success',
+           offset: '10'
+         });
+         this.fetchData()
+      })
+    },
+    cancelCheck(thesisId){
+       thesisReviewTutorCheckStudentThesisCancel({ 'session': document.cookie, 'thesisId': thesisId}).then(res => {
+         this.$message({
+           message: '已成功取消',
+           type: 'success',
+           offset: '10'
+         });
+         this.fetchData()
       })
     },
   }
