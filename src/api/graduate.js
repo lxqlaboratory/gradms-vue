@@ -32,3 +32,11 @@ export function degreeNotNormalDegreeStudentQuery(data) {
     data
   })
 }
+
+export function studentGraduateDegreeStateView(data) {
+  return request({
+    url: '/api/graduate/studentGraduateDegreeStateView',
+    method: 'POST',
+    data
+  })
+}
