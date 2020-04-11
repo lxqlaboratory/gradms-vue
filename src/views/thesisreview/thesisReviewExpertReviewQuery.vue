@@ -190,11 +190,14 @@
                   label="操作"
                   align="center"
                   color="black"
-                  width="210"
+                  width="300"
                 >
                   <template slot-scope="scope">
                     <el-button type="primary" v-if="scope.row.reviewState==='提交'" @click="updateRevewState(scope.row.reviewId,0)"  >设置保存</el-button>
                     <el-button type="primary" v-if="scope.row.reviewState==='保存'" @click="updateRevewState(scope.row.reviewId,1)"  >设置提交</el-button>
+                    <el-button type="primary" v-if="scope.row.reviewState==='提交'"  >
+                      <a :href="serverAddres+'/api/thesisreview/thesisReviewOnlineReviewPrint?reviewId='+scope.row.reviewId" :download="scope.row.printName">评阅表下载</a>
+                    </el-button>
                   </template>
                 </el-table-column>
               </el-table>
@@ -223,6 +226,7 @@ export default {
   data() {
     return {
       configId:-1,
+      serverAddres:'',
       configList:[],
       expertList:[],
     }
@@ -232,6 +236,7 @@ export default {
   },
   methods: {
     fetchData() {
+        this.serverAddres = this.GLOBAL.servicePort
       thesisReviewExpertReviewQuery({ 'session': document.cookie }).then(res => {
         this.configId = res.data.configId
         this.configList= res.data.configList
