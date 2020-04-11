@@ -134,13 +134,6 @@ export function getExportInfoListByPerNumName(data) {
   })
 }
 
-export function getExportInfoListByPerNumNameQuery(data) {
-  return request({
-    url: '/api/thesisreview/getExportInfoListByPerNumName',
-    method: 'POST',
-    data
-  })
-}
 
 
 export function thesisReviewDirectionManage(data) {

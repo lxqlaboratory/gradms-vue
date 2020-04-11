@@ -1,15 +1,6 @@
 <template>
   <div class="app-container">
     <div class="query-container">
-      专家类型
-      <el-select v-model="expertType" size="mini" class="elinput" >
-          <el-option
-            v-for="item in expertTypes"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-      </el-select>
       工号
       <el-input v-model="perNum" placeholder="请输入工号" style="width: 20%;"  />
       姓名
@@ -67,11 +58,12 @@
             label="操作"
             align="center"
             color="black"
-            width="320"
+            width="420"
           >
         <template slot-scope="scope">
             <el-button type="text" @click="addExpert(scope.row.personId,'1')" >添加学硕评审专家</el-button>
-            <el-button type="text" @click="addExpert(scope.row.personId,'2')" >添加专硕评审专家</el-button>
+            <el-button type="text" @click="addExpert(scope.row.personId,'1')" >添加学硕评审专家</el-button>
+            <el-button type="text" @click="addExpert(scope.row.personId,'12')" >添加评审专家</el-button>
         </template>
       </el-table>
     </div>
@@ -81,26 +73,15 @@
 
 <script>
   import { getExportInfoListByPerNumName } from '@/api/thesisreview'
-  import { getExportInfoListByPerNumNameQuery } from '@/api/thesisreview'
   import { thesisReviewPersonAdd } from '@/api/thesisreview'
 export default {
-  name: 'thesisReviewExpertManageAdd',
+  name: 'thesisReviewPersonManageAdd',
   data() {
     return {
       majorId:this.$route.query.majorId,
-      expertType:'2',
       perNum: '',
       perName: '',
       expertList: [],
-      expertTypes: [
-        {
-          value: '2',
-          label: '外审专家'
-        }, {
-          value: '1',
-          label: '内审专家'
-        }
-      ],
     }
   },
   created() {
@@ -114,7 +95,7 @@ export default {
     })
     },
     selectExpert(){
-      getExportInfoListByPerNumNameQuery({ 'session': document.cookie,'expertType':this.expertType,'perNum': this.perNum ,'perName': this.perName,'extertType': this.expertType }).then(res=>{
+      getExportInfoListByPerNumName({ 'session': document.cookie,'perNum': this.perNum ,'perName': this.perName }).then(res=>{
         this.expertList = res.data
       })
     },

@@ -249,7 +249,7 @@ export default {
     },
     
     addInnerExpert(){
-      this.$router.push({ path: 'thesisReviewExpertManageAdd', query: { 'majorId':this.majorId }})
+      this.$router.push({ path: 'thesisReviewPersonManageAdd', query: { 'majorId':this.majorId }})
     },
     updateExpertInfo(personId){
       this.$router.push({ path: 'thesisReviewExpertInfoMaintain', query: { personId }})
