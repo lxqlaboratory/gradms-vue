@@ -35,7 +35,7 @@ export default {
       var graph = new G6.Graph({
         container: 'mountNode',
         width: 2000,
-        height: 1000,
+        height: 2000,
         defaultNode: {
           shape: 'rect',
           size: [160, 50],
