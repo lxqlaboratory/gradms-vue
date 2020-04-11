@@ -201,6 +201,18 @@
                     {{ scope.row.reviewTime }}
                   </template>
                 </el-table-column>
+                <el-table-column
+                  label="操作"
+                  align="center"
+                  color="black"
+                  width="120"
+                >
+                  <template slot-scope="scope">
+                    <el-button type="primary" v-if="scope.row.reviewState==='提交'"  >
+                      <a :href="serverAddres+'/api/thesisreview/thesisReviewOnlineReviewPrint?reviewId='+scope.row.reviewId" :download="scope.row.printName">评阅表下载</a>
+                    </el-button>
+                  </template>
+                </el-table-column>
               </el-table>
             </template>
           </el-table-column>
