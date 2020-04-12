@@ -54,7 +54,10 @@ export default {
             endArrow: true,
             stroke: '#333',
           },
-        }
+        },
+        modes: {
+          default: ['zoom-canvas', 'drag-canvas'],
+        },
       })
       graph.read(data)
       //获取点击节点
