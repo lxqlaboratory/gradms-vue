@@ -172,6 +172,7 @@
             <template slot-scope="scope">
               <el-button type="primary" @click="reviewerUpdate(scope.row.thesisId)"  >修改</el-button>
               <el-button type="primary" @click="remove(scope.row.thesisId)"  >删除</el-button>
+              <el-button type="primary" @click="cancelTutorCheck(scope.row.thesisId)"  >取消导师审核</el-button>
             </template>
           </el-table-column>
           <el-table-column
@@ -362,7 +363,7 @@ import { thesisReviewReviewInfoRemoveAll } from '@/api/thesisreview'
 import { thesisReviewReviewInfoAdd } from '@/api/thesisreview'
 import { thesisReviewReviewInfoRemove } from '@/api/thesisreview'
 import { thesisReviewReviewInfoAutoDistribute} from '@/api/thesisreview'
-
+import { thesisReviewTutorCheckStudentThesisCancel } from '@/api/thesisreview'
 import fileupload from '../../components/upload/fileupload'
 export default {
   name: 'thesisReviewReviewInfoManage',
@@ -496,6 +497,34 @@ export default {
             {
               this.$message({
                 message: "删除成功",
+                type: 'sucess'
+              });
+             this.doQuery();
+            }else {
+              this.$message({
+                message: res.msg,
+                type: 'warning'
+              });
+            }
+        })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+    },
+    cancelTutorCheck(thesisId){
+        this.$confirm('确认取消导师论文审核状态吗吗？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+           thesisReviewTutorCheckStudentThesisCancel({ 'session': document.cookie, 'thesisId': thesisId}).then(res => {
+            if(res.code === '0')
+            {
+              this.$message({
+                message: "取消成功，学生可重新上传论文",
                 type: 'sucess'
               });
              this.doQuery();
