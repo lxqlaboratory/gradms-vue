@@ -12,6 +12,10 @@
     </table>
     <div id="mountNode"  >
     </div>
+
+<!--    <div>-->
+<!--      <img :src="dataURL">-->
+<!--    </div>-->
     <el-button  @click="file">
       下载图片
     </el-button>
@@ -29,6 +33,7 @@ export default {
     return {
       data: {},
       color: '',
+      dataURL: '',
       nodeList: []
     }
   },
