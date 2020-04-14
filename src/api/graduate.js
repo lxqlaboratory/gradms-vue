@@ -40,3 +40,11 @@ export function studentGraduateDegreeStateView(data) {
     data
   })
 }
+
+export function uploadStateGraphImageData(data) {
+  return request({
+    url: '/api/graduate/uploadStateGraphImageData',
+    method: 'POST',
+    data
+  })
+}

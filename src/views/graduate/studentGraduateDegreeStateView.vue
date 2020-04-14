@@ -12,11 +12,15 @@
     </table>
     <div id="mountNode"  >
     </div>
+    <el-button  @click="file">
+      下载图片
+    </el-button>
   </div>
 </template>
 
 <script>
 import { studentGraduateDegreeStateView } from '@/api/graduate'
+import { uploadStateGraphImageData } from '@/api/graduate'
 import insertCss from 'insert-css';
 import G6 from '@antv/g6'
 export default {
@@ -46,7 +50,7 @@ export default {
       var graph = new G6.Graph({
         container: 'mountNode',
         width: 2000,
-        height: 2000,
+        height: 1000,
         defaultNode: {
           shape: 'rect',
           size: [160, 50],
@@ -98,6 +102,9 @@ export default {
         console.log(node.defaultCfg.model.id)
         this.nodeClick(node.defaultCfg.model.id)
       });
+      //graph.downloadImage();
+      this.dataURL   = graph.toDataURL();
+      console.log(this.dataURL );
       //鼠标移入
       // graph.on('node:mouseenter', ev => {
       //   var shape = ev.target;
@@ -106,8 +113,12 @@ export default {
       // });
     },
     nodeClick(id){
-      alert(id)
     },
+    file(){
+      uploadStateGraphImageData({ 'session': document.cookie,'fileData': this.dataURL }).then(res => {
+
+      })
+    }
   }
 }
 </script>
