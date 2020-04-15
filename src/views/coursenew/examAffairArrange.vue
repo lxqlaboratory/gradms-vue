@@ -73,11 +73,11 @@
       </el-table>
     </div>
     <div align="center">
-      <el-button  type="primary" >
-        <a :href="serverAddres+'/api/thesisreview/thesisReviewReviewStatePrintAll?configId='+configId" :download="downloadFielName">导出试题交接单</a>
+      <el-button  type="primary" @click="getSelectAffairIds" >
+        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialHandoverListPrintDataByAffairIds?affairIds='+affairIds" :download="handoverListFielName">导出试题交接单</a>
       </el-button>
-      <el-button  type="primary" >
-        <a :href="serverAddres+'/api/thesisreview/thesisReviewReviewStatePrintAll?configId='+configId" :download="downloadFielName">导出联系方式</a>
+      <el-button  type="primary" @click="getSelectAffairIds" >
+        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialAffairContactPrintDataByAffairIds?affairIds='+affairIds" :download="affairContactFielName">导出考务联系方式</a>
       </el-button>
     </div>
   </div>
@@ -93,8 +93,11 @@ export default {
     return {
       selectList: [],
       affairList: [],
-      multipleSelection:[]
-    }
+      multipleSelection:[],
+      affairIds: '',
+      handoverListFielName:'试题交接单.pdf',
+      affairContactFielName:'考务联系方式.pdf',
+   }
   },
   created() {
     this.fetchData()
@@ -109,6 +112,15 @@ export default {
     },
     handleSelectionChange(val) {
         this.multipleSelection = val;
+    },
+    getSelectAffairIds(){
+      for(var i = 0; i < this.multipleSelection.length;i++){
+        if(i===0) {
+          this.affairIds =  this.multipleSelection[0].affairId.toString()
+        }else{
+          this.affairIds = this.affairIds + '-' + this.multipleSelection[i].affairId.toString()
+        }
+      }
     },
     addPerson(affairId,personId) {
       newCultivateExamAffairArrangePersonAdd({ 'session': document.cookie ,'affairId': affairId ,'personId': personId }).then(res=>{

@@ -111,14 +111,11 @@
       <el-button  type="primary" @click="getSelectExamIds" >
         <a :href="serverAddres+'/api/coursenew/getNewCultivateExamTaskStudentTablePDFDataByExamIds?examIds='+examIds" :download="studentTableFileName">导出考生名单</a>
       </el-button>
-      <el-button  type="primary" >
-        <a :href="serverAddres+'/api/thesisreview/thesisReviewReviewStatePrintAll?configId='+configId" :download="downloadFielName">导出考生名单</a>
+      <el-button  type="primary" @click="getSelectExamIds" >
+        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamTaskDoorStuckPDFDataByExamIds?examIds='+examIds" :download="doorFielName">导出考场门贴</a>
       </el-button>
-      <el-button  type="primary" >
-        <a :href="serverAddres+'/api/thesisreview/thesisReviewReviewStatePrintAll?configId='+configId" :download="downloadFielName">导出考场门贴</a>
-      </el-button>
-      <el-button  type="primary" >
-        <a :href="serverAddres+'/api/thesisreview/thesisReviewReviewStatePrintAll?configId='+configId" :download="downloadFielName">导出考场记录表</a>
+      <el-button  type="primary" @click="getSelectExamIds" >
+        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialRecordPrintDataByExamIds?examIds='+examIds" :download="recordFielName">导出考场记录表</a>
       </el-button>
     </div>
   </div>
@@ -136,7 +133,9 @@ export default {
       multipleSelection: [],
       serverAddres:'',
       examIds: '',
-      studentTableFileName:'考生名单.pdf'
+      studentTableFileName:'考生名单.pdf',
+      doorFielName:'考场门贴.pdf',
+      recordFielName:'考场记录.pdf'
     }
   },
   created() {
@@ -163,7 +162,7 @@ export default {
       }
     },
     submitTableData() {
-      newCultivateExamInvigilaterArrangeSubmit({ 'session': document.cookie, 'examList': this.examList }).then(res => {
+      newCultivateExamInvigilaterArrangeSubmit({ 'session': document.cookie, 'examList': this.multipleSelection }).then(res => {
         console.log(res);
         if(res.code === '0'){
           this.$message({
