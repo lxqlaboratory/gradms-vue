@@ -108,8 +108,8 @@
       <el-button  type="primary" >
         <a :href="serverAddres+'/downloads/coursenew/examRulesResponsibilities.pdf'">下载考场规则、监考人员职责</a>
       </el-button>
-      <el-button  type="primary" >
-        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamTaskStudentTablePDFDataByExamIds?examIds='+getSelectExamIds()" :download="studentTableFileName">导出考生名单</a>
+      <el-button  type="primary" @click="getSelectExamIds" >
+        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamTaskStudentTablePDFDataByExamIds?examIds='+examIds" :download="studentTableFileName">导出考生名单</a>
       </el-button>
       <el-button  type="primary" >
         <a :href="serverAddres+'/api/thesisreview/thesisReviewReviewStatePrintAll?configId='+configId" :download="downloadFielName">导出考生名单</a>
@@ -135,6 +135,7 @@ export default {
       selectList: [],
       multipleSelection: [],
       serverAddres:'',
+      examIds: '',
       studentTableFileName:'考生名单.pdf'
     }
   },
@@ -153,20 +154,13 @@ export default {
         this.multipleSelection = val;
     },
     getSelectExamIds(){
-      var i;
-      var examIds = '';
-      for(i = 0; i < this.multipleSelection.legth;i++){
-        if(this.multipleSelection[i]=== true) {
-          if(examIds === '') {
-            examIds =examList[i].examId.toString();
-          }
-          else {
-            examIds ='=' + examList[i].examId.toString();
-          }
+      for(var i = 0; i < this.multipleSelection.length;i++){
+        if(i===0) {
+          this.examIds =  this.multipleSelection[0].examId.toString()
+        }else{
+          this.examIds = this.examIds + '-' + this.multipleSelection[i].examId.toString()
         }
       }
-      console.log(examIds);
-      return examIds;
     },
     submitTableData() {
       newCultivateExamInvigilaterArrangeSubmit({ 'session': document.cookie, 'examList': this.examList }).then(res => {
