@@ -4,9 +4,15 @@
       <el-table
         :data="affairList"
         border
+        ref="multipleTable"
+        @selection-change="handleSelectionChange">
         style="width: 100%;"
         size="mini"
       >
+      <el-table-column
+        type="selection"
+        width="55">
+      </el-table-column>
         <el-table-column
           label="序号"
           fixed="left"
@@ -66,6 +72,14 @@
         </el-table-column>
       </el-table>
     </div>
+    <div align="center">
+      <el-button  type="primary" >
+        <a :href="serverAddres+'/api/thesisreview/thesisReviewReviewStatePrintAll?configId='+configId" :download="downloadFielName">导出试题交接单</a>
+      </el-button>
+      <el-button  type="primary" >
+        <a :href="serverAddres+'/api/thesisreview/thesisReviewReviewStatePrintAll?configId='+configId" :download="downloadFielName">导出联系方式</a>
+      </el-button>
+    </div>
   </div>
 </template>
 
@@ -78,7 +92,8 @@ export default {
   data() {
     return {
       selectList: [],
-      affairList: []
+      affairList: [],
+      multipleSelection:[]
     }
   },
   created() {
@@ -86,10 +101,14 @@ export default {
   },
   methods: {
     fetchData() {
+      this.serverAddres = this.GLOBAL.servicePort
       newCultivateExamAffairArrangeInit({ 'session': document.cookie }).then(res => {
         this.selectList = res.data.selectList
         this.affairList = res.data.affairList
       })
+    },
+    handleSelectionChange(val) {
+        this.multipleSelection = val;
     },
     addPerson(affairId,personId) {
       newCultivateExamAffairArrangePersonAdd({ 'session': document.cookie ,'affairId': affairId ,'personId': personId }).then(res=>{

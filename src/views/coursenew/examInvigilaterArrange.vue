@@ -3,11 +3,17 @@
     <div class="table-container">
       <el-table
         :data="examList"
+        ref="multipleTable"
+        @selection-change="handleSelectionChange">
         border
         style="width: 100%;"
         size="mini"
       >
-        <el-table-column
+    <el-table-column
+      type="selection"
+      width="55">
+    </el-table-column>
+    <el-table-column
           label="序号"
           fixed="left"
           width="70"
@@ -98,7 +104,22 @@
       </el-table>
     </div>
     <div align="center">
-      <el-button type="primary" @click="submitTableData">提交</el-button>
+      <el-button type="primary" @click="submitTableData">保存提交</el-button>
+      <el-button  type="primary" >
+        <a :href="serverAddres+'/downloads/coursenew/examRulesResponsibilities.pdf'">下载考场规则、监考人员职责</a>
+      </el-button>
+      <el-button  type="primary" >
+        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamTaskStudentTablePDFDataByExamIds?examIds='+getSelectExamIds()" :download="studentTableFileName">导出考生名单</a>
+      </el-button>
+      <el-button  type="primary" >
+        <a :href="serverAddres+'/api/thesisreview/thesisReviewReviewStatePrintAll?configId='+configId" :download="downloadFielName">导出考生名单</a>
+      </el-button>
+      <el-button  type="primary" >
+        <a :href="serverAddres+'/api/thesisreview/thesisReviewReviewStatePrintAll?configId='+configId" :download="downloadFielName">导出考场门贴</a>
+      </el-button>
+      <el-button  type="primary" >
+        <a :href="serverAddres+'/api/thesisreview/thesisReviewReviewStatePrintAll?configId='+configId" :download="downloadFielName">导出考场记录表</a>
+      </el-button>
     </div>
   </div>
 </template>
@@ -111,7 +132,10 @@ export default {
   data() {
     return {
       examList: [],
-      selectList: []
+      selectList: [],
+      multipleSelection: [],
+      serverAddres:'',
+      studentTableFileName:'考生名单.pdf'
     }
   },
   created() {
@@ -119,10 +143,30 @@ export default {
   },
   methods: {
     fetchData() {
+      this.serverAddres = this.GLOBAL.servicePort
       newCultivateExamInvigilaterArrangeInit({ 'session': document.cookie }).then(res => {
         this.examList = res.data.examList
         this.selectList = res.data.selectList
       })
+    },
+    handleSelectionChange(val) {
+        this.multipleSelection = val;
+    },
+    getSelectExamIds(){
+      var i;
+      var examIds = '';
+      for(i = 0; i < this.multipleSelection.legth;i++){
+        if(this.multipleSelection[i]=== true) {
+          if(examIds === '') {
+            examIds =examList[i].examId.toString();
+          }
+          else {
+            examIds ='=' + examList[i].examId.toString();
+          }
+        }
+      }
+      console.log(examIds);
+      return examIds;
     },
     submitTableData() {
       newCultivateExamInvigilaterArrangeSubmit({ 'session': document.cookie, 'examList': this.examList }).then(res => {

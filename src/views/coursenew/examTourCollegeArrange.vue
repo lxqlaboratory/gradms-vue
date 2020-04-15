@@ -4,9 +4,15 @@
       <el-table
         :data="tourList"
         border
+        ref="multipleTable"
+        @selection-change="handleSelectionChange">
         style="width: 100%;"
         size="mini"
       >
+      <el-table-column
+        type="selection"
+        width="55">
+      </el-table-column>
         <el-table-column
           label="序号"
           fixed="left"
@@ -113,6 +119,7 @@
     </div>
     <div align="center">
       <el-button type="primary" @click="submitTableData">提交</el-button>
+      <el-button type="primary" @click="submitTableData">考务人员联系方式</el-button>
     </div>
   </div>
 </template>
@@ -127,7 +134,9 @@ export default {
   data() {
     return {
       selectList: [],
-      tourList: []
+      tourList: [],
+      multipleSelection: [],
+      serverAddres:''
     }
   },
   created() {
@@ -135,10 +144,14 @@ export default {
   },
   methods: {
     fetchData() {
+      this.serverAddres = this.GLOBAL.servicePort
       newCultivateExamTourCollegeArrangeInit({ 'session': document.cookie }).then(res => {
         this.selectList = res.data.selectList
         this.tourList = res.data.tourList
       })
+    },
+    handleSelectionChange(val) {
+        this.multipleSelection = val;
     },
     addPerson(tourId,personId) {
       newCultivateExamTourCollegeArrangePersonAdd({ 'session': document.cookie ,'tourId': tourId ,'personId': personId }).then(res=>{

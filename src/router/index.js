@@ -63,12 +63,6 @@ export const constantRoutes = [
         meta: { title: '学院排课' }
       },
       {
-        path: 'examAffairMaterialExport',
-        name: 'examAffairMaterialExport',
-        component: () => import('@/views/coursenew/examAffairMaterialExport'),
-        meta: { title: '考务材料导出' }
-      },
-      {
         path: 'examInvigilaterArrange',
         name: 'examInvigilaterArrange',
         component: () => import('@/views/coursenew/examInvigilaterArrange'),
