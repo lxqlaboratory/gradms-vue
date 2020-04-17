@@ -1,5 +1,7 @@
 <template>
   <div class="app-container">
+
+    <a  style="position: fixed;z-index:-1;top: 0;left: 0;"  ref="temp" :href="serverAddres+'/api/coursenew/getNewCultivateExamTaskStudentTablePDFDataByExamIds?examIds='+examIds" :download="studentTableFileName"></a>
     <div class="table-container">
       <el-table
         :data="examList"
@@ -109,7 +111,7 @@
         <a :href="serverAddres+'/downloads/coursenew/examRulesResponsibilities.pdf'">下载考场规则、监考人员职责</a>
       </el-button>
       <el-button  type="primary" @click="getSelectExamIds" >
-        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamTaskStudentTablePDFDataByExamIds?examIds='+examIds" :download="studentTableFileName">导出考生名单</a>
+      导出考生名单
       </el-button>
       <el-button  type="primary" @click="getSelectExamIds" >
         <a :href="serverAddres+'/api/coursenew/getNewCultivateExamTaskDoorStuckPDFDataByExamIds?examIds='+examIds" :download="doorFielName">导出考场门贴</a>
@@ -153,12 +155,21 @@ export default {
         this.multipleSelection = val;
     },
     getSelectExamIds(){
+        this.examIds= ''
       for(var i = 0; i < this.multipleSelection.length;i++){
         if(i===0) {
           this.examIds =  this.multipleSelection[0].examId.toString()
         }else{
           this.examIds = this.examIds + '-' + this.multipleSelection[i].examId.toString()
         }
+      }
+      if(this.examIds=== ''){
+        this.$message({
+          message: '选择不能为空',
+          type: 'success'
+        });
+      }else{
+        this.$refs.temp.click()
       }
     },
     submitTableData() {
