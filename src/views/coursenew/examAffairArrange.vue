@@ -77,7 +77,7 @@
         <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialHandoverListPrintDataByAffairIds?affairIds='+affairIds" :download="handoverListFielName">导出试题交接单</a>
       </el-button>
       <el-button  type="primary" @click="getSelectAffairIds" >
-        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialAffairContactPrintDataByAffairIds?affairIds='+affairIds" :download="affairContactFielName">导出考务联系方式</a>
+        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialContactPrintDataByAffairIds?affairIds='+affairIds" :download="contactFielName">导出联系方式</a>
       </el-button>
     </div>
   </div>
@@ -96,7 +96,7 @@ export default {
       multipleSelection:[],
       affairIds: '',
       handoverListFielName:'试题交接单.pdf',
-      affairContactFielName:'考务联系方式.pdf',
+      contactFielName:'联系方式.pdf',
    }
   },
   created() {

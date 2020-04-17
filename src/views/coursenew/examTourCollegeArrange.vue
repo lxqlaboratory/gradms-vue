@@ -120,6 +120,9 @@
     <div align="center">
       <el-button type="primary" @click="submitTableData">提交</el-button>
       <el-button type="primary" @click="submitTableData">考务人员联系方式</el-button>
+      <el-button  type="primary" @click="getSelectTutorIds" >
+        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialAffairContactPrintDataByTutorIds?tutorIds='+tutorIds" :download="affairContactFielName">导出考务人员联系方式</a>
+      </el-button>
     </div>
   </div>
 </template>
@@ -136,7 +139,9 @@ export default {
       selectList: [],
       tourList: [],
       multipleSelection: [],
-      serverAddres:''
+      serverAddres:'',
+      tutorIds:'',
+      affairContactFielName:'考务人员联系方式'
     }
   },
   created() {
@@ -153,6 +158,16 @@ export default {
     handleSelectionChange(val) {
         this.multipleSelection = val;
     },
+    getSelectTutorIds(){
+      for(var i = 0; i < this.multipleSelection.length;i++){
+        if(i===0) {
+          this.tutorIds =  this.multipleSelection[0].tutorId.toString()
+        }else{
+          this.tutorIds = this.tutorIds + '-' + this.multipleSelection[i].tutorId.toString()
+        }
+      }
+    },
+
     addPerson(tourId,personId) {
       newCultivateExamTourCollegeArrangePersonAdd({ 'session': document.cookie ,'tourId': tourId ,'personId': personId }).then(res=>{
         if(res.code === '0'){
