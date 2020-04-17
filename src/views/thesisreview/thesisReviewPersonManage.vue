@@ -135,6 +135,7 @@
             <el-button type="text" @click="doModify(scope.$index)" >修改</el-button>
             <el-button type="text" @click="deletePerson(scope.row.expertId)" >删除</el-button>
         </template>
+          </el-table-column>
         </el-table>
       </div>
       <div class="konghang"/>
@@ -154,6 +155,7 @@
        <el-button type="primary" @click="addInnerExpert()" >添加校内专家</el-button>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -247,7 +249,7 @@ export default {
       }
       })
     },
-    
+
     addInnerExpert(){
       this.$router.push({ path: 'thesisReviewPersonManageAdd', query: { 'majorId':this.majorId }})
     },

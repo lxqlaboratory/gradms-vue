@@ -65,6 +65,7 @@
             <el-button type="text" @click="addExpert(scope.row.personId,'1')" >添加学硕评审专家</el-button>
             <el-button type="text" @click="addExpert(scope.row.personId,'12')" >添加评审专家</el-button>
         </template>
+          </el-table-column>
       </el-table>
     </div>
 

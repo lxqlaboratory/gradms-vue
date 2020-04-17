@@ -62,7 +62,6 @@
       </div>
       <div class="konghang"/>
       <div align="center">
-      <div align="center">
         <el-input v-model="directName" placeholder="请输入研究方向" style="width:300px" ></el-input>
         <el-button type="primary" @click="addDirect()" >添加</el-button>
       </div>
@@ -138,7 +137,7 @@ export default {
             type: 'success',
             offset: '10'
           });
-        }else {      
+        }else {
           thesisReviewDirectionAdd({ 'session': document.cookie, 'majorId': this.majorId,'directName':this.directName}).then(res => {
           if(res.code === '0'){
             this.$message({

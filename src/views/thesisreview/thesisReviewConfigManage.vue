@@ -26,7 +26,7 @@
           <span v-for="(item,index) in reviewTypes" :key="item.id" >
             <input v-model="form.reviewType" :value="item.value" class="input-radio" :checked='item.isChecked'  @click="check(index)" type="radio">
                {{item.label}}
-          <span>
+          </span>
         </td>
       </tr>
       <tr>
