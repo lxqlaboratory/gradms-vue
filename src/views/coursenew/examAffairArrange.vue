@@ -114,12 +114,21 @@ export default {
         this.multipleSelection = val;
     },
     getSelectAffairIds(){
+      affairIds = ''
       for(var i = 0; i < this.multipleSelection.length;i++){
         if(i===0) {
           this.affairIds =  this.multipleSelection[0].affairId.toString()
         }else{
           this.affairIds = this.affairIds + '-' + this.multipleSelection[i].affairId.toString()
         }
+      }
+      if(this.affairIds=== ''){
+        this.$message({
+          message: '选择不能为空',
+          type: 'success'
+        });
+      }else{
+        this.$refs.temp.click()
       }
     },
     addPerson(affairId,personId) {

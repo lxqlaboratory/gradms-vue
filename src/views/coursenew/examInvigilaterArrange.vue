@@ -111,7 +111,7 @@
         <a :href="serverAddres+'/downloads/coursenew/examRulesResponsibilities.pdf'">下载考场规则、监考人员职责</a>
       </el-button>
       <el-button  type="primary" @click="getSelectExamIds" >
-      导出考生名单
+        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamTaskStudentTablePDFDataByExamIds?examIds='+examIds" :download="doorFielName">导出考生名单</a>
       </el-button>
       <el-button  type="primary" @click="getSelectExamIds" >
         <a :href="serverAddres+'/api/coursenew/getNewCultivateExamTaskDoorStuckPDFDataByExamIds?examIds='+examIds" :download="doorFielName">导出考场门贴</a>

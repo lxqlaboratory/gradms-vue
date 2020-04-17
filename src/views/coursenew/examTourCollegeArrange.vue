@@ -119,12 +119,8 @@
     </div>
     <div align="center">
       <el-button type="primary" @click="submitTableData">提交</el-button>
-      <el-button type="primary" @click="submitTableData">考务人员联系方式</el-button>
-      <el-button  type="primary" @click="getSelectTutorIds" >
-        <div v-if="!tutorIds">导出考务人员联系方式</div>
-        <div v-else>
-        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialAffairContactPrintDataByTutorIds?tutorIds='+tutorIds" :download="affairContactFielName">导出考务人员联系方式</a>
-        </div>
+      <el-button  type="primary" @click="getSelectTourIds" >
+        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialAffairContactPrintDataByTourIds?tourIds='+tourIds" :download="affairContactFielName">导出考务人员联系方式</a>
       </el-button>
     </div>
   </div>
@@ -143,8 +139,8 @@ export default {
       tourList: [],
       multipleSelection: [],
       serverAddres:'',
-      tutorIds:'',
-      affairContactFielName:'考务人员联系方式'
+      tourIds:'',
+      affairContactFielName:'考务人员联系方式.pdf'
     }
   },
   created() {
@@ -161,16 +157,24 @@ export default {
     handleSelectionChange(val) {
         this.multipleSelection = val;
     },
-    getSelectTutorIds(){
-      this.$nextTick(() => {
+    getSelectTourIds(){
+      this.tourIds = '';
       for(var i = 0; i < this.multipleSelection.length;i++){
         if(i===0) {
-          this.tutorIds =  this.multipleSelection[0].tutorId.toString()
+          this.tourIds =  this.multipleSelection[0].tourId.toString()
         }else{
-          this.tutorIds = this.tutorIds + '-' + this.multipleSelection[i].tutorId.toString()
+          this.tourIds = this.tourIds + '-' + this.multipleSelection[i].tourId.toString()
         }
       }
-      })
+      console.log(this.tourIds)
+      if(this.tourIds=== ''){
+        this.$message({
+          message: '选择不能为空',
+          type: 'success'
+        });
+      }else{
+        this.$refs.temp.click()
+      }
     },
 
     addPerson(tourId,personId) {
