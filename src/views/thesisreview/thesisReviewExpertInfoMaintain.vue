@@ -95,7 +95,7 @@ export default {
       })
     },
     submit(){
-       if(this.form.bankNo === undefined || this.form.bankNo==='') {
+/*       if(this.form.bankNo === undefined || this.form.bankNo==='') {
                this.$message({
            message: '银行卡号不能为空',
            type: 'success',
@@ -110,7 +110,7 @@ export default {
            offset: '10'
          });
          return;
-       }
+       } */
         this.isDisable = true
      thesisReviewExpertInfoMaintainSubmit({'session': document.cookie , 'form': this.form
       }).then(res => {
