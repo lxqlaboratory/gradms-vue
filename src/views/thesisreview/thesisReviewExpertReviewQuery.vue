@@ -2,12 +2,12 @@
   <div class="app-container">
     <div>
     <div class="query-container">
-      学生类型
-      <el-select v-model="configId"  placeholder="请选择学生类型" style="width: 20%">
+      评审过程
+      <el-select v-model="configId" placeholder="请选择评审过程" @change="doQuery()" class="filter-item" style="width: 20%;">
         <el-option
           v-for="item in configList"
           :key="item.configId"
-          :label="item.stuTypeNames"
+          :label="item.configName"
           :value="item.configId">
         </el-option>
       </el-select>

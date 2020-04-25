@@ -46,7 +46,7 @@ export const constantRoutes = [
     component: Layout,
     name: 'coursenew',
     meta: {
-      title: '教师管理',
+      title: '课程管理',
       icon: 'example'
     },
     children: [
@@ -112,6 +112,24 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/cultivate',
+    component: Layout,
+    name: 'cultivate',
+    meta: {
+      title: '培养方案',
+      icon: 'example'
+    },
+    children: [
+      {
+        path: 'studentSultivatePlanMaintain',
+        name: 'studentSultivatePlanMaintain',
+        component: () => import('@/views/cultivate/studentSultivatePlanMaintain'),
+        meta: { title: '培养计划设置查看' }
+      }
+    ]
+  },
+ 
   {
     path: '/tutor',
     component: Layout,

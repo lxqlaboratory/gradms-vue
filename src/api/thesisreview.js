@@ -294,6 +294,14 @@ export function thesisReviewReviewStateTraceDataExport(data) {
     data
   })
 }
+export function thesisReviewReviewStateTraceTrans(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewReviewStateTraceTrans',
+    method: 'POST',
+    data
+  })
+}
+
 export function thesisReviewExpertReviewQuery(data) {
   return request({
     url: '/api/thesisreview/thesisReviewExpertReviewQuery',

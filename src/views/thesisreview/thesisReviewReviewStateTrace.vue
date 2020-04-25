@@ -1,12 +1,12 @@
 <template>
   <div class="app-container">
     <div class="query-container">
-      学生类型
-      <el-select v-model="configId"  placeholder="请选择学生类型" style="width: 15%">
+      评审过程
+      <el-select v-model="configId" placeholder="请选择评审过程" @change="doQuery()" class="filter-item" style="width: 20%;">
         <el-option
           v-for="item in configList"
           :key="item.configId"
-          :label="item.stuTypeNames"
+          :label="item.configName"
           :value="item.configId">
         </el-option>
       </el-select>
@@ -225,6 +225,7 @@
             <a :href="serverAddres+'/api/thesisreview/thesisReviewReviewStatePrintAll?configId='+configId" :download="downloadFielName">评阅表下载</a>
           </el-button>
           <el-button type="primary" @click="reviewDataExport()" >评阅信息导出</el-button>
+          <el-button type="primary" @click="tranToComment()" >转入评阅库</el-button>
         </td>
       </tr>
       </div>
@@ -238,6 +239,7 @@ import { saveAs } from 'file-saver';
 import { thesisReviewReviewStateTrace } from '@/api/thesisreview'
 import { thesisReviewReviewStateTraceQuery } from '@/api/thesisreview'
 import { thesisReviewReviewStateTraceTableExport } from '@/api/thesisreview'
+import { thesisReviewReviewStateTraceTrans } from '@/api/thesisreview'
 
 export default {
   name: 'thesisReviewReviewStateTrace',
@@ -273,6 +275,34 @@ export default {
       }).then(res => {
         this.studentList = res.data
       })
+    },
+    tranToComment(){
+        this.$confirm('确认将符合要求的评阅成绩转入评阅库吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+           thesisReviewReviewStateTraceTrans({ 'session': document.cookie, 'configId': this.configId}).then(res => {
+            if(res.code === '0')
+            {
+              this.$message({
+                message: "转入成功",
+                type: 'sucess'
+              });
+              this.doQuery();
+            }else {
+              this.$message({
+                message: res.msg,
+                type: 'warning'
+              });
+            }
+        })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消分发'
+          });
+        });
     },
 
     reviewDataExport(){
