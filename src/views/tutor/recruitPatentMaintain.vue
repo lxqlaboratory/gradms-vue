@@ -4,12 +4,12 @@
       <table class="content"  align="center">
       <tr>
         <td  style="font-size: 16px;color: red;text-align:left; ">
-          说明：从候选列表中选择此次招生资格申请所使用的的论文，添加到已选择论文列表中，论文将按照添加顺序在简况表显示          
+          说明：从候选列表中选择此次招生资格申请所使用的的专利，添加到已选择专利列表中，专利将按照添加顺序在简况表显示          
         </td>
       </tr>
     </table>
     <table class="headline">
-          <tr><td  >已选择论文列表</td></tr>
+          <tr><td  >已选择专利列表</td></tr>
         </table>
         <el-table
           :data="dataList"
@@ -102,14 +102,14 @@
     <div align="center">
       <tr>
         <td>
-          <el-button type="primary" @click="doAdd()" >添加候选论文</el-button>
-          <el-button type="primary" @click="doDelete()" >删除已选中论文</el-button>
+          <el-button type="primary" @click="doAdd()" >添加候选专利</el-button>
+          <el-button type="primary" @click="doDelete()" >删除已选中专利</el-button>
         </td>
       </tr>
     </div>
       <div class="table-container">
         <table class="headline">
-          <tr><td  >候选论文列表</td></tr>
+          <tr><td  >候选专利列表</td></tr>
         </table>
         <el-table
           :data="sourceList"
@@ -203,11 +203,11 @@
 </template>
 
 <script>
-import { recruitDisserMaintain } from '@/api/tutor'
-import { recruitDisserMaintainAdd } from '@/api/tutor'
-import { recruitDisserMaintainDelete } from '@/api/tutor'
+import { recruitPatentMaintain } from '@/api/tutor'
+import { recruitPatentMaintainAdd } from '@/api/tutor'
+import { recruitPatentMaintainDelete } from '@/api/tutor'
 export default {
-  name: 'recruitDissorMaintain',
+  name: 'recruitPatentMaintain',
   data() {
     return {
       dataList:[],
@@ -221,7 +221,7 @@ export default {
   },
   methods: {
     fetchData() {
-      recruitDisserMaintain({ 'session': document.cookie }).then(res => {
+      recruitPatentMaintain({ 'session': document.cookie }).then(res => {
         this.dataList = res.data.dataList
         this.sourceList = res.data.sourceList
       })
@@ -241,7 +241,7 @@ export default {
           type: 'success'
         });
       }else{
-       recruitDisserMaintainAdd({ 'session': document.cookie, 'sourceSelection': this.sourceSelection}).then(res => {
+       recruitPatentMaintainAdd({ 'session': document.cookie, 'sourceSelection': this.sourceSelection}).then(res => {
          this.$message({
            message: '添加成功',
            type: 'success',
@@ -262,7 +262,7 @@ export default {
         for(var i = 1; i < this.dataSelection.length;i++){
             dataIds = this.dataIds + '-' + this.dataSelection[i].patentId.toString()
         }
-        recruitDisserMaintainDelete({ 'session': document.cookie, 'dataIds': dataIds}).then(res => {
+        recruitPatentMaintainDelete({ 'session': document.cookie, 'dataIds': dataIds}).then(res => {
           this.$message({
             message: '已成功删除',
             type: 'success',
