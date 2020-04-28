@@ -186,6 +186,48 @@ export const constantRoutes = [
         name: 'tutorAuxiliaryMaintain',
         component: () => import('@/views/tutor/tutorAuxiliaryMaintain'),
         meta: { title: '辅助信息维护'}
+      },
+      {
+        path: 'recruitDisserMaintain',
+        name: 'recruitDisserMaintain',
+        component: () => import('@/views/tutor/recruitDisserMaintain'),
+        meta: { title: '申请论文维护'}
+      },
+      {
+        path: 'recruitBookMaintain',
+        name: 'recruitBookMaintain',
+        component: () => import('@/views/tutor/recruitBookMaintain'),
+        meta: { title: '申请专著维护'}
+      },
+      {
+        path: 'recruitProjectMaintain',
+        name: 'recruitProjectMaintain',
+        component: () => import('@/views/tutor/recruitProjectMaintain'),
+        meta: { title: '申请项目维护'}
+      },
+      {
+        path: 'recruitPatentMaintain',
+        name: 'recruitPatentMaintain',
+        component: () => import('@/views/tutor/recruitPatentMaintain'),
+        meta: { title: '申请专利维护'}
+      },
+      {
+        path: 'recruitRewardMaintain',
+        name: 'recruitRewardMaintain',
+        component: () => import('@/views/tutor/recruitRewardMaintain'),
+        meta: { title: '申请奖励维护'}
+      },
+      {
+        path: 'recruitQualificationApply',
+        name: 'recruitQualificationApply',
+        component: () => import('@/views/tutor/recruitQualificationApply'),
+        meta: { title: '招生资格申请'}
+      },
+      {
+        path: 'recruitQualificationApplyCollege',
+        name: 'recruitQualificationApplyCollege',
+        component: () => import('@/views/tutor/recruitQualificationApplyCollege'),
+        meta: { title: '学院代导师申请'}
       }
     ]
   },

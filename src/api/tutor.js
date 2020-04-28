@@ -157,3 +157,27 @@ export function tutorInfoQueryBrowseQuery(data) {
     data
   })
 }
+
+
+export function recruitDisserMaintain(data) {
+  return request({
+    url: '/api/tutor/recruitDisserMaintain',
+    method: 'POST',
+    data
+  })
+}
+export function recruitDisserMaintainAdd(data) {
+  return request({
+    url: '/api/tutor/recruitDisserMaintainAdd',
+    method: 'POST',
+    data
+  })
+}
+export function recruitDisserMaintainDelete(data) {
+  return request({
+    url: '/api/tutor/recruitDisserMaintainDelete',
+    method: 'POST',
+    data
+  })
+}
+
