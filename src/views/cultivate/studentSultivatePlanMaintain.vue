@@ -660,6 +660,13 @@ export default {
   },
   methods: {
     fetchData() {
+      this.showCourseList11 = false
+      this.showCourseList12 = false
+      this.showCourseList13 = false
+      this.showRequiredList1 = false
+      this.showBuxiuList1 = false
+      this.showOptionalList1 = false
+      this.showLesson = false
       newPlanSelectCourse({ 'session': document.cookie }).then(res => {
         this.CourseList11 = res.data.planData.CourseList11
         this.CourseList12 = res.data.planData.CourseList12
