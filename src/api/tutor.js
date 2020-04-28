@@ -181,3 +181,93 @@ export function recruitDisserMaintainDelete(data) {
   })
 }
 
+export function recruitBookMaintain(data) {
+  return request({
+    url: '/api/tutor/recruitBookMaintain',
+    method: 'POST',
+    data
+  })
+}
+export function recruitBookMaintainAdd(data) {
+  return request({
+    url: '/api/tutor/recruitBookMaintainAdd',
+    method: 'POST',
+    data
+  })
+}
+export function recruitBookMaintainDelete(data) {
+  return request({
+    url: '/api/tutor/recruitBookMaintainDelete',
+    method: 'POST',
+    data
+  })
+}
+
+
+export function recruitPatentMaintain(data) {
+  return request({
+    url: '/api/tutor/recruitPatentMaintain',
+    method: 'POST',
+    data
+  })
+}
+export function recruitPatentMaintainAdd(data) {
+  return request({
+    url: '/api/tutor/recruitPatentMaintainAdd',
+    method: 'POST',
+    data
+  })
+}
+export function recruitPatentMaintainDelete(data) {
+  return request({
+    url: '/api/tutor/recruitPatentMaintainDelete',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitProjectMaintain(data) {
+  return request({
+    url: '/api/tutor/recruitProjectMaintain',
+    method: 'POST',
+    data
+  })
+}
+export function recruitProjectMaintainAdd(data) {
+  return request({
+    url: '/api/tutor/recruitProjectMaintainAdd',
+    method: 'POST',
+    data
+  })
+}
+export function recruitProjectMaintainDelete(data) {
+  return request({
+    url: '/api/tutor/recruitProjectMaintainDelete',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitRewardMaintain(data) {
+  return request({
+    url: '/api/tutor/recruitRewardMaintain',
+    method: 'POST',
+    data
+  })
+}
+export function recruitRewardMaintainAdd(data) {
+  return request({
+    url: '/api/tutor/recruitRewardMaintainAdd',
+    method: 'POST',
+    data
+  })
+}
+export function recruitRewardMaintainDelete(data) {
+  return request({
+    url: '/api/tutor/recruitRewardMaintainDelete',
+    method: 'POST',
+    data
+  })
+}
+
+
