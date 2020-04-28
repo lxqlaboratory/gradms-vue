@@ -99,7 +99,7 @@
           </el-table-column>
         </el-table>
     </div>
-    <div align="center">
+    <div align="center" v-if="isCanModify">
       <tr>
         <td>
           <el-button type="primary" @click="doAdd()" >添加候选项目</el-button>
@@ -107,7 +107,7 @@
         </td>
       </tr>
     </div>
-      <div class="table-container">
+      <div class="table-container" v-if="isCanModify">
         <table class="headline">
           <tr><td  >候选项目列表</td></tr>
         </table>
@@ -214,6 +214,7 @@ export default {
       dataSelection:[],
       sourceList:[],
       sourceSelection:[],
+      isCanModify:false
     }
   },
   created() {
@@ -224,6 +225,7 @@ export default {
       recruitProjectMaintain({ 'session': document.cookie }).then(res => {
         this.dataList = res.data.dataList
         this.sourceList = res.data.sourceList
+        this.isCanModify = res.data.isCanModify
       })
     },
     dataSelectionChange(val) {
