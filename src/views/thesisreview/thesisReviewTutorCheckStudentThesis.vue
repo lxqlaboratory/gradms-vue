@@ -79,7 +79,6 @@
         </el-table>
       </div>
     </div>
-    <div class="app-container">
     <div align="center">
       <tr>
         <td> 未审核学生列表 </td>
@@ -161,7 +160,6 @@
       </div>
     </div>
     </div>
-  </div>
 </template>
 
 <script>
