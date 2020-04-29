@@ -2,13 +2,75 @@
   <div class="app-container">
     <table class="content">
       <tr>
-        <td colspan="7" style="font-size: 16px;font-weight: bold;color: #304156 ">招生申请信息</td>
+        <td colspan="8" style="font-size: 16px;font-weight: bold;color: #304156 ">招生申请信息</td>
       </tr>
       <tr>
-        <td colspan="1" >聘用单位</td>
+        <td colspan="1" >论文数</td>
         <td colspan="1">
-          <el-input v-model="form.disserNum" placeholder="请输入论文数" ></el-input>
+          <el-input v-model.number="form.disserNum" placeholder="请输入论文数" ></el-input>
         </td>
+        <td colspan="1" >专著数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.bookNum" placeholder="请输入论文数" ></el-input>
+        </td>
+        <td colspan="1" >获奖数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.rewardNum" placeholder="请输入论文数" ></el-input>
+        </td>
+        <td colspan="1" >专利数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.patentNum" placeholder="请输入论文数" ></el-input>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1" >国家项目数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.projectNum1" placeholder="请输入论文数" ></el-input>
+        </td>
+        <td colspan="1" >国家立项数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.applyProjectNum1" placeholder="请输入论文数" ></el-input>
+        </td>
+        <td colspan="1" >省部项目数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.projectNum2" placeholder="请输入论文数" ></el-input>
+        </td>
+        <td colspan="1" >省部立项数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.applyProjectNum2" placeholder="请输入论文数" ></el-input>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1" >横向项目</td>
+        <td colspan="1">
+          <el-input v-model.number="form.projectNum3" placeholder="请输入论文数" ></el-input>
+        </td>
+        <td colspan="1" >总经费</td>
+        <td colspan="1">
+          <el-input v-model.number="form.projectFeeTotal" placeholder="请输入论文数" ></el-input>
+        </td>
+        <td colspan="1" >可支配经费</td>
+        <td colspan="1">
+          <el-input v-model.number="form.projectFeeBalance" placeholder="请输入论文数" ></el-input>
+        </td>
+        <td colspan="1" >初始申请博导</td>
+        <td colspan="1" >初始申请硕导</td>
+      </tr>
+      <tr>
+        <td colspan="1" >指导博士生数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.doctorNum" placeholder="请输入论文数" ></el-input>
+        </td>
+        <td colspan="1" >指导硕士生数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.masterNum" placeholder="请输入论文数" ></el-input>
+        </td>
+        <td colspan="1" >协助指导博士生数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.assistDoctorNum" placeholder="请输入论文数" ></el-input>
+        </td>
+        <td colspan="1" >初始申请博导</td>
+        <td colspan="1" >初始申请硕导</td>
       </tr>
     </table>
     <div align="center">
