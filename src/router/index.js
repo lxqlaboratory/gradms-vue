@@ -224,10 +224,28 @@ export const constantRoutes = [
         meta: { title: '招生资格申请'}
       },
       {
+        path: 'recruitTeamApply',
+        name: 'recruitTeamApply',
+        component: () => import('@/views/tutor/recruitQualificationApply'),
+        meta: { title: '指导团队申请'}
+      },
+      {
         path: 'recruitQualificationApplyCollege',
         name: 'recruitQualificationApplyCollege',
         component: () => import('@/views/tutor/recruitQualificationApplyCollege'),
         meta: { title: '学院代导师申请'}
+      },
+      {
+        path: 'recruitQualificationApplyCheck',
+        name: 'recruitQualificationApplyCheck',
+        component: () => import('@/views/tutor/recruitQualificationApplyCheck'),
+        meta: { title: '招生资格审核'}
+      },
+      {
+        path: 'recruitTeamApplyCheck',
+        name: 'recruitTeamApplyCheck',
+        component: () => import('@/views/tutor/recruitTeamApplyCheck'),
+        meta: { title: '招生团队审核'}
       }
     ]
   },

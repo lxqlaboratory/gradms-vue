@@ -271,3 +271,50 @@ export function recruitRewardMaintainDelete(data) {
 }
 
 
+export function recruitQualificationApply(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationApply',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitQualificationApplyApplyList(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationApplyMajorList',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitQualificationApplyMajorList(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationApplyMajorList',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitQualificationApplyStatistics(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationApplyStatistics',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitQualificationApplyMajorAdd(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationApplyMajorAdd',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitQualificationApplyMajorDelete(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationApplyMajorDelete',
+    method: 'POST',
+    data
+  })
+}
