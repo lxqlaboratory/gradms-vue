@@ -11,12 +11,15 @@
         </td>
         <td colspan="1" width="10%">责任导师</td>
         <td colspan="1" width="20%">
-          {{ form.perNum }}-{{ form.leaderName }}
+          {{ form.leaderNum }}-{{ form.leaderName }}
         </td>
         <td colspan="1" width="10%">培养单位</td>
         <td colspan="1" width="20%">
           {{ form.collegeName }}
         </td>
+      </tr>
+      <tr>
+        <td colspan="6" >团队介绍</td>
       </tr>
       <tr>
         <td colspan="6">
@@ -94,7 +97,7 @@
       <tr>
         <td>
           <el-button type="primary" @click="doSave()">保存</el-button>
-          <el-select
+          <el-select  style="width:200px;"
             v-model="personId"
             filterable
             remote
@@ -133,6 +136,7 @@ export default {
       form: {
         teamId: null,
         teamName: '',
+        leaderNum: '',
         leaderName: '',
         collegeName: '',
         des: ''
@@ -190,7 +194,15 @@ export default {
       }
     },
     doPersonAdd() {
-      recruitTeamApplyPersonAdd({ 'session': document.cookie, 'termId': this.form.termId, 'personId': this.personId
+      console.log(this.form.termId);
+      if(this.form.termId == undefined) {
+          this.$message({
+            message: '首先保存团队信息在添加团队成员',
+            type: 'success',
+            offset: '10'
+          })
+      }else {
+      recruitTeamApplyPersonAdd({ 'session': document.cookie, 'teamId': this.form.teamId, 'personId': this.personId
       }).then(res => {
         if (res.code === '0') {
           this.$message({
@@ -201,6 +213,7 @@ export default {
           this.getTeamPersonList()
         }
       })
+      }
     },
     doPersonDelete(teamPersonId) {
       this.$confirm('确认要删除已添加的团队程序成员吗?', '提示', {
