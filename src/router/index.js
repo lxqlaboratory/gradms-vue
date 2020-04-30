@@ -226,7 +226,7 @@ export const constantRoutes = [
       {
         path: 'recruitTeamApply',
         name: 'recruitTeamApply',
-        component: () => import('@/views/tutor/recruitQualificationApply'),
+        component: () => import('@/views/tutor/recruitTeamApply'),
         meta: { title: '指导团队申请'}
       },
       {

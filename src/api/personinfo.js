@@ -15,6 +15,14 @@ export function getPersonInfoListByPerNumNameQuery(data) {
     data
   })
 }
+export function getPersonNameMapListByPerNumName(data) {
+  return request({
+    url: '/api/personinfo/getPersonNameMapListByPerNumName',
+    method: 'POST',
+    data
+  })
+}
+
 
 
 

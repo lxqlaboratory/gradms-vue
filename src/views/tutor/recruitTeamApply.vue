@@ -93,34 +93,24 @@
       <div align="center" >
         <tr>
           <td>
-          申请类型
-          <el-select v-model="applyType" @change="doMajorList()"   placeholder="请选择申请类型" style="width: 20%">
-            <el-option
-              v-for="item in applyTypeList"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
-          学院
-          <el-select v-model="collegeId" @change="doMajorList()" placeholder="请选择学院" style="width: 20%">
-            <el-option
-              v-for="item in collegeList"
-              :key="item.collegeId"
-              :label="item.collegeName"
-              :value="item.collegeId">
-            </el-option>
-          </el-select>
-          专业
-          <el-select v-model="majorId" placeholder="请选择专业" style="width: 20%">
-            <el-option
-              v-for="item in majorId"
-              :key="item.majorId"
-              :label="item.majorName"
-              :value="item.majorId">
-            </el-option>
-          </el-select>
             <el-button type="primary" @click="doSave()" >保存</el-button>
+            <el-select
+                v-model="personId"
+                multiple
+                filterable
+                remote
+                reserve-keyword
+                placeholder="请输入姓名或工号"
+                :remote-method="getPersonList"
+                :loading="loading"
+                >
+                <el-option
+                    v-for="item in selectList"
+                    :key="item.personId"
+                    :label="item.perName"
+                    :value="item.personId"
+                />
+                </el-select>
             <el-button type="primary" @click="doPersonAdd()" >添加团队成员</el-button>
           </td>
         </tr>
@@ -132,7 +122,7 @@
 import Tinymce from '@/components/Tinymce'
 import { recruitTeamApply } from '@/api/tutor'
 import { recruitTeamApplySave } from '@/api/tutor'
-import { recruitTeamApplyPersonSearch } from '@/api/tutor'
+import { getPersonInfoListByPerNumName } from '@/api/personinfo'
 import { recruitTeamApplyPersonList } from '@/api/tutor'
 import { recruitTeamApplyPersonAdd } from '@/api/tutor'
 import { recruitTeamApplyPersonDelele } from '@/api/tutor'
@@ -151,6 +141,8 @@ export default {
         },
         isCanEdit:true,
         isCanApply:true,
+        personId:null,
+        selectList:[],
         personList:[],
      }
   },
@@ -179,11 +171,18 @@ export default {
        }
       })
     },
-    getPersonList(){
-      recruitTeamApplyPersonList({'session': document.cookie 
-      }).then(res => {
-        this.applyList  = res.data;          
-      })
+    getPersonList(numName) {
+      if (numName !== '' && numName.length()>=2) {
+        this.loading = true
+        getPersonInfoListByPerNumName({ 'session': document.cookie, 'numName': numName }).then(res => {
+          this.selectList = res.data.list
+        })
+        setTimeout(() => {
+          this.loading = false
+        }, 200)
+      } else {
+        this.selectList = []
+      }
     },
     doPersonAdd(){
       recruitTeamApplyPersonAdd({'session': document.cookie ,'applyId':this.form.applyId,'applyType': this.applyType, 'collegeId': this.collegeId,'majorId':this.majorId
