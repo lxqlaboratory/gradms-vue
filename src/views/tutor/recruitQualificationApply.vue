@@ -53,8 +53,12 @@
         <td colspan="1">
           <el-input v-model="form.projectFeeBalance" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入可支配经费数" />
         </td>
-        <td colspan="1">初始申请博导</td>
         <td colspan="1">初始申请硕导</td>
+        <td colspan="1">
+          <el-checkbox-group v-model="isNewMaster" @change="test1">
+            <!--              <el-checkbox v-for="item in systemRubroList" :key="item.filterKey" :label="item.label" >{{item.label}}</el-checkbox>-->
+            <el-checkbox v-model="isNewMaster" label="1">初始申请硕导</el-checkbox>
+          </el-checkbox-group>        </td>
       </tr>
       <tr>
         <td colspan="1">指导博士生数</td>
@@ -70,7 +74,12 @@
           <el-input v-model.number="form.assistDoctorNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入协助指导博士生数" />
         </td>
         <td colspan="1">初始申请博导</td>
-        <td colspan="1">初始申请硕导</td>
+        <td colspan="1">
+          <el-checkbox-group v-model="isNewDoctor" @change="test1">
+            <!--              <el-checkbox v-for="item in systemRubroList" :key="item.filterKey" :label="item.label" >{{item.label}}</el-checkbox>-->
+            <el-checkbox v-model="isNewDoctor" label="2">初始申请博导</el-checkbox>
+          </el-checkbox-group>
+        </td>
       </tr>
     </table>
     <div align="center">
@@ -183,9 +192,9 @@
 
 <script>
 import { recruitQualificationApply } from '@/api/tutor'
+import { recruitQualificationApplySave } from '@/api/tutor'
 import { recruitQualificationApplyMajorList } from '@/api/tutor'
 import { recruitQualificationApplyApplyList } from '@/api/tutor'
-import { recruitQualificationApplySave } from '@/api/tutor'
 import { recruitQualificationApplyStatistics } from '@/api/tutor'
 import { recruitQualificationApplyMajorAdd } from '@/api/tutor'
 import { recruitQualificationApplyMajorDelete } from '@/api/tutor'
@@ -194,6 +203,8 @@ export default {
   data() {
     return {
       form: {
+        isNewDoctor: '',
+        isNewMaster: '',
         applyId: null,
         isNewApply: false,
         disserNum: 0,
@@ -235,14 +246,29 @@ export default {
       bookList: [],
       projectList: [],
       rewardList: [],
-      patentList: []
+      patentList: [],
+      isNewMaster: '',
+      isNewDoctor: ''
     }
   },
   created() {
     this.fetchData()
   },
   methods: {
+    test1() {
+      if (this.isNewMaster === true) {
+        this.form.isNewMaster = 1
+      } else {
+        this.form.isNewMaster = 0
+      }
+      if (this.isNewDoctor === true) {
+        this.form.isNewDoctor = 1
+      } else {
+        this.form.isNewDoctor = 0
+      }
+    },
     fetchData() {
+      this.getApplyList()
       recruitQualificationApply({ 'session': document.cookie, 'personId': this.personId }).then(res => {
         this.isCanEdit = res.data.isCanEdit
         this.isCanApply = res.data.isCanApply
@@ -250,10 +276,19 @@ export default {
         this.collegeId = res.data.collegeId
         this.majorId = res.data.majorId
         this.form = res.data.form
+        if (res.data.form.isNewDoctor === 1) {
+          this.isNewDoctor = true
+        } else {
+          this.isNewDoctor = false
+        }
+        if (res.data.form.isNewMaster === 1) {
+          this.isNewMaster = true
+        } else {
+          this.isNewMaster = false
+        }
         this.applyTypeList = res.data.applyTypeList
         this.collegeList = res.data.collegeList
         this.majorList = res.data.majorList
-        this.applyList = res.data.applyList
         this.disserList = res.data.disserList
         this.bookList = res.data.bookList
         this.projectList = res.data.projectList
@@ -269,7 +304,7 @@ export default {
       })
     },
     doStatistics() {
-      recruitQualificationApplySave({ 'session': document.cookie, 'form': this.form
+      recruitQualificationApplyStatistics({ 'session': document.cookie, 'form': this.form
       }).then(res => {
         this.form = res.data
       })
@@ -312,13 +347,13 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        recruitQualificationApplyDelete({ 'session': document.cookie, 'majorApplyId': majorApplyId }).then(res => {
+        recruitQualificationApplyMajorDelete({ 'session': document.cookie, 'majorApplyId': majorApplyId }).then(res => {
           if (res.code === '0') {
             this.$message({
-              message: '添加成功',
+              message: '删除成功',
               type: 'sucess'
             })
-            this.doGetApplyList()
+            this.getApplyList()
           } else {
             this.$message({
               message: res.msg,
