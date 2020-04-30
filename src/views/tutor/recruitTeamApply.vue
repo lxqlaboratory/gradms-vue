@@ -28,7 +28,7 @@
       <tr><td>团对成员列表</td></tr>
     </table>
     <el-table
-      :data="applyList"
+      :data="personList"
       border
       style="width: 100%;"
       size="mini"
@@ -137,7 +137,6 @@ export default {
         collegeName: '',
         des: ''
       },
-      applyList: [],
       loading: false,
       isCanEdit: true,
       isCanApply: true,
@@ -156,7 +155,6 @@ export default {
       recruitTeamApply({ 'session': document.cookie, 'personId': this.personId }).then(res => {
         this.isCanEdit = res.data.isCanEdit
         this.isCanApply = res.data.isCanApply
-        if(res.data.form)
         this.form = res.data.form
         this.personList = res.data.personList
       })
@@ -176,7 +174,7 @@ export default {
             type: 'success',
             offset: '10'
           })
-          this.form.applyId = res.data
+          this.form.termId = res.data
         }
       })
     },
@@ -192,34 +190,31 @@ export default {
       }
     },
     doPersonAdd() {
-      recruitTeamApplyPersonAdd({ 'session': document.cookie, 'applyId': this.form.applyId, 'applyType': this.applyType, 'collegeId': this.collegeId, 'majorId': this.majorId
+      recruitTeamApplyPersonAdd({ 'session': document.cookie, 'termId': this.form.termId, 'personId': this.personId
       }).then(res => {
         if (res.code === '0') {
           this.$message({
-            message: '提交成功',
+            message: '添加成功',
             type: 'success',
             offset: '10'
           })
-          this.getApplyList()
+          this.getTeamPersonList()
         }
       })
     },
-    getApplyList(){
-
-    },
-    doPersonDelete(majorApplyId) {
-      this.$confirm('确认要删除已添加的掌声申请吗?', '提示', {
+    doPersonDelete(teamPersonId) {
+      this.$confirm('确认要删除已添加的团队程序成员吗?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        recruitTeamApplyPersonDelete({ 'session': document.cookie, 'majorApplyId': majorApplyId }).then(res => {
+        recruitTeamApplyPersonDelete({ 'session': document.cookie, 'teamPaersonId': teamPaersonId }).then(res => {
           if (res.code === '0') {
             this.$message({
-              message: '添加成功',
+              message: '删除成功',
               type: 'sucess'
             })
-            this.getApplyList()
+            this.getTeamPersonList()
           } else {
             this.$message({
               message: res.msg,
@@ -230,7 +225,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '已删除分发'
+          message: '已取消删除'
         })
       })
     }
