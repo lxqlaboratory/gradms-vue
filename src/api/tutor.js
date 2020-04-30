@@ -365,9 +365,9 @@ export function recruitTeamApplyPersonAdd(data) {
   })
 }
 
-export function recruitTeamApplyPersonDelele(data) {
+export function recruitTeamApplyPersonDelete(data) {
   return request({
-    url: '/api/tutor/recruitTeamApplyPersonDelele',
+    url: '/api/tutor/recruitTeamApplyPersonDelete',
     method: 'POST',
     data
   })

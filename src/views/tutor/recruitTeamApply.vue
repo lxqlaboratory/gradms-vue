@@ -97,7 +97,7 @@
       <tr>
         <td>
           <el-button type="primary" @click="doSave()">保存</el-button>
-          <el-select  style="width:200px;"
+          <el-select  style="width:300px;"
             v-model="personId"
             filterable
             remote
@@ -127,7 +127,7 @@ import { recruitTeamApplySave } from '@/api/tutor'
 import { getPersonNameMapListByPerNumName } from '@/api/personinfo'
 import { recruitTeamApplyPersonList } from '@/api/tutor'
 import { recruitTeamApplyPersonAdd } from '@/api/tutor'
-import { recruitTeamApplyPersonDelele } from '@/api/tutor'
+import { recruitTeamApplyPersonDelete } from '@/api/tutor'
 export default {
   name: 'RecruitTeamApply',
   components: { Tinymce },
@@ -178,7 +178,7 @@ export default {
             type: 'success',
             offset: '10'
           })
-          this.form.termId = res.data
+          this.form.teamId = res.data
         }
       })
     },
@@ -194,26 +194,37 @@ export default {
       }
     },
     doPersonAdd() {
-      console.log(this.form.termId);
-      if(this.form.termId == undefined) {
+      if(this.form.teamId == undefined) {
           this.$message({
             message: '首先保存团队信息在添加团队成员',
             type: 'success',
             offset: '10'
           })
-      }else {
-      recruitTeamApplyPersonAdd({ 'session': document.cookie, 'teamId': this.form.teamId, 'personId': this.personId
-      }).then(res => {
-        if (res.code === '0') {
+      }else if(this.personId == undefined) {
           this.$message({
-            message: '添加成功',
+            message: '没有选择老师，不能添加',
             type: 'success',
             offset: '10'
           })
-          this.getTeamPersonList()
+      }else{
+        recruitTeamApplyPersonAdd({ 'session': document.cookie, 'teamId': this.form.teamId, 'personId': this.personId
+        }).then(res => {
+          if (res.code === '0') {
+            this.$message({
+              message: '添加成功',
+              type: 'success',
+              offset: '10'
+            })
+            this.getTeamPersonList()
+          }else{
+            this.$message({
+              message: res.msg,
+              type: 'warning',
+              offset: '10'
+            })
+          }
+        })
         }
-      })
-      }
     },
     doPersonDelete(teamPersonId) {
       this.$confirm('确认要删除已添加的团队程序成员吗?', '提示', {
@@ -221,7 +232,8 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        recruitTeamApplyPersonDelete({ 'session': document.cookie, 'teamPaersonId': teamPaersonId }).then(res => {
+        console.log(teamPersonId);
+        recruitTeamApplyPersonDelete({ 'session': document.cookie, 'teamPersonId': teamPersonId }).then(res => {
           if (res.code === '0') {
             this.$message({
               message: '删除成功',
