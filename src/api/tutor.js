@@ -278,7 +278,13 @@ export function recruitQualificationApply(data) {
     data
   })
 }
-
+export function recruitQualificationApplySave(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationApplySave',
+    method: 'POST',
+    data
+  })
+}
 export function recruitQualificationApplyApplyList(data) {
   return request({
     url: '/api/tutor/recruitQualificationApplyMajorList',
