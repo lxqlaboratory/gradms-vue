@@ -318,3 +318,51 @@ export function recruitQualificationApplyMajorDelete(data) {
     data
   })
 }
+
+export function recruitTeamApply(data) {
+  return request({
+    url: '/api/tutor/recruitTeamApply',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitTeamApplySave(data) {
+  return request({
+    url: '/api/tutor/recruitTeamApplySave',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitTeamApplyPersonSearch(data) {
+  return request({
+    url: '/api/tutor/recruitTeamApplyPersonSearch',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitTeamApplyPersonList(data) {
+  return request({
+    url: '/api/tutor/recruitTeamApplyPersonList',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitTeamApplyPersonAdd(data) {
+  return request({
+    url: '/api/tutor/recruitTeamApplyPersonAdd',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitTeamApplyPersonDelele(data) {
+  return request({
+    url: '/api/tutor/recruitTeamApplyPersonDelele',
+    method: 'POST',
+    data
+  })
+}

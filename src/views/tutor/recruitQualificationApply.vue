@@ -194,7 +194,7 @@ export default {
   data() {
     return {
       form: {
-            applyId:'',
+            applyId:null,
             isNewApply:false,
             disserNum:0,
             bookNum:0,
@@ -261,17 +261,6 @@ export default {
         this.patentList = res.data.patentList
       })
     },
-    doSave(){
-      recruitQualificationApplySave({'session': document.cookie , 'form': this.form}).then(res => {
-       if(res.code === '0'){
-         this.$message({
-           message: '提交成功',
-           type: 'success',
-           offset: '10'
-         });
-       }
-      })
-    },
     doMajorList(){
       recruitQualificationApplyMajorList({'session': document.cookie , 'applyType': this.applyType, 'collegeId': this.collegeId 
       }).then(res => {
@@ -294,17 +283,18 @@ export default {
            type: 'success',
            offset: '10'
          });
+         this.form.applyId= res.data
        }
       })
     },
-    doGetApplyList(){
+    getApplyList(){
       recruitQualificationApplyApplyList({'session': document.cookie 
       }).then(res => {
         this.applyList  = res.data;          
       })
     },
     doMajorAdd(){
-      recruitQualificationApplyMajorAdd({'session': document.cookie , 'applyType': this.applyType, 'collegeId': this.collegeId,'majorId':this.majorId
+      recruitQualificationApplyMajorAdd({'session': document.cookie ,'applyId':this.form.applyId,'applyType': this.applyType, 'collegeId': this.collegeId,'majorId':this.majorId
       }).then(res => {
        if(res.code === '0'){
          this.$message({
@@ -312,7 +302,7 @@ export default {
            type: 'success',
            offset: '10'
          });
-        this.doGetApplyList();
+        this.getApplyList();
        }
       })
     },
