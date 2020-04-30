@@ -2,84 +2,30 @@
   <div class="app-container">
     <table class="content">
       <tr>
-        <td colspan="8" style="font-size: 16px;font-weight: bold;color: #304156 ">招生申请信息</td>
+        <td colspan="8" style="font-size: 16px;font-weight: bold;color: #304156 ">团队申请信息</td>
       </tr>
       <tr>
-        <td colspan="1" >论文数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.disserNum" placeholder="请输入论文数" ></el-input>
+        <td colspan="1" >团队名称</td>
+        <td colspan="3">
+          <el-input v-model="form.teamName" placeholder="请输入团队名称" ></el-input>
         </td>
-        <td colspan="1" >专著数</td>
+        <td colspan="1" >责任导师</td>
         <td colspan="1">
-          <el-input v-model.number="form.bookNum" placeholder="请输入论文数" ></el-input>
+          {{form.perNum}}-{{form.perName}}
         </td>
-        <td colspan="1" >获奖数</td>
+        <td colspan="1" >培养单位</td>
         <td colspan="1">
-          <el-input v-model.number="form.rewardNum" placeholder="请输入论文数" ></el-input>
-        </td>
-        <td colspan="1" >专利数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.patentNum" placeholder="请输入论文数" ></el-input>
+          {{form.collegeName}}
         </td>
       </tr>
       <tr>
-        <td colspan="1" >国家项目数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.projectNum1" placeholder="请输入论文数" ></el-input>
+        <td colspan="4">
+             <tinymce v-model="form.des" :height="150" />
         </td>
-        <td colspan="1" >国家立项数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.applyProjectNum1" placeholder="请输入论文数" ></el-input>
-        </td>
-        <td colspan="1" >省部项目数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.projectNum2" placeholder="请输入论文数" ></el-input>
-        </td>
-        <td colspan="1" >省部立项数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.applyProjectNum2" placeholder="请输入论文数" ></el-input>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="1" >横向项目</td>
-        <td colspan="1">
-          <el-input v-model.number="form.projectNum3" placeholder="请输入论文数" ></el-input>
-        </td>
-        <td colspan="1" >总经费</td>
-        <td colspan="1">
-          <el-input v-model.number="form.projectFeeTotal" placeholder="请输入论文数" ></el-input>
-        </td>
-        <td colspan="1" >可支配经费</td>
-        <td colspan="1">
-          <el-input v-model.number="form.projectFeeBalance" placeholder="请输入论文数" ></el-input>
-        </td>
-        <td colspan="1" >初始申请博导</td>
-        <td colspan="1" >初始申请硕导</td>
-      </tr>
-      <tr>
-        <td colspan="1" >指导博士生数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.doctorNum" placeholder="请输入论文数" ></el-input>
-        </td>
-        <td colspan="1" >指导硕士生数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.masterNum" placeholder="请输入论文数" ></el-input>
-        </td>
-        <td colspan="1" >协助指导博士生数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.assistDoctorNum" placeholder="请输入论文数" ></el-input>
-        </td>
-        <td colspan="1" >初始申请博导</td>
-        <td colspan="1" >初始申请硕导</td>
       </tr>
     </table>
-    <div align="center">
-      <el-button type="primary" @click="submit" >数据统计</el-button>
-      <el-button type="primary" @click="submit" >修改保存</el-button>
-      <el-button type="primary" @click="submit" >下载简况表</el-button>
-    </div>
     <table class="headline">
-          <tr><td  >已申请招生专业列表</td></tr>
+          <tr><td  >团对成员列表</td></tr>
     </table>
       <el-table
         :data="applyList"
@@ -99,12 +45,21 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="申请类型"
+          label="工号"
           align="center"
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.applyTypeName }}
+            {{ scope.row.perNum }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="姓名"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.perName }}
           </template>
         </el-table-column>
         <el-table-column
@@ -117,21 +72,12 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="专业"
+          label="职称"
           align="center"
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.majorName }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="状态"
-          align="center"
-          color="black"
-        >
-          <template slot-scope="scope">
-            {{ scope.row.stateName}}
+            {{ scope.row.proTechPositionCode}}
           </template>
         </el-table-column>
         <el-table-column
@@ -140,7 +86,7 @@
           color="black"
          >
         <template slot-scope="scope">
-          <el-button type="primary" @click="doMajorDelete(scope.row.majorApplyId)"  >删除</el-button>
+          <el-button type="primary" @click="doPersonDelete(scope.row.teamPersonId)"  >删除</el-button>
         </template>
       </el-table-column>
       </el-table>
@@ -174,7 +120,8 @@
               :value="item.majorId">
             </el-option>
           </el-select>
-            <el-button type="primary" @click="doMajorAdd()" >添加招生专业</el-button>
+            <el-button type="primary" @click="doSave()" >保存</el-button>
+            <el-button type="primary" @click="doPersonAdd()" >添加团队成员</el-button>
           </td>
         </tr>
       </div>
@@ -182,6 +129,7 @@
 </template>
 
 <script>
+import Tinymce from '@/components/Tinymce'
 import { recruitTeamApply } from '@/api/tutor'
 import { recruitTeamApplySave } from '@/api/tutor'
 import { recruitTeamApplyPersonSearch } from '@/api/tutor'
@@ -190,6 +138,7 @@ import { recruitTeamApplyPersonAdd } from '@/api/tutor'
 import { recruitTeamApplyPersonDelele } from '@/api/tutor'
 export default {
   name: 'recruitTeamApply',
+  components: { Tinymce },
   data() {
     return {
         form:{
@@ -213,19 +162,8 @@ export default {
       recruitTeamApply({ 'session': document.cookie ,'personId': this.personId }).then(res => {
         this.isCanEdit = res.data.isCanEdit
         this.isCanApply = res.data.isCanApply
-        this.teamId = res.data.teamId
-        this.teamName = res.data.teamName
-        this.leaderId = res.data.leaderId
-        this.leaderNum  = res.data.form
-        this.applyTypeList = res.data.applyTypeList
-        this.collegeList = res.data.collegeList
-        this.majorList = res.data.majorList
-        this.applyList = res.data.applyList
-        this.disserList = res.data.disserList
-        this.bookList = res.data.bookList
-        this.projectList = res.data.projectList
-        this.rewardList = res.data.rewardList
-        this.patentList = res.data.patentList
+        this.form = res.data.form
+        this.personList = res.data.personList
       })
     },
     doSave(){

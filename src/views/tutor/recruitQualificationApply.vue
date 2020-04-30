@@ -168,7 +168,7 @@
           专业
           <el-select v-model="majorId" placeholder="请选择专业" style="width: 20%">
             <el-option
-              v-for="item in majorId"
+              v-for="item in majorList"
               :key="item.majorId"
               :label="item.majorName"
               :value="item.majorId">
