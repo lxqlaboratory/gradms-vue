@@ -5,21 +5,21 @@
         <td colspan="8" style="font-size: 16px;font-weight: bold;color: #304156 ">团队申请信息</td>
       </tr>
       <tr>
-        <td colspan="1" >团队名称</td>
-        <td colspan="3">
+        <td colspan="1" width="10%" >团队名称</td>
+        <td colspan="1" width="30%">
           <el-input v-model="form.teamName" placeholder="请输入团队名称" ></el-input>
         </td>
-        <td colspan="1" >责任导师</td>
-        <td colspan="1">
-          {{form.perNum}}-{{form.perName}}
+        <td colspan="1" width="10%" >责任导师</td>
+        <td colspan="1" width="20%" >
+          {{form.perNum}}-{{form.leaderName}}
         </td>
-        <td colspan="1" >培养单位</td>
-        <td colspan="1">
+        <td colspan="1" width="10%" >培养单位</td>
+        <td colspan="1" width="20%" >
           {{form.collegeName}}
         </td>
       </tr>
       <tr>
-        <td colspan="4">
+        <td colspan="6">
              <tinymce v-model="form.des" :height="150" />
         </td>
       </tr>
@@ -122,7 +122,7 @@
 import Tinymce from '@/components/Tinymce'
 import { recruitTeamApply } from '@/api/tutor'
 import { recruitTeamApplySave } from '@/api/tutor'
-import { getPersonInfoListByPerNumName } from '@/api/personinfo'
+import { getPersonNameMapListByPerNumName } from '@/api/personinfo'
 import { recruitTeamApplyPersonList } from '@/api/tutor'
 import { recruitTeamApplyPersonAdd } from '@/api/tutor'
 import { recruitTeamApplyPersonDelele } from '@/api/tutor'
@@ -134,9 +134,8 @@ export default {
         form:{
             teamId:null,
             teamName:'',
-            leaderId:'',
-            leaderNum:'',
             leaderName:'',
+            collegeName:'',
             des:''
         },
         isCanEdit:true,
@@ -158,6 +157,12 @@ export default {
         this.personList = res.data.personList
       })
     },
+    getTeamPersonList() {
+      recruitTeamApplyPersonList({ 'session': document.cookie ,'teamId': this.form.teamId }).then(res => {
+        this.personList = res.data
+      })
+    },
+ 
     doSave(){
       recruitTeamApplySave({'session': document.cookie , 'form': this.form
       }).then(res => {
@@ -172,10 +177,11 @@ export default {
       })
     },
     getPersonList(numName) {
-      if (numName !== '' && numName.length()>=2) {
+      if (numName !== '' && numName.length >= 2) {
         this.loading = true
-        getPersonInfoListByPerNumName({ 'session': document.cookie, 'numName': numName }).then(res => {
-          this.selectList = res.data.list
+        getPersonNameMapListByPerNumName({ 'session': document.cookie, 'numName': numName }).then(res => {
+          this.selectList = res.data
+            console.log(this.selectList);
         })
         setTimeout(() => {
           this.loading = false
@@ -210,7 +216,7 @@ export default {
                 message: "添加成功",
                 type: 'sucess'
               });
-              this.doGetApplyList();
+              this.getApplyList();
             }else {
               this.$message({
                 message: res.msg,
