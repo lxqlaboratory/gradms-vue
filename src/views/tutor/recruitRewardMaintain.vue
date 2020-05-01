@@ -4,7 +4,7 @@
       <table class="content"  align="center">
       <tr>
         <td  style="font-size: 16px;color: red;text-align:left; ">
-          说明：从候选列表中选择此次招生资格申请所使用的的奖励，添加到已选择奖励列表中，奖励将按照添加顺序在简况表显示          
+          说明：从候选列表中选择此次招生资格申请所使用的的奖励，添加到已选择奖励列表中，奖励将按照添加顺序在简况表显示
         </td>
       </tr>
     </table>
@@ -35,66 +35,66 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="论文名称"
+            label="奖励项目名称"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.disserName }}
+              {{ scope.row.rewardProjectName }}
             </template>
           </el-table-column>
           <el-table-column
-            label="刊物名称"
+            label="奖励名称"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.publishUnit }}
+              {{ scope.row.rewardName }}
             </template>
           </el-table-column>
           <el-table-column
-            label="收录情况"
+            label="奖励级别"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.include }}
+              {{ scope.row.rewardGrade }}
             </template>
           </el-table-column>
           <el-table-column
-            label="影响因子"
+            label="奖励等级"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.impactFactor}}
+              {{ scope.row.rewardLevle }}
             </template>
           </el-table-column>
           <el-table-column
-            label="发表时间"
+            label="奖励年度"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.publishTime}}
+              {{ scope.row.rewardYear }}
             </template>
           </el-table-column>
           <el-table-column
-            label="刊物级别"
+            label="颁奖部门"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.ranking}}
+              {{ scope.row.rewardDepartment}}
             </template>
           </el-table-column>
           <el-table-column
-            label="作者位次"
+            label="证书时间"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.orderName}}
+              {{ scope.row.certificateDate}}
             </template>
           </el-table-column>
         </el-table>
@@ -119,11 +119,11 @@
           style="width: 100%;"
           size="mini"
         >
-        <el-table-column
-          type="selection"
-          width="55">
-        </el-table-column>
-         <el-table-column
+          <el-table-column
+            type="selection"
+            width="55">
+          </el-table-column>
+          <el-table-column
             label="序号"
             fixed="left"
             width="50"
@@ -135,66 +135,66 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="论文名称"
+            label="奖励项目名称"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.disserName }}
+              {{ scope.row.rewardProjectName }}
             </template>
           </el-table-column>
           <el-table-column
-            label="刊物名称"
+            label="奖励名称"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.publishUnit }}
+              {{ scope.row.rewardName }}
             </template>
           </el-table-column>
           <el-table-column
-            label="收录情况"
+            label="奖励级别"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.include }}
+              {{ scope.row.rewardGrade }}
             </template>
           </el-table-column>
           <el-table-column
-            label="影响因子"
+            label="奖励等级"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.impactFactor}}
+              {{ scope.row.rewardLevle }}
             </template>
           </el-table-column>
           <el-table-column
-            label="发表时间"
+            label="奖励年度"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.publishTime}}
+              {{ scope.row.rewardYear }}
             </template>
           </el-table-column>
           <el-table-column
-            label="刊物级别"
+            label="颁奖部门"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.ranking}}
+              {{ scope.row.rewardDepartment}}
             </template>
           </el-table-column>
-         <el-table-column
-            label="作者位次"
+          <el-table-column
+            label="证书时间"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.orderName}}
+              {{ scope.row.certificateDate}}
             </template>
           </el-table-column>
         </el-table>
