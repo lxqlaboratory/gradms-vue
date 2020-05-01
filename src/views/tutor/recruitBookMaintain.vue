@@ -70,6 +70,15 @@
               {{ scope.row.wordCount}}
             </template>
           </el-table-column>
+          <el-table-column
+            label="作者位次"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.orderName}}
+            </template>
+          </el-table-column>
         </el-table>
     </div>
     <div align="center" v-if="isCanModify" >
@@ -143,6 +152,15 @@
               {{ scope.row.wordCount}}
             </template>
           </el-table-column>
+          <el-table-column
+            label="作者位次"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.orderName}}
+            </template>
+          </el-table-column>
         </el-table>
       </div>
     </div>
@@ -160,7 +178,8 @@ export default {
       dataSelection:[],
       sourceList:[],
       sourceSelection:[],
-      isCanModify:false
+      isCanModify:false,
+      orderName:''
     }
   },
   created() {

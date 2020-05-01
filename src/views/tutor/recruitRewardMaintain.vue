@@ -97,6 +97,15 @@
               {{ scope.row.certificateDate}}
             </template>
           </el-table-column>
+          <el-table-column
+            label="作者位次"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.orderName}}
+            </template>
+          </el-table-column>
         </el-table>
     </div>
     <div align="center" v-if="isCanModify">
@@ -195,6 +204,15 @@
           >
             <template slot-scope="scope">
               {{ scope.row.certificateDate}}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="作者位次"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.orderName}}
             </template>
           </el-table-column>
         </el-table>
