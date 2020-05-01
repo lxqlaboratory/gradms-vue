@@ -7,7 +7,7 @@
       <tr>
         <td colspan="1">论文数</td>
         <td colspan="1">
-          <el-input v-model.number="form.disserNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入论文数" :disabled="isCanEdit" />
+          <el-input v-model.number="disserNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入论文数" :disabled="isCanEdit" />
         </td>
         <td colspan="1">专著数</td>
         <td colspan="1">
@@ -292,6 +292,7 @@ export default {
   data() {
     return {
       showChengGuo: false,
+      disserNum: '',
       form: {
         isNewDoctor: '',
         isNewMaster: '',
@@ -365,6 +366,7 @@ export default {
         this.disserList = res.data.dataList
         this.sourceList = res.data.sourceList
         this.isCanModify = res.data.isCanModify
+        this.disserNum = this.disserList.length
       })
     },
     fetchData() {
