@@ -236,9 +236,9 @@ export const constantRoutes = [
         meta: { title: '学院代导师申请'}
       },
       {
-        path: 'recruitQualificationApplyCheck',
-        name: 'recruitQualificationApplyCheck',
-        component: () => import('@/views/tutor/recruitQualificationApplyCheck'),
+        path: 'recruitQualificationCheck',
+        name: 'recruitQualificationCheck',
+        component: () => import('@/views/tutor/recruitQualificationCheck'),
         meta: { title: '招生资格审核'}
       },
       {
