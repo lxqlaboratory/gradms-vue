@@ -278,10 +278,16 @@ export function recruitQualificationApply(data) {
     data
   })
 }
-
+export function recruitQualificationApplySave(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationApplySave',
+    method: 'POST',
+    data
+  })
+}
 export function recruitQualificationApplyApplyList(data) {
   return request({
-    url: '/api/tutor/recruitQualificationApplyMajorList',
+    url: '/api/tutor/recruitQualificationApplyApplyList',
     method: 'POST',
     data
   })
@@ -359,9 +365,9 @@ export function recruitTeamApplyPersonAdd(data) {
   })
 }
 
-export function recruitTeamApplyPersonDelele(data) {
+export function recruitTeamApplyPersonDelete(data) {
   return request({
-    url: '/api/tutor/recruitTeamApplyPersonDelele',
+    url: '/api/tutor/recruitTeamApplyPersonDelete',
     method: 'POST',
     data
   })
