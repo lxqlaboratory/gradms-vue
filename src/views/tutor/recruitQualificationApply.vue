@@ -7,7 +7,7 @@
       <tr>
         <td colspan="1">论文数</td>
         <td colspan="1">
-          <el-input v-model.number="disserNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入论文数" :disabled="isCanEdit" />
+          <el-input v-model.number="form.disserNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入论文数" :disabled="isCanEdit" />
         </td>
         <td colspan="1">专著数</td>
         <td colspan="1">
@@ -83,7 +83,7 @@
       </tr>
     </table>
     <div align="center">
-      <el-button type="primary" @click="submit">数据统计</el-button>
+      <el-button type="primary" @click="Statistics">数据统计</el-button>
       <el-button type="primary" :disabled="isCanEdit" @click="doSave">修改保存</el-button>
       <el-button type="primary" @click="submit">下载简况表</el-button>
       <el-button type="primary" @click="show1">展示成果</el-button>
@@ -298,7 +298,7 @@ export default {
         isNewMaster: '',
         applyId: null,
         isNewApply: false,
-        disserNum: 0,
+        disserNum: '',
         bookNum: 0,
         patentNum: 0,
         rewardNum: 0,
@@ -366,12 +366,15 @@ export default {
         this.disserList = res.data.dataList
         this.sourceList = res.data.sourceList
         this.isCanModify = res.data.isCanModify
-        this.disserNum = this.disserList.length
+      })
+    },
+    Statistics() {
+      recruitQualificationApplyStatistics({ 'session': document.cookie }).then(res => {
+
       })
     },
     fetchData() {
       this.getApplyList() // 申请列表
-      this.getDisser()
       recruitQualificationApply({ 'session': document.cookie, 'personId': this.personId }).then(res => {
         this.isCanEdit = res.data.isCanEdit
         // disable与iscanedit的true表达意思相反
@@ -399,6 +402,7 @@ export default {
         this.rewardList = res.data.rewardList
         this.patentList = res.data.patentList
       })
+      this.getDisser()
     },
     doMajorList() {
       recruitQualificationApplyMajorList({ 'session': document.cookie, 'applyType': this.applyType, 'collegeId': this.collegeId

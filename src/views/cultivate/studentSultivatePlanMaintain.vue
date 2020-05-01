@@ -114,7 +114,6 @@
       <el-table
         :show-header="false"
         :data="CourseList12"
-        :span-method="objectSpanMethod"
         border
         style="width: 100%;margin-top:-6px;border-top: solid 0px"
         size="mini"
@@ -222,7 +221,6 @@
       <el-table
         :show-header="false"
         :data="CourseList13"
-        :span-method="objectSpanMethod"
         border
         style="width: 100%;margin-top:-6px;border-top: solid 0px"
         size="mini"
@@ -332,7 +330,6 @@
     <div v-show="showRequiredList1" class="table-container">
       <el-table
         :data="requiredList1"
-        :span-method="objectSpanMethod"
         border
         style="width: 100%;margin-top: -6px"
         size="mini"
@@ -431,7 +428,6 @@
       <el-table
         :show-header="false"
         :data="buxiuList1"
-        :span-method="objectSpanMethod"
         border
         style="width: 100%;margin-top:-6px;border-top: solid 0px"
         size="mini"
@@ -530,7 +526,6 @@
       <el-table
         :show-header="false"
         :data="optionalList1"
-        :span-method="objectSpanMethod"
         border
         style="width: 100%;margin-top:-6px;border-top: solid 0px"
         size="mini"
@@ -726,17 +721,14 @@ export default {
         }
         this.fetchData()
       })
-    }
+    },
     // objectSpanMethod({ row, column, rowIndex, columnIndex }) {
     //   if (columnIndex === 0) {
+    //     const _row = this.CourseList11.length
+    //     const _col = _row > 0 ? 1 : 0
     //     return {
-    //       rowspan: this.CourseList11.length,
-    //       colspan: 0
-    //     }
-    //   } else {
-    //     return {
-    //       rowspan: 0,
-    //       colspan: 0
+    //       rowspan: _row,
+    //       colspan: _col
     //     }
     //   }
     // }
