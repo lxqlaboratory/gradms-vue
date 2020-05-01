@@ -230,12 +230,6 @@ export const constantRoutes = [
         meta: { title: '指导团队申请'}
       },
       {
-        path: 'recruitQualificationApplyCollege',
-        name: 'recruitQualificationApplyCollege',
-        component: () => import('@/views/tutor/recruitQualificationApplyCollege'),
-        meta: { title: '学院代导师申请'}
-      },
-      {
         path: 'recruitQualificationCheck',
         name: 'recruitQualificationCheck',
         component: () => import('@/views/tutor/recruitQualificationCheck'),
