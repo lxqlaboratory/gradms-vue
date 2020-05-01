@@ -389,3 +389,28 @@ export function recruitTeamCheckSubmit(data) {
   })
 }
 
+export function recruitQualificationCheck(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationCheck',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitQualificationCheckSubmit(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationCheckSubmit',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitQualificationCheckSubmitSelect(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationCheckSubmitSelect',
+    method: 'POST',
+    data
+  })
+}
+
+

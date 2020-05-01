@@ -43,12 +43,30 @@
           </template>
         </el-table-column>
        <el-table-column
+          label="申请类型"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.applyNames }}
+          </template>
+        </el-table-column>
+       <el-table-column
           label="申请专业"
           align="center"
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.applyTypes }}
+            {{ scope.row.majorNames }}
+          </template>
+        </el-table-column>
+       <el-table-column
+          label="审核通过数"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.passCount }}
           </template>
         </el-table-column>
        <el-table-column
@@ -56,36 +74,102 @@
           align="center"
           color="black"
         >
-          <template slot-scope="scope">
-            {{ scope.row.applyTypes }}
-          </template>
-        </el-table-column>
-       </el-table>
+        <template slot-scope="scope">
+          <el-button type="primary" @click="doView(scope.row.applyId)" >查看详情</el-button>
+          <el-button type="primary"   >
+            <a :href="serverAddres+'/api/thesisreview/thesisReviewOnlineReviewPrint?reviewId='+scope.row.applyId" :download="scope.row.printName">简况表下载</a>
+          </el-button>
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="审核"
+        align="center"
+        color="black"
+        width="60"
+        type="expand"
+      >
+        <template slot-scope="scope">
+          <el-table
+            border
+            style="width: 100%;"
+            :data="scope.row.mList"
+          >
+           <el-table-column
+              label="申请类型"
+              fixed="left"
+              align="center"
+              color="black"
+            >
+              <template slot-scope="scope">
+                {{ scope.row.applyName }}
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="申请专业"
+              fixed="left"
+              align="center"
+              color="black"
+            >
+              <template slot-scope="scope">
+                {{ scope.row.majorName }}
+              </template>
+            </el-table-column>
+           <el-table-column
+              label="状态"
+              fixed="left"
+              align="center"
+              color="black"
+            >
+              <template slot-scope="scope">
+                {{ scope.row.stateName }}
+              </template>
+            </el-table-column>
+           <el-table-column
+              label="操作"
+              fixed="left"
+              align="center"
+              color="black"
+            >
+              <template slot-scope="scope">
+                <el-button v-if="scope.row.state===0" type="primary" @click="doCheck(scope.row.majorApplyId,1)" >审核通过</el-button>
+                <el-button v-if="scope.row.state===0" type="primary" @click="doCheck(scope.row.majorApplyId,2)" >审核不通过</el-button>
+                <el-button v-if="scope.row.state!==0" type="primary" @click="doCheck(scope.row.majorApplyId,0)" >取消审核</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </template>
+      </el-table-column>
+    </el-table>
     </div>
     <div align="center">
-      <el-button  type="primary" @click="getSelectAffairIds" >
-        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialHandoverListPrintDataByAffairIds?affairIds='+affairIds" :download="handoverListFielName">导出试题交接单</a>
+      <el-button  type="primary" @click="doCheckSelect(0)" >取消审核</el-button>
+      <el-button  type="primary" @click="doCheckSelect(1)" >审核通过</el-button>
+      <el-button  type="primary" @click="doCheckSelect(2)" >审核不通过</el-button>
+      <el-button  type="primary" @click="doGetSelectApplyIds" >
+        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialHandoverListPrintDataByAffairIds?affairIds='+applyIds" :download="handoverListFielName">导出试题交接单</a>
       </el-button>
-      <el-button  type="primary" @click="getSelectAffairIds" >
-        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialContactPrintDataByAffairIds?affairIds='+affairIds" :download="contactFielName">导出联系方式</a>
+      <el-button  type="primary" @click="doGetSelectApplyIds" >
+        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialContactPrintDataByAffairIds?affairIds='+applyIds" :download="contactFielName">导出联系方式</a>
       </el-button>
     </div>
   </div>
 </template>
 
 <script>
-import { recruitQualificationCheck } from '@/api/coursenew'
-import { recruitQualificationCheckSubmit } from '@/api/coursenew'
+import { recruitQualificationCheck } from '@/api/tutor'
+import { recruitQualificationCheckSubmit } from '@/api/tutor'
+import { recruitQualificationCheckSubmitSelect } from '@/api/tutor'
+
+
 export default {
   name: 'recruitQualificationCheck',
   data() {
     return {
-      selectList: [],
-      affairList: [],
+      applyList: [],
       multipleSelection:[],
-      affairIds: '',
-      handoverListFielName:'试题交接单.pdf',
-      contactFielName:'联系方式.pdf',
+      applyIds: '',
+      handoverListFielName:'p.pdf',
+      contactFielName:'f.pdf'
    }
   },
   created() {
@@ -94,24 +178,26 @@ export default {
   methods: {
     fetchData() {
       this.serverAddres = this.GLOBAL.servicePort
-      newCultivateExamAffairArrangeInit({ 'session': document.cookie }).then(res => {
-        this.selectList = res.data.selectList
-        this.affairList = res.data.affairList
+      recruitQualificationCheck({ 'session': document.cookie }).then(res => {
+        this.applyList = res.data
       })
     },
-    handleSelectionChange(val) {
+    selectionChange(val) {
         this.multipleSelection = val;
     },
-    getSelectAffairIds(){
-      affairIds = ''
+    getSelectApplyIds(){
+      this.applyIds = ''
       for(var i = 0; i < this.multipleSelection.length;i++){
         if(i===0) {
-          this.affairIds =  this.multipleSelection[0].affairId.toString()
+          this.applyIds =  this.multipleSelection[0].applyId.toString()
         }else{
-          this.affairIds = this.affairIds + '-' + this.multipleSelection[i].affairId.toString()
+          this.applyIds = this.applyIds + '-' + this.multipleSelection[i].applyId.toString()
         }
       }
-      if(this.affairIds=== ''){
+    },
+    doGetSelectApplyIds(){
+      this.getSelectApplyIds();
+      if(this.applyIds=== ''){
         this.$message({
           message: '选择不能为空',
           type: 'success'
@@ -120,38 +206,43 @@ export default {
         this.$refs.temp.click()
       }
     },
-    addPerson(affairId,personId) {
-      newCultivateExamAffairArrangePersonAdd({ 'session': document.cookie ,'affairId': affairId ,'personId': personId }).then(res=>{
-        if(res.code === '0'){
+    doView(applyId){
+      this.$router.push({ path: '/tutor/recruitQualificationApply', query: { applyId }})
+    },
+    doCheckSelect(state){
+      this.getSelectApplyIds();
+      if(this.applyIds=== ''){
+        this.$message({
+          message: '选择不能为空',
+          type: 'success'
+        });
+      }else{
+        recruitQualificationCheckSubmitSelect({ 'session': document.cookie, 'applyIds': this.applyIds, 'state': state
+        }).then(res => {
+          if (res.code === '0') {
+            this.$message({
+              message: '提交成功',
+              type: 'success',
+              offset: '10'
+            })
+            this.fetchData();
+          }
+        })
+      }
+    },
+    doCheck(majorApplyId,state){
+      recruitQualificationCheckSubmit({ 'session': document.cookie, 'majorApplyId': majorApplyId, 'state': state
+      }).then(res => {
+         if (res.code === '0') {
           this.$message({
-            message: '添加成功',
-            type: 'success'
-          });
-         this.fetchData()
-        }else {
-          this.$message({
-            message: res.msg,
-            type: 'warning'
-          });
+            message: '提交成功',
+            type: 'success',
+            offset: '10'
+          })
+          this.fetchData();
         }
       })
     },
-    deletePerson(affairId,personId) {
-      newCultivateExamAffairArrangePersonDelete({ 'session': document.cookie ,'affairId': affairId ,'personId': personId }).then(res=>{
-        if(res.code === '0'){
-          this.$message({
-            message: '删除成功',
-            type: 'success'
-          });
-         this.fetchData()
-        }else {
-          this.$message({
-            message: res.msg,
-            type: 'warning'
-          });
-        }
-      })
-    }
   }
 }
 </script>
