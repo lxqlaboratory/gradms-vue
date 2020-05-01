@@ -292,7 +292,6 @@ export default {
   data() {
     return {
       showChengGuo: false,
-      edit1: false,
       form: {
         isNewDoctor: '',
         isNewMaster: '',
@@ -346,10 +345,10 @@ export default {
     this.fetchData()
   },
   methods: {
-    show1() {
+    show1() { // 展示成果 关闭展示成果
       if (this.showChengGuo === true) { this.showChengGuo = false } else { this.showChengGuo = true }
     },
-    test1() {
+    test1() { // 回显checkbox
       if (this.isNewMaster === true) {
         this.form.isNewMaster = 1
       } else {
@@ -361,7 +360,7 @@ export default {
         this.form.isNewDoctor = 0
       }
     },
-    getDisser() {
+    getDisser() { // 获取论文列表
       recruitDisserMaintain({ 'session': document.cookie }).then(res => {
         this.disserList = res.data.dataList
         this.sourceList = res.data.sourceList
@@ -369,10 +368,11 @@ export default {
       })
     },
     fetchData() {
-      this.getApplyList()
+      this.getApplyList() // 申请列表
       this.getDisser()
       recruitQualificationApply({ 'session': document.cookie, 'personId': this.personId }).then(res => {
         this.isCanEdit = res.data.isCanEdit
+        // disable与iscanedit的true表达意思相反
         this.isCanEdit = !this.isCanEdit
         this.isCanApply = res.data.isCanApply
         this.applyType = res.data.applyType
@@ -411,7 +411,7 @@ export default {
         this.form = res.data
       })
     },
-    doSave() {
+    doSave() { // 保存修改
       recruitQualificationApplySave({ 'session': document.cookie, 'form': this.form
       }).then(res => {
         if (res.code === '0') {
@@ -424,13 +424,13 @@ export default {
         }
       })
     },
-    getApplyList() {
+    getApplyList() { // 申请专业列表
       recruitQualificationApplyApplyList({ 'session': document.cookie
       }).then(res => {
         this.applyList = res.data
       })
     },
-    doMajorAdd() {
+    doMajorAdd() { // 添加申请专业
       recruitQualificationApplyMajorAdd({ 'session': document.cookie, 'applyId': this.form.applyId, 'applyType': this.applyType, 'collegeId': this.collegeId, 'majorId': this.majorId
       }).then(res => {
         if (res.code === '0') {
@@ -443,7 +443,7 @@ export default {
         }
       })
     },
-    doMajorDelete(majorApplyId) {
+    doMajorDelete(majorApplyId) { // 删除申请专业
       this.$confirm('确认要删除已添加的掌声申请吗?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
