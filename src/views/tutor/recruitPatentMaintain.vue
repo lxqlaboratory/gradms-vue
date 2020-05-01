@@ -4,7 +4,7 @@
       <table class="content"  align="center">
       <tr>
         <td  style="font-size: 16px;color: red;text-align:left; ">
-          说明：从候选列表中选择此次招生资格申请所使用的的专利，添加到已选择专利列表中，专利将按照添加顺序在简况表显示          
+          说明：从候选列表中选择此次招生资格申请所使用的的专利，添加到已选择专利列表中，专利将按照添加顺序在简况表显示
         </td>
       </tr>
     </table>
@@ -35,66 +35,39 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="论文名称"
+            label="专利名称"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.disserName }}
+              {{ scope.row.patentName }}
             </template>
           </el-table-column>
           <el-table-column
-            label="刊物名称"
+            label="专利类型"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.publishUnit }}
+              {{ scope.row.patentType }}
             </template>
           </el-table-column>
           <el-table-column
-            label="收录情况"
+            label="申请时间"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.include }}
+              {{ scope.row.applyDate }}
             </template>
           </el-table-column>
           <el-table-column
-            label="影响因子"
+            label="授权时间"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.impactFactor}}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="发表时间"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.publishTime}}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="刊物级别"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.ranking}}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="作者位次"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.orderName}}
+              {{ scope.row.authoriDate}}
             </template>
           </el-table-column>
         </el-table>
@@ -123,7 +96,7 @@
           type="selection"
           width="55">
         </el-table-column>
-         <el-table-column
+          <el-table-column
             label="序号"
             fixed="left"
             width="50"
@@ -135,66 +108,39 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="论文名称"
+            label="专利名称"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.disserName }}
+              {{ scope.row.patentName }}
             </template>
           </el-table-column>
           <el-table-column
-            label="刊物名称"
+            label="专利类型"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.publishUnit }}
+              {{ scope.row.patentType }}
             </template>
           </el-table-column>
           <el-table-column
-            label="收录情况"
+            label="申请时间"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.include }}
+              {{ scope.row.applyDate }}
             </template>
           </el-table-column>
           <el-table-column
-            label="影响因子"
+            label="授权时间"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.impactFactor}}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="发表时间"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.publishTime}}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="刊物级别"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.ranking}}
-            </template>
-          </el-table-column>
-         <el-table-column
-            label="作者位次"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.orderName}}
+              {{ scope.row.authoriDate}}
             </template>
           </el-table-column>
         </el-table>

@@ -4,7 +4,7 @@
       <table class="content"  align="center">
       <tr>
         <td  style="font-size: 16px;color: red;text-align:left; ">
-          说明：从候选列表中选择此次招生资格申请所使用的项目，添加到已选择项目列表中，项目将按照添加顺序在简况表显示          
+          说明：从候选列表中选择此次招生资格申请所使用的项目，添加到已选择项目列表中，项目将按照添加顺序在简况表显示
         </td>
       </tr>
     </table>
@@ -35,66 +35,57 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="论文名称"
+            label="项目名称"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.disserName }}
+              {{ scope.row.projectName }}
             </template>
           </el-table-column>
           <el-table-column
-            label="刊物名称"
+            label="项目类别"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.publishUnit }}
+              {{ scope.row.projectType }}
             </template>
           </el-table-column>
           <el-table-column
-            label="收录情况"
+            label="项目等级"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.include }}
+              {{ scope.row.ranking }}
             </template>
           </el-table-column>
           <el-table-column
-            label="影响因子"
+            label="项目经费"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.impactFactor}}
+              {{ scope.row.projectFee }}
             </template>
           </el-table-column>
           <el-table-column
-            label="发表时间"
+            label="批准部门"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.publishTime}}
+              {{ scope.row.projectSource}}
             </template>
           </el-table-column>
           <el-table-column
-            label="刊物级别"
+            label="项目时间"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.ranking}}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="作者位次"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.orderName}}
+              {{ scope.row.projectTime}}
             </template>
           </el-table-column>
         </el-table>
@@ -123,7 +114,7 @@
           type="selection"
           width="55">
         </el-table-column>
-         <el-table-column
+          <el-table-column
             label="序号"
             fixed="left"
             width="50"
@@ -135,66 +126,57 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="论文名称"
+            label="项目名称"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.disserName }}
+              {{ scope.row.projectName }}
             </template>
           </el-table-column>
           <el-table-column
-            label="刊物名称"
+            label="项目类别"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.publishUnit }}
+              {{ scope.row.projectType }}
             </template>
           </el-table-column>
           <el-table-column
-            label="收录情况"
+            label="项目等级"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.include }}
+              {{ scope.row.ranking }}
             </template>
           </el-table-column>
           <el-table-column
-            label="影响因子"
+            label="项目经费"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.impactFactor}}
+              {{ scope.row.projectFee }}
             </template>
           </el-table-column>
           <el-table-column
-            label="发表时间"
+            label="批准部门"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.publishTime}}
+              {{ scope.row.projectSource}}
             </template>
           </el-table-column>
           <el-table-column
-            label="刊物级别"
+            label="项目时长"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.ranking}}
-            </template>
-          </el-table-column>
-         <el-table-column
-            label="作者位次"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.orderName}}
+              {{ scope.row.projectTime}}
             </template>
           </el-table-column>
         </el-table>
@@ -279,4 +261,7 @@ export default {
 </script>
 
 <style scoped>
+  .headline{
+    margin-bottom: 10px;
+  }
 </style>
