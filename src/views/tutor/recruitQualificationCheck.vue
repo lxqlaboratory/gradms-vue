@@ -146,10 +146,10 @@
       <el-button  type="primary" @click="doCheckSelect(1)" >审核通过</el-button>
       <el-button  type="primary" @click="doCheckSelect(2)" >审核不通过</el-button>
       <el-button  type="primary" @click="doGetSelectApplyIds" >
-        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialHandoverListPrintDataByAffairIds?affairIds='+applyIds" :download="handoverListFielName">导出试题交接单</a>
+        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialHandoverListPrintDataByAffairIds?affairIds='+applyIds" :download="handoverListFielName">导出申请信息表</a>
       </el-button>
       <el-button  type="primary" @click="doGetSelectApplyIds" >
-        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialContactPrintDataByAffairIds?affairIds='+applyIds" :download="contactFielName">导出联系方式</a>
+        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialContactPrintDataByAffairIds?affairIds='+applyIds" :download="contactFielName">下载汇总表</a>
       </el-button>
     </div>
   </div>
