@@ -242,9 +242,9 @@ export const constantRoutes = [
         meta: { title: '招生资格审核'}
       },
       {
-        path: 'recruitTeamApplyCheck',
-        name: 'recruitTeamApplyCheck',
-        component: () => import('@/views/tutor/recruitTeamApplyCheck'),
+        path: 'recruitTeamCheck',
+        name: 'recruitTeamCheck',
+        component: () => import('@/views/tutor/recruitTeamCheck'),
         meta: { title: '招生团队审核'}
       }
     ]

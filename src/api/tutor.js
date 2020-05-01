@@ -372,3 +372,20 @@ export function recruitTeamApplyPersonDelete(data) {
     data
   })
 }
+
+export function recruitTeamCheck(data) {
+  return request({
+    url: '/api/tutor/recruitTeamCheck',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitTeamCheckSubmit(data) {
+  return request({
+    url: '/api/tutor/recruitTeamCheckSubmit',
+    method: 'POST',
+    data
+  })
+}
+

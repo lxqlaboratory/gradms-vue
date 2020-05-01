@@ -6,8 +6,11 @@
       </tr>
       <tr>
         <td colspan="1" width="10%">团队名称</td>
-        <td colspan="1" width="30%">
-          <el-input v-model="form.teamName" placeholder="请输入团队名称" />
+        <td colspan="1" width="30%" v-if="isCanEdit===true" >
+          <el-input v-model="form.teamName" placeholder="请输入团队名称"/>
+        </td>
+        <td colspan="1" width="30%" v-if="isCanEdit===false" >
+          {{form.teamName}}
         </td>
         <td colspan="1" width="10%">责任导师</td>
         <td colspan="1" width="20%">
@@ -23,7 +26,8 @@
       </tr>
       <tr>
         <td colspan="6">
-          <tinymce v-model="form.des" :height="150" />
+          <textarea v-if="isCanEdit===false" placeholder="团队介绍" maxlength="1000"  v-model="form.reviewDes" style="width: 100%;height:150px"  readonly />
+          <textarea v-if="isCanEdit===true" placeholder="团队介绍" maxlength="1000"  v-model="form.reviewDes" style="width: 100%;height:150px"    />
         </td>
       </tr>
     </table>
@@ -83,17 +87,17 @@
           {{ scope.row.proTechPositionCode }}
         </template>
       </el-table-column>
-      <el-table-column
+      <el-table-column  v-if = "isCanEdit"
         label="操作"
         align="center"
         color="black"
       >
-        <template slot-scope="scope">
+        <template slot-scope="scope" >
           <el-button type="primary" @click="doPersonDelete(scope.row.teamPersonId)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <div align="center">
+    <div align="center" v-if = "isCanEdit" >
       <tr>
         <td>
           <el-button type="primary" @click="doSave()">保存</el-button>
@@ -121,7 +125,6 @@
 </template>
 
 <script>
-import Tinymce from '@/components/Tinymce'
 import { recruitTeamApply } from '@/api/tutor'
 import { recruitTeamApplySave } from '@/api/tutor'
 import { getPersonNameMapListByPerNumName } from '@/api/personinfo'
@@ -129,8 +132,7 @@ import { recruitTeamApplyPersonList } from '@/api/tutor'
 import { recruitTeamApplyPersonAdd } from '@/api/tutor'
 import { recruitTeamApplyPersonDelete } from '@/api/tutor'
 export default {
-  name: 'RecruitTeamApply',
-  components: { Tinymce },
+  name: 'recruitTeamApply',
   data() {
     return {
       form: {
@@ -143,7 +145,6 @@ export default {
       },
       loading: false,
       isCanEdit: true,
-      isCanApply: true,
       personId: '',
       selectList: [],
       list: [],
@@ -156,9 +157,8 @@ export default {
   },
   methods: {
     fetchData() {
-      recruitTeamApply({ 'session': document.cookie, 'personId': this.personId }).then(res => {
+      recruitTeamApply({ 'session': document.cookie, 'teamId': this.$route.query.teamId }).then(res => {
         this.isCanEdit = res.data.isCanEdit
-        this.isCanApply = res.data.isCanApply
         this.form = res.data.form
         this.personList = res.data.personList
       })
@@ -187,7 +187,6 @@ export default {
         this.loading = true
         getPersonNameMapListByPerNumName({ 'session': document.cookie, 'numName': numName }).then(res => {
           this.selectList = res.data
-          console.log(this.selectList)
           this.loading = false
         }).catch(() => {
         })
@@ -232,7 +231,6 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        console.log(teamPersonId);
         recruitTeamApplyPersonDelete({ 'session': document.cookie, 'teamPersonId': teamPersonId }).then(res => {
           if (res.code === '0') {
             this.$message({
