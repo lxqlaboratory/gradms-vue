@@ -397,6 +397,14 @@ export function recruitQualificationCheck(data) {
   })
 }
 
+export function recruitQualificationCheckApplyList(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationCheckApplyList',
+    method: 'POST',
+    data
+  })
+}
+
 export function recruitQualificationCheckSubmit(data) {
   return request({
     url: '/api/tutor/recruitQualificationCheckSubmit',
@@ -412,5 +420,14 @@ export function recruitQualificationCheckSubmitSelect(data) {
     data
   })
 }
+
+export function recruitQualificationCheckMajorAdd(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationCheckMajorAdd',
+    method: 'POST',
+    data
+  })
+}
+
 
 

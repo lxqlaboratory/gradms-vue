@@ -1,6 +1,15 @@
 <template>
   <div class="app-container">
       <div class="table-headline">
+      <table class="content"  align="left">
+        <tr>
+          <td  style="font-size: 16px;color: red;text-align:left; ">
+            审核说明:<br>
+            &nbsp;&nbsp;1.点击下载论文，可以下载学生论<br>
+            &nbsp;&nbsp;2.点击评阅，可以填写评阅意见，保存后可以继续修改，选择提交按钮则不能在进行修改，只可以下下载评阅书。
+          </td>
+        </tr>
+      </table>
         <table class="headline">
           <tr><td  >指导团队列表</td></tr>
         </table>

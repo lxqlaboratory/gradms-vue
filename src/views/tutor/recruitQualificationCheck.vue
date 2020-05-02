@@ -1,5 +1,15 @@
 <template>
   <div class="app-container">
+    <table class="content"  align="left">
+      <tr>
+        <td  style="font-size: 16px;color: red;text-align:left; ">
+          审核说明:<br>
+          &nbsp;&nbsp;1.点击下载论文，可以下载学生论<br>
+          &nbsp;&nbsp;2.点击评阅，可以填写评阅意见，保存后可以继续修改，选择提交按钮则不能在进行修改，只可以下下载评阅书。
+          
+        </td>
+      </tr>
+    </table>
     <div class="table-container">
       <el-table
         :data="applyList"
@@ -196,6 +206,8 @@ import { recruitQualificationCheck } from '@/api/tutor'
 import { recruitQualificationCheckSubmit } from '@/api/tutor'
 import { recruitQualificationCheckSubmitSelect } from '@/api/tutor'
 import { recruitQualificationApplyMajorList} from '@/api/tutor'
+import { recruitQualificationCheckMajorAdd } from '@/api/tutor'
+import { recruitQualificationCheckApplyList } from '@/api/tutor'
 
 export default {
   name: 'recruitQualificationCheck',
@@ -224,10 +236,16 @@ export default {
         this.personId = res.data.personId
         this.applyType = res.data.applyType
         this.majorId = res.data.majorId
-        this.applyList = res.data.applyTypeList
+        this.applyList = res.data.applyList
         this.personList = res.data.personList
         this.applyTypeList = res.data.applyTypeList
         this.majorList = res.data.majorList
+      })
+    },
+    getApplyList() {
+      this.serverAddres = this.GLOBAL.servicePort
+      recruitQualificationCheckApplyList({ 'session': document.cookie }).then(res => {
+        this.applyList = res.data
       })
     },
     doMajorList() {
@@ -238,6 +256,19 @@ export default {
       })
     },
 
+doMajorAdd() { // 添加申请专业
+      recruitQualificationCheckMajorAdd({ 'session': document.cookie, 'applyType': this.applyType, 'personId': this.personId, 'majorId': this.majorId
+      }).then(res => {
+        if (res.code === '0') {
+          this.$message({
+            message: '提交成功',
+            type: 'success',
+            offset: '10'
+          })
+          this.getApplyList()
+        }
+      })
+    },
     selectionChange(val) {
         this.multipleSelection = val;
     },
@@ -281,7 +312,7 @@ export default {
               type: 'success',
               offset: '10'
             })
-            this.fetchData();
+            this.getApplyList();
           }
         })
       }
@@ -295,7 +326,7 @@ export default {
             type: 'success',
             offset: '10'
           })
-          this.fetchData();
+          this.getApplyList();
         }
       })
     },
