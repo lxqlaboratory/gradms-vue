@@ -142,6 +142,40 @@
     </el-table>
     </div>
     <div align="center">
+      <tr>
+        <td>
+          导师
+          <el-select v-model="personId" filterable placeholder="请选择添加的教师">
+              <el-option
+                v-for="item in personList"
+                :key="item.personId"
+                :label="item.perName"
+                :value="item.personId"
+              />
+          </el-select>
+          类型
+          <el-select v-model="applyType" placeholder="请选择招生类型" style="width: 20%"  @change="doMajorList()">
+            <el-option
+              v-for="item in applyTypeList"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+          专业
+          <el-select v-model="majorId" placeholder="请选择专业" style="width: 20%" >
+            <el-option
+              v-for="item in majorList"
+              :key="item.majorId"
+              :label="item.majorName"
+              :value="item.majorId"
+            />
+          </el-select>
+          <el-button type="primary"  @click="doMajorAdd()">添加导师招生专业</el-button>
+        </td>
+      </tr>
+    </div>
+    <div align="center">
       <el-button  type="primary" @click="doCheckSelect(0)" >取消审核</el-button>
       <el-button  type="primary" @click="doCheckSelect(1)" >审核通过</el-button>
       <el-button  type="primary" @click="doCheckSelect(2)" >审核不通过</el-button>
@@ -161,7 +195,7 @@ import { saveAs } from 'file-saver';
 import { recruitQualificationCheck } from '@/api/tutor'
 import { recruitQualificationCheckSubmit } from '@/api/tutor'
 import { recruitQualificationCheckSubmitSelect } from '@/api/tutor'
-
+import { recruitQualificationApplyMajorList} from '@/api/tutor'
 
 export default {
   name: 'recruitQualificationCheck',
@@ -171,7 +205,13 @@ export default {
       multipleSelection:[],
       applyIds: '',
       handoverListFielName:'p.pdf',
-      contactFielName:'f.pdf'
+      contactFielName:'f.pdf',
+      personId:'',
+      applyType:'',
+      majorId:'',
+      personList:[],
+      applyTypeList:[],
+      majorList:[]
    }
   },
   created() {
@@ -181,9 +221,23 @@ export default {
     fetchData() {
       this.serverAddres = this.GLOBAL.servicePort
       recruitQualificationCheck({ 'session': document.cookie }).then(res => {
-        this.applyList = res.data
+        this.personId = res.data.personId
+        this.applyType = res.data.applyType
+        this.majorId = res.data.majorId
+        this.applyList = res.data.applyTypeList
+        this.personList = res.data.personList
+        this.applyTypeList = res.data.applyTypeList
+        this.majorList = res.data.majorList
       })
     },
+    doMajorList() {
+      recruitQualificationApplyMajorList({ 'session': document.cookie, 'applyType': this.applyType
+      }).then(res => {
+        this.majorId = res.data.majorId
+        this.majorList = res.data.majorList
+      })
+    },
+
     selectionChange(val) {
         this.multipleSelection = val;
     },
