@@ -1,96 +1,187 @@
 <template>
   <div class="app-container">
-    <table class="content">
+    <table class="content" align="left">
+      <tr>
+        <td style="font-size: 16px;color: red;text-align:left; ">
+          审核说明:<br>
+          &nbsp;&nbsp;1.点击下载论文，可以下载学生论<br>
+          &nbsp;&nbsp;2.点击评阅，可以填写评阅意见，保存后可以继续修改，选择提交按钮则不能在进行修改，只可以下下载评阅书。
+
+        </td>
+      </tr>
+    </table>
+    <table class="content" v-show="isCanEdit">
       <tr>
         <td colspan="8" style="font-size: 16px;font-weight: bold;color: #304156 ">招生申请信息</td>
       </tr>
       <tr>
         <td colspan="1">论文数</td>
         <td colspan="1">
-          <el-input v-model.number="form.disserNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入论文数" :disabled="isCanEdit" />
+          <el-input v-model.number="form.disserNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入论文数"/>
         </td>
         <td colspan="1">专著数</td>
         <td colspan="1">
-          <el-input v-model.number="form.bookNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入专著数" :disabled="isCanEdit" />
+          <el-input v-model.number="form.bookNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入专著数"/>
         </td>
         <td colspan="1">获奖数</td>
         <td colspan="1">
-          <el-input v-model.number="form.rewardNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入获奖数" :disabled="isCanEdit" />
+          <el-input v-model.number="form.rewardNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入获奖数"/>
         </td>
         <td colspan="1">专利数</td>
         <td colspan="1">
-          <el-input v-model.number="form.patentNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入专利数" :disabled="isCanEdit" />
+          <el-input v-model.number="form.patentNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入专利数"/>
         </td>
       </tr>
       <tr>
         <td colspan="1">国家项目数</td>
         <td colspan="1">
-          <el-input v-model.number="form.projectNum1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入国家项目数" :disabled="isCanEdit" />
+          <el-input v-model.number="form.projectNum1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入国家项目数" />
         </td>
         <td colspan="1">国家立项数</td>
         <td colspan="1">
-          <el-input v-model.number="form.applyProjectNum1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入国家立项数" :disabled="isCanEdit" />
+          <el-input v-model.number="form.applyProjectNum1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入国家立项数"/>
         </td>
         <td colspan="1">省部项目数</td>
         <td colspan="1">
-          <el-input v-model.number="form.projectNum2" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入省部项目数" :disabled="isCanEdit" />
+          <el-input v-model.number="form.projectNum2" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入省部项目数"/>
         </td>
         <td colspan="1">省部立项数</td>
         <td colspan="1">
-          <el-input v-model.number="form.applyProjectNum2" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入省部立项数" :disabled="isCanEdit" />
+          <el-input v-model.number="form.applyProjectNum2" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入省部立项数"/>
         </td>
       </tr>
       <tr>
         <td colspan="1">横向项目</td>
         <td colspan="1">
-          <el-input v-model.number="form.projectNum3" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入横向项目数" :disabled="isCanEdit" />
+          <el-input v-model.number="form.projectNum3" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入横向项目数"/>
         </td>
         <td colspan="1">总经费</td>
         <td colspan="1">
-          <el-input v-model="form.projectFeeTotal" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入总经费数" :disabled="isCanEdit" />
+          <el-input v-model="form.projectFeeTotal" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入总经费数"/>
         </td>
         <td colspan="1">可支配经费</td>
         <td colspan="1">
-          <el-input v-model="form.projectFeeBalance" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入可支配经费数" :disabled="isCanEdit" />
+          <el-input v-model="form.projectFeeBalance" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入可支配经费数"/>
         </td>
         <td colspan="1">初始申请硕导</td>
         <td colspan="1">
           <el-checkbox-group v-model="isNewMaster" @change="test1">
             <!--              <el-checkbox v-for="item in systemRubroList" :key="item.filterKey" :label="item.label" >{{item.label}}</el-checkbox>-->
-            <el-checkbox v-model="isNewMaster" :disabled="isCanEdit" label="1">初始申请硕导</el-checkbox>
+            <el-checkbox v-model="isNewMaster" label="1">初始申请硕导</el-checkbox>
           </el-checkbox-group>        </td>
       </tr>
       <tr>
         <td colspan="1">指导博士生数</td>
         <td colspan="1">
-          <el-input v-model.number="form.doctorNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入指导博士生数" :disabled="isCanEdit" />
+          <el-input v-model.number="form.doctorNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入指导博士生数"/>
         </td>
         <td colspan="1">指导硕士生数</td>
         <td colspan="1">
-          <el-input v-model.number="form.masterNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入指导硕士生数" :disabled="isCanEdit" />
+          <el-input v-model.number="form.masterNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入指导硕士生数"/>
         </td>
         <td colspan="1">协助指导博士生数</td>
         <td colspan="1">
-          <el-input v-model.number="form.assistDoctorNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入协助指导博士生数" :disabled="isCanEdit" />
+          <el-input v-model.number="form.assistDoctorNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入协助指导博士生数"/>
         </td>
         <td colspan="1">初始申请博导</td>
         <td colspan="1">
           <el-checkbox-group v-model="isNewDoctor" @change="test1">
             <!--              <el-checkbox v-for="item in systemRubroList" :key="item.filterKey" :label="item.label" >{{item.label}}</el-checkbox>-->
-            <el-checkbox v-model="isNewDoctor" :disabled="isCanEdit" label="1">初始申请博导</el-checkbox>
+            <el-checkbox v-model="isNewDoctor" label="1">初始申请博导</el-checkbox>
+          </el-checkbox-group>
+        </td>
+      </tr>
+    </table>
+    <table class="content" v-show="!isCanEdit">
+      <tr>
+        <td colspan="8" style="font-size: 16px;font-weight: bold;color: #304156 ">招生申请信息</td>
+      </tr>
+      <tr>
+        <td colspan="1">论文数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.disserNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入论文数" v-bind:readonly="true"/>
+        </td>
+        <td colspan="1">专著数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.bookNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入专著数" v-bind:readonly="true"/>
+        </td>
+        <td colspan="1">获奖数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.rewardNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入获奖数" v-bind:readonly="true"/>
+        </td>
+        <td colspan="1">专利数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.patentNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入专利数" v-bind:readonly="true"/>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1">国家项目数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.projectNum1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入国家项目数" v-bind:readonly="true"/>
+        </td>
+        <td colspan="1">国家立项数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.applyProjectNum1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入国家立项数" v-bind:readonly="true"/>
+        </td>
+        <td colspan="1">省部项目数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.projectNum2" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入省部项目数" v-bind:readonly="true"/>
+        </td>
+        <td colspan="1">省部立项数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.applyProjectNum2" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入省部立项数" v-bind:readonly="true"/>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1">横向项目</td>
+        <td colspan="1">
+          <el-input v-model.number="form.projectNum3" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入横向项目数" v-bind:readonly="true"/>
+        </td>
+        <td colspan="1">总经费</td>
+        <td colspan="1">
+          <el-input v-model="form.projectFeeTotal" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入总经费数" v-bind:readonly="true"/>
+        </td>
+        <td colspan="1">可支配经费</td>
+        <td colspan="1">
+          <el-input v-model="form.projectFeeBalance" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入可支配经费数" v-bind:readonly="true"/>
+        </td>
+        <td colspan="1">初始申请硕导</td>
+        <td colspan="1">
+          <el-checkbox-group v-model="isNewMaster" @change="test1">
+            <!--              <el-checkbox v-for="item in systemRubroList" :key="item.filterKey" :label="item.label" >{{item.label}}</el-checkbox>-->
+            <el-checkbox v-model="isNewMaster" :disabled="!isCanEdit" label="1">初始申请硕导</el-checkbox>
+          </el-checkbox-group>        </td>
+      </tr>
+      <tr>
+        <td colspan="1">指导博士生数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.doctorNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入指导博士生数" v-bind:readonly="true"/>
+        </td>
+        <td colspan="1">指导硕士生数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.masterNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入指导硕士生数" v-bind:readonly="true"/>
+        </td>
+        <td colspan="1">协助指导博士生数</td>
+        <td colspan="1">
+          <el-input v-model.number="form.assistDoctorNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入协助指导博士生数" v-bind:readonly="true"/>
+        </td>
+        <td colspan="1">初始申请博导</td>
+        <td colspan="1">
+          <el-checkbox-group v-model="isNewDoctor" @change="test1">
+            <!--              <el-checkbox v-for="item in systemRubroList" :key="item.filterKey" :label="item.label" >{{item.label}}</el-checkbox>-->
+            <el-checkbox v-model="isNewDoctor" :disabled="!isCanEdit" label="1">初始申请博导</el-checkbox>
           </el-checkbox-group>
         </td>
       </tr>
     </table>
     <div align="center">
-      <el-button type="primary" @click="Statistics">数据统计</el-button>
-      <el-button type="primary" :disabled="isCanEdit" @click="doSave">修改保存</el-button>
+      <el-button v-show="showApply" type="primary" @click="Statistics">数据统计</el-button>
+      <el-button v-show="showApply" type="primary" @click="doSave">修改保存</el-button>
       <el-button type="primary" @click="submit">下载简况表</el-button>
-      <el-button type="primary" @click="show1">展示成果</el-button>
     </div>
     <table class="headline">
-      <tr><td>已申请招生专业列表</td></tr>
-    </table>
+    <tr><td>已申请招生专业列表</td></tr>
+  </table>
     <el-table
       :data="applyList"
       border
@@ -148,17 +239,18 @@
         label="操作"
         align="center"
         color="black"
+        v-if='isCanEdit'
       >
         <template slot-scope="scope">
-          <el-button type="primary" :disabled="isCanEdit" @click="doMajorDelete(scope.row.majorApplyId)">删除</el-button>
+          <el-button type="primary"  @click="doMajorDelete(scope.row.majorApplyId)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <div align="center" v-show="showApply">
+    <div v-show="showApply" align="center">
       <tr>
         <td>
           申请类型
-          <el-select v-model="applyType" placeholder="请选择申请类型" style="width: 20%" :disabled="isCanEdit" @change="doMajorList()">
+          <el-select v-model="applyType" placeholder="请选择申请类型" style="width: 20%"  @change="doMajorList()">
             <el-option
               v-for="item in applyTypeList"
               :key="item.value"
@@ -167,7 +259,7 @@
             />
           </el-select>
           学院
-          <el-select v-model="collegeId" placeholder="请选择学院" style="width: 20%" :disabled="isCanEdit" @change="doMajorList()">
+          <el-select v-model="collegeId" placeholder="请选择学院" style="width: 20%"  @change="doMajorList()">
             <el-option
               v-for="item in collegeList"
               :key="item.collegeId"
@@ -176,7 +268,7 @@
             />
           </el-select>
           专业
-          <el-select v-model="majorId" placeholder="请选择专业" style="width: 20%" :disabled="isCanEdit">
+          <el-select v-model="majorId" placeholder="请选择专业" style="width: 20%" >
             <el-option
               v-for="item in majorList"
               :key="item.majorId"
@@ -184,11 +276,11 @@
               :value="item.majorId"
             />
           </el-select>
-          <el-button type="primary" :disabled="isCanEdit" @click="doMajorAdd()">添加招生专业</el-button>
+          <el-button type="primary"  @click="doMajorAdd()">添加招生专业</el-button>
         </td>
       </tr>
     </div>
-    <div align="center" v-show="!showApply">
+    <div v-show="!showApply" align="center">
       <div v-show="showDisser">
         <table class="headline">
           <tr><td>已选择论文列表</td></tr>
@@ -278,15 +370,15 @@
       </div>
       <div v-show="showBook">
         <table class="headline">
-          <tr><td  >已选择专著列表</td></tr>
+          <tr><td>已选择专著列表</td></tr>
         </table>
         <el-table
-          :data="bookList"
           ref="multipleTable"
+          :data="bookList"
           border
           style="width: 100%;margin-top: -6px"
           size="mini"
-          >
+        >
           <el-table-column
             label="序号"
             fixed="left"
@@ -331,7 +423,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.wordCount}}
+              {{ scope.row.wordCount }}
             </template>
           </el-table-column>
           <el-table-column
@@ -340,22 +432,22 @@
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.orderName}}
+              {{ scope.row.orderName }}
             </template>
           </el-table-column>
         </el-table>
       </div>
       <div v-show="showProject">
         <table class="headline">
-          <tr><td  >已选择项目列表</td></tr>
+          <tr><td>已选择项目列表</td></tr>
         </table>
         <el-table
-          :data="projectList"
           ref="multipleTable"
+          :data="projectList"
           border
           style="width: 100%;margin-top: -6px"
           size="mini"
-          >
+        >
           <el-table-column
             label="序号"
             fixed="left"
@@ -409,7 +501,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.projectSource}}
+              {{ scope.row.projectSource }}
             </template>
           </el-table-column>
           <el-table-column
@@ -418,7 +510,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.projectTime}}
+              {{ scope.row.projectTime }}
             </template>
           </el-table-column>
           <el-table-column
@@ -427,22 +519,22 @@
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.orderName}}
+              {{ scope.row.orderName }}
             </template>
           </el-table-column>
         </el-table>
       </div>
       <div v-show="showPatent">
         <table class="headline">
-          <tr><td  >已选择专利列表</td></tr>
+          <tr><td>已选择专利列表</td></tr>
         </table>
         <el-table
-          :data="patentList"
           ref="multipleTable"
+          :data="patentList"
           border
           style="width: 100%;margin-top: -6px"
           size="mini"
-          >
+        >
           <el-table-column
             label="序号"
             fixed="left"
@@ -487,7 +579,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.authoriDate}}
+              {{ scope.row.authoriDate }}
             </template>
           </el-table-column>
           <el-table-column
@@ -496,22 +588,22 @@
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.orderName}}
+              {{ scope.row.orderName }}
             </template>
           </el-table-column>
         </el-table>
       </div>
       <div v-show="showReward">
         <table class="headline">
-          <tr><td  >已选择奖励列表</td></tr>
+          <tr><td>已选择奖励列表</td></tr>
         </table>
         <el-table
-          :data="rewardList"
           ref="multipleTable"
+          :data="rewardList"
           border
           style="width: 100%;margin-top: -6px"
           size="mini"
-          >
+        >
           <el-table-column
             label="序号"
             fixed="left"
@@ -574,7 +666,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.rewardDepartment}}
+              {{ scope.row.rewardDepartment }}
             </template>
           </el-table-column>
           <el-table-column
@@ -583,7 +675,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.certificateDate}}
+              {{ scope.row.certificateDate }}
             </template>
           </el-table-column>
           <el-table-column
@@ -592,7 +684,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.orderName}}
+              {{ scope.row.orderName }}
             </template>
           </el-table-column>
         </el-table>
@@ -631,7 +723,7 @@ export default {
         isNewMaster: '',
         applyId: null,
         isNewApply: false,
-        disserNum: '',
+        disserNum: 0,
         bookNum: 0,
         patentNum: 0,
         rewardNum: 0,
@@ -657,7 +749,7 @@ export default {
         achieContent3: ''
       },
       personId: this.$route.query.personId,
-      isCanEdit: true,
+      isCanEdit: false,
       isCanApply: true,
       applyType: '11',
       collegeId: null,
@@ -679,9 +771,6 @@ export default {
     this.fetchData()
   },
   methods: {
-    show1() { // 展示成果 关闭展示成果
-      if (this.showChengGuo === true) { this.showChengGuo = false } else { this.showChengGuo = true }
-    },
     test1() { // 回显checkbox
       if (this.isNewMaster === true) {
         this.form.isNewMaster = 1
@@ -746,15 +835,21 @@ export default {
     },
     Statistics() {
       recruitQualificationApplyStatistics({ 'session': document.cookie }).then(res => {
-
+        this.form.disserNum = res.data.disserNum
+        this.form.bookNum = res.data.bookNum
+        this.form.patentNum = res.data.patentNum
+        this.form.rewardNum = res.data.rewardNum
+        this.form.projectNum1 = res.data.projectNum1
+        this.form.projectNum2 = res.data.projectNum2
+        this.form.projectNum3 = res.data.projectNum3
+        this.form.applyProjectNum1 = res.data.applyProjectNum1
+        this.form.projectFeeTotal = res.data.projectFeeTotal
       })
     },
     fetchData() {
       this.getApplyList() // 申请列表
       recruitQualificationApply({ 'session': document.cookie, 'personId': this.personId }).then(res => {
         this.isCanEdit = res.data.isCanEdit
-        // disable与iscanedit的true表达意思相反
-        this.isCanEdit = !this.isCanEdit
         this.showApply = res.data.isCanEdit
         if (this.showApply === false) {
           this.getDisser()
@@ -826,6 +921,14 @@ export default {
           this.$message({
             message: '提交成功',
             type: 'success',
+            offset: '10'
+          })
+          this.getApplyList()
+        }
+        if (res.code === '1') {
+          this.$message({
+            message: res.msg,
+            type: 'error',
             offset: '10'
           })
           this.getApplyList()
