@@ -94,7 +94,7 @@
     <el-table
       :data="applyList"
       border
-      style="width: 100%;"
+      style="width: 100%;margin-top: -6px"
       size="mini"
     >
       <el-table-column
@@ -154,7 +154,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <div align="center">
+    <div align="center" v-show="showApply">
       <tr>
         <td>
           申请类型
@@ -188,92 +188,415 @@
         </td>
       </tr>
     </div>
-    <div v-show="showChengGuo" align="center">
-      <table class="headline">
-        <tr><td>已选择论文列表</td></tr>
-      </table>
-      <el-table
-        ref="multipleTable"
-        :data="disserList"
-        border
-        style="width: 100%;"
-        size="mini"
-      >
-        <el-table-column
-          label="序号"
-          fixed="left"
-          width="50"
-          align="center"
-          color="black"
+    <div align="center" v-show="!showApply">
+      <div v-show="showDisser">
+        <table class="headline">
+          <tr><td>已选择论文列表</td></tr>
+        </table>
+        <el-table
+          ref="multipleTable"
+          :data="disserList"
+          border
+          style="width: 100%;margin-top: -6px"
+          size="mini"
         >
-          <template slot-scope="scope">
-            {{ scope.$index+1 }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="论文名称"
-          align="center"
-          color="black"
-        >
-          <template slot-scope="scope">
-            {{ scope.row.disserName }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="刊物名称"
-          align="center"
-          color="black"
-        >
-          <template slot-scope="scope">
-            {{ scope.row.publishUnit }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="收录情况"
-          align="center"
-          color="black"
-        >
-          <template slot-scope="scope">
-            {{ scope.row.include }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="影响因子"
-          align="center"
-          color="black"
-        >
-          <template slot-scope="scope">
-            {{ scope.row.impactFactor }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="发表时间"
-          align="center"
-          color="black"
-        >
-          <template slot-scope="scope">
-            {{ scope.row.publishTime }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="刊物级别"
-          align="center"
-          color="black"
-        >
-          <template slot-scope="scope">
-            {{ scope.row.ranking }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="作者位次"
-          align="center"
-          color="black"
-        >
-          <template slot-scope="scope">
-            {{ scope.row.orderName }}
-          </template>
-        </el-table-column>
-      </el-table>
+          <el-table-column
+            label="序号"
+            fixed="left"
+            width="50"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.$index+1 }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="论文名称"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.disserName }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="刊物名称"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.publishUnit }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="收录情况"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.include }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="影响因子"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.impactFactor }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="发表时间"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.publishTime }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="刊物级别"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.ranking }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="作者位次"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.orderName }}
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div v-show="showBook">
+        <table class="headline">
+          <tr><td  >已选择专著列表</td></tr>
+        </table>
+        <el-table
+          :data="bookList"
+          ref="multipleTable"
+          border
+          style="width: 100%;margin-top: -6px"
+          size="mini"
+          >
+          <el-table-column
+            label="序号"
+            fixed="left"
+            width="50"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.$index+1 }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="著作名称"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.bookName }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="著作类型"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.bookType }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="出版时间"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.publishDate }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="字数"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.wordCount}}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="作者位次"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.orderName}}
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div v-show="showProject">
+        <table class="headline">
+          <tr><td  >已选择项目列表</td></tr>
+        </table>
+        <el-table
+          :data="projectList"
+          ref="multipleTable"
+          border
+          style="width: 100%;margin-top: -6px"
+          size="mini"
+          >
+          <el-table-column
+            label="序号"
+            fixed="left"
+            width="50"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.$index+1 }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="项目名称"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.projectName }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="项目类别"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.projectType }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="项目等级"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.ranking }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="项目经费"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.projectFee }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="批准部门"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.projectSource}}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="项目时间"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.projectTime}}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="作者位次"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.orderName}}
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div v-show="showPatent">
+        <table class="headline">
+          <tr><td  >已选择专利列表</td></tr>
+        </table>
+        <el-table
+          :data="patentList"
+          ref="multipleTable"
+          border
+          style="width: 100%;margin-top: -6px"
+          size="mini"
+          >
+          <el-table-column
+            label="序号"
+            fixed="left"
+            width="50"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.$index+1 }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="专利名称"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.patentName }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="专利类型"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.patentType }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="申请时间"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.applyDate }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="授权时间"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.authoriDate}}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="作者位次"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.orderName}}
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div v-show="showReward">
+        <table class="headline">
+          <tr><td  >已选择奖励列表</td></tr>
+        </table>
+        <el-table
+          :data="rewardList"
+          ref="multipleTable"
+          border
+          style="width: 100%;margin-top: -6px"
+          size="mini"
+          >
+          <el-table-column
+            label="序号"
+            fixed="left"
+            width="50"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.$index+1 }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="奖励项目名称"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.rewardProjectName }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="奖励名称"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.rewardName }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="奖励级别"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.rewardGrade }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="奖励等级"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.rewardLevle }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="奖励年度"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.rewardYear }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="颁奖部门"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.rewardDepartment}}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="证书时间"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.certificateDate}}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="作者位次"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.orderName}}
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
     </div>
   </div>
 </template>
@@ -281,6 +604,10 @@
 <script>
 import { recruitQualificationApply } from '@/api/tutor'
 import { recruitDisserMaintain } from '@/api/tutor'
+import { recruitBookMaintain } from '@/api/tutor'
+import { recruitProjectMaintain } from '@/api/tutor'
+import { recruitPatentMaintain } from '@/api/tutor'
+import { recruitRewardMaintain } from '@/api/tutor'
 import { recruitQualificationApplySave } from '@/api/tutor'
 import { recruitQualificationApplyMajorList } from '@/api/tutor'
 import { recruitQualificationApplyApplyList } from '@/api/tutor'
@@ -291,7 +618,13 @@ export default {
   name: 'RecruitQualificationApply',
   data() {
     return {
+      showDisser: false,
+      showBook: false,
+      showProject: false,
+      showPatent: false,
+      showReward: false,
       showChengGuo: false,
+      showApply: false,
       disserNum: '',
       form: {
         isNewDoctor: '',
@@ -366,6 +699,49 @@ export default {
         this.disserList = res.data.dataList
         this.sourceList = res.data.sourceList
         this.isCanModify = res.data.isCanModify
+        if (this.disserList.length !== 0) {
+          this.showDisser = true
+        }
+      })
+    },
+    getBook() {
+      recruitBookMaintain({ 'session': document.cookie }).then(res => {
+        this.bookList = res.data.dataList
+        this.sourceList = res.data.sourceList
+        this.isCanModify = res.data.isCanModify
+        if (this.bookList.length !== 0) {
+          this.showBook = true
+        }
+      })
+    },
+    getProject() {
+      recruitProjectMaintain({ 'session': document.cookie }).then(res => {
+        this.projectList = res.data.dataList
+        this.sourceList = res.data.sourceList
+        this.isCanModify = res.data.isCanModify
+        if (this.projectList.length !== 0) {
+          this.showProject = true
+        }
+      })
+    },
+    getPatent() {
+      recruitPatentMaintain({ 'session': document.cookie }).then(res => {
+        this.patentList = res.data.dataList
+        this.sourceList = res.data.sourceList
+        this.isCanModify = res.data.isCanModify
+        if (this.patentList.length !== 0) {
+          this.showPatent = true
+        }
+      })
+    },
+    getReward() {
+      recruitRewardMaintain({ 'session': document.cookie }).then(res => {
+        this.rewardList = res.data.dataList
+        this.sourceList = res.data.sourceList
+        this.isCanModify = res.data.isCanModify
+        if (this.rewardList.length !== 0) {
+          this.showReward = true
+        }
       })
     },
     Statistics() {
@@ -379,6 +755,14 @@ export default {
         this.isCanEdit = res.data.isCanEdit
         // disable与iscanedit的true表达意思相反
         this.isCanEdit = !this.isCanEdit
+        this.showApply = res.data.isCanEdit
+        if (this.showApply === false) {
+          this.getDisser()
+          this.getBook()
+          this.getProject()
+          this.getPatent()
+          this.getReward()
+        }
         this.isCanApply = res.data.isCanApply
         this.applyType = res.data.applyType
         this.collegeId = res.data.collegeId
@@ -402,7 +786,6 @@ export default {
         this.rewardList = res.data.rewardList
         this.patentList = res.data.patentList
       })
-      this.getDisser()
     },
     doMajorList() {
       recruitQualificationApplyMajorList({ 'session': document.cookie, 'applyType': this.applyType, 'collegeId': this.collegeId
