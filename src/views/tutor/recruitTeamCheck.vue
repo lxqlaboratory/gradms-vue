@@ -84,7 +84,7 @@
       <div align="center">
       <tr>
         <td>
-          <el-button type="primary" @click="doExport()" >导出申请信息表</el-button>
+          <el-button type="primary" @click="doExport()" >导出团队申请信息表</el-button>
           <el-button type="primary" @click="download()" >下载汇总表</el-button>
         </td>
       </tr>
