@@ -63,12 +63,17 @@
         <td colspan="1">
           <el-input v-model="form.projectFeeBalance" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入可支配经费数"/>
         </td>
-        <td colspan="1">初始申请硕导</td>
+        <td colspan="1">申请类型</td>
         <td colspan="1">
-          <el-checkbox-group v-model="isNewMaster" @change="test1">
-            <!--              <el-checkbox v-for="item in systemRubroList" :key="item.filterKey" :label="item.label" >{{item.label}}</el-checkbox>-->
-            <el-checkbox v-model="isNewMaster" label="1">初始申请硕导</el-checkbox>
-          </el-checkbox-group>        </td>
+          <el-select v-model="form.applyKind" placeholder="请选择申请类型" style="width: 20%"  >
+            <el-option
+              v-for="item in applyKindList"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+        </td>
       </tr>
       <tr>
         <td colspan="1">指导博士生数</td>
@@ -82,13 +87,6 @@
         <td colspan="1">协助指导博士生数</td>
         <td colspan="1">
           <el-input v-model.number="form.assistDoctorNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入协助指导博士生数"/>
-        </td>
-        <td colspan="1">初始申请博导</td>
-        <td colspan="1">
-          <el-checkbox-group v-model="isNewDoctor" @change="test1">
-            <!--              <el-checkbox v-for="item in systemRubroList" :key="item.filterKey" :label="item.label" >{{item.label}}</el-checkbox>-->
-            <el-checkbox v-model="isNewDoctor" label="1">初始申请博导</el-checkbox>
-          </el-checkbox-group>
         </td>
       </tr>
     </table>
@@ -145,12 +143,17 @@
         <td colspan="1">
           <el-input v-model="form.projectFeeBalance" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入可支配经费数" v-bind:readonly="true"/>
         </td>
-        <td colspan="1">初始申请硕导</td>
+        <td colspan="1">申请类型</td>
         <td colspan="1">
-          <el-checkbox-group v-model="isNewMaster" @change="test1">
-            <!--              <el-checkbox v-for="item in systemRubroList" :key="item.filterKey" :label="item.label" >{{item.label}}</el-checkbox>-->
-            <el-checkbox v-model="isNewMaster" :disabled="!isCanEdit" label="1">初始申请硕导</el-checkbox>
-          </el-checkbox-group>        </td>
+          <el-select v-model="form.applyKind" placeholder="请选择申请类型"   >
+            <el-option
+              v-for="item in applyKindList"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+        </td>
       </tr>
       <tr>
         <td colspan="1">指导博士生数</td>
@@ -164,13 +167,6 @@
         <td colspan="1">协助指导博士生数</td>
         <td colspan="1">
           <el-input v-model.number="form.assistDoctorNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入协助指导博士生数" v-bind:readonly="true"/>
-        </td>
-        <td colspan="1">初始申请博导</td>
-        <td colspan="1">
-          <el-checkbox-group v-model="isNewDoctor" @change="test1">
-            <!--              <el-checkbox v-for="item in systemRubroList" :key="item.filterKey" :label="item.label" >{{item.label}}</el-checkbox>-->
-            <el-checkbox v-model="isNewDoctor" :disabled="!isCanEdit" label="1">初始申请博导</el-checkbox>
-          </el-checkbox-group>
         </td>
       </tr>
     </table>
@@ -719,10 +715,9 @@ export default {
       showApply: false,
       disserNum: '',
       form: {
-        isNewDoctor: '',
-        isNewMaster: '',
         applyId: null,
-        isNewApply: false,
+        recruitType:'',
+        applyKind: '',
         disserNum: 0,
         bookNum: 0,
         patentNum: 0,
@@ -754,6 +749,7 @@ export default {
       applyType: '11',
       collegeId: null,
       majorId: null,
+      applyKindList: [],
       applyTypeList: [],
       collegeList: [],
       majorList: [],
@@ -763,8 +759,6 @@ export default {
       projectList: [],
       rewardList: [],
       patentList: [],
-      isNewMaster: '',
-      isNewDoctor: ''
     }
   },
   created() {
@@ -772,16 +766,6 @@ export default {
   },
   methods: {
     test1() { // 回显checkbox
-      if (this.isNewMaster === true) {
-        this.form.isNewMaster = 1
-      } else {
-        this.form.isNewMaster = 0
-      }
-      if (this.isNewDoctor === true) {
-        this.form.isNewDoctor = 1
-      } else {
-        this.form.isNewDoctor = 0
-      }
     },
     getDisser() { // 获取论文列表
       recruitDisserMaintain({ 'session': document.cookie }).then(res => {
@@ -863,16 +847,7 @@ export default {
         this.collegeId = res.data.collegeId
         this.majorId = res.data.majorId
         this.form = res.data.form
-        if (res.data.form.isNewDoctor === 1) {
-          this.isNewDoctor = true
-        } else {
-          this.isNewDoctor = false
-        }
-        if (res.data.form.isNewMaster === 1) {
-          this.isNewMaster = true
-        } else {
-          this.isNewMaster = false
-        }
+        this.applyKindList = res.data.applyKindList
         this.applyTypeList = res.data.applyTypeList
         this.collegeList = res.data.collegeList
         this.majorList = res.data.majorList
@@ -880,6 +855,7 @@ export default {
         this.projectList = res.data.projectList
         this.rewardList = res.data.rewardList
         this.patentList = res.data.patentList
+        this.applyList = res.data.applyList;
       })
     },
     doMajorList() {
