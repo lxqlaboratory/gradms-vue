@@ -210,10 +210,10 @@
       <el-button  type="primary" @click="doCheckSelect(2)" >审核不通过</el-button>
       <el-button  type="primary" @click="doExport()" >导出招生申请信息表</el-button>
       <el-button  type="primary" @click="doGetSelectApplyIds" >
-        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialHandoverListPrintDataByAffairIds?affairIds='+applyIds" :download="handoverListFielName">导出申请信息表</a>
+        <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationListPrintDataByApplyIds?applyIds='+applyIds" :download="qualificationFielName">导出申请信息表</a>
       </el-button>
-      <el-button  type="primary" @click="doGetSelectApplyIds" >
-        <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialContactPrintDataByAffairIds?affairIds='+applyIds" :download="contactFielName">下载汇总表</a>
+      <el-button  type="primary" >
+        <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationApplySummaryTablePrintData'" :download="summarFielName">下载汇总表</a>
       </el-button>
     </div>
   </div>
@@ -236,8 +236,8 @@ export default {
       applyList: [],
       multipleSelection:[],
       applyIds: '',
-      handoverListFielName:'p.pdf',
-      contactFielName:'f.pdf',
+      qualificationFielName:'简况表.pdf',
+      summarFielName:'申请汇总表.pdf',
       personId:'',
       applyType:'',
       majorId:'',
@@ -350,7 +350,7 @@ doMajorAdd() { // 添加申请专业
         }
       })
     },
-       doExport(){
+    doExport(){
       var filename = "招生申请信息表.xlsx";
       // 工作簿中工作表的名字
       var sheetName = "招生申请信息表";
