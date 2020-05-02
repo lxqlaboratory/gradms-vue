@@ -62,7 +62,16 @@
           </template>
         </el-table-column>
        <el-table-column
-          label="申请专业"
+          label="专业代码"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.majorNums }}
+          </template>
+        </el-table-column>
+       <el-table-column
+          label="专业名称"
           align="center"
           color="black"
         >
@@ -115,7 +124,17 @@
               </template>
             </el-table-column>
             <el-table-column
-              label="申请专业"
+              label="专业代码"
+              fixed="left"
+              align="center"
+              color="black"
+            >
+              <template slot-scope="scope">
+                {{ scope.row.majorNum }}
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="专业名称"
               fixed="left"
               align="center"
               color="black"
@@ -189,6 +208,7 @@
       <el-button  type="primary" @click="doCheckSelect(0)" >取消审核</el-button>
       <el-button  type="primary" @click="doCheckSelect(1)" >审核通过</el-button>
       <el-button  type="primary" @click="doCheckSelect(2)" >审核不通过</el-button>
+      <el-button  type="primary" @click="doExport()" >导出招生申请信息表</el-button>
       <el-button  type="primary" @click="doGetSelectApplyIds" >
         <a :href="serverAddres+'/api/coursenew/getNewCultivateExamAffairMaterialHandoverListPrintDataByAffairIds?affairIds='+applyIds" :download="handoverListFielName">导出申请信息表</a>
       </el-button>
@@ -331,13 +351,17 @@ doMajorAdd() { // 添加申请专业
       })
     },
        doExport(){
-      var filename = "申请信息信息表.xlsx";
+      var filename = "招生申请信息表.xlsx";
       // 工作簿中工作表的名字
-      var sheetName = "团队申请信息表";
+      var sheetName = "招生申请信息表";
 
       // head定义了整个xlsx的顺序，里面的内容时json object的key
-      const header = ["teamName","leaderName","perNams", "perName", "tutorName","thesisNum", "uploadTime", "checkTime", "reviewTotal","reviewExpert","reviewResult"];
-      const headerExcel = ["学生类型","专业","学号", "姓名", "导师姓名","论文编号", "上传时间", "导师审核时间", "评阅分数", "评阅专家", "评阅结果"];
+      const header = ["perNum","collegeName","perName", "gender", "perBirthday","proTechPosition", "doctorTutorTime","applyNames", "majorNums", "majorNames"
+      ,"disserNum","bookNum","rewardNum","patentNum","projectNum1","projectNum2","projectNum3","applyProjectNum1","applyProjectNum1","projectFeeTotal","projectFeeBalance"
+      ,"doctorNum","masterNum","assistDoctorNum","isNewDoctor","isNewMaster"];
+      const headerExcel = ["教师编号","培养单位","姓名", "性别", "出生年月","专业技术职称", "初次担任博导时间", "申请类型","二级学科代码", "二级学科名称"
+      ,"论文数", "专著数","奖励数", "专利数","国家项目数", "省部项目数","横向项目数", "国家立项数","省部立项数", "项目总经费","可支配经费"
+      , "指导博士生数","指导硕士生数", "辅助指导博士生数","是否首次申请博导","是否首次申请硕导"];
 
       const XlsxPopulate = require('xlsx-populate');
 
@@ -350,7 +374,7 @@ doMajorAdd() { // 添加申请专业
         ws.name(sheetName);
 
         // Set table name
-        const r = ws.range("A1:K1");
+        const r = ws.range("A1:Z1");
         r.merged(true);
         r.value(sheetName);
         r.style({horizontalAlignment: "center", verticalAlignment : "center"});
@@ -367,13 +391,28 @@ doMajorAdd() { // 添加申请专业
         ws.column("E").width(10);
         ws.column("F").width(20);
         ws.column("G").width(25);
-        ws.column("H").width(25);
-        ws.column("I").width(10);
-        ws.column("J").width(20);
-        ws.column("K").width(40);
+        ws.column("H").width(55);
+        ws.column("I").width(50);
+        ws.column("J").width(50);
+        ws.column("K").width(20);
+        ws.column("L").width(20);
+        ws.column("M").width(20);
+        ws.column("N").width(20);
+        ws.column("O").width(20);
+        ws.column("P").width(20);
+        ws.column("Q").width(20);
+        ws.column("R").width(20);
+        ws.column("S").width(20);
+        ws.column("T").width(20);
+        ws.column("U").width(20);
+        ws.column("V").width(20);
+        ws.column("W").width(20);
+        ws.column("X").width(20);
+        ws.column("Y").width(20);
+        ws.column("Z").width(20);
 
         // create data from array of json object to array of array
-        var valueArray = this.studentList.map(
+        var valueArray = this.applyList.map(
           item => {
             var va = [];
             header.forEach(element => {

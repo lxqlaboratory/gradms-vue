@@ -94,7 +94,7 @@
         color="black"
       >
         <template slot-scope="scope">
-          {{ scope.row.proTechPositionCode }}
+          {{ scope.row.proTechPosition }}
         </template>
       </el-table-column>
       <el-table-column  v-if = "isCanEdit"
