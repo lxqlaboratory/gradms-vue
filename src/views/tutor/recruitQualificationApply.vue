@@ -844,7 +844,6 @@ export default {
         this.form.projectNum3 = res.data.projectNum3
         this.form.applyProjectNum1 = res.data.applyProjectNum1
         this.form.projectFeeTotal = res.data.projectFeeTotal
-        this.form.projectFeeBalance = res.data.projectFeeBalance
       })
     },
     fetchData() {
