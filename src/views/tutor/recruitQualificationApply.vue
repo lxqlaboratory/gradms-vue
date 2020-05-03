@@ -3,246 +3,262 @@
     <table class="content" align="left">
       <tr>
         <td style="font-size: 16px;color: red;text-align:left; ">
-          审核说明:<br>
+          申请说明:<br>
           &nbsp;&nbsp;1.点击下载论文，可以下载学生论<br>
           &nbsp;&nbsp;2.点击评阅，可以填写评阅意见，保存后可以继续修改，选择提交按钮则不能在进行修改，只可以下下载评阅书。
-
         </td>
       </tr>
     </table>
-    <table class="content" v-show="isCanEdit">
-      <tr>
-        <td colspan="8" style="font-size: 16px;font-weight: bold;color: #304156 ">招生申请信息</td>
-      </tr>
-      <tr>
-        <td colspan="1">论文数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.disserNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入论文数"/>
-        </td>
-        <td colspan="1">专著数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.bookNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入专著数"/>
-        </td>
-        <td colspan="1">获奖数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.rewardNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入获奖数"/>
-        </td>
-        <td colspan="1">专利数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.patentNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入专利数"/>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="1">国家项目数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.projectNum1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入国家项目数" />
-        </td>
-        <td colspan="1">国家立项数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.applyProjectNum1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入国家立项数"/>
-        </td>
-        <td colspan="1">省部项目数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.projectNum2" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入省部项目数"/>
-        </td>
-        <td colspan="1">省部立项数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.applyProjectNum2" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入省部立项数"/>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="1">横向项目</td>
-        <td colspan="1">
-          <el-input v-model.number="form.projectNum3" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入横向项目数"/>
-        </td>
-        <td colspan="1">总经费</td>
-        <td colspan="1">
-          <el-input v-model="form.projectFeeTotal" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入总经费数"/>
-        </td>
-        <td colspan="1">可支配经费</td>
-        <td colspan="1">
-          <el-input v-model="form.projectFeeBalance" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入可支配经费数"/>
-        </td>
-        <td colspan="1">申请类型</td>
-        <td colspan="1">
-          <el-select v-model="form.applyKind" placeholder="请选择申请类型" style="width: 20%"  >
-            <el-option
-              v-for="item in applyKindList"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+    <div >
+      <table class="content" >
+        <tr>
+          <td colspan="10" style="font-size: 16px;font-weight: bold;color: #304156 ">招生申请信息</td>
+        </tr>
+        <tr>
+          <td colspan="1">申请类型</td>
+          <td colspan="1">
+            <el-select v-model="form.applyKind" placeholder="请选择申请类型"   >
+              <el-option
+                v-for="item in applyKindList"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
+          </td>
+          <td colspan="1">性别</td>
+          <td colspan="1">
+            <el-select v-model="form.genderCode" placeholder="请选择性别"   >
+              <el-option
+                v-for="item in gender"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
+          </td>
+          <td colspan="1">出生年月</td>
+          <td colspan="1">
+            <el-date-picker
+              v-model="form.perBirthDay"
+              size="mini"
+              type="date"
+              value-format="yyyy-MM-dd"
+              placeholder="选择日期时间"
             />
-          </el-select>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="1">指导博士生数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.doctorNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入指导博士生数"/>
-        </td>
-        <td colspan="1">指导硕士生数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.masterNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入指导硕士生数"/>
-        </td>
-        <td colspan="1">协助指导博士生数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.assistDoctorNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入协助指导博士生数"/>
-        </td>
-      </tr>
-    </table>
-    <table class="content" v-show="!isCanEdit">
-      <tr>
-        <td colspan="8" style="font-size: 16px;font-weight: bold;color: #304156 ">招生申请信息</td>
-      </tr>
-      <tr>
-        <td colspan="1">论文数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.disserNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入论文数" v-bind:readonly="true"/>
-        </td>
-        <td colspan="1">专著数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.bookNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入专著数" v-bind:readonly="true"/>
-        </td>
-        <td colspan="1">获奖数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.rewardNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入获奖数" v-bind:readonly="true"/>
-        </td>
-        <td colspan="1">专利数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.patentNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入专利数" v-bind:readonly="true"/>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="1">国家项目数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.projectNum1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入国家项目数" v-bind:readonly="true"/>
-        </td>
-        <td colspan="1">国家立项数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.applyProjectNum1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入国家立项数" v-bind:readonly="true"/>
-        </td>
-        <td colspan="1">省部项目数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.projectNum2" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入省部项目数" v-bind:readonly="true"/>
-        </td>
-        <td colspan="1">省部立项数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.applyProjectNum2" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入省部立项数" v-bind:readonly="true"/>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="1">横向项目</td>
-        <td colspan="1">
-          <el-input v-model.number="form.projectNum3" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入横向项目数" v-bind:readonly="true"/>
-        </td>
-        <td colspan="1">总经费</td>
-        <td colspan="1">
-          <el-input v-model="form.projectFeeTotal" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入总经费数" v-bind:readonly="true"/>
-        </td>
-        <td colspan="1">可支配经费</td>
-        <td colspan="1">
-          <el-input v-model="form.projectFeeBalance" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入可支配经费数" v-bind:readonly="true"/>
-        </td>
-        <td colspan="1">申请类型</td>
-        <td colspan="1">
-          <el-select v-model="form.applyKind" placeholder="请选择申请类型"   >
-            <el-option
-              v-for="item in applyKindList"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+          </td>
+          <td colspan="1">职称</td>
+          <td colspan="1">
+            <el-select v-model="form.proTechPositionCode" placeholder="请选择申请类型"   >
+              <el-option
+                v-for="item in proTechPositionCodeList"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
+          </td>
+          <td colspan="1">博导时间</td>
+          <td colspan="1">
+            <el-date-picker
+              v-model="form.doctorTutorTime"
+              size="mini"
+              type="date"
+              value-format="yyyy-MM-dd"
+              placeholder="选择日期时间"
             />
-          </el-select>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="1">指导博士生数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.doctorNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入指导博士生数" v-bind:readonly="true"/>
-        </td>
-        <td colspan="1">指导硕士生数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.masterNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入指导硕士生数" v-bind:readonly="true"/>
-        </td>
-        <td colspan="1">协助指导博士生数</td>
-        <td colspan="1">
-          <el-input v-model.number="form.assistDoctorNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入协助指导博士生数" v-bind:readonly="true"/>
-        </td>
-      </tr>
-    </table>
-    <div align="center">
-      <el-button v-show="showApply" type="primary" @click="Statistics">数据统计</el-button>
-      <el-button v-show="showApply" type="primary" @click="doSave">修改保存</el-button>
-      <el-button type="primary" @click="submit">下载简况表</el-button>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="1"  >论文数</td>
+          <td colspan="1" >
+            <el-input v-model.number="form.disserNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入论文数"   style="width:50p;" />
+          </td>
+          <td colspan="1">专著数</td>
+          <td colspan="1"  >  
+            <el-input v-model.number="form.bookNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入专著数" style="width:50px;" />
+          </td>
+          <td colspan="1">获奖数</td>
+          <td colspan="1"  width = "%5" >
+            <el-input v-model.number="form.rewardNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入获奖数"/>
+          </td>
+          <td colspan="1">专利数</td>
+          <td colspan="1" width = "%5" >
+            <el-input v-model.number="form.patentNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入专利数"/>
+          </td>
+          <td colspan="1">国家项目数</td>
+          <td colspan="1">
+            <el-input v-model.number="form.projectNum1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入国家项目数" />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="1">国家立项数</td>
+          <td colspan="1">
+            <el-input v-model.number="form.applyProjectNum1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入国家立项数"/>
+          </td>
+          <td colspan="1">省部项目数</td>
+          <td colspan="1">
+            <el-input v-model.number="form.projectNum2" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入省部项目数"/>
+          </td>
+          <td colspan="1">省部立项数</td>
+          <td colspan="1">
+            <el-input v-model.number="form.applyProjectNum2" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入省部立项数"/>
+          </td>
+          <td colspan="1">横向项目</td>
+          <td colspan="1">
+            <el-input v-model.number="form.projectNum3" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入横向项目数"/>
+          </td>
+          <td colspan="1">总经费</td>
+          <td colspan="1">
+            <el-input v-model="form.projectFeeTotal" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入总经费数"/>
+          </td>
+          </tr>
+          <tr>
+          <td colspan="1">可支配经费</td>
+          <td colspan="1">
+            <el-input v-model="form.projectFeeBalance" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入可支配经费数"/>
+          </td>
+          <td colspan="1">指导博士生数</td>
+          <td colspan="1">
+            <el-input v-model.number="form.doctorNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入指导博士生数"/>
+          </td>
+          <td colspan="1">指导硕士生数</td>
+          <td colspan="1">
+            <el-input v-model.number="form.masterNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入指导硕士生数"/>
+          </td>
+          <td colspan="1">协助指导博士生数</td>
+          <td colspan="3">
+            <el-input v-model.number="form.assistDoctorNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入协助指导博士生数"/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="1">成果一名称</td>
+          <td colspan="6">
+            <el-input v-model="form.achieName1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入成果一名称"/>
+          </td>
+          <td colspan="1">日期</td>
+          <td colspan="2">
+            <el-input v-model="form.achieDate1"  placeholder="请输入成果一日期"/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="10">
+            <textarea  placeholder="成果一介绍" maxlength="1000"  v-model="form.achieContent1" style="width: 100%;height:80px"    />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="1">成果二名称</td>
+          <td colspan="6">
+            <el-input v-model="form.achieName1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入成果二名称"/>
+          </td>
+          <td colspan="1">日期</td>
+          <td colspan="2">
+            <el-input v-model="form.achieDate1"  placeholder="请输入成果二日期"/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="10">
+            <textarea  placeholder="成果二介绍" maxlength="1000"  v-model="form.achieContent1" style="width: 100%;height:80px"    />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="1">成果三名称</td>
+          <td colspan="6">
+            <el-input v-model="form.achieName1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入成果三日期"/>
+          </td>
+          <td colspan="1">日期</td>
+          <td colspan="2">
+            <el-input v-model="form.achieDate1"  placeholder="请输入成果三日期"/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="10">
+            <textarea  placeholder="成果三介绍" maxlength="1000"  v-model="form.achieContent1" style="width: 100%;height:80px"    />
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div align="center"  >
+        <fileupload 
+          url="/api/thesisreview/thesisReviewOnlineReviewThesisUpload"
+          :data="{'docType': pdf,'thesisId':form.applyId}"
+          accepttype=".pdf"
+          @successcallback="onSuccess"
+          style="float: right"
+          @preview="onPreview"
+        >附件上传
+        </fileupload>
+        <el-button  type="primary" @click="Statistics">数据统计</el-button>
+        <el-button  type="primary" @click="doSave">修改保存</el-button>
     </div>
     <table class="headline">
-    <tr><td>已申请招生专业列表</td></tr>
-  </table>
-    <el-table
-      :data="applyList"
-      border
-      style="width: 100%;margin-top: -6px"
-      size="mini"
-    >
-      <el-table-column
-        label="序号"
-        fixed="left"
-        width="50"
-        align="center"
-        color="black"
+      <tr><td>已申请招生专业列表</td></tr>
+    </table>
+      <el-table
+        :data="applyList"
+        border
+        style="width: 100%;margin-top: -6px"
+        size="mini"
       >
-        <template slot-scope="scope">
-          {{ scope.$index+1 }}
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="申请类型"
-        align="center"
-        color="black"
-      >
-        <template slot-scope="scope">
-          {{ scope.row.applyTypeName }}
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="学院"
-        align="center"
-        color="black"
-      >
-        <template slot-scope="scope">
-          {{ scope.row.collegeName }}
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="专业"
-        align="center"
-        color="black"
-      >
-        <template slot-scope="scope">
-          {{ scope.row.majorName }}
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="状态"
-        align="center"
-        color="black"
-      >
-        <template slot-scope="scope">
-          {{ scope.row.stateName }}
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="操作"
-        align="center"
-        color="black"
-        v-if='isCanEdit'
-      >
-        <template slot-scope="scope">
-          <el-button type="primary"  @click="doMajorDelete(scope.row.majorApplyId)">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-    <div v-show="showApply" align="center">
+        <el-table-column
+          label="序号"
+          fixed="left"
+          width="50"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.$index+1 }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="申请类型"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.applyTypeName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="学院"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.collegeName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="专业"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.majorName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="状态"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.stateName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="操作"
+          align="center"
+          color="black"
+          v-if='isCanEdit'
+        >
+          <template slot-scope="scope">
+            <el-button type="primary"  @click="doMajorDelete(scope.row.majorApplyId)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    <div  align="center">
       <tr>
         <td>
           申请类型
@@ -273,429 +289,15 @@
             />
           </el-select>
           <el-button type="primary"  @click="doMajorAdd()">添加招生专业</el-button>
+          <el-button type="primary" @click="submit">下载简况表</el-button>
         </td>
       </tr>
-    </div>
-    <div v-show="!showApply" align="center">
-      <div v-show="showDisser">
-        <table class="headline">
-          <tr><td>已选择论文列表</td></tr>
-        </table>
-        <el-table
-          ref="multipleTable"
-          :data="disserList"
-          border
-          style="width: 100%;margin-top: -6px"
-          size="mini"
-        >
-          <el-table-column
-            label="序号"
-            fixed="left"
-            width="50"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.$index+1 }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="论文名称"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.disserName }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="刊物名称"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.publishUnit }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="收录情况"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.include }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="影响因子"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.impactFactor }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="发表时间"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.publishTime }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="刊物级别"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.ranking }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="作者位次"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.orderName }}
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
-      <div v-show="showBook">
-        <table class="headline">
-          <tr><td>已选择专著列表</td></tr>
-        </table>
-        <el-table
-          ref="multipleTable"
-          :data="bookList"
-          border
-          style="width: 100%;margin-top: -6px"
-          size="mini"
-        >
-          <el-table-column
-            label="序号"
-            fixed="left"
-            width="50"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.$index+1 }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="著作名称"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.bookName }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="著作类型"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.bookType }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="出版时间"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.publishDate }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="字数"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.wordCount }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="作者位次"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.orderName }}
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
-      <div v-show="showProject">
-        <table class="headline">
-          <tr><td>已选择项目列表</td></tr>
-        </table>
-        <el-table
-          ref="multipleTable"
-          :data="projectList"
-          border
-          style="width: 100%;margin-top: -6px"
-          size="mini"
-        >
-          <el-table-column
-            label="序号"
-            fixed="left"
-            width="50"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.$index+1 }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="项目名称"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.projectName }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="项目类别"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.projectType }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="项目等级"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.ranking }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="项目经费"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.projectFee }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="批准部门"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.projectSource }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="项目时间"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.projectTime }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="作者位次"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.orderName }}
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
-      <div v-show="showPatent">
-        <table class="headline">
-          <tr><td>已选择专利列表</td></tr>
-        </table>
-        <el-table
-          ref="multipleTable"
-          :data="patentList"
-          border
-          style="width: 100%;margin-top: -6px"
-          size="mini"
-        >
-          <el-table-column
-            label="序号"
-            fixed="left"
-            width="50"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.$index+1 }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="专利名称"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.patentName }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="专利类型"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.patentType }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="申请时间"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.applyDate }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="授权时间"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.authoriDate }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="作者位次"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.orderName }}
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
-      <div v-show="showReward">
-        <table class="headline">
-          <tr><td>已选择奖励列表</td></tr>
-        </table>
-        <el-table
-          ref="multipleTable"
-          :data="rewardList"
-          border
-          style="width: 100%;margin-top: -6px"
-          size="mini"
-        >
-          <el-table-column
-            label="序号"
-            fixed="left"
-            width="50"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.$index+1 }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="奖励项目名称"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.rewardProjectName }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="奖励名称"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.rewardName }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="奖励级别"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.rewardGrade }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="奖励等级"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.rewardLevle }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="奖励年度"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.rewardYear }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="颁奖部门"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.rewardDepartment }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="证书时间"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.certificateDate }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="作者位次"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.orderName }}
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { recruitQualificationApply } from '@/api/tutor'
-import { recruitDisserMaintain } from '@/api/tutor'
-import { recruitBookMaintain } from '@/api/tutor'
-import { recruitProjectMaintain } from '@/api/tutor'
-import { recruitPatentMaintain } from '@/api/tutor'
-import { recruitRewardMaintain } from '@/api/tutor'
 import { recruitQualificationApplySave } from '@/api/tutor'
 import { recruitQualificationApplyMajorList } from '@/api/tutor'
 import { recruitQualificationApplyApplyList } from '@/api/tutor'
@@ -706,18 +308,14 @@ export default {
   name: 'RecruitQualificationApply',
   data() {
     return {
-      showDisser: false,
-      showBook: false,
-      showProject: false,
-      showPatent: false,
-      showReward: false,
-      showChengGuo: false,
-      showApply: false,
-      disserNum: '',
       form: {
         applyId: null,
         recruitType:'',
         applyKind: '',
+        genderCode:'',
+        perBirthDay:'',
+        proTechPositionCode:'',
+        doctorTutorTime:'',
         disserNum: 0,
         bookNum: 0,
         patentNum: 0,
@@ -743,13 +341,13 @@ export default {
         achieDate3: '',
         achieContent3: ''
       },
-      personId: this.$route.query.personId,
+      personId: this.$route.query.applyId,
       isCanEdit: false,
-      isCanApply: true,
       applyType: '11',
       collegeId: null,
       majorId: null,
       applyKindList: [],
+      proTechPositionCode:[],
       applyTypeList: [],
       collegeList: [],
       majorList: [],
@@ -759,6 +357,15 @@ export default {
       projectList: [],
       rewardList: [],
       patentList: [],
+      gender:[
+          {
+            value: '1',
+            label: '男'
+          }, {
+            value: '2',
+            label: '女'
+          }
+        ],
     }
   },
   created() {
@@ -766,56 +373,6 @@ export default {
   },
   methods: {
     test1() { // 回显checkbox
-    },
-    getDisser() { // 获取论文列表
-      recruitDisserMaintain({ 'session': document.cookie }).then(res => {
-        this.disserList = res.data.dataList
-        this.sourceList = res.data.sourceList
-        this.isCanModify = res.data.isCanModify
-        if (this.disserList.length !== 0) {
-          this.showDisser = true
-        }
-      })
-    },
-    getBook() {
-      recruitBookMaintain({ 'session': document.cookie }).then(res => {
-        this.bookList = res.data.dataList
-        this.sourceList = res.data.sourceList
-        this.isCanModify = res.data.isCanModify
-        if (this.bookList.length !== 0) {
-          this.showBook = true
-        }
-      })
-    },
-    getProject() {
-      recruitProjectMaintain({ 'session': document.cookie }).then(res => {
-        this.projectList = res.data.dataList
-        this.sourceList = res.data.sourceList
-        this.isCanModify = res.data.isCanModify
-        if (this.projectList.length !== 0) {
-          this.showProject = true
-        }
-      })
-    },
-    getPatent() {
-      recruitPatentMaintain({ 'session': document.cookie }).then(res => {
-        this.patentList = res.data.dataList
-        this.sourceList = res.data.sourceList
-        this.isCanModify = res.data.isCanModify
-        if (this.patentList.length !== 0) {
-          this.showPatent = true
-        }
-      })
-    },
-    getReward() {
-      recruitRewardMaintain({ 'session': document.cookie }).then(res => {
-        this.rewardList = res.data.dataList
-        this.sourceList = res.data.sourceList
-        this.isCanModify = res.data.isCanModify
-        if (this.rewardList.length !== 0) {
-          this.showReward = true
-        }
-      })
     },
     Statistics() {
       recruitQualificationApplyStatistics({ 'session': document.cookie }).then(res => {
@@ -834,14 +391,6 @@ export default {
       this.getApplyList() // 申请列表
       recruitQualificationApply({ 'session': document.cookie, 'personId': this.personId }).then(res => {
         this.isCanEdit = res.data.isCanEdit
-        this.showApply = res.data.isCanEdit
-        if (this.showApply === false) {
-          this.getDisser()
-          this.getBook()
-          this.getProject()
-          this.getPatent()
-          this.getReward()
-        }
         this.isCanApply = res.data.isCanApply
         this.applyType = res.data.applyType
         this.collegeId = res.data.collegeId
@@ -851,10 +400,6 @@ export default {
         this.applyTypeList = res.data.applyTypeList
         this.collegeList = res.data.collegeList
         this.majorList = res.data.majorList
-        this.bookList = res.data.bookList
-        this.projectList = res.data.projectList
-        this.rewardList = res.data.rewardList
-        this.patentList = res.data.patentList
         this.applyList = res.data.applyList;
       })
     },
@@ -937,7 +482,25 @@ export default {
           message: '已删除分发'
         })
       })
-    }
+    },
+    onPreview: function(file) {
+    },
+    onSuccess(res, file) {
+        if(res.code === '0'){
+          this.$message({
+            message: '上传成功，请下载检查一下文件是否可以打开',
+            type: 'success'
+          });
+          this.fetchData()
+        }
+        else{
+          this.$message({
+            message: res.msg,
+            type: 'error'
+          });
+        }
+    },
+
   }
 }
 </script>
