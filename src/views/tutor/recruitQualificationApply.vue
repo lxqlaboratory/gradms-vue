@@ -434,7 +434,7 @@ export default {
       collegeId: null,
       majorId: null,
       applyKindList: [],
-      proTechPositionCode:[],
+      proTechPositionCodeList:[],
       applyTypeList: [],
       collegeList: [],
       majorList: [],
@@ -469,6 +469,7 @@ export default {
         this.collegeId = res.data.collegeId
         this.majorId = res.data.majorId
         this.form = res.data.form
+        this.proTechPositionCodeList = res.data.proTechPositionCodeList
         this.applyKindList = res.data.applyKindList
         this.applyTypeList = res.data.applyTypeList
         this.collegeList = res.data.collegeList
@@ -495,17 +496,25 @@ export default {
       })
     },
     doSave() { // 保存修改
-      recruitQualificationApplySave({ 'session': document.cookie, 'form': this.form
-      }).then(res => {
-        if (res.code === '0') {
-          this.$message({
+        if(genderCode === undefined ||perBirthDay === undefined || proTechPositionCode=== undefined || applyKind==='D' && doctorTutorTime=== undefined ) {
+           this.$message({
             message: '提交成功',
             type: 'success',
             offset: '10'
           })
-          this.form.applyId = res.data
+        }else {
+          recruitQualificationApplySave({ 'session': document.cookie, 'form': this.form
+          }).then(res => {
+            if (res.code === '0') {
+              this.$message({
+                message: '提交成功',
+                type: 'success',
+                offset: '10'
+              })
+              this.form.applyId = res.data
+            }
+          })
         }
-      })
     },
     getApplyList() { // 申请专业列表
       recruitQualificationApplyApplyList({ 'session': document.cookie
