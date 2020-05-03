@@ -237,6 +237,7 @@ export default {
   name: 'recruitQualificationCheck',
   data() {
     return {
+      serverAddres:'',
       applyList: [],
       multipleSelection:[],
       applyIds: '',

@@ -264,7 +264,7 @@
       </table>
     </div>
     <div align="center" v-if="isCanEdit" >
-        <el-button  type="primary" @click="Statistics">数据统计</el-button>
+        <el-button  type="primary" @click="doStatistics">数据统计</el-button>
         <el-button  type="primary" @click="doSave">修改保存</el-button>
       <fileupload
         url="/api/tutor/recruitQualificationAttachUpload"
@@ -374,7 +374,7 @@
           </el-select>
           <el-button type="primary"  @click="doMajorAdd()">添加招生专业</el-button>
           <el-button type="primary"   >
-            <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationPrintData?applyId='+scope.row.applyId" :download="applyTableName">下载简况表</a>
+            <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationPrintData?applyId='+applyId" :download="applyTableName">下载简况表</a>
           </el-button>
         </td>
       </tr>
@@ -476,17 +476,9 @@ export default {
         this.applyList = res.data.applyList;
       })
     },
-    Statistics() {
-      recruitQualificationApplyStatistics({ 'session': document.cookie }).then(res => {
-        this.form.disserNum = res.data.disserNum
-        this.form.bookNum = res.data.bookNum
-        this.form.patentNum = res.data.patentNum
-        this.form.rewardNum = res.data.rewardNum
-        this.form.projectNum1 = res.data.projectNum1
-        this.form.projectNum2 = res.data.projectNum2
-        this.form.projectNum3 = res.data.projectNum3
-        this.form.applyProjectNum1 = res.data.applyProjectNum1
-        this.form.projectFeeTotal = res.data.projectFeeTotal
+    doStatistics() {
+      recruitQualificationApplyStatistics({ 'session': document.cookie,'form':this.form }).then(res => {
+        this.form = res.data
       })
     },
     doMajorList() {
