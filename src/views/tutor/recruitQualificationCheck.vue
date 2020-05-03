@@ -95,6 +95,7 @@
         >
         <template slot-scope="scope">
           <el-button type="primary" @click="doView(scope.row.applyId)" >查看详情</el-button>
+          <el-button type="primary" @click="doViewAchievement(scope.row.personId)" >成果列表</el-button>          
           <el-button type="primary"   >
             <a :href="serverAddres+'/api/thesisreview/thesisReviewOnlineReviewPrint?reviewId='+scope.row.applyId" :download="scope.row.printName">简况表下载</a>
           </el-button>
@@ -315,6 +316,9 @@ doMajorAdd() { // 添加申请专业
     },
     doView(applyId){
       this.$router.push({ path: '/tutor/recruitQualificationApply', query: { applyId }})
+    },
+    doViewAchievement(personId){
+      this.$router.push({ path: '/tutor/tutorRecruitAchievementList', query: { personId }})
     },
     doCheckSelect(state){
       this.getSelectApplyIds();

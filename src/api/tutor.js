@@ -428,6 +428,14 @@ export function recruitQualificationCheckMajorAdd(data) {
     data
   })
 }
+export function tutorRecruitAchievementList(data) {
+  return request({
+    url: '/api/tutor/tutorRecruitAchievementList',
+    method: 'POST',
+    data
+  })
+}
+
 
 
 

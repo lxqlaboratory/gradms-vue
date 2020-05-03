@@ -240,6 +240,12 @@ export const constantRoutes = [
         name: 'recruitTeamCheck',
         component: () => import('@/views/tutor/recruitTeamCheck'),
         meta: { title: '招生团队审核'}
+      },
+      {
+        path: 'tutorRecruitAchievementList',
+        name: 'tutorRecruitAchievementList',
+        component: () => import('@/views/tutor/tutorRecruitAchievementList'),
+        meta: { title: '招生团队审核'}
       }
     ]
   },
