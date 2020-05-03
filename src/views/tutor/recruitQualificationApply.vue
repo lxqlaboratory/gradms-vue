@@ -373,7 +373,9 @@
             />
           </el-select>
           <el-button type="primary"  @click="doMajorAdd()">添加招生专业</el-button>
-          <el-button type="primary" @click="submit">下载简况表</el-button>
+          <el-button type="primary"   >
+            <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationPrintData?applyId='+scope.row.applyId" :download="applyTableName">下载简况表</a>
+          </el-button>
         </td>
       </tr>
     </div>
@@ -442,6 +444,7 @@ export default {
       projectList: [],
       rewardList: [],
       patentList: [],
+      applyTableName:'简况表.pdf',
       gender:[
           {
             value: '1',
@@ -457,21 +460,8 @@ export default {
     this.fetchData()
   },
   methods: {
-    Statistics() {
-      recruitQualificationApplyStatistics({ 'session': document.cookie ,'applyId':this.$route.query.applyId}).then(res => {
-        this.form.disserNum = res.data.disserNum
-        this.form.bookNum = res.data.bookNum
-        this.form.patentNum = res.data.patentNum
-        this.form.rewardNum = res.data.rewardNum
-        this.form.projectNum1 = res.data.projectNum1
-        this.form.projectNum2 = res.data.projectNum2
-        this.form.projectNum3 = res.data.projectNum3
-        this.form.applyProjectNum1 = res.data.applyProjectNum1
-        this.form.projectFeeTotal = res.data.projectFeeTotal
-      })
-    },
     fetchData() {
-      console.log(this.$route.query.applyId)
+      this.serverAddres = this.GLOBAL.servicePort
       recruitQualificationApply({ 'session': document.cookie, 'applyId':this.$route.query.applyId }).then(res => {
         this.isCanEdit = res.data.isCanEdit
         this.isCanApply = res.data.isCanApply
@@ -484,6 +474,19 @@ export default {
         this.collegeList = res.data.collegeList
         this.majorList = res.data.majorList
         this.applyList = res.data.applyList;
+      })
+    },
+    Statistics() {
+      recruitQualificationApplyStatistics({ 'session': document.cookie }).then(res => {
+        this.form.disserNum = res.data.disserNum
+        this.form.bookNum = res.data.bookNum
+        this.form.patentNum = res.data.patentNum
+        this.form.rewardNum = res.data.rewardNum
+        this.form.projectNum1 = res.data.projectNum1
+        this.form.projectNum2 = res.data.projectNum2
+        this.form.projectNum3 = res.data.projectNum3
+        this.form.applyProjectNum1 = res.data.applyProjectNum1
+        this.form.projectFeeTotal = res.data.projectFeeTotal
       })
     },
     doMajorList() {
@@ -571,7 +574,7 @@ export default {
     onSuccess(res, file) {
         if(res.code === '0'){
           this.$message({
-            message: '上传成功，请下载检查一下文件是否可以打开',
+            message: '上传成功',
             type: 'success'
           });
           this.fetchData()
