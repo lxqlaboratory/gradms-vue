@@ -4,10 +4,10 @@
       <table class="content"  align="left">
         <tr>
           <td  style="font-size: 16px;color: red;text-align:left; ">
-            审核说明:<br>
-            &nbsp;&nbsp;1.点击下载论文，可以下载学生论<br>
-            &nbsp;&nbsp;2.点击评阅，可以填写评阅意见，保存后可以继续修改，选择提交按钮则不能在进行修改，只可以下下载评阅书。
-          </td>
+          说明:<br>
+            &nbsp;&nbsp;1.学院可以对本学院的责任导师申请的指导团队进行审核通过，审核不通过，取消通过，审核通过后信息不能修改<br>
+            &nbsp;&nbsp;2.学院可以导出所有团队申请信息列表，和审核通过的上报研究生院的汇总表
+         </td>
         </tr>
       </table>
         <table class="headline">
