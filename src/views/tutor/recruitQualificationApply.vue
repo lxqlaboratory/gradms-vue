@@ -16,7 +16,7 @@
         </tr>
         <tr>
           <td colspan="1" style="width: 10%">申请类型</td>
-          <td colspan="1" style="width: 12%" v-if="isCanEdit" >
+          <td colspan="1" style="width: 10%" v-if="isCanEdit" >
             <el-select v-model="form.applyKind" placeholder="请选择申请类型"   >
               <el-option
                 v-for="item in applyKindList"
@@ -27,7 +27,7 @@
             </el-select>
           </td>
           <td colspan="1" style="width: 12%" v-else >
-          {{form.applyKind}}
+          {{form.applyKindName}}
           </td>
           <td colspan="1" style="width: 10%">性别</td>
           <td colspan="1" style="width: 8%" v-if="isCanEdit" >
@@ -41,9 +41,9 @@
             </el-select>
           </td>
           <td colspan="1" style="width: 8%" v-else >
-            {{form.genderCode}}
+            {{form.genderName}}
           </td>
-          <td colspan="1" style="width: 15%">出生年月</td>
+          <td colspan="1" style="width: 12%">出生年月</td>
           <td colspan="1" style="width: 12%" v-if="isCanEdit">
             <el-date-picker
               v-model="form.perBirthDay"
@@ -55,9 +55,9 @@
             />
           </td>
           <td colspan="1" style="width: 12%" v-else >
-            {{form.perBirthDay}}
+            {{form.perBirthDayStr}}
           </td>
-          <td colspan="1" style="width: 15%">职称</td>
+          <td colspan="1" style="width: 12%">职称</td>
           <td colspan="1" style="width: 10%" v-if="isCanEdit">
             <el-select v-model="form.proTechPositionCode" placeholder="请选择申请类型"   >
               <el-option
@@ -69,7 +69,7 @@
             </el-select>
           </td>
           <td colspan="1" style="width: 10%" v-else >
-            {{form.proTechPositionCode}}
+            {{form.proTechPositionName}}
           </td>
           <td colspan="1" style="width: 10%">博导时间</td>
           <td colspan="1"  v-if="isCanEdit">
@@ -81,8 +81,8 @@
               placeholder="选择日期时间"
             />
           </td>
-          <td colspan="1" style="width: 10%" v-else >
-            {{form.doctorTutorTime}}
+          <td colspan="1" style="width: 12%" v-else >
+            {{form.doctorTutorTimeStr}}
           </td>
         </tr>
         <tr>
@@ -185,53 +185,80 @@
           <td colspan="3" v-if="isCanEdit">
             <el-input v-model.number="form.assistDoctorNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入协助指导博士生数"/>
           </td>
-            <td colspan="1" v-else  >
+            <td colspan="3" v-else  >
               {{form.assistDoctorNum}}
             </td>
         </tr>
-        <tr  v-if="form.applyKind!=='DN'&&isCanEdit">
+        <tr  v-if="form.applyKind==='DN'">
           <td colspan="1">成果一名称</td>
-          <td colspan="6">
-            <el-input v-model="form.achieName1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入成果一名称"/>
+          <td colspan="6" v-if="isCanEdit" >
+            <el-input v-model="form.achieName1"  placeholder="请输入成果一名称"/>
+          </td>
+          <td colspan="6" v-else >
+            {{form.achieName1}}
           </td>
           <td colspan="1">日期</td>
-          <td colspan="2">
+          <td colspan="2" v-if="isCanEdit" >
             <el-input v-model="form.achieDate1"  placeholder="请输入成果一日期"/>
           </td>
+          <td colspan="2" v-else >
+            {{form.achieDate1}}
+          </td>
         </tr>
-        <tr v-if="form.applyKind!=='DN'&&isCanEdit">
-          <td colspan="10">
+        <tr v-if="form.applyKind==='DN'">
+          <td colspan="10" v-if="isCanEdit">
             <textarea  placeholder="成果一介绍" maxlength="1000"  v-model="form.achieContent1" style="width: 100%;height:80px"    />
           </td>
+          <td colspan="10" v-else >
+            <textarea  placeholder="成果一介绍" maxlength="1000"  v-model="form.achieContent1" style="width: 100%;height:80px"   readonly />
+          </td>
         </tr>
-        <tr v-if="form.applyKind!=='DN'&&isCanEdit">
+        <tr  v-if="form.applyKind==='DN'">
           <td colspan="1">成果二名称</td>
-          <td colspan="6">
-            <el-input v-model="form.achieName1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入成果二名称"/>
+          <td colspan="6" v-if="isCanEdit" >
+            <el-input v-model="form.achieName2"  placeholder="请输入成果二名称"/>
+          </td>
+          <td colspan="6" v-else >
+            {{form.achieName2}}
           </td>
           <td colspan="1">日期</td>
-          <td colspan="2">
-            <el-input v-model="form.achieDate1"  placeholder="请输入成果二日期"/>
+          <td colspan="2" v-if="isCanEdit" >
+            <el-input v-model="form.achieDate2"  placeholder="请输入成果二日期"/>
+          </td>
+          <td colspan="2" v-else >
+            {{form.achieDate2}}
           </td>
         </tr>
-        <tr v-if="form.applyKind!=='DN'&&isCanEdit">
-          <td colspan="10">
-            <textarea  placeholder="成果二介绍" maxlength="1000"  v-model="form.achieContent1" style="width: 100%;height:80px"    />
+        <tr v-if="form.applyKind==='DN'">
+          <td colspan="10" v-if="isCanEdit">
+            <textarea  placeholder="成果二介绍" maxlength="1000"  v-model="form.achieContent2" style="width: 100%;height:80px"    />
+          </td>
+          <td colspan="10" v-else >
+            <textarea  placeholder="成果二介绍" maxlength="1000"  v-model="form.achieContent2" style="width: 100%;height:80px"   readonly />
           </td>
         </tr>
-        <tr v-if="form.applyKind!=='DN'&&isCanEdit">
+        <tr  v-if="form.applyKind==='DN'">
           <td colspan="1">成果三名称</td>
-          <td colspan="6">
-            <el-input v-model="form.achieName1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入成果三日期"/>
+          <td colspan="6" v-if="isCanEdit" >
+            <el-input v-model="form.achieName3"  placeholder="请输入成果三名称"/>
+          </td>
+          <td colspan="6" v-else >
+            {{form.achieName3}}
           </td>
           <td colspan="1">日期</td>
-          <td colspan="2">
-            <el-input v-model="form.achieDate1"  placeholder="请输入成果三日期"/>
+          <td colspan="2" v-if="isCanEdit" >
+            <el-input v-model="form.achieDate3"  placeholder="请输入成果三日期"/>
+          </td>
+          <td colspan="2" v-else >
+            {{form.achieDate1}}
           </td>
         </tr>
-        <tr v-if="form.applyKind!=='DN'&&isCanEdit">
-          <td colspan="10">
-            <textarea  placeholder="成果三介绍" maxlength="1000"  v-model="form.achieContent1" style="width: 100%;height:80px"    />
+        <tr v-if="form.applyKind==='DN'">
+          <td colspan="10" v-if="isCanEdit">
+            <textarea  placeholder="成果三介绍" maxlength="1000"  v-model="form.achieContent3" style="width: 100%;height:80px"    />
+          </td>
+          <td colspan="10" v-else >
+            <textarea  placeholder="成果三介绍" maxlength="1000"  v-model="form.achieContent3" style="width: 100%;height:80px"   readonly />
           </td>
         </tr>
       </table>
