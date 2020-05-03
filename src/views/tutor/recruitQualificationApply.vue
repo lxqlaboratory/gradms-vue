@@ -15,8 +15,8 @@
           <td colspan="10" style="font-size: 16px;font-weight: bold;color: #304156 ">招生申请信息</td>
         </tr>
         <tr>
-          <td colspan="1">申请类型</td>
-          <td colspan="1">
+          <td colspan="1" style="width: 10%">申请类型</td>
+          <td colspan="1" style="width: 12%" v-if="isCanEdit" >
             <el-select v-model="form.applyKind" placeholder="请选择申请类型"   >
               <el-option
                 v-for="item in applyKindList"
@@ -26,8 +26,11 @@
               />
             </el-select>
           </td>
-          <td colspan="1">性别</td>
-          <td colspan="1">
+          <td colspan="1" style="width: 12%" v-else >
+          {{form.applyKind}}
+          </td>
+          <td colspan="1" style="width: 10%">性别</td>
+          <td colspan="1" style="width: 8%" v-if="isCanEdit" >
             <el-select v-model="form.genderCode" placeholder="请选择性别"   >
               <el-option
                 v-for="item in gender"
@@ -37,18 +40,25 @@
               />
             </el-select>
           </td>
-          <td colspan="1">出生年月</td>
-          <td colspan="1">
+          <td colspan="1" style="width: 8%" v-else >
+            {{form.genderCode}}
+          </td>
+          <td colspan="1" style="width: 15%">出生年月</td>
+          <td colspan="1" style="width: 12%" v-if="isCanEdit">
             <el-date-picker
               v-model="form.perBirthDay"
               size="mini"
               type="date"
+              style="width: 95%"
               value-format="yyyy-MM-dd"
               placeholder="选择日期时间"
             />
           </td>
-          <td colspan="1">职称</td>
-          <td colspan="1">
+          <td colspan="1" style="width: 12%" v-else >
+            {{form.perBirthDay}}
+          </td>
+          <td colspan="1" style="width: 15%">职称</td>
+          <td colspan="1" style="width: 10%" v-if="isCanEdit">
             <el-select v-model="form.proTechPositionCode" placeholder="请选择申请类型"   >
               <el-option
                 v-for="item in proTechPositionCodeList"
@@ -58,8 +68,11 @@
               />
             </el-select>
           </td>
-          <td colspan="1">博导时间</td>
-          <td colspan="1">
+          <td colspan="1" style="width: 10%" v-else >
+            {{form.proTechPositionCode}}
+          </td>
+          <td colspan="1" style="width: 10%">博导时间</td>
+          <td colspan="1"  v-if="isCanEdit">
             <el-date-picker
               v-model="form.doctorTutorTime"
               size="mini"
@@ -68,70 +81,115 @@
               placeholder="选择日期时间"
             />
           </td>
+          <td colspan="1" style="width: 10%" v-else >
+            {{form.doctorTutorTime}}
+          </td>
         </tr>
         <tr>
           <td colspan="1"  >论文数</td>
-          <td colspan="1" >
-            <el-input v-model.number="form.disserNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入论文数"   style="width:50p;" />
+          <td colspan="1" v-if="isCanEdit"  >
+            <el-input v-model.number="form.disserNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入论文数"    />
+          </td>
+          <td colspan="1" v-else  >
+            {{form.disserNum}}
           </td>
           <td colspan="1">专著数</td>
-          <td colspan="1"  >  
-            <el-input v-model.number="form.bookNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入专著数" style="width:50px;" />
+          <td colspan="1" v-if="isCanEdit" >
+            <el-input v-model.number="form.bookNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入专著数"  />
+          </td>
+          <td colspan="1" v-else  >
+            {{form.bookNum}}
           </td>
           <td colspan="1">获奖数</td>
-          <td colspan="1"  width = "%5" >
+          <td colspan="1"    v-if="isCanEdit" >
             <el-input v-model.number="form.rewardNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入获奖数"/>
           </td>
+          <td colspan="1" v-else  >
+            {{form.rewardNum}}
+          </td>
           <td colspan="1">专利数</td>
-          <td colspan="1" width = "%5" >
+          <td colspan="1"  v-if="isCanEdit">
             <el-input v-model.number="form.patentNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入专利数"/>
           </td>
+          <td colspan="1" v-else  >
+            {{form.patentNum}}
+          </td>
           <td colspan="1">国家项目数</td>
-          <td colspan="1">
+          <td colspan="1" v-if="isCanEdit">
             <el-input v-model.number="form.projectNum1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入国家项目数" />
+          </td>
+          <td colspan="1" v-else  >
+            {{form.projectNum1}}
           </td>
         </tr>
         <tr>
           <td colspan="1">国家立项数</td>
-          <td colspan="1">
+          <td colspan="1"  v-if="isCanEdit">
             <el-input v-model.number="form.applyProjectNum1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入国家立项数"/>
           </td>
+          <td colspan="1" v-else  >
+            {{form.applyProjectNum1}}
+          </td>
           <td colspan="1">省部项目数</td>
-          <td colspan="1">
+          <td colspan="1" v-if="isCanEdit">
             <el-input v-model.number="form.projectNum2" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入省部项目数"/>
           </td>
+          <td colspan="1" v-else  >
+            {{form.projectNum2}}
+          </td>
           <td colspan="1">省部立项数</td>
-          <td colspan="1">
+          <td colspan="1" v-if="isCanEdit">
             <el-input v-model.number="form.applyProjectNum2" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入省部立项数"/>
           </td>
+          <td colspan="1" v-else  >
+            {{form.applyProjectNum2}}
+          </td>
           <td colspan="1">横向项目</td>
-          <td colspan="1">
+          <td colspan="1" v-if="isCanEdit">
             <el-input v-model.number="form.projectNum3" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入横向项目数"/>
           </td>
+          <td colspan="1" v-else  >
+            {{form.projectNum3}}
+          </td>
           <td colspan="1">总经费</td>
-          <td colspan="1">
+          <td colspan="1" v-if="isCanEdit">
             <el-input v-model="form.projectFeeTotal" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入总经费数"/>
+          </td>
+          <td colspan="1" v-else  >
+            {{form.projectFeeTotal}}
           </td>
           </tr>
           <tr>
           <td colspan="1">可支配经费</td>
-          <td colspan="1">
+          <td colspan="1" v-if="isCanEdit">
             <el-input v-model="form.projectFeeBalance" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入可支配经费数"/>
           </td>
+            <td colspan="1" v-else  >
+              {{form.projectFeeBalance}}
+            </td>
           <td colspan="1">指导博士生数</td>
-          <td colspan="1">
+          <td colspan="1" v-if="isCanEdit">
             <el-input v-model.number="form.doctorNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入指导博士生数"/>
           </td>
+            <td colspan="1" v-else  >
+              {{form.doctorNum}}
+            </td>
           <td colspan="1">指导硕士生数</td>
-          <td colspan="1">
+          <td colspan="1" v-if="isCanEdit">
             <el-input v-model.number="form.masterNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入指导硕士生数"/>
           </td>
+            <td colspan="1" v-else  >
+              {{form.masterNum}}
+            </td>
           <td colspan="1">协助指导博士生数</td>
-          <td colspan="3">
+          <td colspan="3" v-if="isCanEdit">
             <el-input v-model.number="form.assistDoctorNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入协助指导博士生数"/>
           </td>
+            <td colspan="1" v-else  >
+              {{form.assistDoctorNum}}
+            </td>
         </tr>
-        <tr>
+        <tr  v-if="form.applyKind!=='DN'&&isCanEdit">
           <td colspan="1">成果一名称</td>
           <td colspan="6">
             <el-input v-model="form.achieName1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入成果一名称"/>
@@ -141,12 +199,12 @@
             <el-input v-model="form.achieDate1"  placeholder="请输入成果一日期"/>
           </td>
         </tr>
-        <tr>
+        <tr v-if="form.applyKind!=='DN'&&isCanEdit">
           <td colspan="10">
             <textarea  placeholder="成果一介绍" maxlength="1000"  v-model="form.achieContent1" style="width: 100%;height:80px"    />
           </td>
         </tr>
-        <tr>
+        <tr v-if="form.applyKind!=='DN'&&isCanEdit">
           <td colspan="1">成果二名称</td>
           <td colspan="6">
             <el-input v-model="form.achieName1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入成果二名称"/>
@@ -156,12 +214,12 @@
             <el-input v-model="form.achieDate1"  placeholder="请输入成果二日期"/>
           </td>
         </tr>
-        <tr>
+        <tr v-if="form.applyKind!=='DN'&&isCanEdit">
           <td colspan="10">
             <textarea  placeholder="成果二介绍" maxlength="1000"  v-model="form.achieContent1" style="width: 100%;height:80px"    />
           </td>
         </tr>
-        <tr>
+        <tr v-if="form.applyKind!=='DN'&&isCanEdit">
           <td colspan="1">成果三名称</td>
           <td colspan="6">
             <el-input v-model="form.achieName1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入成果三日期"/>
@@ -171,25 +229,24 @@
             <el-input v-model="form.achieDate1"  placeholder="请输入成果三日期"/>
           </td>
         </tr>
-        <tr>
+        <tr v-if="form.applyKind!=='DN'&&isCanEdit">
           <td colspan="10">
             <textarea  placeholder="成果三介绍" maxlength="1000"  v-model="form.achieContent1" style="width: 100%;height:80px"    />
           </td>
         </tr>
       </table>
     </div>
-    <div align="center"  >
-        <fileupload 
-          url="/api/thesisreview/thesisReviewOnlineReviewThesisUpload"
-          :data="{'docType': pdf,'thesisId':form.applyId}"
-          accepttype=".pdf"
-          @successcallback="onSuccess"
-          style="float: right"
-          @preview="onPreview"
-        >附件上传
-        </fileupload>
+    <div align="center" v-if="isCanEdit" >
         <el-button  type="primary" @click="Statistics">数据统计</el-button>
         <el-button  type="primary" @click="doSave">修改保存</el-button>
+      <fileupload
+        url="/api/thesisreview/thesisReviewOnlineReviewThesisUpload"
+        :data="{'docType': pdf,'thesisId':form.applyId}"
+        accepttype=".pdf"
+        @successcallback="onSuccess"
+        @preview="onPreview"
+      >附件上传
+      </fileupload>
     </div>
     <table class="headline">
       <tr><td>已申请招生专业列表</td></tr>
