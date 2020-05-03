@@ -54,7 +54,7 @@
               placeholder="选择日期时间"
             />
           </td>
-          <td colspan="1" style="width: 12%" v-else >
+          <td colspan="1" style="width: 8%" v-else >
             {{form.perBirthDayStr}}
           </td>
           <td colspan="1" style="width: 12%">职称</td>
@@ -81,7 +81,7 @@
               placeholder="选择日期时间"
             />
           </td>
-          <td colspan="1" style="width: 12%" v-else >
+          <td colspan="1"  v-else >
             {{form.doctorTutorTimeStr}}
           </td>
         </tr>
