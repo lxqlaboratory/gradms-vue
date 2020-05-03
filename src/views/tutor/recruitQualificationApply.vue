@@ -267,9 +267,9 @@
         <el-button  type="primary" @click="Statistics">数据统计</el-button>
         <el-button  type="primary" @click="doSave">修改保存</el-button>
       <fileupload
-        url="/api/thesisreview/thesisReviewOnlineReviewThesisUpload"
-        :data="{'docType': pdf,'thesisId':form.applyId}"
-        accepttype=".pdf"
+        url="/api/tutor/recruitQualificationAttachUpload"
+        :data="{'docType': zip,'applyId':form.applyId}"
+        accepttype=".zip"
         @successcallback="onSuccess"
         @preview="onPreview"
       >附件上传
@@ -328,21 +328,21 @@
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.stateName }}
+            {{ scope.row.checkedName }}
           </template>
         </el-table-column>
         <el-table-column
           label="操作"
           align="center"
           color="black"
-          v-if='isCanEdit'
+          v-if='isCanApply'
         >
-          <template slot-scope="scope">
+          <template slot-scope="scope" v-if="!scope.row.isChecked">
             <el-button type="primary"  @click="doMajorDelete(scope.row.majorApplyId)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
-    <div  align="center">
+    <div  align="center" v-if='isCanApply' >
       <tr>
         <td>
           申请类型
@@ -427,6 +427,7 @@ export default {
       },
       personId: this.$route.query.applyId,
       isCanEdit: false,
+      isCanApply:true,
       applyType: '11',
       collegeId: null,
       majorId: null,
@@ -456,10 +457,8 @@ export default {
     this.fetchData()
   },
   methods: {
-    test1() { // 回显checkbox
-    },
     Statistics() {
-      recruitQualificationApplyStatistics({ 'session': document.cookie }).then(res => {
+      recruitQualificationApplyStatistics({ 'session': document.cookie ,'applyId':this.$route.query.applyId}).then(res => {
         this.form.disserNum = res.data.disserNum
         this.form.bookNum = res.data.bookNum
         this.form.patentNum = res.data.patentNum
@@ -472,8 +471,8 @@ export default {
       })
     },
     fetchData() {
-      this.getApplyList() // 申请列表
-      recruitQualificationApply({ 'session': document.cookie, 'personId': this.personId }).then(res => {
+      console.log(this.$route.query.applyId)
+      recruitQualificationApply({ 'session': document.cookie, 'applyId':this.$route.query.applyId }).then(res => {
         this.isCanEdit = res.data.isCanEdit
         this.isCanApply = res.data.isCanApply
         this.applyType = res.data.applyType
