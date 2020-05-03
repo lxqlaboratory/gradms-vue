@@ -373,8 +373,8 @@
             />
           </el-select>
           <el-button type="primary"  @click="doMajorAdd()">添加招生专业</el-button>
-          <el-button type="primary"   >
-            <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationPrintData?applyId='+applyId" :download="applyTableName">下载简况表</a>
+          <el-button type="primary"  v-if="form.applyId > 0" >
+            <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationPrintData?applyId='+form.applyId" :download="applyTableName">下载简况表</a>
           </el-button>
         </td>
       </tr>
@@ -427,7 +427,7 @@ export default {
         achieDate3: '',
         achieContent3: ''
       },
-      personId: this.$route.query.applyId,
+      serverAddres:'',
       isCanEdit: false,
       isCanApply:true,
       applyType: '11',
