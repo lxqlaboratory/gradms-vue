@@ -194,15 +194,23 @@
               {{form.assistDoctorNum}}
             </td>
         </tr>
+        <tr v-if="form.applyKind==='DN'">
+          <td colspan="10" v-if="isCanEdit">
+            <textarea  placeholder="本人主要研究方向及学术贡献：" maxlength="1000"  v-model="form.researchReview" style="width: 100%;height:80px"    />
+          </td>
+          <td colspan="10" v-else >
+            <textarea  placeholder="本人主要研究方向及学术贡献：" maxlength="1000"  v-model="form.researchReview" style="width: 100%;height:80px"   readonly />
+          </td>
+        </tr>
         <tr  v-if="form.applyKind==='DN'">
-          <td colspan="1">成果一名称</td>
+          <td colspan="1">成果名称</td>
           <td colspan="6" v-if="isCanEdit" >
             <el-input v-model="form.achieName1"  placeholder="请输入成果一名称"/>
           </td>
           <td colspan="6" v-else >
             {{form.achieName1}}
           </td>
-          <td colspan="1">日期</td>
+          <td colspan="1">完成日期</td>
           <td colspan="2" v-if="isCanEdit" >
             <el-input v-model="form.achieDate1"  placeholder="请输入成果一日期"/>
           </td>
@@ -212,21 +220,21 @@
         </tr>
         <tr v-if="form.applyKind==='DN'">
           <td colspan="10" v-if="isCanEdit">
-            <textarea  placeholder="成果一介绍" maxlength="1000"  v-model="form.achieContent1" style="width: 100%;height:80px"    />
+            <textarea  placeholder="近五年代表性科研成果简介之一：" maxlength="1000"  v-model="form.achieContent1" style="width: 100%;height:80px"    />
           </td>
           <td colspan="10" v-else >
-            <textarea  placeholder="成果一介绍" maxlength="1000"  v-model="form.achieContent1" style="width: 100%;height:80px"   readonly />
+            <textarea  placeholder="近五年代表性科研成果简介之一：" maxlength="1000"  v-model="form.achieContent1" style="width: 100%;height:80px"   readonly />
           </td>
         </tr>
         <tr  v-if="form.applyKind==='DN'">
-          <td colspan="1">成果二名称</td>
+          <td colspan="1">成果名称</td>
           <td colspan="6" v-if="isCanEdit" >
             <el-input v-model="form.achieName2"  placeholder="请输入成果二名称"/>
           </td>
           <td colspan="6" v-else >
             {{form.achieName2}}
           </td>
-          <td colspan="1">日期</td>
+          <td colspan="1">完成日期</td>
           <td colspan="2" v-if="isCanEdit" >
             <el-input v-model="form.achieDate2"  placeholder="请输入成果二日期"/>
           </td>
@@ -236,21 +244,21 @@
         </tr>
         <tr v-if="form.applyKind==='DN'">
           <td colspan="10" v-if="isCanEdit">
-            <textarea  placeholder="成果二介绍" maxlength="1000"  v-model="form.achieContent2" style="width: 100%;height:80px"    />
+            <textarea  placeholder="近五年代表性科研成果简介之二：" maxlength="1000"  v-model="form.achieContent2" style="width: 100%;height:80px"    />
           </td>
           <td colspan="10" v-else >
-            <textarea  placeholder="成果二介绍" maxlength="1000"  v-model="form.achieContent2" style="width: 100%;height:80px"   readonly />
+            <textarea  placeholder="近五年代表性科研成果简介之二：" maxlength="1000"  v-model="form.achieContent2" style="width: 100%;height:80px"   readonly />
           </td>
         </tr>
         <tr  v-if="form.applyKind==='DN'">
-          <td colspan="1">成果三名称</td>
+          <td colspan="1">成果名称</td>
           <td colspan="6" v-if="isCanEdit" >
             <el-input v-model="form.achieName3"  placeholder="请输入成果三名称"/>
           </td>
           <td colspan="6" v-else >
             {{form.achieName3}}
           </td>
-          <td colspan="1">日期</td>
+          <td colspan="1">完成日期</td>
           <td colspan="2" v-if="isCanEdit" >
             <el-input v-model="form.achieDate3"  placeholder="请输入成果三日期"/>
           </td>
@@ -260,10 +268,10 @@
         </tr>
         <tr v-if="form.applyKind==='DN'">
           <td colspan="10" v-if="isCanEdit">
-            <textarea  placeholder="成果三介绍" maxlength="1000"  v-model="form.achieContent3" style="width: 100%;height:80px"    />
+            <textarea  placeholder="近五年代表性科研成果简介之三：" maxlength="1000"  v-model="form.achieContent3" style="width: 100%;height:80px"    />
           </td>
           <td colspan="10" v-else >
-            <textarea  placeholder="成果三介绍" maxlength="1000"  v-model="form.achieContent3" style="width: 100%;height:80px"   readonly />
+            <textarea  placeholder="近五年代表性科研成果简介之三：" maxlength="1000"  v-model="form.achieContent3" style="width: 100%;height:80px"   readonly />
           </td>
         </tr>
       </table>
@@ -421,7 +429,7 @@ export default {
         doctorNum: 0,
         masterNum: 0,
         assistDoctorNum: 0,
-        researchReview: 0,
+        researchReview:'',
         achieName1: '',
         achieDate1: '',
         achieContent1: '',
@@ -497,8 +505,8 @@ export default {
     doSave() { // 保存修改
         if(this.form.genderCode === undefined ||this.form.perBirthday === undefined || this.form.proTechPositionCode=== undefined || this.form.applyKind==='D' && this.form.doctorTutorTime=== undefined ) {
            this.$message({
-            message: '提交成功',
-            type: 'success',
+            message: '性别，出生日期，职称，博导时间不能为空',
+            type: 'warning',
             offset: '10'
           })
         }else {
