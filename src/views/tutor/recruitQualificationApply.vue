@@ -51,7 +51,7 @@
           <td colspan="1" style="width: 12%">出生年月</td>
           <td colspan="1" style="width: 12%" v-if="isCanEdit">
             <el-date-picker
-              v-model="form.perBirthDay"
+              v-model="form.perBirthday"
               size="mini"
               type="date"
               style="width: 95%"
@@ -60,7 +60,7 @@
             />
           </td>
           <td colspan="1" style="width: 8%" v-else >
-            {{form.perBirthDayStr}}
+            {{form.perBirthday}}
           </td>
           <td colspan="1" style="width: 12%">职称</td>
           <td colspan="1" style="width: 10%" v-if="isCanEdit">
@@ -404,7 +404,7 @@ export default {
         recruitType:'',
         applyKind: '',
         genderCode:'',
-        perBirthDay:'',
+        perBirthday:'',
         proTechPositionCode:'',
         doctorTutorTime:'',
         disserNum: 0,
@@ -495,7 +495,7 @@ export default {
       })
     },
     doSave() { // 保存修改
-        if(this.form.genderCode === undefined ||this.form.perBirthDay === undefined || this.form.proTechPositionCode=== undefined || this.form.applyKind==='D' && this.form.doctorTutorTime=== undefined ) {
+        if(this.form.genderCode === undefined ||this.form.perBirthday === undefined || this.form.proTechPositionCode=== undefined || this.form.applyKind==='D' && this.form.doctorTutorTime=== undefined ) {
            this.$message({
             message: '提交成功',
             type: 'success',
