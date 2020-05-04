@@ -4,7 +4,10 @@
       <table class="content"  align="center">
       <tr>
         <td  style="font-size: 16px;color: red;text-align:left; ">
-          说明：从候选列表中选择此次招生资格申请所使用的的论文，添加到已选择专著列表中，专著将按照添加顺序在简况表显示
+          说明:<br>
+          &nbsp;&nbsp;1.候选列表列出的是科研系统提供的近五年的专著。如果老师的出版专著未在候选列表列出，请咨询科研系统<br>
+          &nbsp;&nbsp;2.从候选列表中选择符合要求的此次招生资格申请所使用的专著，添加到已选择专著列表中，专著将按照添加顺序在简况表显示。<br>
+          &nbsp;&nbsp;3.可勾选进行批量添加和删除
         </td>
       </tr>
     </table>

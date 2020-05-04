@@ -3,6 +3,7 @@
     <table class="content" align="left">
       <tr>
         <td style="font-size: 16px;color: red;text-align:left; ">
+          友情提示：建议使用谷歌浏览器chrome,windows自带浏览器Microsoft Edge,360浏览器请选用极速模式<br>
           申请说明:<br>
           &nbsp;&nbsp;1.请首先在申请论文、专著、项目、奖励、专利维护功能中把本次招生申请需要的成果维护好，在进行招生资格认证申请。<br>
           &nbsp;&nbsp;2.点击数据统计按钮后系统自动统计近五年的成果项目、指导学生数，可在此基础上进行编辑修改，协助指导学生数和可支配经费需教师自己维护。<br>
@@ -55,7 +56,7 @@
               type="date"
               style="width: 95%"
               value-format="yyyy-MM-dd"
-              placeholder="选择日期时间"
+              placeholder="选择出生日期"
             />
           </td>
           <td colspan="1" style="width: 8%" v-else >
@@ -493,14 +494,8 @@ export default {
         this.majorList = res.data.majorList
       })
     },
-    doStatistics() {
-      recruitQualificationApplyStatistics({ 'session': document.cookie, 'form': this.form
-      }).then(res => {
-        this.form = res.data
-      })
-    },
     doSave() { // 保存修改
-        if(genderCode === undefined ||perBirthDay === undefined || proTechPositionCode=== undefined || applyKind==='D' && doctorTutorTime=== undefined ) {
+        if(this.form.genderCode === undefined ||this.form.perBirthDay === undefined || this.form.proTechPositionCode=== undefined || this.form.applyKind==='D' && this.form.doctorTutorTime=== undefined ) {
            this.$message({
             message: '提交成功',
             type: 'success',

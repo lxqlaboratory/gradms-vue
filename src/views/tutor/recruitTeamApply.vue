@@ -3,10 +3,11 @@
     <table class="content"  align="left">
       <tr>
         <td  style="font-size: 16px;color: red;text-align:left; ">
+          友情提示：建议使用谷歌浏览器chrome,windows自带浏览器Microsoft Edge,360浏览器请选用极速模式<br>
           申请说明:<br>
           &nbsp;&nbsp;1.每一个责任导师只可以申请一个团队，团队成员可以是系统中校内教师或院聘教师，如果查不到希望添加的教师，请联系学院研究生秘书。<br>
           &nbsp;&nbsp;2.请首先维护好团队信息，点击保存后在添加团队成员<br>
-          &nbsp;&nbsp;4.申请专业学院审核通过后，团队信息和团队成员信息不可维护，请责任导师在学院审核前进行信息维护。          
+          &nbsp;&nbsp;3.申请专业学院审核通过后，团队信息和团队成员信息不可维护，请责任导师在学院审核前进行信息维护。          
         </td>
       </tr>
     </table>
