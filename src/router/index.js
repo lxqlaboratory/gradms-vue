@@ -262,14 +262,27 @@ export const constantRoutes = [
         path: 'studentBaseInfoMaintain',
         name: 'studentBaselInfoMaintain',
         component: () => import('@/views/student/studentBaseInfoMaintain'),
-        meta: { title: '学生基本详细维护'}
+        meta: { title: '学生基本信息维护'}
       },  
       {
         path: 'studentDetailInfoShow',
         name: 'studentDetailInfoShow',
         component: () => import('@/views/student/studentDetailInfoShow'),
         meta: { title: '学生详细信息'}
+      },
+      {
+        path: 'studentCetScoreMaintain',
+        name: 'studentCetScoreMaintain',
+        component: () => import('@/views/student/studentCetScoreMaintain'),
+        meta: { title: '学生基本信息维护'}
+      }, 
+      {
+        path: 'collegeCetScoreMaintain',
+        name: 'collegeCetScoreMaintain',
+        component: () => import('@/views/student/collegeCetScoreMaintain'),
+        meta: { title: '学生基本信息维护'}
       }
+
     ]
   },
   {
