@@ -6,7 +6,7 @@
     <div v-show="showCourseList11" class="table-container">
       <el-table
         :data="CourseList11"
-        :span-method="objectSpanMethod"
+        :span-method="objectSpanMethod1"
         border
         style="width: 100%;margin-top: -6px"
         size="mini"
@@ -103,6 +103,7 @@
           label="操作"
           align="center"
           color="black"
+          v-if='planState'
         >
           <template slot-scope="scope">
             <el-button type="primary" size="mini" @click="delete1(scope.row.planCourseId)">删除</el-button>
@@ -114,6 +115,7 @@
       <el-table
         :show-header="false"
         :data="CourseList12"
+        :span-method="objectSpanMethod2"
         border
         style="width: 100%;margin-top:-6px;border-top: solid 0px"
         size="mini"
@@ -210,6 +212,7 @@
           label=""
           align="center"
           color="black"
+          v-if='planState'
         >
           <template slot-scope="scope">
             <el-button type="primary" size="mini" @click="delete1(scope.row.planCourseId)">删除</el-button>
@@ -221,6 +224,7 @@
       <el-table
         :show-header="false"
         :data="CourseList13"
+        :span-method="objectSpanMethod3"
         border
         style="width: 100%;margin-top:-6px;border-top: solid 0px"
         size="mini"
@@ -317,6 +321,7 @@
           label=""
           align="center"
           color="black"
+          v-if='planState'
         >
           <template slot-scope="scope">
             <el-button type="primary" size="mini" @click="delete1(scope.row.planCourseId)">删除</el-button>
@@ -330,6 +335,7 @@
     <div v-show="showRequiredList1" class="table-container">
       <el-table
         :data="requiredList1"
+        :span-method="objectSpanMethod4"
         border
         style="width: 100%;margin-top: -6px"
         size="mini"
@@ -428,6 +434,7 @@
       <el-table
         :show-header="false"
         :data="buxiuList1"
+        :span-method="objectSpanMethod5"
         border
         style="width: 100%;margin-top:-6px;border-top: solid 0px"
         size="mini"
@@ -526,6 +533,7 @@
       <el-table
         :show-header="false"
         :data="optionalList1"
+        :span-method="objectSpanMethod6"
         border
         style="width: 100%;margin-top:-6px;border-top: solid 0px"
         size="mini"
@@ -633,6 +641,7 @@ export default {
   name: 'StudentSultivatePlanMaintainVue',
   data() {
     return {
+      planState: true,
       showCourseList11: false,
       showCourseList12: false,
       showCourseList13: false,
@@ -666,6 +675,11 @@ export default {
         this.CourseList11 = res.data.planData.CourseList11
         this.CourseList12 = res.data.planData.CourseList12
         this.CourseList13 = res.data.planData.CourseList13
+
+        if (res.data.planState === 1) {
+          this.planState = false
+        }
+
         if (this.CourseList11.length !== 0) {
           this.showCourseList11 = true
         }
@@ -722,16 +736,96 @@ export default {
         this.fetchData()
       })
     },
-    // objectSpanMethod({ row, column, rowIndex, columnIndex }) {
-    //   if (columnIndex === 0) {
-    //     const _row = this.CourseList11.length
-    //     const _col = _row > 0 ? 1 : 0
-    //     return {
-    //       rowspan: _row,
-    //       colspan: _col
-    //     }
-    //   }
-    // }
+    objectSpanMethod1({ row, column, rowIndex, columnIndex }) {
+      if (columnIndex === 0) {
+        if (rowIndex % this.CourseList11.length === 0) {
+          return {
+            rowspan: this.CourseList11.length,
+            colspan: 1
+          }
+        } else {
+          return {
+            rowspan: 0,
+            colspan: 0
+          }
+        }
+      }
+    },
+    objectSpanMethod2({ row, column, rowIndex, columnIndex }) {
+      if (columnIndex === 0) {
+        if (rowIndex % this.CourseList12.length === 0) {
+          return {
+            rowspan: this.CourseList12.length,
+            colspan: 1
+          }
+        } else {
+          return {
+            rowspan: 0,
+            colspan: 0
+          }
+        }
+      }
+    },
+    objectSpanMethod3({ row, column, rowIndex, columnIndex }) {
+      if (columnIndex === 0) {
+        if (rowIndex % this.CourseList13.length === 0) {
+          return {
+            rowspan: this.CourseList13.length,
+            colspan: 1
+          }
+        } else {
+          return {
+            rowspan: 0,
+            colspan: 0
+          }
+        }
+      }
+    },
+    objectSpanMethod4({ row, column, rowIndex, columnIndex }) {
+      if (columnIndex === 0) {
+        if (rowIndex % this.requiredList1.length === 0) {
+          return {
+            rowspan: this.requiredList1.length,
+            colspan: 1
+          }
+        } else {
+          return {
+            rowspan: 0,
+            colspan: 0
+          }
+        }
+      }
+    },
+    objectSpanMethod5({ row, column, rowIndex, columnIndex }) {
+      if (columnIndex === 0) {
+        if (rowIndex % this.buxiuList1.length === 0) {
+          return {
+            rowspan: this.buxiuList1.length,
+            colspan: 1
+          }
+        } else {
+          return {
+            rowspan: 0,
+            colspan: 0
+          }
+        }
+      }
+    },
+    objectSpanMethod6({ row, column, rowIndex, columnIndex }) {
+      if (columnIndex === 0) {
+        if (rowIndex % this.optionalList1.length === 0) {
+          return {
+            rowspan: this.optionalList1.length,
+            colspan: 1
+          }
+        } else {
+          return {
+            rowspan: 0,
+            colspan: 0
+          }
+        }
+      }
+    }
   }
 }
 </script>
