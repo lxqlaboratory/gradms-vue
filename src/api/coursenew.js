@@ -198,3 +198,18 @@ export function collegeWorkOutTeachingScheduleTaskList(data) {
     data
   })
 }
+
+export function allCourseQueryInit(data) {
+  return request({
+    url: '/api/coursenew/allCourseQueryInit',
+    method: 'POST',
+    data
+  })
+}
+export function allCourseQueryDoQuery(data) {
+  return request({
+    url: '/api/coursenew/allCourseQueryDoQuery',
+    method: 'POST',
+    data
+  })
+}
