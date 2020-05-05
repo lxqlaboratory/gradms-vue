@@ -218,7 +218,7 @@
         <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationListPrintDataByApplyIds?applyIds='+applyIds" :download="qualificationFielName">导出申请信息表</a>
       </el-button>
       <el-button  type="primary" >
-        <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationApplySummaryTablePrintData'" :download="summarFielName">下载汇总表</a>
+        <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationApplySummaryTablePrintData'" :download="summaryFielName">下载汇总表</a>
       </el-button>
     </div>
   </div>
@@ -243,7 +243,7 @@ export default {
       multipleSelection:[],
       applyIds: '',
       qualificationFielName:'简况表.pdf',
-      summarFielName:'申请汇总表.pdf',
+      summaryFielName:'申请汇总表.pdf',
       personId:'',
       applyType:'',
       majorId:'',
@@ -269,7 +269,6 @@ export default {
       })
     },
     getApplyList() {
-      this.serverAddres = this.GLOBAL.servicePort
       recruitQualificationCheckApplyList({ 'session': document.cookie }).then(res => {
         this.applyList = res.data
       })

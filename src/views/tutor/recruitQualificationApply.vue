@@ -524,7 +524,7 @@ export default {
         }
     },
     getApplyList() { // 申请专业列表
-      recruitQualificationApplyApplyList({ 'session': document.cookie
+      recruitQualificationApplyApplyList({ 'session': document.cookie,'applyId':this.form.applyId
       }).then(res => {
         this.applyList = res.data
       })
