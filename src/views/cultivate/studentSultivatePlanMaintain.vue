@@ -75,7 +75,7 @@
             label="课程号"
             align="center"
             color="black"
-            width="80"
+            width="120"
           >
             <template slot-scope="scope">
               {{ scope.row.courseNum }}
@@ -85,7 +85,6 @@
             label="课程名"
             align="center"
             color="black"
-            width="200"
           >
             <template slot-scope="scope">
               <el-button type="text" size="mini" @click="showDetile(scope.row.courseId)">{{ scope.row.courseName }}</el-button>
@@ -95,7 +94,7 @@
             label="课程属性"
             align="center"
             color="black"
-            width="50"
+            width="150"
           >
             <template slot-scope="scope">
               {{ scope.row.courseAttribute }}
@@ -115,6 +114,7 @@
             label="学时"
             align="center"
             color="black"
+            width="50"
           >
             <template slot-scope="scope">
               {{ scope.row.classHour }}
@@ -124,6 +124,7 @@
             label="开课学期"
             align="center"
             color="black"
+            width="100"
           >
             <template slot-scope="scope">
               {{ scope.row.termCodeName }}
@@ -142,6 +143,7 @@
             label="考核方式"
             align="center"
             color="black"
+            width="100"
           >
             <template slot-scope="scope">
               {{ scope.row.examTypeName }}
@@ -151,6 +153,7 @@
             label="负责人"
             align="center"
             color="black"
+            width="100"
           >
             <template slot-scope="scope">
               {{ scope.row.managerName }}
@@ -254,7 +257,6 @@
             label="课程名"
             align="center"
             color="black"
-            width="200"
           >
             <template slot-scope="scope">
               <el-button type="text" size="mini" @click="showDetile(scope.row.courseId)">{{ scope.row.courseName.zh }}</el-button>
@@ -264,7 +266,6 @@
             label="课程属性"
             align="center"
             color="black"
-            width="50"
           >
             <template slot-scope="scope">
               {{ scope.row.courseAttribute.zh }}
@@ -284,6 +285,7 @@
             label="学时"
             align="center"
             color="black"
+            width="50"
           >
             <template slot-scope="scope">
               {{ scope.row.classHour }}
@@ -293,6 +295,7 @@
             label="开课学期"
             align="center"
             color="black"
+            width="100"
           >
             <template slot-scope="scope">
               {{ scope.row.termCodeName.zh }}
@@ -302,6 +305,7 @@
             label="考核方式"
             align="center"
             color="black"
+            width="100"
           >
             <template slot-scope="scope">
               {{ scope.row.examTypeName.zh }}
@@ -311,6 +315,7 @@
             label="负责人"
             align="center"
             color="black"
+            width="100"
           >
             <template slot-scope="scope">
               {{ scope.row.managerName }}
@@ -429,18 +434,18 @@
             {{ detileForm.manageDepartment }}
           </td>
         </tr>
-        <tr>
-          <td colspan="1">课程负责人</td>
-          <td colspan="5">
-            {{ detileForm.teachGroup }}
-          </td>
-        </tr>
-        <tr>
-          <td colspan="1">教材</td>
-          <td colspan="5">
-            {{ detileForm.book }}
-          </td>
-        </tr>
+        <!--<tr>-->
+        <!--<td colspan="1">课程负责人</td>-->
+        <!--<td colspan="5">-->
+        <!--{{ detileForm.teachGroup }}-->
+        <!--</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td colspan="1">教材</td>-->
+        <!--<td colspan="5">-->
+        <!--{{ detileForm.book }}-->
+        <!--</td>-->
+        <!--</tr>-->
         <tr>
           <td colspan="1">教材主页</td>
           <td colspan="5" />
@@ -464,7 +469,7 @@
           </td>
         </tr>
         <tr>
-          <td colspan="1">教学大纲</td>
+          <td colspan="1" style="width: 15%">教学大纲</td>
           <td colspan="5">
             {{ detileForm.subSpec.zh }}
           </td>
@@ -541,7 +546,6 @@
           label="课程名"
           align="center"
           color="black"
-          width="200"
         >
           <template slot-scope="scope">
             {{ scope.row.courseName.zh }}
@@ -579,6 +583,7 @@
           label="是否公选课"
           align="center"
           color="black"
+          width="100"
         >
           <template slot-scope="scope">
             {{ scope.row.courseAttribute }}
@@ -588,6 +593,7 @@
           label="教学任务"
           align="center"
           color="black"
+          width="100"
         >
           <template slot-scope="scope">
             {{ scope.row.courseIndex }}
@@ -650,7 +656,6 @@
           label=""
           align="center"
           color="black"
-          width="200"
         >
           <template slot-scope="scope">
             {{ scope.row.courseName.zh }}
@@ -688,6 +693,7 @@
           label=""
           align="center"
           color="black"
+          width="100"
         >
           <template slot-scope="scope">
             {{ scope.row.courseAttribute }}
@@ -697,6 +703,7 @@
           label=""
           align="center"
           color="black"
+          width="100"
         >
           <template slot-scope="scope">
             {{ scope.row.courseIndex }}
@@ -759,7 +766,6 @@
           label=""
           align="center"
           color="black"
-          width="200"
         >
           <template slot-scope="scope">
             {{ scope.row.courseName.zh }}
@@ -797,6 +803,7 @@
           label=""
           align="center"
           color="black"
+          width="100"
         >
           <template slot-scope="scope">
             {{ scope.row.courseAttribute }}
@@ -806,6 +813,7 @@
           label=""
           align="center"
           color="black"
+          width="100"
         >
           <template slot-scope="scope">
             {{ scope.row.courseIndex }}
@@ -870,7 +878,6 @@
           label="课程名"
           align="center"
           color="black"
-          width="200"
         >
           <template slot-scope="scope">
             {{ scope.row.courseName.zh }}
@@ -908,6 +915,7 @@
           label="是否公选课"
           align="center"
           color="black"
+          width="100"
         >
           <template slot-scope="scope">
             {{ scope.row.isPubSelectCourse.zh }}
@@ -969,7 +977,6 @@
           label="课程名"
           align="center"
           color="black"
-          width="200"
         >
           <template slot-scope="scope">
             {{ scope.row.courseName.zh }}
@@ -1007,6 +1014,7 @@
           label="是否公选课"
           align="center"
           color="black"
+          width="100"
         >
           <template slot-scope="scope">
             {{ scope.row.isPubSelectCourse.zh }}
@@ -1068,7 +1076,6 @@
           label="课程名"
           align="center"
           color="black"
-          width="200"
         >
           <template slot-scope="scope">
             {{ scope.row.courseName.zh }}
@@ -1106,6 +1113,7 @@
           label="是否公选课"
           align="center"
           color="black"
+          width="100"
         >
           <template slot-scope="scope">
             {{ scope.row.isPubSelectCourse.zh }}
