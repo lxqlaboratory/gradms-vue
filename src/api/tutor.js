@@ -436,6 +436,29 @@ export function tutorRecruitAchievementList(data) {
   })
 }
 
+export function recruitQualificationNote(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationNote',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitQualificationNoteSubmit(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationNoteSubmit',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitQualificationNoteEmpty(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationNoteEmpty',
+    method: 'POST',
+    data
+  })
+}
 
 
 

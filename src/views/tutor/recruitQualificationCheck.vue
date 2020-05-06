@@ -53,6 +53,15 @@
             {{ scope.row.perName }}
           </template>
         </el-table-column>
+        <el-table-column
+          label="年龄"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.age }}
+          </template>
+        </el-table-column>
        <el-table-column
           label="申请类型"
           align="center"
@@ -81,6 +90,15 @@
           </template>
         </el-table-column>
        <el-table-column
+          label="备注"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.note }}
+          </template>
+        </el-table-column>
+       <el-table-column
           label="审核通过数"
           align="center"
           color="black"
@@ -95,13 +113,14 @@
           color="black"
         >
         <template slot-scope="scope">
-          <el-button type="primary" @click="doView(scope.row.applyId)" >查看详情</el-button>
-          <el-button type="primary" @click="doViewAchievement(scope.row.personId)" >成果列表</el-button>          
+          <el-button type="primary" @click="doView(scope.row.applyId)" >详情</el-button>
+          <el-button type="primary" @click="doViewAchievement(scope.row.personId)" >成果</el-button>          
+          <el-button type="primary" @click="doSetNote(scope.row.applyId)" >备注</el-button>          
           <el-button type="primary"   >
-            <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationPrintData?applyId='+scope.row.applyId" :download="scope.row.applyTableName">简况表下载</a>
+            <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationPrintData?applyId='+scope.row.applyId" :download="scope.row.applyTableName">简况表</a>
           </el-button>
           <el-button  type="primary" v-if="scope.row.attachId > 0" >
-                <a :href="serverAddres+'/api/tutor/recruitQualificationAttachDownload?attachId='+scope.row.attachId" :download="scope.row.attachFileName">附件下载</a>
+                <a :href="serverAddres+'/api/tutor/recruitQualificationAttachDownload?attachId='+scope.row.attachId" :download="scope.row.attachFileName">附件</a>
           </el-button>
         </template>
       </el-table-column>
@@ -281,7 +300,7 @@ export default {
       })
     },
 
-doMajorAdd() { // 添加申请专业
+    doMajorAdd() { // 添加申请专业
       recruitQualificationCheckMajorAdd({ 'session': document.cookie, 'applyType': this.applyType, 'personId': this.personId, 'majorId': this.majorId
       }).then(res => {
         if (res.code === '0') {
@@ -317,6 +336,9 @@ doMajorAdd() { // 添加申请专业
       }else{
         this.$refs.temp.click()
       }
+    },
+    doSetNote(applyId){
+      this.$router.push({ path: '/tutor/recruitQualificationNote', query: { applyId }})
     },
     doView(applyId){
       this.$router.push({ path: '/tutor/recruitQualificationApply', query: { applyId }})
