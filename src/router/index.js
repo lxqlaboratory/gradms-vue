@@ -246,6 +246,12 @@ export const constantRoutes = [
         name: 'tutorRecruitAchievementList',
         component: () => import('@/views/tutor/tutorRecruitAchievementList'),
         meta: { title: '招生团队审核'}
+      },
+      {
+        path: 'recruitQualificationNote',
+        name: 'recruitQualificationNote',
+        component: () => import('@/views/tutor/recruitQualificationNote'),
+        meta: { title: '申请备注信息维护'}
       }
     ]
   },
