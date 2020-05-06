@@ -25,8 +25,8 @@ module.exports = {
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
   publicPath: '/vue',
- // outputDir: 'D:/apache-tomcat-7.0.94/webapps/ROOT/vue',
-  outputDir: '/dev/tomcat8/webapps/ROOT/vue',
+  outputDir: 'D:/apache-tomcat-7.0.94/webapps/ROOT/vue'111,
+  // outputDir: '/dev/tomcat8/webapps/ROOT/vue',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
