@@ -52,7 +52,7 @@
 
       </table>
       <div align="center">
-        <el-button type="primary" @click="publicCourseQuery">查询</el-button>
+        <el-button v-show="showbutton" type="primary" style="margin: 15px auto" @click="publicCourseQuery">查询</el-button>
       </div>
       <div v-show="showPublicCourseQueryList" class="table-container">
         <el-table
@@ -224,7 +224,7 @@
         </tr>
       </table>
       <div align="center">
-        <el-button type="primary" @click="AcrossCourseQuery">查询</el-button>
+        <el-button v-show="showbutton" type="primary" style="margin: 15px auto" @click="AcrossCourseQuery">查询</el-button>
       </div>
       <div v-show="showAcrossCourseQueryList" class="table-container">
         <el-table
@@ -335,7 +335,7 @@
         </el-table>
       </div>
     </div>
-    <div v-show="showDetile1">
+    <div v-show="showDetile1" style="margin-top: 15px">
       <table class="content">
         <tr>
           <td colspan="1">创建者</td>
@@ -432,21 +432,21 @@
           </td>
           <td colspan="1">申请课程类型	</td>
           <td colspan="1">
-            {{ detileForm.manageDepartment }}
+            <!--{{ detileForm.manageDepartment }}-->
           </td>
         </tr>
-        <!--<tr>-->
-        <!--<td colspan="1">课程负责人</td>-->
-        <!--<td colspan="5">-->
-        <!--{{ detileForm.teachGroup }}-->
-        <!--</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-        <!--<td colspan="1">教材</td>-->
-        <!--<td colspan="5">-->
-        <!--{{ detileForm.book }}-->
-        <!--</td>-->
-        <!--</tr>-->
+        <tr>
+          <td colspan="1">课程负责人</td>
+          <td colspan="5">
+            {{ detileForm.teachGroup }}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="1">教材</td>
+          <td colspan="5">
+            {{ detileForm.book }}
+          </td>
+        </tr>
         <tr>
           <td colspan="1">教材主页</td>
           <td colspan="5" />
@@ -484,7 +484,7 @@
         <tr>
           <td colspan="1">课程状态</td>
           <td colspan="1">
-            {{ detileForm.courseState }}
+            {{ detileForm.courseState.zh }}
           </td>
           <td colspan="1">学院意见</td>
           <td colspan="1">
@@ -832,6 +832,10 @@
         </el-table-column>
       </el-table>
     </div>
+    <div v-show="button1" align="center" style="margin: 15px auto">
+      <el-button type="primary" size="mini" @click="PublicCourse()">添加公共选修课</el-button>
+      <el-button type="primary" size="mini" @click="AcrossCourse()">跨学院选课</el-button>
+    </div>
     <table v-show="showLesson" class="headline">
       <tr><td><div style="color: red;text-align: left">培养方案课程</div></td></tr>
     </table>
@@ -1132,10 +1136,6 @@
       </el-table>
     </div>
     <div v-show="tip" style="color: red;text-align: center">制定培养计划完毕，确保”培养计划课程“栏中课程无误后，无需提交，需联系导师审核通过后方可打印！</div>
-    <div v-show="button1" align="center">
-      <el-button type="primary" size="mini" @click="PublicCourse()">添加公共选修课</el-button>
-      <el-button type="primary" size="mini" @click="AcrossCourse()">跨学院选课</el-button>
-    </div>
   </div>
 </template>
 
@@ -1242,6 +1242,7 @@ export default {
         }
       ],
       showDetile1: false,
+      showbutton: true,
       showAcrossCourseQueryList: false,
       showPublicCourseQueryList: false,
       showPublicCourse: false,
@@ -1275,11 +1276,13 @@ export default {
       this.showAcrossCourseQueryList = true
       this.showPublicCourseQueryList = true
       this.showDetile1 = false
+      this.showbutton = true
     },
     showDetile(courseId) {
       newCultivateCourseDetail({ 'session': document.cookie, 'courseId': courseId }).then(res => {
         this.showPublicCourseQueryList = false
         this.showAcrossCourseQueryList = false
+        this.showbutton = false
         this.showDetile1 = true
         this.detileForm = res.data
       })
