@@ -3,6 +3,17 @@
     <div v-show="showPublicCourse">
       <table class="content" style="width: 1000px;margin: 15px auto;">
         <tr>
+          <td colspan="1">选课学期</td>
+          <td colspan="1">
+            <el-select v-model="PublicCourseForm.courseTerm" placeholder="2019－2020学年第1学期" style="width: 100%">
+              <el-option
+                v-for="item in courseTerm"
+                :key="item.value"
+                :label="item.label.zh"
+                :value="item.value"
+              />
+            </el-select>
+          </td>
           <td colspan="1">课程状态</td>
           <td colspan="1">
             <el-select v-model="PublicCourseForm.status" placeholder="主管部门审核通过" style="width: 100%">
@@ -14,6 +25,18 @@
               />
             </el-select>
           </td>
+        </tr>
+        <tr>
+          <td colspan="1">课程号</td>
+          <td colspan="1">
+            <el-input v-model="PublicCourseForm.courseNum" />
+          </td>
+          <td colspan="1">课程名</td>
+          <td colspan="3">
+            <el-input v-model="PublicCourseForm.courseName" />
+          </td>
+        </tr>
+        <tr>
           <td colspan="1">课程属性</td>
           <td colspan="1">
             <el-select v-model="PublicCourseForm.attribute" placeholder="公共选修课" style="width: 100%">
@@ -26,29 +49,7 @@
             </el-select>
           </td>
         </tr>
-        <tr>
-          <td colspan="1">选课学期</td>
-          <td colspan="1">
-            <el-select v-model="PublicCourseForm.courseTerm" placeholder="2019－2020学年第1学期" style="width: 100%">
-              <el-option
-                v-for="item in courseTerm"
-                :key="item.value"
-                :label="item.label.zh"
-                :value="item.value"
-              />
-            </el-select>
-          </td>
-          <td colspan="1">课程号</td>
-          <td colspan="1">
-            <el-input v-model="PublicCourseForm.courseNum" />
-          </td>
-        </tr>
-        <tr>
-          <td colspan="1">课程名</td>
-          <td colspan="3">
-            <el-input v-model="PublicCourseForm.courseName" />
-          </td>
-        </tr>
+
       </table>
       <div align="center">
         <el-button type="primary" @click="publicCourseQuery">查询</el-button>
@@ -186,19 +187,6 @@
               />
             </el-select>
           </td>
-          <td colspan="1">课程状态</td>
-          <td colspan="1">
-            <el-select v-model="AcrossCourseForm.status" placeholder="主管部门审核通过" style="width: 100%">
-              <el-option
-                v-for="item in courseStatus"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
-            </el-select>
-          </td>
-        </tr>
-        <tr>
           <td colspan="1">选课学期</td>
           <td colspan="1">
             <el-select v-model="AcrossCourseForm.courseTerm" placeholder="2019－2020学年第1学期" style="width: 100%">
@@ -210,15 +198,28 @@
               />
             </el-select>
           </td>
+        </tr>
+        <tr>
+          <td colspan="1">课程名</td>
+          <td colspan="1">
+            <el-input v-model="AcrossCourseForm.courseName" />
+          </td>
           <td colspan="1">课程号</td>
           <td colspan="1">
             <el-input v-model="AcrossCourseForm.courseNum" />
           </td>
         </tr>
         <tr>
-          <td colspan="1">课程名</td>
+          <td colspan="1">课程状态</td>
           <td colspan="3">
-            <el-input v-model="AcrossCourseForm.courseName" />
+            <el-select v-model="AcrossCourseForm.status" placeholder="主管部门审核通过" style="width: 100%">
+              <el-option
+                v-for="item in courseStatus"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
           </td>
         </tr>
       </table>
