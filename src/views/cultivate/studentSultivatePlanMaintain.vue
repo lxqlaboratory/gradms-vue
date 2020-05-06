@@ -211,7 +211,7 @@
         </tr>
         <tr>
           <td colspan="1">课程状态</td>
-          <td colspan="3">
+          <td colspan="1">
             <el-select v-model="AcrossCourseForm.status" placeholder="主管部门审核通过" style="width: 100%">
               <el-option
                 v-for="item in courseStatus"
