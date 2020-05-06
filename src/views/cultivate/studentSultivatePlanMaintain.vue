@@ -398,7 +398,7 @@
           </td>
           <td colspan="1">授课语言</td>
           <td colspan="1">
-            {{ detileForm.teachLanguage }}
+            {{ detileForm.teachLanguage.zh }}
           </td>
         </tr>
         <tr>
@@ -1199,7 +1199,9 @@ export default {
         teachingWayCode: {
           zh: ''
         },
-        teachLanguage: ''
+        teachLanguage: {
+          zh: ''
+        }
       },
       publiccourseTermList: [],
       acrosscourseTermList: [],
