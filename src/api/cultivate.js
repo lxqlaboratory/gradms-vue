@@ -31,3 +31,40 @@ export function studentSultivatePlanCourseDelete(data) {
     data
   })
 }
+export function acrossCourseQueryInit(data) {
+  return request({
+    url: '/api/coursenew/acrossCourseQueryInit',
+    method: 'POST',
+    data
+  })
+}
+export function publicCourseQueryDoQuery(data) {
+  return request({
+    url: '/api/coursenew/publicCourseQueryDoQuery',
+    method: 'POST',
+    data
+  })
+}
+export function newCultivateCourseDetail(data) {
+  return request({
+    url: '/api/coursenew/newCultivateCourseDetail',
+    method: 'POST',
+    data
+  })
+}
+export function newCultivateSelectPublicCourse(data) {
+  return request({
+    url: '/api/cultivatenew/newCultivateSelectPublicCourse',
+    method: 'POST',
+    data
+  })
+}
+
+export function acrossCourseQueryDoQuery(data) {
+  return request({
+    url: '/api/coursenew/acrossCourseQueryDoQuery',
+    method: 'POST',
+    data
+  })
+}
+
