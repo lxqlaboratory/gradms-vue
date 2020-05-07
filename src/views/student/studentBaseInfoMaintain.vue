@@ -41,12 +41,44 @@
       </tr>
       <tr>
         <td colspan="1" >电子邮箱</td>
-        <td colspan="3">
+        <td colspan="1">
           <el-input v-model="form.email" placeholder="请输入电子邮箱" ></el-input>
         </td>
         <td colspan="1" >紧急联系人电话</td>
         <td colspan="1">
           <el-input v-model="form.contactTelephone" placeholder="请输入紧急联系人电话" ></el-input>
+        </td>
+        <td colspan="1" >辅导员</td>
+        <td colspan="1">
+          {{form.instructorName}}{{form.instructorPhone}}
+        </td>
+      </tr>
+      <tr>
+       <td colspan="1">住宿方式</td>
+        <td colspan="1">
+          <el-select v-model.number="form.isCollectiveLive" placeholder="请选择住宿方式" style="width: 100%">
+            <el-option
+              v-for="item in liveList"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </td>
+       <td colspan="1">住宿点</td>
+        <td colspan="1">
+          <el-select v-model.number="form.liveUnitId" placeholder="请选择住宿点" style="width: 100%">
+            <el-option
+              v-for="item in liveUnitList"
+              :key="item.unitId"
+              :label="item.unitName"
+              :value="item.unitId">
+            </el-option>
+          </el-select>
+        </td>
+        <td colspan="1" >宿舍地址</td>
+        <td colspan="1">
+          <el-input v-model="form.liveAddress" placeholder="请输入宿舍地址" ></el-input>
         </td>
       </tr>
       <tr>
@@ -56,7 +88,17 @@
         </td>
         <td colspan="1" >现住地址</td>
         <td colspan="1">
-          <el-input v-model="form.perAddress" placeholder="请输入通讯地址" ></el-input>
+          <el-input v-model="form.perAddress" placeholder="请输入现地址" ></el-input>
+        </td>
+      </tr>
+      <tr>
+       <td colspan="1">家庭所在地</td>
+        <td colspan="3" >
+          <v-distpicker :province="form.familyProvince" :city ="form.familyCity " :area="form.familyTown"  @selected='onSelectedFamily'></v-distpicker>
+        </td>
+        <td colspan="1" >家庭地址</td>
+        <td colspan="1">
+          <el-input v-model="form.familyAddress" placeholder="请输入家庭地址" ></el-input>
         </td>
       </tr>
       <tr>
@@ -66,7 +108,7 @@
         </td>
         <td colspan="1" >户籍地址</td>
         <td colspan="1">
-          <el-input v-model="form.hujiAddress" placeholder="请输入通讯地址" ></el-input>
+          <el-input v-model="form.hujiAddress" placeholder="请输入户籍地址" ></el-input>
         </td>
       </tr>
       <tr>
@@ -119,6 +161,13 @@ export default {
           wechat:'',
           email:'',
           contactTelephone:'',
+          isCollectiveLive:1,
+          liveUnitId:1,
+          liveAddress:'',
+          familyProvince:'',
+          familyCity:'',
+          familyTown:'',
+          familyAddress:'',
           perProvince:'',
           perCity:'',
           perTown:'',
@@ -129,9 +178,22 @@ export default {
           hujiAddress:'',
           healthyState:'',
           note:'',
+          instructorName:'',
+          instructorPhone:'',
           personIntroduction:''
         },
-        politicsCodeList:[]
+        politicsCodeList:[],
+        liveUnitList:[],
+        liveList:[
+          {
+            value: 1,
+            label: '有集体住宿'
+          }, {
+            value: 0,
+            label: '无集体住宿'
+          }
+        ],
+
     }
   },
   created() {
@@ -143,7 +205,8 @@ export default {
         console.log(res.data)
         this.form = res.data.form
         this.politicsCodeList = res.data.politicsCodeList
-        this.healthyStateList = res.data.healthyStateList;
+        this.healthyStateList = res.data.healthyStateList
+        this.liveUnitList = res.data.liveUnitList
       })
     },
     submit(){
@@ -163,6 +226,12 @@ export default {
         this.form.perProvince= data.province.value
         this.form.perCity=data.city.value
         this.form.perTown=data.area.value
+        console.log(data)
+    },
+    onSelectedFamily(data){
+        this.form.familyProvince= data.province.value
+        this.form.familyCity=data.city.value
+        this.form.familyTown=data.area.value
         console.log(data)
     },
     onSelectedHuji(data){
