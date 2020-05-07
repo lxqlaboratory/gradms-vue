@@ -33,21 +33,21 @@ export function studentSultivatePlanCourseDelete(data) {
 }
 export function acrossCourseQueryInit(data) {
   return request({
-    url: '/api/coursenew/acrossCourseQueryInit',
+    url: '/api/cultivatenew/acrossCourseQueryInit',
     method: 'POST',
     data
   })
 }
 export function publicCourseQueryDoQuery(data) {
   return request({
-    url: '/api/coursenew/publicCourseQueryDoQuery',
+    url: '/api/cultivatenew/publicCourseQueryDoQuery',
     method: 'POST',
     data
   })
 }
 export function newCultivateCourseDetail(data) {
   return request({
-    url: '/api/coursenew/newCultivateCourseDetail',
+    url: '/api/cultivatenew/newCultivateCourseDetail',
     method: 'POST',
     data
   })
@@ -62,7 +62,7 @@ export function newCultivateSelectPublicCourse(data) {
 
 export function acrossCourseQueryDoQuery(data) {
   return request({
-    url: '/api/coursenew/acrossCourseQueryDoQuery',
+    url: '/api/cultivatenew/acrossCourseQueryDoQuery',
     method: 'POST',
     data
   })

@@ -213,3 +213,10 @@ export function allCourseQueryDoQuery(data) {
     data
   })
 }
+export function newCultivateCourseDetail(data) {
+  return request({
+    url: '/api/coursenew/newCultivateCourseDetail',
+    method: 'POST',
+    data
+  })
+}
