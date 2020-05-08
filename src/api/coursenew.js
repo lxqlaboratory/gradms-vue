@@ -220,3 +220,18 @@ export function newCultivateCourseDetail(data) {
     data
   })
 }
+export function getTeachTaskAwakeInfoInit(data) {
+  return request({
+    url: '/api/coursenew/getTeachTaskAwakeInfoInit',
+    method: 'POST',
+    data
+  })
+}
+export function teachTaskAwakeInfoSubmit(data) {
+  return request({
+    url: '/api/coursenew/teachTaskAwakeInfoSubmit',
+    method: 'POST',
+    data
+  })
+}
+

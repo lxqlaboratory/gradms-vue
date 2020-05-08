@@ -36,3 +36,11 @@ export function updateCetScore(data) {
     data
   })
 }
+export function englishScoreMaintenanceInit(data) {
+  return request({
+    url: '/api/student/englishScoreMaintenanceInit',
+    method: 'POST',
+    data
+  })
+}
+
