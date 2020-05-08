@@ -56,7 +56,7 @@
       <tr>
        <td colspan="1">住宿方式</td>
         <td colspan="1">
-          <el-select v-model.number="form.isCollectiveLive" placeholder="请选择住宿方式" style="width: 100%">
+          <el-select v-model="form.liveType" placeholder="请选择住宿方式" style="width: 100%">
             <el-option
               v-for="item in liveList"
               :key="item.value"
@@ -65,7 +65,7 @@
             </el-option>
           </el-select>
         </td>
-       <td colspan="1">住宿点</td>
+       <td colspan="1">集中住宿点</td>
         <td colspan="1">
           <el-select v-model.number="form.liveUnitId" placeholder="请选择住宿点" style="width: 100%">
             <el-option
@@ -161,7 +161,7 @@ export default {
           wechat:'',
           email:'',
           contactTelephone:'',
-          isCollectiveLive:1,
+          liveType:'1',
           liveUnitId:1,
           liveAddress:'',
           familyProvince:'',
@@ -184,16 +184,7 @@ export default {
         },
         politicsCodeList:[],
         liveUnitList:[],
-        liveList:[
-          {
-            value: 1,
-            label: '有集体住宿'
-          }, {
-            value: 0,
-            label: '无集体住宿'
-          }
-        ],
-
+        liveList:[],
     }
   },
   created() {
@@ -207,6 +198,7 @@ export default {
         this.politicsCodeList = res.data.politicsCodeList
         this.healthyStateList = res.data.healthyStateList
         this.liveUnitList = res.data.liveUnitList
+        this.liveList = res.data.liveList
       })
     },
     submit(){
