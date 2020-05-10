@@ -126,8 +126,14 @@ export const constantRoutes = [
         name: 'studentSultivatePlanMaintain',
         component: () => import('@/views/cultivate/studentSultivatePlanMaintain'),
         meta: { title: '培养计划设置查看' }
-      }
-    ]
+      },
+      {
+        path: 'collegeQueryStudentAbroadApply',
+        name: 'collegeQueryStudentAbroadApply',
+        component: () => import('@/views/cultivate/collegeQueryStudentAbroadApply'),
+        meta: { title: '培养计划设置查看' }
+      },
+          ]
   },
  
   {

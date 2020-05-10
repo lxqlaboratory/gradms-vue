@@ -60,11 +60,10 @@ export function newCultivateSelectPublicCourse(data) {
   })
 }
 
-export function acrossCourseQueryDoQuery(data) {
+export function collegeQueryStudentAbroadApply(data) {
   return request({
-    url: '/api/cultivatenew/acrossCourseQueryDoQuery',
+    url: '/api/cultivatenew/collegeQueryStudentAbroadApply',
     method: 'POST',
     data
   })
 }
-

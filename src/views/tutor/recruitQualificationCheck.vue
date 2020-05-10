@@ -234,7 +234,7 @@
       <el-button  type="primary" @click="doCheckSelect(2)" >审核不通过</el-button>
       <el-button  type="primary" @click="doExport()" >导出招生申请信息表</el-button>
       <el-button  type="primary" @click="doGetSelectApplyIds" >
-        <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationListPrintDataByApplyIds?applyIds='+applyIds" :download="qualificationFielName">导出申请信息表</a>
+        <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationListPrintDataByApplyIds?applyIds='+applyIds" :download="qualificationFielName">批量下载简况表</a>
       </el-button>
       <el-button  type="primary" >
         <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationApplySummaryTablePrintData'" :download="summaryFielName">下载汇总表</a>
