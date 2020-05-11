@@ -276,9 +276,7 @@
         </tr>
       </table>
     </div>
-    <div align="center" v-if="isCanEdit" >
-        <el-button  type="primary" @click="doStatistics">数据统计</el-button>
-        <el-button  type="primary" @click="doSave" :disabled="isDisable" >修改保存</el-button>
+    <div class="buttonCenter" v-if="isCanEdit"  >
       <fileupload
         url="/api/tutor/recruitQualificationAttachUpload"
         :data="{'docType': zip,'applyId':form.applyId}"
@@ -287,6 +285,8 @@
         @preview="onPreview"
       >附件上传
       </fileupload>
+        <el-button  type="primary" @click="doStatistics">数据统计</el-button>
+        <el-button  type="primary" @click="doSave" :disabled="isDisable" >修改保存</el-button>
     </div>
     <table class="headline">
       <tr><td>已申请招生专业列表</td></tr>

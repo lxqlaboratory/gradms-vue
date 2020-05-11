@@ -225,3 +225,14 @@ div:focus {
 .el-form-item {
   margin-bottom: 0px;
 }
+.buttonCenter{
+  display: flex;
+  justify-content: center;
+  .el-button{
+    margin-left: 5px!important;
+    margin-bottom: 5px!important;
+  }
+  .el-upload__tip{
+    margin-top: 0px!important;
+  }
+}
