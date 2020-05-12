@@ -66,49 +66,49 @@ export const constantRoutes = [
         path: 'examInvigilaterArrange',
         name: 'examInvigilaterArrange',
         component: () => import('@/views/coursenew/examInvigilaterArrange'),
-        meta: { title: '监考人员安排 '}
+        meta: { title: '监考人员安排 ' }
       },
       {
         path: 'examTourCollegeArrange',
         name: 'examTourCollegeArrange',
         component: () => import('@/views/coursenew/examTourCollegeArrange'),
-        meta: { title: '巡考人员安排 '}
+        meta: { title: '巡考人员安排 ' }
       },
       {
         path: 'examAffairArrange',
         name: 'examAffairArrange',
         component: () => import('@/views/coursenew/examAffairArrange'),
-        meta: { title: '考务人员安排 '}
+        meta: { title: '考务人员安排 ' }
       },
       {
         path: 'teacherCourseTaskQuery',
         name: 'teacherCourseTaskQuery',
         component: () => import('@/views/coursenew/teacherCourseTaskQuery'),
-        meta: { title: '教师授课查询'}
+        meta: { title: '教师授课查询' }
       },
       {
         path: 'examAffairInfoQuery',
         name: 'examAffairInfoQuery',
         component: () => import('@/views/coursenew/examAffairInfoQuery'),
-        meta: { title: '考务信息查询'}
+        meta: { title: '考务信息查询' }
       },
       {
         path: 'examAffairPersonManage',
         name: 'examAffairPersonManage',
         component: () => import('@/views/coursenew/examAffairPersonManage'),
-        meta: { title: '监考人库管理'}
+        meta: { title: '监考人库管理' }
       },
       {
         path: 'examAffairPersonManageAdd',
         name: 'examAffairPersonManageAdd',
         component: () => import('@/views/coursenew/examAffairPersonManageAdd'),
-        meta: { title: '监考人员添加'}
+        meta: { title: '监考人员添加' }
       },
       {
         path: 'examInvigilaterArrange',
         name: 'examInvigilaterArrange',
         component: () => import('@/views/coursenew/examInvigilaterArrange'),
-        meta: { title: '考试安排管理'}
+        meta: { title: '考试安排管理' }
       }
     ]
   },
@@ -132,10 +132,26 @@ export const constantRoutes = [
         name: 'collegeQueryStudentAbroadApply',
         component: () => import('@/views/cultivate/collegeQueryStudentAbroadApply'),
         meta: { title: '培养计划设置查看' }
-      },
-          ]
+      }
+    ]
   },
- 
+  {
+    path: '/instructor',
+    component: Layout,
+    name: 'instructor',
+    meta: {
+      title: '辅导员管理',
+      icon: 'example'
+    },
+    children: [
+      {
+        path: 'degreeCollegeInstructorMemberManageAdd',
+        name: 'degreeCollegeInstructorMemberManageAdd',
+        component: () => import('@/views/instructor/degreeCollegeInstructorMemberManageAdd'),
+        meta: { title: '辅导员添加' }
+      }
+    ]
+  },
   {
     path: '/tutor',
     component: Layout,
@@ -149,115 +165,115 @@ export const constantRoutes = [
         path: 'degreeCollegeTutorMemberManage',
         name: 'degreeCollegeTutorMemberManage',
         component: () => import('@/views/tutor/degreeCollegeTutorMemberManage'),
-        meta: { title: '学院导师组管理'}
+        meta: { title: '学院导师组管理' }
       },
       {
         path: 'degreeCollegeTutorMemberManageAdd',
         name: 'degreeCollegeTutorMemberManageAdd',
         component: () => import('@/views/tutor/degreeCollegeTutorMemberManageAdd'),
-        meta: { title: '导师组成员添加'}
+        meta: { title: '导师组成员添加' }
       },
       {
         path: 'collegeMaintainStudentTutor',
         name: 'collegeMaintainStudentTutor',
         component: () => import('@/views/tutor/collegeMaintainStudentTutor'),
-        meta: { title: '学院维护学生导师'}
+        meta: { title: '学院维护学生导师' }
       },
       {
         path: 'studentViewCollegeTutor',
         name: 'studentViewCollegeTutor',
         component: () => import('@/views/tutor/studentViewCollegeTutor'),
-        meta: { title: '查看导师信息'}
+        meta: { title: '查看导师信息' }
       },
       {
         path: 'tutorInfoQueryBrowse',
         name: 'tutorInfoQueryBrowse',
         component: () => import('@/views/tutor/tutorInfoQueryBrowse'),
-        meta: { title: '导师查询浏览'}
+        meta: { title: '导师查询浏览' }
       },
       {
         path: 'tutorBaseInfoMaintain',
         name: 'tutorBaselInfoMaintain',
         component: () => import('@/views/tutor/tutorBaseInfoMaintain'),
-        meta: { title: '导师基本信息维护'}
-      },  
+        meta: { title: '导师基本信息维护' }
+      },
       {
         path: 'tutorDetailInfoShow',
         name: 'tutorDetailInfoShow',
         component: () => import('@/views/tutor/tutorDetailInfoShow'),
-        meta: { title: '导师详细信息'}
+        meta: { title: '导师详细信息' }
       },
       {
         path: 'tutorAuxiliaryMaintain',
         name: 'tutorAuxiliaryMaintain',
         component: () => import('@/views/tutor/tutorAuxiliaryMaintain'),
-        meta: { title: '辅助信息维护'}
+        meta: { title: '辅助信息维护' }
       },
       {
         path: 'recruitDisserMaintain',
         name: 'recruitDisserMaintain',
         component: () => import('@/views/tutor/recruitDisserMaintain'),
-        meta: { title: '申请论文维护'}
+        meta: { title: '申请论文维护' }
       },
       {
         path: 'recruitBookMaintain',
         name: 'recruitBookMaintain',
         component: () => import('@/views/tutor/recruitBookMaintain'),
-        meta: { title: '申请专著维护'}
+        meta: { title: '申请专著维护' }
       },
       {
         path: 'recruitProjectMaintain',
         name: 'recruitProjectMaintain',
         component: () => import('@/views/tutor/recruitProjectMaintain'),
-        meta: { title: '申请项目维护'}
+        meta: { title: '申请项目维护' }
       },
       {
         path: 'recruitPatentMaintain',
         name: 'recruitPatentMaintain',
         component: () => import('@/views/tutor/recruitPatentMaintain'),
-        meta: { title: '申请专利维护'}
+        meta: { title: '申请专利维护' }
       },
       {
         path: 'recruitRewardMaintain',
         name: 'recruitRewardMaintain',
         component: () => import('@/views/tutor/recruitRewardMaintain'),
-        meta: { title: '申请奖励维护'}
+        meta: { title: '申请奖励维护' }
       },
       {
         path: 'recruitQualificationApply',
         name: 'recruitQualificationApply',
         component: () => import('@/views/tutor/recruitQualificationApply'),
-        meta: { title: '招生资格申请'}
+        meta: { title: '招生资格申请' }
       },
       {
         path: 'recruitTeamApply',
         name: 'recruitTeamApply',
         component: () => import('@/views/tutor/recruitTeamApply'),
-        meta: { title: '指导团队申请'}
+        meta: { title: '指导团队申请' }
       },
       {
         path: 'recruitQualificationCheck',
         name: 'recruitQualificationCheck',
         component: () => import('@/views/tutor/recruitQualificationCheck'),
-        meta: { title: '招生资格审核'}
+        meta: { title: '招生资格审核' }
       },
       {
         path: 'recruitTeamCheck',
         name: 'recruitTeamCheck',
         component: () => import('@/views/tutor/recruitTeamCheck'),
-        meta: { title: '招生团队审核'}
+        meta: { title: '招生团队审核' }
       },
       {
         path: 'tutorRecruitAchievementList',
         name: 'tutorRecruitAchievementList',
         component: () => import('@/views/tutor/tutorRecruitAchievementList'),
-        meta: { title: '招生团队审核'}
+        meta: { title: '招生团队审核' }
       },
       {
         path: 'recruitQualificationNote',
         name: 'recruitQualificationNote',
         component: () => import('@/views/tutor/recruitQualificationNote'),
-        meta: { title: '申请备注信息维护'}
+        meta: { title: '申请备注信息维护' }
       }
     ]
   },
@@ -274,25 +290,25 @@ export const constantRoutes = [
         path: 'studentBaseInfoMaintain',
         name: 'studentBaselInfoMaintain',
         component: () => import('@/views/student/studentBaseInfoMaintain'),
-        meta: { title: '学生基本信息维护'}
-      },  
+        meta: { title: '学生基本信息维护' }
+      },
       {
         path: 'studentDetailInfoShow',
         name: 'studentDetailInfoShow',
         component: () => import('@/views/student/studentDetailInfoShow'),
-        meta: { title: '学生详细信息'}
+        meta: { title: '学生详细信息' }
       },
       {
         path: 'studentCetScoreMaintain',
         name: 'studentCetScoreMaintain',
         component: () => import('@/views/student/studentCetScoreMaintain'),
-        meta: { title: '学生基本信息维护'}
-      }, 
+        meta: { title: '学生基本信息维护' }
+      },
       {
         path: 'collegeCetScoreMaintain',
         name: 'collegeCetScoreMaintain',
         component: () => import('@/views/student/collegeCetScoreMaintain'),
-        meta: { title: '学生基本信息维护'}
+        meta: { title: '学生基本信息维护' }
       }
 
     ]
@@ -310,20 +326,20 @@ export const constantRoutes = [
         path: 'degreeTutorCheckStudentGraduateApply',
         name: 'degreeTutorCheckStudentGraduateApply',
         component: () => import('@/views/graduate/degreeTutorCheckStudentGraduateApply'),
-        meta: { title: '导师审核毕业申请'}
-      }, 
+        meta: { title: '导师审核毕业申请' }
+      },
       {
         path: 'studentGraduateDegreeStateView',
         name: 'studentGraduateDegreeStateView',
         component: () => import('@/views/graduate/studentGraduateDegreeStateView'),
-        meta: { title: '学生毕业学位状态查询'}
-      }, 
+        meta: { title: '学生毕业学位状态查询' }
+      },
       {
         path: 'degreeNotNormalDegreeStudentQuery',
         name: 'degreeNotNormalDegreeStudentQuery',
         component: () => import('@/views/graduate/degreeNotNormalDegreeStudentQuery'),
-        meta: { title: '未正常授位学生查询'}
-      } 
+        meta: { title: '未正常授位学生查询' }
+      }
     ]
   },
   {
@@ -339,109 +355,109 @@ export const constantRoutes = [
         path: 'thesisReviewPasswordUpdate',
         name: 'thesisReviewPasswordUpdate',
         component: () => import('@/views/thesisreview/thesisReviewPasswordUpdate'),
-        meta: { title: '密码修改'}
+        meta: { title: '密码修改' }
       },
       {
         path: 'thesisReviewStudentThesisUpload',
         name: 'thesisReviewStudentThesisUpload',
         component: () => import('@/views/thesisreview/thesisReviewStudentThesisUpload'),
-        meta: { title: '论文上传'}
+        meta: { title: '论文上传' }
       },
       {
         path: 'thesisReviewTutorCheckStudentThesis',
         name: 'thesisReviewTutorCheckStudentThesis',
         component: () => import('@/views/thesisreview/thesisReviewTutorCheckStudentThesis'),
-        meta: { title: '导师审核学生论文'}
-      }, 
+        meta: { title: '导师审核学生论文' }
+      },
       {
         path: 'thesisReviewTutorQueryStudentReviewInfo',
         name: 'thesisReviewTutorQueryStudentReviewInfo',
         component: () => import('@/views/thesisreview/thesisReviewTutorQueryStudentReviewInfo'),
-        meta: { title: '导师查看评阅成绩'}
+        meta: { title: '导师查看评阅成绩' }
       },
       {
         path: 'thesisReviewExpertInfoMaintain',
         name: 'thesisReviewExpertInfoMaintain',
         component: () => import('@/views/thesisreview/thesisReviewExpertInfoMaintain'),
-        meta: { title: '基本信息'}
-      }, 
+        meta: { title: '基本信息' }
+      },
       {
         path: 'thesisReviewOnlineReview',
         name: 'thesisReviewOnlineReview',
         component: () => import('@/views/thesisreview/thesisReviewOnlineReview'),
-        meta: { title: '论文评阅'}
-      }, 
+        meta: { title: '论文评阅' }
+      },
       {
         path: 'thesisReviewOnlineReviewFill',
         name: 'thesisReviewOnlineReviewFill',
         component: () => import('@/views/thesisreview/thesisReviewOnlineReviewFill'),
-        meta: { title: '论文评阅填写'}
-      }, 
+        meta: { title: '论文评阅填写' }
+      },
       {
         path: 'thesisReviewExpertManage',
         name: 'thesisReviewExpertManage',
         component: () => import('@/views/thesisreview/thesisReviewExpertManage'),
-        meta: { title: '评阅专家管理'}
-      }, 
+        meta: { title: '评阅专家管理' }
+      },
       {
         path: 'thesisReviewConfigManage',
         name: 'thesisReviewConfigManage',
         component: () => import('@/views/thesisreview/thesisReviewConfigManage'),
-        meta: { title: '评阅配置管理'}
-      }, 
+        meta: { title: '评阅配置管理' }
+      },
       {
         path: 'thesisReviewDirectionManage',
         name: 'thesisReviewDirectionManage',
         component: () => import('@/views/thesisreview/thesisReviewDirectionManage'),
-        meta: { title: '评阅方向管理'}
-      }, 
+        meta: { title: '评阅方向管理' }
+      },
       {
         path: 'thesisReviewPersonManage',
         name: 'thesisReviewPersonManage',
         component: () => import('@/views/thesisreview/thesisReviewPersonManage'),
-        meta: { title: '评阅人管理'}
-      }, 
+        meta: { title: '评阅人管理' }
+      },
       {
         path: 'thesisReviewPersonManageAdd',
         name: 'thesisReviewPersonManageAdd',
         component: () => import('@/views/thesisreview/thesisReviewPersonManageAdd'),
-        meta: { title: '评阅人添加'}
-      }, 
+        meta: { title: '评阅人添加' }
+      },
       {
         path: 'thesisReviewReviewInfoManage',
         name: 'thesisReviewReviewInfoManage',
         component: () => import('@/views/thesisreview/thesisReviewReviewInfoManage'),
-        meta: { title: '评阅信息管理'}
-      }, 
+        meta: { title: '评阅信息管理' }
+      },
       {
         path: 'thesisReviewReviewInfoExpertMaintain',
         name: 'thesisReviewReviewInfoExpertMaintain',
         component: () => import('@/views/thesisreview/thesisReviewReviewInfoExpertMaintain'),
-        meta: { title: '评阅信息专家表'}
-      }, 
+        meta: { title: '评阅信息专家表' }
+      },
       {
         path: 'thesisReviewReviewStateTrace',
         name: 'thesisReviewReviewStateTrace',
         component: () => import('@/views/thesisreview/thesisReviewReviewStateTrace'),
-        meta: { title: '评阅状态追踪'}
-      }, 
+        meta: { title: '评阅状态追踪' }
+      },
       {
         path: 'thesisReviewExpertReviewQuery',
         name: 'thesisReviewExpertReviewQuery',
         component: () => import('@/views/thesisreview/thesisReviewExpertReviewQuery'),
-        meta: { title: '专家评阅查询'}
-      }, 
-        
+        meta: { title: '专家评阅查询' }
+      },
+
       {
         path: 'thesisReviewReviewFeeManage',
         name: 'thesisReviewReviewFeeManage',
         component: () => import('@/views/thesisreview/thesisReviewReviewFeeManage'),
-        meta: { title: '评阅费用管理'}
-      } 
+        meta: { title: '评阅费用管理' }
+      }
     ]
   },
 
-  {path: '/', redirect: '/login' ,hidden: true },
+  { path: '/', redirect: '/login', hidden: true },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

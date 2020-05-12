@@ -1,17 +1,5 @@
 <template>
   <div class="app-container">
-      <div class="query-container">
-      类别
-      <el-select v-model="memberType" placeholder="请选择类别" class="filter-item" style="width: 20%;">
-        <el-option
-          v-for="item in typeList"
-          :key="item.memberType"
-          :label="item.memberName"
-          :value="item.memberType">
-        </el-option>
-      </el-select>
-      <el-button type="primary" @click="doQuery" >查询</el-button>
-      </div>
     <div>
       <div class="table-container">
         <el-table
@@ -48,7 +36,7 @@
             width="70"
           >
             <template slot-scope="scope">
-              <el-button type="text" @click="showPersonInfo(scope.row.personId)" >{{ scope.row.perName }}</el-button>
+              {{ scope.row.perName }}
             </template>
           </el-table-column>
           <el-table-column
@@ -75,34 +63,31 @@
             color="black"
           >
             <template slot-scope="scope">
-              <el-button type="primary" @click="deletePerson(scope.row.memberId)"  >删除</el-button>
+              <el-button type="primary" @click="deletePerson(scope.row.memberId)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
       </div>
 
       <div align="center">
-        <el-button type="primary" @click="memberClear(memberType)" >清空</el-button>
-        <el-button type="primary" @click="memberInit(memberType)" >初始</el-button>
-        <el-button type="primary" @click="addPerson(memberType)" >添加</el-button>
+        <!--<el-button type="primary" @click="memberClear(memberType)">清空</el-button>-->
+        <!--<el-button type="primary" @click="memberInit(memberType)">初始</el-button>-->
+        <el-button type="primary" @click="addPerson()">添加</el-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { degreeCollegeTutorMemberManageInit } from '@/api/tutor'
-import { degreeCollegeTutorMemberQuery} from '@/api/tutor'
-import { degreeCollegeTutorMemberPersonDelete } from '@/api/tutor'
-import { degreeCollegeTutorMemberClear } from '@/api/tutor'
-import { degreeCollegeTutorMemberInit } from '@/api/tutor'
+import { instructorMemberManageInit } from '@/api/instructor'
+import { degreeCollegeInstructorMemberPersonDelete } from '@/api/instructor'
 export default {
   name: 'DegreeCollegeTutorMemberManage',
   data() {
     return {
-      memberType:'',
-      typeList:[],
-      memberList:[]
+      memberType: '',
+      typeList: [],
+      memberList: []
     }
   },
   created() {
@@ -110,51 +95,54 @@ export default {
   },
   methods: {
     fetchData() {
-      degreeCollegeTutorMemberManageInit({ 'session': document.cookie }).then(res => {
-        this.memberList = res.data.memberList
-        this.typeList = res.data.typeList
-        this.memberType=res.data.memberType
-      })
-    },
-    doQuery(){
-      degreeCollegeTutorMemberQuery({ 'session': document.cookie, 'memberType': this.memberType
-      }).then(res => {
+      instructorMemberManageInit({ 'session': document.cookie }).then(res => {
         this.memberList = res.data.memberList
       })
     },
-    deletePerson(memberId){
-       degreeCollegeTutorMemberPersonDelete({ 'session': document.cookie, 'memberId': memberId}).then(res => {
-         this.fetchData()
-      })
-    },
-    memberClear(memberType){
-        this.$confirm('此操作将清除导师组中所有成员, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-		      degreeCollegeTutorMemberClear({ 'session': document.cookie, 'memberType': memberType}).then(res => {
-          this.fetchData()
-        })
-        }).catch(() => {
+    deletePerson(memberId) {
+      degreeCollegeInstructorMemberPersonDelete({ 'session': document.cookie, 'memberId': memberId }).then(res => {
+        if (res.code === '0') {
           this.$message({
-            type: 'info',
-            message: '已取消清除'
-          });
-        });
-    },
-    memberInit(memberType){
-       degreeCollegeTutorMemberInit({ 'session': document.cookie, 'memberType': memberType}).then(res => {
-         this.fetchData()
+            message: '删除成功',
+            type: 'success'
+          })
+          this.fetchData()
+        } else {
+          this.$message({
+            message: res.msg,
+            type: 'error'
+          })
+        }
       })
     },
-    addPerson(memberType){
-      console.log(memberType);
-      this.$router.push({ path: 'degreeCollegeTutorMemberManageAdd', query: { memberType }})
-    },
-    showPersonInfo(personId){
-      this.$router.push({ path: '/tutor/tutorDetailInfoShow', query: { personId }})
+    // memberClear(memberType) {
+    //   this.$confirm('此操作将清除辅导员组中所有成员, 是否继续?', '提示', {
+    //     confirmButtonText: '确定',
+    //     cancelButtonText: '取消',
+    //     type: 'warning'
+    //   }).then(() => {
+    //     degreeCollegeInstructorMemberClear({ 'session': document.cookie, 'memberType': memberType }).then(res => {
+    //       this.fetchData()
+    //     })
+    //   }).catch(() => {
+    //     this.$message({
+    //       type: 'info',
+    //       message: '已取消清除'
+    //     })
+    //   })
+    // },
+    // memberInit() {
+    //   degreeCollegeTutorMemberInit({ 'session': document.cookie }).then(res => {
+    //     this.fetchData()
+    //   })
+    // },
+    addPerson(memberType) {
+      console.log(memberType)
+      this.$router.push({ path: '/instructor/degreeCollegeInstructorMemberManageAdd' })
     }
+    // showPersonInfo(personId) {
+    //   this.$router.push({ path: '/instructor/instructorDetailInfoShow', query: { personId }})
+    // }
   }
 }
 </script>
