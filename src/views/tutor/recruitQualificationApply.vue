@@ -276,9 +276,7 @@
         </tr>
       </table>
     </div>
-    <div align="center" v-if="isCanEdit" >
-        <el-button  type="primary" @click="doStatistics">数据统计</el-button>
-        <el-button  type="primary" @click="doSave">修改保存</el-button>
+    <div class="buttonCenter" v-if="isCanEdit"  >
       <fileupload
         url="/api/tutor/recruitQualificationAttachUpload"
         :data="{'docType': zip,'applyId':form.applyId}"
@@ -287,6 +285,8 @@
         @preview="onPreview"
       >附件上传
       </fileupload>
+        <el-button  type="primary" @click="doStatistics">数据统计</el-button>
+        <el-button  type="primary" @click="doSave" :disabled="isDisable" >修改保存</el-button>
     </div>
     <table class="headline">
       <tr><td>已申请招生专业列表</td></tr>
@@ -396,6 +396,7 @@
 </template>
 
 <script>
+import fileupload from '../../components/upload/fileupload'
 import { recruitQualificationApply } from '@/api/tutor'
 import { recruitQualificationApplySave } from '@/api/tutor'
 import { recruitQualificationApplyMajorList } from '@/api/tutor'
@@ -405,6 +406,7 @@ import { recruitQualificationApplyMajorAdd } from '@/api/tutor'
 import { recruitQualificationApplyMajorDelete } from '@/api/tutor'
 export default {
   name: 'RecruitQualificationApply',
+  components: { fileupload },
   data() {
     return {
       form: {
@@ -440,6 +442,7 @@ export default {
         achieDate3: '',
         achieContent3: ''
       },
+      isDisable: false,
       serverAddres:'',
       isCanEdit: false,
       isCanApply:true,
@@ -510,6 +513,7 @@ export default {
             offset: '10'
           })
         }else {
+          this.isDisable = true
           recruitQualificationApplySave({ 'session': document.cookie, 'form': this.form
           }).then(res => {
             if (res.code === '0') {
@@ -520,6 +524,9 @@ export default {
               })
               this.form.applyId = res.data
             }
+            setTimeout(() =>{
+              this.isDisable = false
+              },1000);
           })
         }
     },

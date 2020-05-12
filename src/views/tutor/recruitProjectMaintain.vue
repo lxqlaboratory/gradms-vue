@@ -192,7 +192,7 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="作者位次"
+            label="位次"
             align="center"
             color="black"
           >
