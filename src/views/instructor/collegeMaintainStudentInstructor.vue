@@ -137,106 +137,106 @@
 </template>
 Init
 <script>
-  import { instructorMemberManageInit } from '@/api/instructor'
-  import { instructorStudentTutorQuery } from '@/api/instructor'
-  import { collegeMaintainStudentInstructorSubmit } from '@/api/instructor'
-  import { collegeMaintainStudentTutorMajor } from '@/api/instructor'
+import { instructorMemberManageInit } from '@/api/instructor'
+import { instructorStudentTutorQuery } from '@/api/instructor'
+import { collegeMaintainStudentInstructorSubmit } from '@/api/instructor'
+import { collegeMaintainStudentTutorMajor } from '@/api/instructor'
 
-  import fileupload from '../../components/upload/fileupload'
-  export default {
-    name: 'CollegeMaintainStudentTutor',
-    components: { fileupload },
-    data() {
-      return {
-        instructorId1: '',
-        stuTypeCode: '',
-        majorId: -1,
-        grade: '',
-        perNum: '',
-        perName: '',
-        stuTypeList: [],
-        gradeList: [],
-        majorList: [],
-        doctorTutorList: [],
-        masterTutorList: [],
-        studentList: [],
-        instructorList: [],
-        multipleSelection: []
+import fileupload from '../../components/upload/fileupload'
+export default {
+  name: 'CollegeMaintainStudentTutor',
+  components: { fileupload },
+  data() {
+    return {
+      instructorId1: '',
+      stuTypeCode: '',
+      majorId: -1,
+      grade: '',
+      perNum: '',
+      perName: '',
+      stuTypeList: [],
+      gradeList: [],
+      majorList: [],
+      doctorTutorList: [],
+      masterTutorList: [],
+      studentList: [],
+      instructorList: [],
+      multipleSelection: []
+    }
+  },
+  created() {
+    this.fetchData()
+  },
+  methods: {
+    changeInstructor() {
+      for (let i = 0; i < this.multipleSelection.length; i++) {
+        this.multipleSelection[i].instructorId = this.instructorId1
       }
     },
-    created() {
-      this.fetchData()
+    handleSelectionChange(val) {
+      this.multipleSelection = val
+      console.log(this.multipleSelection)
     },
-    methods: {
-      changeInstructor() {
-        for (let i = 0; i < this.multipleSelection.length; i++) {
-          this.multipleSelection[i].instructorId = this.instructorId1
-        }
-      },
-      handleSelectionChange(val) {
-        this.multipleSelection = val
-        console.log(this.multipleSelection)
-      },
-      fetchData() {
-        instructorMemberManageInit({ 'session': document.cookie }).then(res => {
-          this.studentList = res.data.studentList
-          this.stuTypeList = res.data.stuTypeList
-          this.gradeList = res.data.gradeList
-          this.majorList = res.data.majorList
-          this.instructorList = res.data.memberList
-        })
-      },
-      doQuery() {
-        instructorStudentTutorQuery({ 'session': document.cookie, 'stuTypeCode': this.stuTypeCode,
-          'grade': this.grade, 'majorId': this.majorId, 'perNum': this.perNum, 'perName': this.perName
-        }).then(res => {
-          this.studentList = res.data
-        })
-      },
-      changeMajor() {
-        collegeMaintainStudentTutorMajor({ 'session': document.cookie, 'stuTypeCode': this.stuTypeCode
-        }).then(res => {
-          this.majorList = res.data
-          this.majorId = ''
-        })
-      },
-      submitTableData() {
-        // console.log(this.studentList)
-        collegeMaintainStudentInstructorSubmit({ 'session': document.cookie, 'studentList': this.studentList }).then(res => {
-          console.log(res)
-          if (res.code === '0') {
-            this.$message({
-              message: '提交成功',
-              type: 'success'
-            })
-            this.doQuery()
-          } else {
-            this.$message({
-              message: res.msg,
-              type: 'error'
-            })
-          }
-        })
-      },
-      onPreview: function(file) {
-      },
-      onSuccess(res, file) {
+    fetchData() {
+      instructorMemberManageInit({ 'session': document.cookie }).then(res => {
+        this.studentList = res.data.studentList
+        this.stuTypeList = res.data.stuTypeList
+        this.gradeList = res.data.gradeList
+        this.majorList = res.data.majorList
+        this.instructorList = res.data.memberList
+      })
+    },
+    doQuery() {
+      instructorStudentTutorQuery({ 'session': document.cookie, 'stuTypeCode': this.stuTypeCode,
+        'grade': this.grade, 'majorId': this.majorId, 'perNum': this.perNum, 'perName': this.perName
+      }).then(res => {
+        this.studentList = res.data
+      })
+    },
+    changeMajor() {
+      collegeMaintainStudentTutorMajor({ 'session': document.cookie, 'stuTypeCode': this.stuTypeCode
+      }).then(res => {
+        this.majorList = res.data
+        this.majorId = ''
+      })
+    },
+    submitTableData() {
+      // console.log(this.studentList)
+      collegeMaintainStudentInstructorSubmit({ 'session': document.cookie, 'studentList': this.studentList }).then(res => {
+        console.log(res)
         if (res.code === '0') {
           this.$message({
-            message: '导入成功',
+            message: '提交成功',
             type: 'success'
           })
-          this.fetchData()
+          this.doQuery()
         } else {
           this.$message({
             message: res.msg,
             type: 'error'
           })
         }
+      })
+    },
+    onPreview: function(file) {
+    },
+    onSuccess(res, file) {
+      if (res.code === '0') {
+        this.$message({
+          message: '导入成功',
+          type: 'success'
+        })
+        this.fetchData()
+      } else {
+        this.$message({
+          message: res.msg,
+          type: 'error'
+        })
       }
-
     }
+
   }
+}
 </script>
 
 <style scoped>
