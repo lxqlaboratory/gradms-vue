@@ -216,10 +216,22 @@ export const constantRoutes = [
         meta: { title: '申请论文维护' }
       },
       {
+        path: 'recruitDisserSourceMaintain',
+        name: 'recruitDisserSourceMaintain',
+        component: () => import('@/views/tutor/recruitDisserSourceMaintain'),
+        meta: { title: '申请论文添加' }
+      },
+      {
         path: 'recruitBookMaintain',
         name: 'recruitBookMaintain',
         component: () => import('@/views/tutor/recruitBookMaintain'),
         meta: { title: '申请专著维护' }
+      },
+      {
+        path: 'recruitBookSourceMaintain',
+        name: 'recruitBookSourceMaintain',
+        component: () => import('@/views/tutor/recruitBookSourceMaintain'),
+        meta: { title: '申请专著添加' }
       },
       {
         path: 'recruitProjectMaintain',
@@ -228,16 +240,40 @@ export const constantRoutes = [
         meta: { title: '申请项目维护' }
       },
       {
+        path: 'recruitProjectSourceMaintain',
+        name: 'recruitProjectSourceMaintain',
+        component: () => import('@/views/tutor/recruitProjectSourceMaintain'),
+        meta: { title: '申请项目添加' }
+      },
+      {
         path: 'recruitPatentMaintain',
         name: 'recruitPatentMaintain',
         component: () => import('@/views/tutor/recruitPatentMaintain'),
         meta: { title: '申请专利维护' }
       },
       {
+        path: 'recruitPatentSourceMaintain',
+        name: 'recruitPatentSourceMaintain',
+        component: () => import('@/views/tutor/recruitPatentSourceMaintain'),
+        meta: { title: '申请专利添加' }
+      },
+      {
+        path: 'recruitRewardSourceMaintain',
+        name: 'recruitRewardSourceMaintain',
+        component: () => import('@/views/tutor/recruitRewardSourceMaintain'),
+        meta: { title: '申请奖励添加' }
+      },
+      {
         path: 'recruitRewardMaintain',
         name: 'recruitRewardMaintain',
         component: () => import('@/views/tutor/recruitRewardMaintain'),
         meta: { title: '申请奖励维护' }
+      },
+      {
+        path: 'recruitCheckMaintain',
+        name: 'recruitCheckMaintain',
+        component: () => import('@/views/tutor/recruitCheckMaintain'),
+        meta: { title: '申请审核' }
       },
       {
         path: 'recruitQualificationApply',
