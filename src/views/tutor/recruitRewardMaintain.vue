@@ -126,7 +126,7 @@
         <el-table
           :data="sourceList"
           ref="multipleTable"
-          @selection-change="sourceSelectionChange">
+          @selection-change="sourceSelectionChange"
           border
           style="width: 100%;"
           size="mini"
