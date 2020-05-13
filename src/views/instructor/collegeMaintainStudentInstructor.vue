@@ -187,6 +187,7 @@ export default {
       })
     },
     doQuery() {
+      this.instructorId1 = ''
       instructorStudentTutorQuery({ 'session': document.cookie, 'stuTypeCode': this.stuTypeCode,
         'grade': this.grade, 'majorId': this.majorId, 'perNum': this.perNum, 'perName': this.perName
       }).then(res => {
