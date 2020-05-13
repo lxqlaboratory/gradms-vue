@@ -2,7 +2,7 @@
   <div class="app-container">
     <div class="query-container" >
       学院
-      <el-select v-model="collegeId" @change="changeMajor" placeholder="请选择学院"  style="width: 15%;">
+      <el-select v-model="collegeId"  placeholder="请选择学院"  style="width: 15%;">
         <el-option
           v-for="item in collegeList"
           :key="item.collegeId"
@@ -39,7 +39,6 @@
           label="姓名"
           align="center"
           color="black"
-          width="70"
         >
           <template slot-scope="scope">
             {{ scope.row.perName }}
@@ -72,6 +71,12 @@
             {{ scope.row.genderName }}
           </template>
         </el-table-column>
+        <el-table-column
+          label="操作"
+          align="center"
+          color="black"
+        >
+        </el-table-column>
       </el-table>
     </div>
   </div>
@@ -94,11 +99,11 @@
       },
       methods: {
         fetchData() {
-          tutorInfoQueryBrowseInit({'session': document.cookie}).then(res => {
-            this.collegeList = res.data.collegeList
-            this.collegeId = res.data.collegeId;
-            this.tutors = res.data.tutors
-          })
+          // tutorInfoQueryBrowseInit({'session': document.cookie}).then(res => {
+          //   this.collegeList = res.data.collegeList
+          //   this.collegeId = res.data.collegeId;
+          //   this.tutors = res.data.tutors
+          // })
         },
       }
     }

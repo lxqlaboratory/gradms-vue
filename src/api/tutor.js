@@ -462,3 +462,32 @@ export function recruitQualificationNoteEmpty(data) {
 
 
 
+export function recruitDisserSourceMaintain(data) {
+  return request({
+    url: '/api/tutor/recruitDisserSourceMaintain',
+    method: 'POST',
+    data
+  })
+}
+export function recruitDisserSourceMaintainFill(data) {
+  return request({
+    url: '/api/tutor/recruitDisserSourceMaintainFill',
+    method: 'POST',
+    data
+  })
+}
+export function recruitDisserSourceMaintainUpdate(data) {
+  return request({
+    url: '/api/tutor/recruitDisserSourceMaintainUpdate',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitDisserSourceMaintainDelete(data) {
+  return request({
+    url: '/api/tutor/recruitDisserSourceMaintainDelete',
+    method: 'POST',
+    data
+  })
+}

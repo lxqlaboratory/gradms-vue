@@ -222,6 +222,12 @@ export const constantRoutes = [
         meta: { title: '申请论文添加' }
       },
       {
+        path: 'recruitDisserMaintainDetail',
+        name: 'recruitDisserMaintainDetail',
+        component: () => import('@/views/tutor/recruitDisserMaintainDetail'),
+        meta: { title: '申请论文' }
+      },
+      {
         path: 'recruitBookMaintain',
         name: 'recruitBookMaintain',
         component: () => import('@/views/tutor/recruitBookMaintain'),
@@ -232,6 +238,12 @@ export const constantRoutes = [
         name: 'recruitBookSourceMaintain',
         component: () => import('@/views/tutor/recruitBookSourceMaintain'),
         meta: { title: '申请专著添加' }
+      },
+      {
+        path: 'recruitBookMaintainDetail',
+        name: 'recruitBookMaintainDetail',
+        component: () => import('@/views/tutor/recruitBookMaintainDetail'),
+        meta: { title: '申请专著' }
       },
       {
         path: 'recruitProjectMaintain',
