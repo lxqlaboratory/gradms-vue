@@ -276,6 +276,26 @@ export const constantRoutes = [
         meta: { title: '申请审核' }
       },
       {
+        path: 'recruitCheckDisserMaintain',
+        name: 'recruitCheckDisserMaintain',
+        component: () => import('@/views/tutor/recruitCheckDisserMaintain')
+      },
+      {
+        path: 'recruitCheckPatentMaintain',
+        name: 'recruitCheckPatentMaintain',
+        component: () => import('@/views/tutor/recruitCheckPatentMaintain')
+      },
+      {
+        path: 'recruitCheckProjectMaintain',
+        name: 'recruitCheckProjectMaintain',
+        component: () => import('@/views/tutor/recruitCheckProjectMaintain')
+      },
+      {
+        path: 'recruitCheckRewardMaintain',
+        name: 'recruitCheckRewardMaintain',
+        component: () => import('@/views/tutor/recruitCheckRewardMaintain')
+      },
+      {
         path: 'recruitQualificationApply',
         name: 'recruitQualificationApply',
         component: () => import('@/views/tutor/recruitQualificationApply'),
