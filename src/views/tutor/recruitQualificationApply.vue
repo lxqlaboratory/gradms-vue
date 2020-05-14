@@ -288,7 +288,7 @@
         <el-button  type="primary" @click="doStatistics">数据统计</el-button>
         <el-button  type="primary" @click="doSave" :disabled="isDisable" >修改保存</el-button>
         <el-button  type="primary" v-if="form.attachId > 0" >
-              <a :href="serverAddres+'/api/tutor/recruitQualificationAttachDownload?attachId='+form.attachId" :download="form.attachFileName">附件</a>
+              <a :href="serverAddres+'/api/tutor/recruitQualificationAttachDownload?attachId='+form.attachId" :download="attachFileName">附件</a>
         </el-button>
     </div>
     <table class="headline">
@@ -444,7 +444,6 @@ export default {
         achieName3: '',
         achieDate3: '',
         achieContent3: '',
-        attachFileName:'',
         attachId:null
       },
       isDisable: false,
@@ -466,6 +465,7 @@ export default {
       rewardList: [],
       patentList: [],
       applyTableName:'简况表.pdf',
+      attachFileName:'附件.zip',
       gender:[
           {
             value: '1',
@@ -597,7 +597,7 @@ export default {
             message: '上传成功',
             type: 'success'
           });
-          this.fetchData()
+          this.form.attachId= res.data
         }
         else{
           this.$message({
