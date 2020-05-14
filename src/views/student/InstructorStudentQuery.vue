@@ -70,7 +70,7 @@ import { instructorViewStudentInit } from '@/api/student'
 import { instructorViewStudentInitQuery } from '@/api/student'
 
 export default {
-  name: 'CollegeMaintainStudentTutor',
+  name: 'instructorStudentQuery',
   data() {
     return {
       grade: '',
