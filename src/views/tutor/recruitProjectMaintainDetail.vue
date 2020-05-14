@@ -2,11 +2,11 @@
   <div class="app-container">
     <table class="content">
       <tr>
-        <td colspan="4" style="font-size: 16px;font-weight: bold;color: #304156 ">申请项目添加</td>
+        <td colspan="2" style="font-size: 16px;font-weight: bold;color: #304156 ">申请项目添加</td>
       </tr>
       <tr>
         <td colspan="1">项目名称</td>
-        <td colspan="3">
+        <td colspan="1">
           <el-input v-model="form.projectName" placeholder="请输入项目名称" />
         </td>
       </tr>
@@ -15,6 +15,8 @@
         <td colspan="1">
           <el-input v-model="form.projectType" placeholder="请输入项目类别" />
         </td>
+      </tr>
+      <tr>
         <td colspan="1">项目等级</td>
         <td colspan="1">
           <el-select v-model="form.ranking" placeholder="请选择申请类型" style="width: 100%">
@@ -32,6 +34,8 @@
         <td colspan="1">
           <el-input  v-model="form.projectFee" placeholder="请输入项目经费" />
         </td>
+      </tr>
+      <tr>
         <td colspan="1">批准部门</td>
         <td colspan="1">
           <el-input v-model="form.projectSource" placeholder="请输入批准部门" />
@@ -42,6 +46,8 @@
         <td colspan="1">
           <el-input v-model="form.projectTime" placeholder="请输入xxxx年xx月xx日-xxxx年xx月xx日" />
         </td>
+      </tr>
+      <tr>
         <td colspan="1">作者位次</td>
         <td colspan="1">
           <el-input v-model="form.orderName" placeholder="请输入作者位次" />
