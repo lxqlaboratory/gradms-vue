@@ -612,3 +612,20 @@ export function recruitProjectSourceMaintainDelete(data) {
     data
   })
 }
+
+
+
+export function recruitCheckMaintain(data) {
+  return request({
+    url: '/api/tutor/recruitCheckMaintain',
+    method: 'POST',
+    data
+  })
+}
+export function recruitCheckBookMaintain(data) {
+  return request({
+    url: '/api/tutor/recruitCheckBookMaintain',
+    method: 'POST',
+    data
+  })
+}

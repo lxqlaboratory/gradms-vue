@@ -312,6 +312,11 @@ export const constantRoutes = [
         component: () => import('@/views/tutor/recruitCheckDisserMaintain')
       },
       {
+        path: 'recruitCheckBookMaintain',
+        name: 'recruitCheckBookMaintain',
+        component: () => import('@/views/tutor/recruitCheckBookMaintain')
+      },
+      {
         path: 'recruitCheckPatentMaintain',
         name: 'recruitCheckPatentMaintain',
         component: () => import('@/views/tutor/recruitCheckPatentMaintain')
