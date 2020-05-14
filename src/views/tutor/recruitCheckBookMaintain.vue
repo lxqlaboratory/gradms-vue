@@ -2,7 +2,7 @@
 <div class="app-container">
   <div class="query-container" >
   专著名称
-  <el-input v-model="perNum" placeholder="请输入专著名称" style="width: 15%;"  />
+  <el-input v-model="achievementName" placeholder="请输入专著名称" style="width: 15%;"  />
   审核状态
     <el-select v-model="checkState" placeholder="审核状态"  style="width: 15%;">
       <el-option
@@ -99,6 +99,7 @@
           List:[],
           sourceSelection:'',
           checkState:'',
+          achievementName:'',
           checkStateList:[{
             value: 0,
             label: '未审核'
@@ -120,7 +121,7 @@
           })
         },
         doQuery(){
-          tutorAchievementSourceCheckPerson({'session': document.cookie,'checkState':this.checkState,'personId': this.$route.query.personId ,'tableName': this.$route.query.tableName  }).then(res => {
+          tutorAchievementSourceCheckPerson({'session': document.cookie,'achievementName':this.achievementName,'checkState':this.checkState,'personId': this.$route.query.personId ,'tableName': this.$route.query.tableName  }).then(res => {
             this.List = res.data
 
           })
@@ -131,7 +132,7 @@
         submit(){
           var achievementIds = this.sourceSelection[0].bookId.toString();
           for(var i = 1; i < this.sourceSelection.length;i++){
-            achievementIds = achievementIds + '-' + this.dataSelection[i].bookId.toString()
+            achievementIds = achievementIds + '-' + this.sourceSelection[i].bookId.toString()
           }
           tutorAchievementSourceCheckCheck({'session': document.cookie,'checkState': 1,'tableName': this.$route.query.tableName, 'achievementIds': achievementIds }).then(res => {
            if(res.msg==='sucess'){

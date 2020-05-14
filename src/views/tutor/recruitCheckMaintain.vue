@@ -114,11 +114,11 @@
           width="300"
         >
           <template slot-scope="scope">
-            <el-button type="text" @click="modfiyDiss(scope.row.personId)" >论文</el-button>
-            <el-button type="text" @click="deleteDiss(scope.row.personId)"  >项目</el-button>
+            <el-button type="text" @click="disser(scope.row.personId)" >论文</el-button>
+            <el-button type="text" @click="project(scope.row.personId)"  >项目</el-button>
             <el-button type="text" @click="book(scope.row.personId)" >专著</el-button>
-            <el-button type="text" @click="deleteDiss(scope.row.personId)" >专利</el-button>
-            <el-button type="text" @click="chakan(scope.row.personId)" >获奖</el-button>
+            <el-button type="text" @click="patent(scope.row.personId)" >专利</el-button>
+            <el-button type="text" @click="reeard(scope.row.personId)" >获奖</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -155,6 +155,18 @@
         },
         book(personId){
           this.$router.push({ path: 'recruitCheckBookMaintain',query: { 'personId':personId,'tableName':'book'} })
+        },
+        disser(personId){
+          this.$router.push({ path: 'recruitCheckDisserMaintain',query: { 'personId':personId,'tableName':'disser'} })
+        },
+        project(personId){
+          this.$router.push({ path: 'recruitCheckProjectMaintain',query: { 'personId':personId,'tableName':'project'} })
+        },
+        patent(personId){
+          this.$router.push({ path: 'recruitCheckPatentMaintain',query: { 'personId':personId,'tableName':'patent'} })
+        },
+        reeard(personId){
+          this.$router.push({ path: 'recruitCheckRewardMaintain',query: { 'personId':personId,'tableName':'reeard'} })
         }
       }
     }
