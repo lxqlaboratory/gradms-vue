@@ -1,41 +1,7 @@
 <template>
   <div class="app-container">
-    <table class="content">
-      <tr>
-        <td colspan="4" style="font-size: 16px;font-weight: bold;color: #304156 ">申请专著添加</td>
-      </tr>
-      <tr>
-        <td colspan="1" >专著名称</td>
-        <td colspan="3">
-          <el-input  placeholder="请输入专著名称" ></el-input>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="1" >著作名称</td>
-        <td colspan="1">
-          <el-input  placeholder="请输入著作名称" ></el-input>
-        </td>
-        <td colspan="1" >著作类型</td>
-        <td colspan="1">
-          <el-input placeholder="请输入著作类型" ></el-input>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="1" >出版时间</td>
-        <td colspan="1">
-          <el-input  placeholder="请输入出版时间" ></el-input>
-        </td>
-        <td colspan="1" >字数</td>
-        <td colspan="1">
-          <el-input  placeholder="请输入字数" ></el-input>
-        </td>
-      </tr>
-    </table>
-    <div align="center">
-      <el-button type="primary" @click="submit" >添加</el-button>
-    </div>
     <el-table
-      :data="sourceList"
+      :data="dataList"
       border
       style="width: 100%;"
       size="mini"
@@ -101,36 +67,80 @@
         align="center"
         color="black"
       >
+        <template slot-scope="scope">
+        <el-button type="text" @click="modfiyDiss(scope.row.bookId)" v-if="scope.row.checkState===0" >修改</el-button>
+        <el-button type="text" @click="deleteDiss(scope.row.bookId)" v-if="scope.row.checkState===0" >删除</el-button>
+        <el-button type="text" @click="chakan(scope.row.bookId)" v-if="scope.row.checkState===1" >查看</el-button>
+        </template>
       </el-table-column>
     </el-table>
+    <div align="center">
+      <el-button type="primary" @click="addDisser" >添加</el-button>
+    </div>
   </div>
 </template>
 
 <script>
-    export default {
+  import { recruitBookSourceMaintain } from '@/api/tutor'
+  import { recruitBookSourceMaintainDelete } from '@/api/tutor'
+  export default {
         name: "recruitBookSourceMaintain",
-      data() {
-        return {
-          dataList:[],
-          dataSelection:[],
-          sourceList:[],
-          sourceSelection:[],
-          isCanModify:false,
-          orderName:''
-        }
-      },
-      created() {
-        // this.fetchData()
-      },
-      methods: {
-        fetchData() {
-          // recruitBookMaintain({'session': document.cookie}).then(res => {
-          //   this.dataList = res.data.dataList
-          //   this.sourceList = res.data.sourceList
-          //   this.isCanModify = res.data.isCanModify
-          // })
-        },
+    data() {
+      return {
+        dataList:[],
+        dataSelection:[],
+        sourceList:[],
+        sourceSelection:[],
+        isCanModify:false
       }
+    },
+    created() {
+      this.fetchData()
+    },
+    methods: {
+      fetchData() {
+        recruitBookSourceMaintain({'session': document.cookie}).then(res => {
+          this.dataList = res.data
+        })
+      },
+      addDisser(){
+        this.$router.push({ path: 'recruitBookMaintainDetail', query: { 'state': 0 }})
+      },
+      modfiyDiss(bookId){
+        this.$router.push({ path: 'recruitBookMaintainDetail', query: { 'bookId': bookId ,'state': 0 }})
+      },
+      chakan(bookId){
+        this.$router.push({ path: 'recruitBookMaintainDetail', query: { 'bookId': bookId ,'state': 1 }})
+      },
+      deleteDiss(bookId){
+        this.$confirm('确认删除吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          recruitBookSourceMaintainDelete({'session': document.cookie,'bookId':bookId}).then(res => {
+            if(res.code === '0')
+            {
+              this.$message({
+                message: "删除成功",
+                type: 'sucess'
+              });
+              this.fetchData();
+            }else {
+              this.$message({
+                message: res.msg,
+                type: 'warning'
+              });
+            }
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+      }
+    }
     }
 </script>
 

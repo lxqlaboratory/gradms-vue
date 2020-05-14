@@ -258,6 +258,12 @@ export const constantRoutes = [
         meta: { title: '申请项目添加' }
       },
       {
+        path: 'recruitProjectMaintainDetail',
+        name: 'recruitProjectMaintainDetail',
+        component: () => import('@/views/tutor/recruitProjectMaintainDetail'),
+        meta: { title: '申请项目' }
+      },
+      {
         path: 'recruitPatentMaintain',
         name: 'recruitPatentMaintain',
         component: () => import('@/views/tutor/recruitPatentMaintain'),
@@ -270,16 +276,29 @@ export const constantRoutes = [
         meta: { title: '申请专利添加' }
       },
       {
+        path: 'recruitPatentMaintainDetail',
+        name: 'recruitPatentMaintainDetail',
+        component: () => import('@/views/tutor/recruitPatentMaintainDetail'),
+        meta: { title: '申请专利' }
+      },
+      {
         path: 'recruitRewardSourceMaintain',
         name: 'recruitRewardSourceMaintain',
         component: () => import('@/views/tutor/recruitRewardSourceMaintain'),
         meta: { title: '申请奖励添加' }
       },
+
       {
         path: 'recruitRewardMaintain',
         name: 'recruitRewardMaintain',
         component: () => import('@/views/tutor/recruitRewardMaintain'),
         meta: { title: '申请奖励维护' }
+      },
+      {
+        path: 'recruitRewardMaintainDetail',
+        name: 'recruitRewardMaintainDetail',
+        component: () => import('@/views/tutor/recruitRewardMaintainDetail'),
+        meta: { title: '申请奖励' }
       },
       {
         path: 'recruitCheckMaintain',

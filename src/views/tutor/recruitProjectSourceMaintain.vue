@@ -1,53 +1,7 @@
 <template>
     <div class="app-container">
-      <table class="content">
-        <tr>
-          <td colspan="4" style="font-size: 16px;font-weight: bold;color: #304156 ">申请项目添加</td>
-        </tr>
-        <tr>
-          <td colspan="1" >项目名称</td>
-          <td colspan="3">
-            <el-input  placeholder="请输入项目名称" ></el-input>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="1" >项目类别</td>
-          <td colspan="1">
-            <el-input  placeholder="请输入项目类别" ></el-input>
-          </td>
-          <td colspan="1" >项目等级</td>
-          <td colspan="1">
-            <el-input placeholder="请输入项目等级" ></el-input>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="1" >项目经费</td>
-          <td colspan="1">
-            <el-input  placeholder="请输入项目经费" ></el-input>
-          </td>
-          <td colspan="1" >批准部门</td>
-          <td colspan="1">
-            <el-input  placeholder="请输入批准部门" ></el-input>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="1" >项目时间</td>
-          <td colspan="1">
-            <el-input  placeholder="请输入项目时间" ></el-input>
-          </td>
-          <td colspan="1" >作者位次</td>
-          <td colspan="1">
-            <el-input  placeholder="请输入作者位次" ></el-input>
-          </td>
-        </tr>
-      </table>
-      <div align="center">
-        <el-button type="primary" @click="addDisser" >添加</el-button>
-      </div>
       <el-table
-        :data="sourceList"
-        ref="multipleTable"
-        @selection-change="sourceSelectionChange"
+        :data="dataList"
         border
         style="width: 100%;"
         size="mini"
@@ -131,12 +85,22 @@
           align="center"
           color="black"
         >
+          <template slot-scope="scope">
+            <el-button type="text" @click="modfiyDiss(scope.row.projectId)" v-if="scope.row.checkState===0" >修改</el-button>
+            <el-button type="text" @click="deleteDiss(scope.row.projectId)" v-if="scope.row.checkState===0" >删除</el-button>
+            <el-button type="text" @click="chakan(scope.row.projectId)" v-if="scope.row.checkState===1" >查看</el-button>
+          </template>
         </el-table-column>
       </el-table>
+      <div align="center">
+        <el-button type="primary" @click="addDisser" >添加</el-button>
+      </div>
     </div>
 </template>
 
 <script>
+  import { recruitProjectSourceMaintain } from '@/api/tutor'
+  import { recruitProjectSourceMaintainDelete } from '@/api/tutor'
     export default {
         name: "recruitProjectSourceMaintain",
       data() {
@@ -149,16 +113,51 @@
         }
       },
       created() {
-        // this.fetchData()
+        this.fetchData()
       },
       methods: {
         fetchData() {
-          // recruitDisserMaintain({'session': document.cookie}).then(res => {
-          //   this.dataList = res.data.dataList
-          //   this.sourceList = res.data.sourceList
-          //   this.isCanModify = res.data.isCanModify
-          // })
+          recruitProjectSourceMaintain({'session': document.cookie}).then(res => {
+            this.dataList = res.data
+          })
         },
+        addDisser(){
+          this.$router.push({ path: 'recruitProjectMaintainDetail', query: { 'state': 0 }})
+        },
+        modfiyDiss(projectId){
+          this.$router.push({ path: 'recruitProjectMaintainDetail', query: { 'projectId': projectId ,'state': 0 }})
+        },
+        chakan(projectId){
+          this.$router.push({ path: 'recruitProjectMaintainDetail', query: { 'projectId': projectId ,'state': 1 }})
+        },
+        deleteDiss(projectId){
+          this.$confirm('确认删除吗?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            recruitProjectSourceMaintainDelete({'session': document.cookie,'projectId':projectId}).then(res => {
+              if(res.code === '0')
+              {
+                this.$message({
+                  message: "删除成功",
+                  type: 'sucess'
+                });
+                this.fetchData();
+              }else {
+                this.$message({
+                  message: res.msg,
+                  type: 'warning'
+                });
+              }
+            })
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消删除'
+            });
+          });
+        }
       }
     }
 </script>

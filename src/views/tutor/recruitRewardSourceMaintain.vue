@@ -1,41 +1,7 @@
 <template>
   <div class="app-container">
-    <table class="content">
-      <tr>
-        <td colspan="4" style="font-size: 16px;font-weight: bold;color: #304156 ">申请奖励添加</td>
-      </tr>
-      <tr>
-        <td colspan="1" >奖励项目名称</td>
-        <td colspan="3">
-          <el-input  placeholder="请输入奖励项目名称" ></el-input>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="1" >奖励名称</td>
-        <td colspan="1">
-          <el-input  placeholder="请输入奖励名称" ></el-input>
-        </td>
-        <td colspan="1" >奖励等级</td>
-        <td colspan="1">
-          <el-input placeholder="请输入奖励等级" ></el-input>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="1" >证书时间</td>
-        <td colspan="1">
-          <el-input  placeholder="请输入证书时间" ></el-input>
-        </td>
-        <td colspan="1" >作者位次</td>
-        <td colspan="1">
-          <el-input  placeholder="请输入作者位次" ></el-input>
-        </td>
-      </tr>
-    </table>
-    <div align="center">
-      <el-button type="primary" @click="addDisser" >添加</el-button>
-    </div>
     <el-table
-      :data="sourceList"
+      :data="dataList"
       border
       style="width: 100%;"
       size="mini"
@@ -128,12 +94,22 @@
         align="center"
         color="black"
       >
+        <template slot-scope="scope">
+          <el-button type="text" @click="modfiyDiss(scope.row.rewardId)" v-if="scope.row.checkState===0" >修改</el-button>
+          <el-button type="text" @click="deleteDiss(scope.row.rewardId)" v-if="scope.row.checkState===0" >删除</el-button>
+          <el-button type="text" @click="chakan(scope.row.rewardId)" v-if="scope.row.checkState===1" >查看</el-button>
+        </template>
       </el-table-column>
     </el-table>
+    <div align="center">
+      <el-button type="primary" @click="addDisser" >添加</el-button>
+    </div>
   </div>
 </template>
 
 <script>
+  import { recruitRewardSourceMaintain } from '@/api/tutor'
+  import { recruitRewardSourceMaintainDelete } from '@/api/tutor'
     export default {
         name: "recruitRewardSourceMaintain",
       data() {
@@ -150,12 +126,47 @@
       },
       methods: {
         fetchData() {
-          // recruitRewardMaintain({'session': document.cookie}).then(res => {
-          //   this.dataList = res.data.dataList
-          //   this.sourceList = res.data.sourceList
-          //   this.isCanModify = res.data.isCanModify
-          // })
+          recruitRewardSourceMaintain({'session': document.cookie}).then(res => {
+            this.dataList = res.data
+          })
         },
+        addDisser(){
+          this.$router.push({ path: 'recruitRewardMaintainDetail', query: { 'state': 0 }})
+        },
+        modfiyDiss(rewardId){
+          this.$router.push({ path: 'recruitRewardMaintainDetail', query: { 'rewardId': rewardId ,'state': 0 }})
+        },
+        chakan(rewardId){
+          this.$router.push({ path: 'recruitRewardMaintainDetail', query: { 'rewardId': rewardId ,'state': 1 }})
+        },
+        deleteDiss(rewardId){
+          this.$confirm('确认删除吗?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            recruitRewardSourceMaintainDelete({'session': document.cookie,'rewardId':rewardId}).then(res => {
+              if(res.code === '0')
+              {
+                this.$message({
+                  message: "删除成功",
+                  type: 'sucess'
+                });
+                this.fetchData();
+              }else {
+                this.$message({
+                  message: res.msg,
+                  type: 'warning'
+                });
+              }
+            })
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消删除'
+            });
+          });
+        }
       }
     }
 </script>
