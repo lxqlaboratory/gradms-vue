@@ -144,10 +144,23 @@ export const constantRoutes = [
       icon: 'example'
     },
     children: [
+
       {
-        path: 'degreeCollegeInstructorMemberManageAdd',
-        name: 'degreeCollegeInstructorMemberManageAdd',
-        component: () => import('@/views/instructor/degreeCollegeInstructorMemberManageAdd'),
+        path: 'collegeMaintainStudentInstructor',
+        name: 'collegeMaintainStudentInstructor',
+        component: () => import('@/views/instructor/collegeMaintainStudentInstructor'),
+        meta: { title: '维护学生辅导员' }
+      },
+      {
+        path: 'studentInstructorCollegeMemberManageAdd',
+        name: 'studentInstructorCollegeMemberManageAdd',
+        component: () => import('@/views/instructor/studentInstructorCollegeMemberManageAdd'),
+        meta: { title: '辅导员添加' }
+      },
+      {
+        path: 'studentInstructorCollegeMemberManage',
+        name: 'studentInstructorCollegeMemberManage',
+        component: () => import('@/views/instructor/studentInstructorCollegeMemberManage'),
         meta: { title: '辅导员添加' }
       }
     ]
@@ -401,8 +414,13 @@ export const constantRoutes = [
         name: 'collegeCetScoreMaintain',
         component: () => import('@/views/student/collegeCetScoreMaintain'),
         meta: { title: '学生基本信息维护' }
+      },
+      {
+        path: 'instructorStudentQuery',
+        name: 'instructorStudentQuery',
+        component: () => import('@/views/student/instructorStudentQuery'),
+        meta: { title: '学生基本信息维护' }
       }
-
     ]
   },
   {

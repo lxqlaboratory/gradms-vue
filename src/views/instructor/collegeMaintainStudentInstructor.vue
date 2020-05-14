@@ -188,6 +188,9 @@ export default {
     },
     doQuery() {
       this.instructorId1 = ''
+      if (this.majorId === '') {
+        this.majorId = -1
+      }
       instructorStudentTutorQuery({ 'session': document.cookie, 'stuTypeCode': this.stuTypeCode,
         'grade': this.grade, 'majorId': this.majorId, 'perNum': this.perNum, 'perName': this.perName
       }).then(res => {
@@ -202,7 +205,7 @@ export default {
       })
     },
     submitTableData() {
-      // console.log(this.studentList)
+      alert(this.studentList)
       collegeMaintainStudentInstructorSubmit({ 'session': document.cookie, 'studentList': this.studentList }).then(res => {
         console.log(res)
         if (res.code === '0') {

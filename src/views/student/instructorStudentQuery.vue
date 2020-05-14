@@ -60,6 +60,42 @@
             {{ scope.row.stuTypeName }}
           </template>
         </el-table-column>
+        <el-table-column
+          label="联系方式"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.PerTelephone }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="电子邮箱"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.email }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="住址"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.address }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="导师"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.tutorName }}
+          </template>
+        </el-table-column>
       </el-table>
     </div>
   </div>
