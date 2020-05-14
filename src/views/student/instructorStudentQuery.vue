@@ -67,7 +67,7 @@
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.perTelephone }}
+            {{ scope.row.PerTelephone }}
           </template>
         </el-table-column>
         <el-table-column
