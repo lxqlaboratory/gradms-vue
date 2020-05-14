@@ -43,4 +43,17 @@ export function englishScoreMaintenanceInit(data) {
     data
   })
 }
-
+export function instructorViewStudentInit(data) {
+  return request({
+    url: '/api/instructor/instructorViewStudentInit',
+    method: 'POST',
+    data
+  })
+}
+export function instructorViewStudentInitQuery(data) {
+  return request({
+    url: '/api/instructor/instructorViewStudentInitQuery',
+    method: 'POST',
+    data
+  })
+}
