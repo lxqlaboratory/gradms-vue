@@ -154,7 +154,7 @@
           })
         },
         book(personId){
-          this.$router.push({ path: 'recruitCheckBookMaintain',query: { personId} })
+          this.$router.push({ path: 'recruitCheckBookMaintain',query: { 'personId':personId,'tableName':'book'} })
         }
       }
     }

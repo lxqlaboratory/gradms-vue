@@ -617,14 +617,21 @@ export function recruitProjectSourceMaintainDelete(data) {
 
 export function recruitCheckMaintain(data) {
   return request({
-    url: '/api/tutor/recruitCheckMaintain',
+    url: '/api/tutor/tutorAchievementSourceCheck',
     method: 'POST',
     data
   })
 }
-export function recruitCheckBookMaintain(data) {
+export function tutorAchievementSourceCheckPerson(data) {
   return request({
-    url: '/api/tutor/recruitCheckBookMaintain',
+    url: '/api/tutor/tutorAchievementSourceCheckPerson',
+    method: 'POST',
+    data
+  })
+}
+export function tutorAchievementSourceCheckCheck(data) {
+  return request({
+    url: '/api/tutor/tutorAchievementSourceCheckCheck',
     method: 'POST',
     data
   })
