@@ -287,6 +287,9 @@
       </fileupload>
         <el-button  type="primary" @click="doStatistics">数据统计</el-button>
         <el-button  type="primary" @click="doSave" :disabled="isDisable" >修改保存</el-button>
+        <el-button  type="primary" v-if="form.attachId > 0" >
+              <a :href="serverAddres+'/api/tutor/recruitQualificationAttachDownload?attachId='+form.attachId" :download="form.attachFileName">附件</a>
+        </el-button>
     </div>
     <table class="headline">
       <tr><td>已申请招生专业列表</td></tr>
@@ -440,7 +443,9 @@ export default {
         achieContent2: '',
         achieName3: '',
         achieDate3: '',
-        achieContent3: ''
+        achieContent3: '',
+        attachFileName:'',
+        attachId:null
       },
       isDisable: false,
       serverAddres:'',
