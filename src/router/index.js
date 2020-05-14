@@ -144,7 +144,7 @@ export const constantRoutes = [
       icon: 'example'
     },
     children: [
-      
+
       {
         path: 'collegeMaintainStudentInstructor',
         name: 'collegeMaintainStudentInstructor',
@@ -416,7 +416,6 @@ export const constantRoutes = [
         component: () => import('@/views/student/instructorStudentQuery'),
         meta: { title: '学生基本信息维护' }
       }
-      
     ]
   },
   {
