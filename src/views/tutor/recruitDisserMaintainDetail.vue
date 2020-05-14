@@ -2,17 +2,17 @@
   <div class="app-container">
     <table class="content">
       <tr>
-        <td colspan="4" style="font-size: 16px;font-weight: bold;color: #304156 ">申请论文添加</td>
+        <td colspan="2" style="font-size: 16px;font-weight: bold;color: #304156 ">申请论文添加</td>
       </tr>
       <tr>
         <td colspan="1">论文名称</td>
-        <td colspan="3">
+        <td colspan="1">
           <el-input v-model="form.disserName" placeholder="请输入论文名称" />
         </td>
       </tr>
       <tr>
         <td colspan="1">刊物名称</td>
-        <td colspan="3">
+        <td colspan="1">
           <el-input v-model="form.publishUnit" placeholder="请输入刊物名称" />
         </td>
       </tr>
@@ -28,6 +28,8 @@
             />
           </el-select>
         </td>
+      </tr>
+      <tr>
         <td colspan="1">影响因子</td>
         <td colspan="1">
           <el-input v-model="form.impactFactor" placeholder="请输入影响因子" />
@@ -45,6 +47,8 @@
             placeholder="选择时间"
           />
         </td>
+      </tr>
+      <tr>
         <td colspan="1">刊物级别</td>
         <td colspan="1">
           <el-select v-model="form.ranking" placeholder="请选择申请类型" style="width: 100%">
@@ -59,7 +63,7 @@
       </tr>
       <tr>
         <td colspan="1">作者位次</td>
-        <td colspan="3">
+        <td colspan="1">
 
           <el-input v-model="form.orderName" placeholder="请输入作者位次" />
         </td>

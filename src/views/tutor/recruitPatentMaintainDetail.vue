@@ -2,11 +2,11 @@
 <div class="app-container">
   <table class="content">
     <tr>
-      <td colspan="4" style="font-size: 16px;font-weight: bold;color: #304156 ">申请专利添加</td>
+      <td colspan="2" style="font-size: 16px;font-weight: bold;color: #304156 ">申请专利添加</td>
     </tr>
     <tr>
       <td colspan="1" >专利名称</td>
-      <td colspan="3">
+      <td colspan="1">
         <el-input  v-model="form.patentName" placeholder="请输入专利名称" ></el-input>
       </td>
     </tr>
@@ -22,6 +22,8 @@
           />
         </el-select>
       </td>
+    </tr>
+    <tr>
       <td colspan="1" >申请时间</td>
       <td colspan="1">
         <el-date-picker
@@ -46,6 +48,8 @@
           placeholder="选择时间"
         />
       </td>
+    </tr>
+    <tr>
       <td colspan="1" >作者位次</td>
       <td colspan="1">
         <el-input v-model="form.orderName" placeholder="请输入作者位次" ></el-input>

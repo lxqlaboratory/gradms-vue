@@ -3,11 +3,11 @@
   <div class="app-container">
     <table class="content">
       <tr>
-        <td colspan="4" style="font-size: 16px;font-weight: bold;color: #304156 ">申请专著添加</td>
+        <td colspan="2" style="font-size: 16px;font-weight: bold;color: #304156 ">申请专著添加</td>
       </tr>
       <tr>
         <td colspan="1" >专著名称</td>
-        <td colspan="3">
+        <td colspan="1">
           <el-input  v-model="form.bookName" placeholder="请输入专著名称" ></el-input>
         </td>
       </tr>
@@ -23,6 +23,8 @@
             />
           </el-select>
         </td>
+      </tr>
+      <tr>
         <td colspan="1" >出版时间</td>
         <td colspan="1">
           <el-date-picker
@@ -40,6 +42,8 @@
         <td colspan="1">
           <el-input  v-model="form.wordCount" placeholder="请输入字数" ></el-input>
         </td>
+      </tr>
+      <tr>
         <td colspan="1" >作者位次</td>
         <td colspan="1">
           <el-input  v-model="form.orderName" placeholder="请输入作者位次" ></el-input>
@@ -76,7 +80,6 @@
       },
       methods: {
         fetchData() {
-          // alert( this.$route.query.state)
           if(this.$route.query.state === 0){
             this.showB = true
           }else if(this.$route.query.state === 1){

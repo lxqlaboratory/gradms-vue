@@ -2,11 +2,11 @@
   <div class="app-container">
     <table class="content">
       <tr>
-        <td colspan="4" style="font-size: 16px;font-weight: bold;color: #304156 ">申请奖励添加</td>
+        <td colspan="2" style="font-size: 16px;font-weight: bold;color: #304156 ">申请奖励添加</td>
       </tr>
       <tr>
         <td colspan="1" >奖励项目名称</td>
-        <td colspan="3">
+        <td colspan="1">
           <el-input v-model="form.rewardProjectName" placeholder="请输入奖励项目名称" ></el-input>
         </td>
       </tr>
@@ -15,6 +15,8 @@
         <td colspan="1">
           <el-input v-model="form.rewardName" placeholder="请输入奖励名称" ></el-input>
         </td>
+      </tr>
+      <tr>
         <td colspan="1" >奖励级别</td>
         <td colspan="1">
           <el-select v-model="form.rewardGrade" placeholder="请输入奖励级别" style="width: 100%">
@@ -39,6 +41,8 @@
             />
           </el-select>
         </td>
+      </tr>
+      <tr>
         <td colspan="1" >奖励年度</td>
         <td colspan="1">
           <el-input v-model="form.rewardYear" placeholder="请输入奖励年度" ></el-input>
@@ -56,6 +60,8 @@
             placeholder="选择时间"
           />
         </td>
+      </tr>
+      <tr>
         <td colspan="1" >作者位次</td>
         <td colspan="1">
           <el-input v-model="form.orderName" placeholder="请输入作者位次" ></el-input>
@@ -63,7 +69,7 @@
       </tr>
       <tr>
         <td colspan="1" >颁奖部门</td>
-        <td colspan="3">
+        <td colspan="1">
           <el-input v-model="form.rewardDepartment" placeholder="请输入颁奖部门" ></el-input>
         </td>
       </tr>

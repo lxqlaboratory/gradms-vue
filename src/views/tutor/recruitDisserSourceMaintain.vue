@@ -1,5 +1,20 @@
 <template>
   <div class="app-container">
+    <table class="content"  align="center">
+      <tr>
+        <td  style="font-size: 16px;color: red;text-align:left; "  v-if="canFill">
+          说明:<br>
+          &nbsp;&nbsp;1.个人论文维护主要用于自己论文库的维护，作者科自行添加发表的论文，添加后请所在医院进行审核后可可以在申请论文维护的候选列表中出现<br>
+          &nbsp;&nbsp;2.医院审核通过可以编辑修改和删除，审核后将不能在编辑修改和删除。<br>
+          &nbsp;&nbsp;3.编辑修改专著信息修改保存后可以上传附件，方便医院审核。
+        </td>
+        <td  style="font-size: 16px;color: red;text-align:left; " v-if="!canFill">
+          友情提示:<br>
+          &nbsp;&nbsp;该功能目前仅限于用于临床医院的博导、硕导科研成果库的维护，其他导师无法使用<br>
+        </td>
+      </tr>
+    </table>
+    <div v-if="canFill">
     <el-table
       :data="dataList"
       border
@@ -95,6 +110,7 @@
     <div align="center">
       <el-button type="primary" @click="addDisser" >添加</el-button>
     </div>
+    </div>
   </div>
 </template>
 
@@ -107,7 +123,7 @@
         return {
           dataList:[],
           dataSelection:[],
-          sourceList:[],
+          canFill:false,
           sourceSelection:[],
           isCanModify:false
         }
@@ -118,7 +134,8 @@
       methods: {
         fetchData() {
           recruitDisserSourceMaintain({'session': document.cookie}).then(res => {
-            this.dataList = res.data
+            this.dataList = res.data.dataList
+            this.canFill = res.data.canFill
           })
         },
         addDisser(){
