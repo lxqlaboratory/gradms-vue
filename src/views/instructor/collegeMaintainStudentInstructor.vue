@@ -88,6 +88,33 @@
           </template>
         </el-table-column>
         <el-table-column
+          label="出生年月"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.perBirthday }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="联系方式"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.mobilePhone }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="导师"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.tutorName }}
+          </template>
+        </el-table-column>
+        <el-table-column
           label="辅导员"
           align="center"
           color="black"
@@ -205,7 +232,6 @@ export default {
       })
     },
     submitTableData() {
-      alert(this.studentList)
       collegeMaintainStudentInstructorSubmit({ 'session': document.cookie, 'studentList': this.studentList }).then(res => {
         console.log(res)
         if (res.code === '0') {
