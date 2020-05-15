@@ -32,6 +32,7 @@
       <el-input v-model="perNum" placeholder="请输入学号" style="width: 10%;" />
       姓名
       <el-input v-model="perName" placeholder="请输入姓名" style="width: 10%;" />
+      <el-button type="primary" @click="clear">清空</el-button>
       <el-button type="primary" @click="doQuery">查询</el-button>
     </div>
     <div class="table-container">
@@ -212,6 +213,13 @@ export default {
         this.majorList = res.data.majorList
         this.instructorList = res.data.memberList
       })
+    },
+    clear() {
+      this.stuTypeCode = ''
+      this.grade = ''
+      this.majorId = -1
+      this.perNum = ''
+      this.perName = ''
     },
     doQuery() {
       this.instructorId1 = ''
