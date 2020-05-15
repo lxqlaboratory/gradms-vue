@@ -17,7 +17,7 @@
         <el-table
           :data="dataList"
           ref="multipleTable"
-          @selection-change="dataSelectionChange">
+          @selection-change="dataSelectionChange"
           border
           style="width: 100%;"
           size="mini"
