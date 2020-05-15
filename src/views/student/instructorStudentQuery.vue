@@ -11,6 +11,7 @@
         />
       </el-select>
       <el-button type="primary" @click="doQuery">查询</el-button>
+      <el-button type="primary" @click="doExport">导出</el-button>
     </div>
     <div class="table-container">
       <el-table
@@ -104,7 +105,7 @@ Init
 <script>
 import { instructorViewStudentInit } from '@/api/student'
 import { instructorViewStudentInitQuery } from '@/api/student'
-
+import { parseTime } from '@/utils'
 export default {
   name: 'CollegeMaintainStudentTutor',
   data() {
@@ -130,6 +131,30 @@ export default {
     },
     viewInformation(personId) {
       this.$router.push({ path: '/student/studentBaseInfoMaintain', query: { personId }})
+    },
+    doExport() {
+        import('@/vendor/Export2Excel').then(excel => {
+          const tHeader = ['学号', '姓名', '学生类型', '联系方式', '电子邮箱', '住址', '导师']
+          const filterVal = ['perNum', 'perName', 'stuTypeCode', 'PerTelephone', 'email', 'address', 'tutorName']
+          const list = this.studentList
+          const data = this.formatJson(filterVal, list)
+          excel.export_json_to_excel({
+            header: tHeader,
+            data,
+            filename: this.filename,
+            autoWidth: this.autoWidth,
+            bookType: this.bookType
+          })
+        })
+    },
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => {
+        if (j === 'timestamp') {
+          return parseTime(v[j])
+        } else {
+          return v[j]
+        }
+      }))
     }
   }
 }
