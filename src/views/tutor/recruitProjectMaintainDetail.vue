@@ -54,17 +54,32 @@
         </td>
       </tr>
     </table>
-    <div align="center">
-      <el-button type="primary" @click="submit" v-if="showB">提交</el-button>
+    <div class="buttonCenter"   >
+      <el-button  type="primary" @click="submit" v-if="showB" >保存</el-button>
+      <fileupload
+        v-if="showB&&showD"
+        url="/api/tutor/tutorAchievementSourceAttachUpload"
+        :data="{'tableName': 'project','achievementId':projectId}"
+        accepttype=".zip"
+        @successcallback="onSuccess"
+        @preview="onPreview"
+      >附件上传
+      </fileupload>
+
+      <el-button  type="primary" v-if="showB&&showDo" >
+        <a :href="serverAddres+'/api/tutor/recruitQualificationAttachDownload?attachId='+attachId" :download="applyTableName">附件下载</a>
+      </el-button>
     </div>
   </div>
 </template>
 
 <script>
+  import fileupload from '../../components/upload/fileupload'
 import { recruitProjectSourceMaintainFill } from '@/api/tutor'
 import { recruitProjectSourceMaintainUpdate } from '@/api/tutor'
 export default {
   name: 'RecruitProjectMaintainDetail',
+  components: { fileupload },
   data() {
     return {
       XMDJList: [],
@@ -77,6 +92,12 @@ export default {
         orderName: '',
         projectTime: ''
       },
+      serverAddres: '',
+      applyTableName: '附件.zip',
+      attachId: '',
+      projectId:'',
+      showD: false,
+      showDo: false,
       showB: false
     }
   },
@@ -85,26 +106,49 @@ export default {
   },
   methods: {
     fetchData() {
-      // alert( this.$route.query.state)
-      if (this.$route.query.state === 0) {
+      this.serverAddres = this.GLOBAL.servicePort
+      if(this.$route.query.state === 0){
         this.showB = true
-      } else if (this.$route.query.state === 1) {
+      }else if(this.$route.query.state === 1){
         this.showB = false
       }
-      recruitProjectSourceMaintainFill({ 'session': document.cookie, 'projectId': this.$route.query.projectId }).then(res => {
+      this.projectId = this.$route.query.projectId
+      if(this.projectId!== undefined){
+        this.showD = true
+      }
+      recruitProjectSourceMaintainFill({ 'session': document.cookie, 'projectId': this.projectId }).then(res => {
         this.XMDJList = res.data.XMDJList
         this.form = res.data.form
       })
     },
     submit() {
-      recruitProjectSourceMaintainUpdate({ 'session': document.cookie, 'source': this.form, 'projectId': this.$route.query.projectId }).then(res => {
+      recruitProjectSourceMaintainUpdate({ 'session': document.cookie, 'source': this.form, 'projectId': this.projectId }).then(res => {
         this.$message({
           message: '提交成功',
           type: 'success',
           offset: '10'
         })
-        this.$router.push({ path: 'recruitProjectSourceMaintain' })
+        this.projectId = res.data.projectId
+        this.showD = true
       })
+    },
+    onPreview: function(file) {
+    },
+    onSuccess(res, file) {
+      if(res.code === '0'){
+        this.$message({
+          message: '上传成功',
+          type: 'success'
+        });
+        this.attachId= res.data
+        this.showDo = true
+      }
+      else{
+        this.$message({
+          message: res.msg,
+          type: 'error'
+        });
+      }
     }
   }
 }

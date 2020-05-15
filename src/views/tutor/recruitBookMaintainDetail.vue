@@ -51,19 +51,35 @@
       </tr>
     </table>
   </div>
-  <div align="center">
-    <el-button type="primary" @click="submit" v-if="showB">提交</el-button>
+  <div class="buttonCenter"   >
+    <el-button  type="primary" @click="submit" v-if="showB" >保存</el-button>
+    <fileupload
+      v-if="showB&&showD"
+      url="/api/tutor/tutorAchievementSourceAttachUpload"
+      :data="{'tableName': 'book','achievementId':bookId}"
+      accepttype=".zip"
+      @successcallback="onSuccess"
+      @preview="onPreview"
+    >附件上传
+    </fileupload>
+
+    <el-button  type="primary" v-if="showB&&showDo" >
+      <a :href="serverAddres+'/api/tutor/recruitQualificationAttachDownload?attachId='+attachId" :download="applyTableName">附件下载</a>
+    </el-button>
   </div>
 </div>
 </template>
 
 <script>
+  import fileupload from '../../components/upload/fileupload'
   import { recruitBookSourceMaintainFill } from '@/api/tutor'
   import { recruitBookSourceMaintainUpdate } from '@/api/tutor'
     export default {
         name: "recruitBookMaintainDetail",
+      components: { fileupload },
       data() {
         return {
+          baocun: false,
           bookTypeList: [],
           form: {
             bookName: '',
@@ -72,6 +88,12 @@
             wordCount: '',
             orderName: ''
           },
+          serverAddres: '',
+          applyTableName: '附件.zip',
+          attachId: '',
+          bookId:'',
+          showD: false,
+          showDo: false,
           showB: false
         }
       },
@@ -80,25 +102,49 @@
       },
       methods: {
         fetchData() {
+          this.serverAddres = this.GLOBAL.servicePort
           if(this.$route.query.state === 0){
             this.showB = true
           }else if(this.$route.query.state === 1){
             this.showB = false
           }
-          recruitBookSourceMaintainFill({ 'session': document.cookie,'bookId': this.$route.query.bookId  }).then(res => {
+          this.bookId = this.$route.query.bookId
+          if(this.bookId!== undefined){
+            this.showD = true
+          }
+          recruitBookSourceMaintainFill({ 'session': document.cookie,'bookId': this.bookId }).then(res => {
             this.bookTypeList = res.data.bookTypeList
             this.form = res.data.form
           })
         },
         submit(){
-          recruitBookSourceMaintainUpdate({ 'session': document.cookie ,'source': this.form,'bookId':this.$route.query.bookId}).then(res => {
+          recruitBookSourceMaintainUpdate({ 'session': document.cookie ,'source': this.form,'bookId':this.bookId}).then(res => {
             this.$message({
-              message: '提交成功',
+              message: '保存成功',
               type: 'success',
               offset: '10'
             });
-            this.$router.push({ path: 'recruitBookSourceMaintain'})
+            this.bookId = res.data.bookId
+            this.showD = true
           })
+        },
+        onPreview: function(file) {
+        },
+        onSuccess(res, file) {
+          if(res.code === '0'){
+            this.$message({
+              message: '上传成功',
+              type: 'success'
+            });
+            this.attachId= res.data
+            this.showDo = true
+          }
+          else{
+            this.$message({
+              message: res.msg,
+              type: 'error'
+            });
+          }
         }
       }
     }

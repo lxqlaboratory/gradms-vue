@@ -69,17 +69,32 @@
         </td>
       </tr>
     </table>
-    <div align="center">
-      <el-button type="primary" @click="submit" v-if="showB">提交</el-button>
+    <div class="buttonCenter"   >
+      <el-button  type="primary" @click="submit" v-if="showB" >保存</el-button>
+      <fileupload
+        v-if="showB&&showD"
+        url="/api/tutor/tutorAchievementSourceAttachUpload"
+        :data="{'tableName': 'disser','achievementId':disserId}"
+        accepttype=".zip"
+        @successcallback="onSuccess"
+        @preview="onPreview"
+      >附件上传
+      </fileupload>
+
+      <el-button  type="primary" v-if="showB&&showDo" >
+        <a :href="serverAddres+'/api/tutor/recruitQualificationAttachDownload?attachId='+attachId" :download="applyTableName">附件下载</a>
+      </el-button>
     </div>
   </div>
 </template>
 
 <script>
+  import fileupload from '../../components/upload/fileupload'
 import { recruitDisserSourceMaintainFill } from '@/api/tutor'
 import { recruitDisserSourceMaintainUpdate } from '@/api/tutor'
 export default {
   name: 'RecruitDisserMaintainDetail',
+  components: { fileupload },
   data() {
     return {
       includeList: [],
@@ -93,6 +108,12 @@ export default {
         publishTime: '',
         include: ''
       },
+      serverAddres: '',
+      applyTableName:'附件.zip',
+      attachId: '',
+      disserId:'',
+      showD: false,
+      showDo: false,
       showB: false
     }
   },
@@ -102,27 +123,53 @@ export default {
   methods: {
     fetchData() {
       // alert( this.$route.query.state)
+      this.serverAddres = this.GLOBAL.servicePort
       if(this.$route.query.state === 0){
         this.showB = true
       }else if(this.$route.query.state === 1){
         this.showB = false
       }
-      recruitDisserSourceMaintainFill({ 'session': document.cookie,'disserId': this.$route.query.disserId  }).then(res => {
+      this.disserId = this.$route.query.disserId
+      if(this.disserId!== undefined){
+        this.showD = true
+      }
+      recruitDisserSourceMaintainFill({ 'session': document.cookie,'disserId': this.disserId  }).then(res => {
         this.includeList = res.data.includeList
         this.rankingList = res.data.rankingList
         this.form = res.data.form
       })
     },
     submit(){
-      recruitDisserSourceMaintainUpdate({ 'session': document.cookie ,'source': this.form,'disserId':this.$route.query.disserId}).then(res => {
+      recruitDisserSourceMaintainUpdate({ 'session': document.cookie ,'source': this.form,'disserId': this.disserId}).then(res => {
         this.$message({
           message: '提交成功',
           type: 'success',
           offset: '10'
         });
-        this.$router.push({ path: 'recruitDisserSourceMaintain'})
+        this.disserId = res.data.disserId
+        console.log( this.disserId)
+        this.showD = true
       })
+    },
+    onPreview: function(file) {
+    },
+    onSuccess(res, file) {
+      if(res.code === '0'){
+        this.$message({
+          message: '上传成功',
+          type: 'success'
+        });
+        this.attachId= res.data
+        this.showDo = true
+      }
+      else{
+        this.$message({
+          message: res.msg,
+          type: 'error'
+        });
+      }
     }
+
   }
 }
 </script>

@@ -56,17 +56,32 @@
       </td>
     </tr>
   </table>
-  <div align="center">
-    <el-button type="primary" @click="submit" v-if="showB">提交</el-button>
+  <div class="buttonCenter"   >
+    <el-button  type="primary" @click="submit" v-if="showB" >保存</el-button>
+    <fileupload
+      v-if="showB&&showD"
+      url="/api/tutor/tutorAchievementSourceAttachUpload"
+      :data="{'tableName': 'patent','achievementId':patentId}"
+      accepttype=".zip"
+      @successcallback="onSuccess"
+      @preview="onPreview"
+    >附件上传
+    </fileupload>
+
+    <el-button  type="primary" v-if="showB&&showDo" >
+      <a :href="serverAddres+'/api/tutor/recruitQualificationAttachDownload?attachId='+attachId" :download="applyTableName">附件下载</a>
+    </el-button>
   </div>
 </div>
 </template>
 
 <script>
+  import fileupload from '../../components/upload/fileupload'
   import { recruitPatentSourceMaintainFill } from '@/api/tutor'
   import { recruitPatentSourceMaintainUpdate } from '@/api/tutor'
     export default {
         name: "recruitPatentMaintainDetail.vue",
+      components: { fileupload },
       data() {
         return {
           patentTypeList: [],
@@ -77,6 +92,12 @@
             authoriDate: '',
             orderName: ''
           },
+          serverAddres: '',
+          applyTableName: '附件.zip',
+          attachId: '',
+          patentId:'',
+          showD: false,
+          showDo: false,
           showB: false
         }
       },
@@ -86,25 +107,49 @@
       methods: {
         fetchData() {
           // alert( this.$route.query.state)
+          this.serverAddres = this.GLOBAL.servicePort
           if(this.$route.query.state === 0){
             this.showB = true
           }else if(this.$route.query.state === 1){
             this.showB = false
           }
-          recruitPatentSourceMaintainFill({ 'session': document.cookie,'patentId': this.$route.query.patentId  }).then(res => {
+          this.patentId = this.$route.query.patentId
+          if(this.patentId!== undefined){
+            this.showD = true
+          }
+          recruitPatentSourceMaintainFill({ 'session': document.cookie,'patentId': this.patentId  }).then(res => {
             this.patentTypeList = res.data.patentTypeList
             this.form = res.data.form
           })
         },
         submit(){
-          recruitPatentSourceMaintainUpdate({ 'session': document.cookie ,'source': this.form,'patentId':this.$route.query.patentId}).then(res => {
+          recruitPatentSourceMaintainUpdate({ 'session': document.cookie ,'source': this.form,'patentId':this.patentId}).then(res => {
             this.$message({
               message: '提交成功',
               type: 'success',
               offset: '10'
             });
-            this.$router.push({ path: 'recruitPatentSourceMaintain'})
+            this.patentId = res.data.patentId
+            this.showD = true
           })
+        },
+        onPreview: function(file) {
+        },
+        onSuccess(res, file) {
+          if(res.code === '0'){
+            this.$message({
+              message: '上传成功',
+              type: 'success'
+            });
+            this.attachId= res.data
+            this.showDo = true
+          }
+          else{
+            this.$message({
+              message: res.msg,
+              type: 'error'
+            });
+          }
         }
       }
     }

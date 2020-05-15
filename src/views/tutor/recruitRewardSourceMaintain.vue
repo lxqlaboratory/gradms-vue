@@ -144,7 +144,7 @@
         fetchData() {
           recruitRewardSourceMaintain({'session': document.cookie}).then(res => {
             this.dataList = res.data.dataList
-            this.canFill = res.data.canFill
+            this.canFill = true
           })
         },
         addDisser(){
