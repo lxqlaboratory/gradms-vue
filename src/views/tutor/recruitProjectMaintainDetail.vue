@@ -42,9 +42,29 @@
         </td>
       </tr>
       <tr>
-        <td colspan="1">项目时间</td>
+        <td colspan="1">项目开始时间</td>
         <td colspan="1">
-          <el-input v-model="form.projectTime" placeholder="请输入xxxx年xx月xx日-xxxx年xx月xx日" />
+          <el-date-picker
+            v-model="form.projectStartTime"
+            size="mini"
+            type="date"
+            style="width: 100%"
+            value-format="yyyy-MM-dd"
+            placeholder="选择时间"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1">项目结束时间</td>
+        <td colspan="1">
+          <el-date-picker
+            v-model="form.projectEndTime"
+            size="mini"
+            type="date"
+            style="width: 100%"
+            value-format="yyyy-MM-dd"
+            placeholder="选择时间"
+          />
         </td>
       </tr>
       <tr>
@@ -90,7 +110,8 @@ export default {
         projectFee: '',
         projectSource: '',
         orderName: '',
-        projectTime: ''
+        projectStartTime: '',
+        projectEndTime: ''
       },
       serverAddres: '',
       applyTableName: '附件.zip',

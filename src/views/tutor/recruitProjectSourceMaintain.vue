@@ -83,7 +83,7 @@
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.projectTime}}
+            {{ scope.row.projectStartTime}} - {{scope.row.projectEndTime}}
           </template>
         </el-table-column>
         <el-table-column
