@@ -56,3 +56,17 @@ export function degreeCollegeInstructorMemberClear(data) {
     data
   })
 }
+export function getPersonInfoListByPerNumNameQuery(data) {
+  return request({
+    url: '/api/instructor/getPersonInfoListByPerNumName',
+    method: 'POST',
+    data
+  })
+}
+export function getPersonInfoListByPerNumName(data) {
+  return request({
+    url: '/api/instructor/getPersonInfoListByPerNumName',
+    method: 'POST',
+    data
+  })
+}

@@ -32,6 +32,7 @@
       <el-input v-model="perNum" placeholder="请输入学号" style="width: 10%;" />
       姓名
       <el-input v-model="perName" placeholder="请输入姓名" style="width: 10%;" />
+      <el-button type="primary" @click="clear">清空</el-button>
       <el-button type="primary" @click="doQuery">查询</el-button>
     </div>
     <div class="table-container">
@@ -85,6 +86,33 @@
         >
           <template slot-scope="scope">
             {{ scope.row.stuTypeName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="出生年月"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.perBirthday }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="联系方式"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.mobilePhone }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="导师"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.tutorName }}
           </template>
         </el-table-column>
         <el-table-column
@@ -186,6 +214,13 @@ export default {
         this.instructorList = res.data.memberList
       })
     },
+    clear() {
+      this.stuTypeCode = ''
+      this.grade = ''
+      this.majorId = -1
+      this.perNum = ''
+      this.perName = ''
+    },
     doQuery() {
       this.instructorId1 = ''
       if (this.majorId === '') {
@@ -205,7 +240,6 @@ export default {
       })
     },
     submitTableData() {
-      alert(this.studentList)
       collegeMaintainStudentInstructorSubmit({ 'session': document.cookie, 'studentList': this.studentList }).then(res => {
         console.log(res)
         if (res.code === '0') {

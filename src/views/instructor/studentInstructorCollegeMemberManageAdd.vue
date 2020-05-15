@@ -46,7 +46,43 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="学院名"
+          label="职称"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.proTechPositionCode }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="家庭住址"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.famillyAddress }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="出生年月"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.perBirthday }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="联系方式"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.mobilePhone }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="学院"
           align="center"
           color="black"
         >
@@ -69,8 +105,8 @@
 </template>
 
 <script>
-import { getPersonInfoListByPerNumName } from '@/api/personinfo'
-import { getPersonInfoListByPerNumNameQuery } from '@/api/personinfo'
+import { getPersonInfoListByPerNumName } from '@/api/instructor'
+import { getPersonInfoListByPerNumNameQuery } from '@/api/instructor'
 import { degreeCollegeInstructorMemberPersonAdd } from '@/api/instructor'
 export default {
   name: 'DegreeCollegeTutorMemberManageAdd',

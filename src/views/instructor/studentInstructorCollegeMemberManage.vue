@@ -45,7 +45,34 @@
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.proTechPositionName }}
+              {{ scope.row.proTechPositionCode }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="家庭住址"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.famillyAddress }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="出生年月"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.perBirthday }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="联系方式"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.mobilePhone }}
             </template>
           </el-table-column>
           <el-table-column
@@ -138,7 +165,7 @@ export default {
     // },
     addPerson(memberType) {
       console.log(memberType)
-      this.$router.push({ path: '/instructor/degreeCollegeInstructorMemberManageAdd' })
+      this.$router.push({ path: '/instructor/studentInstructorCollegeMemberManageAdd' })
     }
     // showPersonInfo(personId) {
     //   this.$router.push({ path: '/instructor/instructorDetailInfoShow', query: { personId }})
