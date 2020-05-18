@@ -62,7 +62,7 @@
       v-if="showB&&showD"
       url="/api/tutor/tutorAchievementSourceAttachUpload"
       :data="{'tableName': 'patent','achievementId':patentId}"
-      accepttype=".zip"
+      accepttype=".pdf"
       @successcallback="onSuccess"
       @preview="onPreview"
     >附件上传
@@ -93,7 +93,7 @@
             orderName: ''
           },
           serverAddres: '',
-          applyTableName: '附件.zip',
+          applyTableName: '附件.pdf',
           attachId: '',
           patentId:'',
           showD: false,

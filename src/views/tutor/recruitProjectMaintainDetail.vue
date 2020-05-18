@@ -80,7 +80,7 @@
         v-if="showB&&showD"
         url="/api/tutor/tutorAchievementSourceAttachUpload"
         :data="{'tableName': 'project','achievementId':projectId}"
-        accepttype=".zip"
+        accepttype=".pdf"
         @successcallback="onSuccess"
         @preview="onPreview"
       >附件上传
@@ -114,7 +114,7 @@ export default {
         projectEndTime: ''
       },
       serverAddres: '',
-      applyTableName: '附件.zip',
+      applyTableName: '附件.pdf',
       attachId: '',
       projectId:'',
       showD: false,
