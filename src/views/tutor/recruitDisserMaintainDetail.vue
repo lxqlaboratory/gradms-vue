@@ -75,7 +75,7 @@
         v-if="showB&&showD"
         url="/api/tutor/tutorAchievementSourceAttachUpload"
         :data="{'tableName': 'disser','achievementId':disserId}"
-        accepttype=".zip"
+        accepttype=".pdf"
         @successcallback="onSuccess"
         @preview="onPreview"
       >附件上传
@@ -109,7 +109,7 @@ export default {
         include: ''
       },
       serverAddres: '',
-      applyTableName:'附件.zip',
+      applyTableName:'附件.pdf',
       attachId: '',
       disserId:'',
       showD: false,

@@ -80,7 +80,7 @@
         v-if="showB&&showD"
         url="/api/tutor/tutorAchievementSourceAttachUpload"
         :data="{'tableName': 'reeard','achievementId':rewardId}"
-        accepttype=".zip"
+        accepttype=".pdf"
         @successcallback="onSuccess"
         @preview="onPreview"
       >附件上传
@@ -115,7 +115,7 @@
             certificateDate: ''
           },
           serverAddres: '',
-          applyTableName: '附件.zip',
+          applyTableName: '附件.pdf',
           attachId: '',
           rewardId:'',
           showD: false,
