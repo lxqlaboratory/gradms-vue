@@ -29,6 +29,11 @@
           </td>
         </tr>
         <tr>
+          <td colspan="2"  >
+            <textarea placeholder="请输入兼职导师意义及承担主要工作" maxlength="1000"  v-model="workDes" style="width: 100%;height:80px"/>
+          </td>
+        </tr>
+        <tr>
           <td colspan="1" >备注</td>
           <td colspan="1"  >
             <el-input v-model="note"  placeholder="请输入人才，兼职外其他备注"    />
@@ -55,6 +60,7 @@ export default {
       applyId:null,
       coPersonId: null,
       outstandingType:'',
+      workDes:'',
       note: '',
       outstandingTypeList: [],
       coPersonList:[],
@@ -69,13 +75,14 @@ export default {
       recruitQualificationNote({ 'session': document.cookie, 'applyId':this.applyId}).then(res => {
         this.coPersonId = res.data.coPersonId
         this.outstandingType = res.data.outstandingType
+        this.workDes = res.data.workDes
         this.note = res.data.note
         this.outstandingTypeList = res.data.outstandingTypeList
         this.coPersonList = res.data.coPersonList
       })
     },
     doSubmit() {
-      recruitQualificationNoteSubmit({ 'session': document.cookie, 'applyId':this.applyId, 'coPersonId':this.coPersonId, 'outstandingType':this.outstandingType, 'note':this.note }).then(res => {
+      recruitQualificationNoteSubmit({ 'session': document.cookie, 'applyId':this.applyId, 'coPersonId':this.coPersonId, 'outstandingType':this.outstandingType, 'note':this.note, 'workDes':this.workDes }).then(res => {
         if (res.code === '0') {
           this.$message({
             message: '提交成功',

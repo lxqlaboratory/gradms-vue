@@ -107,7 +107,7 @@ export default {
   methods: {
     submitForm() {
       thesisReviewPasswordUpdate({  'session': document.cookie,'oldpassword': this.ruleForm.oldPass, 'newpassword': this.ruleForm.newPass }).then(res => {
-        if (res.re === '0') {
+        if (res.code === '0') {
           this.$message({
             type: 'success',
             message: '修改成功'
