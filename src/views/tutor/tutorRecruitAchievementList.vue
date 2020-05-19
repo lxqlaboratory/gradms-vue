@@ -403,6 +403,11 @@
           </el-table-column>
         </el-table>
     </div>
+    <div align="center" v-if="existAttach" >
+      <el-button  type="primary"  >
+        <a :href="serverAddres+'/api/tutor/getTutorRecruitAchievementListByApplyId?personId='+personId" :download="achievementFielName">下载成果附件PDF</a>
+      </el-button>
+    </div>
 </div>
 </template>
 
@@ -412,11 +417,14 @@ export default {
   name: 'tutorRecruitAchievementList',
   data() {
     return {
+      personId:'',
+      existAttach:false,
       dirsserList:[],
       bookList:[],
       projectList:[],
       rewardList:[],
-      patentList:[]
+      patentList:[],
+      achievementFielName:''
     }
   },
   created() {
@@ -424,12 +432,16 @@ export default {
   },
   methods: {
     fetchData() {
-      tutorRecruitAchievementList({ 'session': document.cookie ,'personId': this.$route.query.personId }).then(res => {
+      this.personId=this.$route.query.personId 
+      console.log(this.personId);     
+      tutorRecruitAchievementList({ 'session': document.cookie ,'personId': this.personId }).then(res => {
         this.disserList = res.data.disserList
         this.bookList = res.data.bookList
         this.projectList = res.data.projectList
         this.rewardList = res.data.rewardList
         this.patentList = res.data.patentList
+        this.existAttach = res.data.existAttach;
+        this.achievementFielName = res.data.achievementFielName
       })
     },
   }
