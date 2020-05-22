@@ -1,5 +1,7 @@
 <template>
+
   <div class="app-container">
+    <div class="qrcode" ref="qrCodeUrl"></div>
      <div align="center">
       <tr>
         <td>
@@ -94,7 +96,6 @@
           </el-table-column>
         </el-table>
       </div>
-    <div class="qrcode" ref="qrCodeUrl"></div>
   </div>
 
 </template>
@@ -147,11 +148,13 @@ export default {
 
 <style scoped>
   .qrcode{
-    display: inline-block;
+    display: block;
+    margin:0 auto;
     width: 300px;
     height: 300px;
     background-color: #fff;
     box-sizing: border-box;
+    margin-bottom: 3px;
   }
 </style>
 
