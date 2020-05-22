@@ -69,7 +69,7 @@
             align="center"
             color="black"
           >
-          <template slot-scope="scope" > 
+          <template slot-scope="scope" >
               {{ scope.row.stateName }}
             </template>
           </el-table-column>
@@ -78,7 +78,7 @@
             align="center"
             color="black"
           >
-          <template slot-scope="scope" > 
+          <template slot-scope="scope" >
               {{ scope.row.stateName }}
             </template>
           </el-table-column>
@@ -94,13 +94,17 @@
           </el-table-column>
         </el-table>
       </div>
-  </div>/template>
+    <div class="qrcode" ref="qrCodeUrl"></div>
+  </div>
+
+</template>
 
 <script>
 import { termRegisterStuRegister } from '@/api/student'
 import { termRegisterStuRegisterMaintain } from '@/api/student'
 import { termRegisterStuRegisterQuery } from '@/api/student'
 import { termRegisterStuRegisterSubmit } from '@/api/student'
+import QRCode from 'qrcodejs2'
 export default {
   name: 'termRegisterStuRegister',
   data() {
@@ -119,6 +123,7 @@ export default {
       termRegisterStuRegister({ 'session': document.cookie }).then(res => {
             this.registerCode = res.data.registerCode
             this.statisticsList = res.data.statisticsList
+        this.creatQrCode()
         })
         },
     doQuery() {
@@ -126,11 +131,27 @@ export default {
             this.statisticsList = res.data
         })
         },
+    creatQrCode() {
+      var qrcode = new QRCode(this.$refs.qrCodeUrl, {
+        text: this.registerCode, // 需要转换为二维码的内容
+        width: 300,
+        height: 300,
+        colorDark: '#000000',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
+      })
+    }
     }
 }
 </script>
 
 <style scoped>
-
+  .qrcode{
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    background-color: #fff;
+    box-sizing: border-box;
+  }
 </style>
 
