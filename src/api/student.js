@@ -57,3 +57,33 @@ export function instructorViewStudentInitQuery(data) {
     data
   })
 }
+
+export function termRegisterStuRegister(data) {
+  return request({
+    url: '/api/instructor/termRegisterStuRegister',
+    method: 'POST',
+    data
+  })
+}
+
+export function termRegisterStuRegisterMaintain(data) {
+  return request({
+    url: '/api/instructor/termRegisterStuRegisterMaintain',
+    method: 'POST',
+    data
+  })
+}
+export function termRegisterStuRegisterQuery(data) {
+  return request({
+    url: '/api/instructor/termRegisterStuRegisterQuery',
+    method: 'POST',
+    data
+  })
+}
+export function termRegisterStuRegisterSubmit(data) {
+  return request({
+    url: '/api/instructor/termRegisterStuRegisterSubmit',
+    method: 'POST',
+    data
+  })
+}

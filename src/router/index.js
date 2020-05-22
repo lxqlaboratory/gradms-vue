@@ -420,7 +420,14 @@ export const constantRoutes = [
         name: 'instructorStudentQuery',
         component: () => import('@/views/student/instructorStudentQuery'),
         meta: { title: '学生基本信息维护' }
+      },
+      {
+        path: 'termRegisterStuRegister',
+        name: 'termRegisterStuRegister',
+        component: () => import('@/views/student/termRegisterStuRegister'),
+        meta: { title: '学生注册' }
       }
+
     ]
   },
   {
