@@ -379,7 +379,20 @@ export const constantRoutes = [
         name: 'recruitQualificationNote',
         component: () => import('@/views/tutor/recruitQualificationNote'),
         meta: { title: '申请备注信息维护' }
-      }
+      },
+      {
+        path: 'recruitQualificationCheckGrad',
+        name: 'recruitQualificationCheckGrad',
+        component: () => import('@/views/tutor/recruitQualificationCheckGrad'),
+        meta: { title: '申请审核研究生院' }
+      },
+      {
+        path: 'recruitQualificationStatistics',
+        name: 'recruitQualificationStatistics',
+        component: () => import('@/views/tutor/recruitQualificationStatistics'),
+        meta: { title: '招生申请统计' }
+      },
+      
     ]
   },
   {
