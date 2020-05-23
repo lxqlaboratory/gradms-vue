@@ -5,19 +5,19 @@
       <tr>
         <td colspan="1" >旧密码</td>
         <td colspan="1">
-          <el-input v-model="ruleForm.oldPass" type="password" autocomplete="off" placeholder="请输入旧密码" ></el-input>
+          <el-input v-model="oldPass" type="password" autocomplete="off" placeholder="请输入旧密码" ></el-input>
         </td>
       </tr>
       <tr>
         <td colspan="1" >新密码</td>
         <td colspan="1">
-          <el-input v-model="ruleForm.newPass" type="password" autocomplete="off" placeholder="请输入新密码" ></el-input>
+          <el-input v-model="newPass" type="password" autocomplete="off" placeholder="请输入新密码" ></el-input>
         </td>
       </tr>
       <tr>
         <td colspan="1" >确认密码</td>
         <td colspan="1">
-          <el-input v-model="ruleForm.checkPass" type="password" autocomplete="off" placeholder="请输入确认密码" ></el-input>
+          <el-input v-model="checkPass" type="password" autocomplete="off" placeholder="请输入确认密码" ></el-input>
         </td>
       </tr>
     </table>
@@ -34,92 +34,73 @@ import { thesisReviewPasswordUpdate } from '@/api/thesisreview'
 export default {
   name: 'thesisReviewPasswordUpdate',
   data() {
-    var validateOldPass = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('旧密码不能为空'))
-      }
-      callback()
-    }
-    var validateNewPass = (rule, value, callback) => {
-      var c
-      var low = false
-      var up = false
-      var num = false
-      var other = false
-      for (var i = 0; i < value.length; i++) {
-        c = value.charAt(i)
-        if (c >= 'a' && c <= 'z') { low = true } else if (c >= 'A' && c <= 'Z') { low = true } else if (c >= '0' && c <= '9') { num = true } else { other = true }
-      }
-      var count = 0
-      if (low) { count++ }
-      if (up) { count++ }
-      if (num) { count++ }
-      if (other) { count++ }
-      if (value === '') {
-        callback(new Error('请输入新密码'))
-      } else if (count < 2) {
-        callback(new Error('密码至少包含大写字母、小写字母、数字和符号两种以上的类型，请重新输入！'))
-      } else if (value.length < 8) {
-        callback(new Error('密码长度必须大于等于8个字符，请重新输入！'))
-      }
-      setTimeout(() => {
-        if (value.length > 20) {
-          callback(new Error('密码长度最大为20位'))
-        } else {
-          callback()
-        }
-      }, 10)
-    }
-    var validateNewPass2 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请重新输入新密码'))
-      } else if (value !== this.ruleForm.newPass) {
-        callback(new Error('两次输入的密码不一致'))
-      }
-      setTimeout(() => {
-        if (value.length > 20) {
-          callback(new Error('密码长度最大为20位'))
-        } else {
-          callback()
-        }
-      }, 10)
-    }
     return {
-      ruleForm: {
         oldPass: '',
         newPass: '',
         checkPass: '',
-        msg: ''
-      },
-      rules: {
-        oldPass: [
-          { validator: validateOldPass, trigger: 'blur' }
-        ],
-        newPass: [
-          { validator: validateNewPass, trigger: 'blur' }
-        ],
-        checkPass: [
-          { validator: validateNewPass2, trigger: 'blur' }
-        ]
-      }
     }
   },
   methods: {
     submitForm() {
-      thesisReviewPasswordUpdate({  'session': document.cookie,'oldpassword': this.ruleForm.oldPass, 'newpassword': this.ruleForm.newPass }).then(res => {
-        if (res.code === '0') {
-          this.$message({
-            type: 'success',
-            message: '修改成功'
-          })
-        } else {
+      var msg = ''
+      if (this.oldPass === undefined  || this.oldPass==='' ){
+        msg = '旧密码为空不能修改'
+      }else if (this.newPass  === undefined || this.newPass  === '') {
+          msg ='新密码为空不能修改'
+      }
+      else if( this.oldPass === this.newPass){
+        msg = '新密码和旧密码相同，不能修改'
+      }else if( this.checkPass !== this.newPass){
+        msg = '新密码和确认密码不相同，不能修改'
+      } else {
+        var c
+        var low = false
+        var up = false
+        var num = false
+        var other = false
+        for (var i = 0; i < this.newPass.length; i++) {
+          c = this.newPass.charAt(i)
+          if (c >= 'a' && c <= 'z') { 
+            low = true 
+          } else if (c >= 'A' && c <= 'Z') {
+             low = true 
+          } else if (
+            c >= '0' && c <= '9') {
+               num = true 
+          } else { 
+            other = true }
+          }
+        var count = 0
+        if (low) { count++ }
+        if (up) { count++ }
+        if (num) { count++ }
+        if (other) { count++ }
+        if (count < 2) {
+          msg ='密码至少包含大写字母、小写字母、数字和符号两种以上的类型，请重新输入！';
+        } else if (this.newPass.length < 8) {
+          msg ='密码长度必须大于等于8个字符，请重新输入！';
+        }
+      }
+      if(msg !== '') {
           this.$message({
             type: 'error',
-            message: '旧密码不正确请重新输入'
+            message: msg
           })
-        }
-      }).catch(e => {
-      })
+      }else  {
+        thesisReviewPasswordUpdate({  'session': document.cookie,'oldpassword': this.oldPass, 'newpassword': this.newPass }).then(res => {
+            if (res.code === '0') {
+              this.$message({
+                type: 'success',
+                message: '修改成功'
+              })
+            }else {
+             this.$message({
+              type: 'error',
+              message: '旧密码错误'
+            })
+          }
+        })
+      } 
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()
