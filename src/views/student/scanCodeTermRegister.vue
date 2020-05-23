@@ -101,13 +101,13 @@
 </template>
 
 <script>
-import { termRegisterStuRegister } from '@/api/student'
-import { termRegisterStuRegisterMaintain } from '@/api/student'
-import { termRegisterStuRegisterQuery } from '@/api/student'
-import { termRegisterStuRegisterSubmit } from '@/api/student'
+import { scanCodeTermRegister } from '@/api/student'
+import { scanCodeTermRegisterMaintain } from '@/api/student'
+import { scanCodeTermRegisterQuery } from '@/api/student'
+import { scanCodeTermRegisterSubmit } from '@/api/student'
 import QRCode from 'qrcodejs2'
 export default {
-  name: 'termRegisterStuRegister',
+  name: 'scanCodeTermRegister',
   data() {
     return {
         form:{
@@ -121,14 +121,14 @@ export default {
   },
   methods: {
     fetchData() {
-      termRegisterStuRegister({ 'session': document.cookie }).then(res => {
+      scanCodeTermRegister({ 'session': document.cookie }).then(res => {
             this.registerCode = res.data.registerCode
             this.statisticsList = res.data.statisticsList
         this.creatQrCode()
         })
         },
     doQuery() {
-      termRegisterStuRegisterQuery({ 'session': document.cookie }).then(res => {
+      scanCodeTermRegisterQuery({ 'session': document.cookie }).then(res => {
             this.statisticsList = res.data
         })
         },

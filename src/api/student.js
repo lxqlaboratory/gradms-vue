@@ -58,31 +58,61 @@ export function instructorViewStudentInitQuery(data) {
   })
 }
 
-export function termRegisterStuRegister(data) {
+export function scanCodeTermRegister(data) {
   return request({
-    url: '/api/student/termRegisterStuRegister',
+    url: '/api/student/scanCodeTermRegister',
     method: 'POST',
     data
   })
 }
 
-export function termRegisterStuRegisterMaintain(data) {
+export function scanCodeTermRegisterMaintain(data) {
   return request({
-    url: '/api/student/termRegisterStuRegisterMaintain',
+    url: '/api/student/scanCodeTermRegisterMaintain',
     method: 'POST',
     data
   })
 }
-export function termRegisterStuRegisterQuery(data) {
+export function scanCodeTermRegisterQuery(data) {
   return request({
-    url: '/api/student/termRegisterStuRegisterQuery',
+    url: '/api/student/scanCodeTermRegisterQuery',
     method: 'POST',
     data
   })
 }
-export function termRegisterStuRegisterSubmit(data) {
+export function scanCodeTermRegisterSubmit(data) {
   return request({
-    url: '/api/student/termRegisterStuRegisterSubmit',
+    url: '/api/student/scanCodeTermRegisterSubmit',
+    method: 'POST',
+    data
+  })
+}
+
+export function scanCodeFreshRegister(data) {
+  return request({
+    url: '/api/student/scanCodeFreshRegister',
+    method: 'POST',
+    data
+  })
+}
+
+export function scanCodeFreshRegisterMaintain(data) {
+  return request({
+    url: '/api/student/scanCodeFreshRegisterMaintain',
+    method: 'POST',
+    data
+  })
+}
+export function scanCodeFreshRegisterQuery(data) {
+  return request({
+    url: '/api/student/scanCodeFreshRegisterQuery',
+    method: 'POST',
+    data
+  })
+}
+export function scanCodeFreshRegisterSubmit(data) {
+  return request({
+    url: '/api/student/scanCodeFreshRegisterSubmit',
     method: 'POST',
     data
   })

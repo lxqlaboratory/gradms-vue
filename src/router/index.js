@@ -422,9 +422,15 @@ export const constantRoutes = [
         meta: { title: '学生基本信息维护' }
       },
       {
-        path: 'termRegisterStuRegister',
-        name: 'termRegisterStuRegister',
-        component: () => import('@/views/student/termRegisterStuRegister'),
+        path: 'scanCodeFreshRegister',
+        name: 'scanCodeFreshRegister',
+        component: () => import('@/views/student/scanCodeFreshRegister'),
+        meta: { title: '学生注册' }
+      },
+      {
+        path: 'scanCodeTermRegister',
+        name: 'scanCodeTermRegister',
+        component: () => import('@/views/student/scanCodeTermRegister'),
         meta: { title: '学生注册' }
       }
 
