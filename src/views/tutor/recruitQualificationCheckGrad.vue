@@ -5,21 +5,21 @@
         <el-select v-model="collegeId" @change="changeMajor" placeholder="请选择学院"  style="width: 15%;">
           <el-option
             v-for="item in collegeList"
-            :key="item.collegeId"
-            :label="item.collegeName"
-            :value="item.collegeId">
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
           </el-option>
         </el-select>
         招生类型
-        <el-select v-model="collegeId" @change="changeMajor" placeholder="请选择招生类型"  style="width: 15%;">
+        <el-select v-model="applyType"  placeholder="请选择招生类型"  style="width: 15%;">
           <el-option
-            v-for="item in collegeList"
-            :key="item.collegeId"
-            :label="item.collegeName"
-            :value="item.collegeId">
+            v-for="item in applyTypeList"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
           </el-option>
         </el-select>
-        <el-button  type="primary" @click="doQuery"  >查询</el-button>
+        <el-button  type="primary" @click="getApplyList()"  >查询</el-button>
       </div>
     <div class="table-container">
       <el-table
@@ -275,7 +275,7 @@ export default {
       })
     },
     getApplyList() {
-      recruitQualificationCheckApplyListGrad({ 'session': document.cookie }).then(res => {
+      recruitQualificationCheckApplyListGrad({ 'session': document.cookie, 'collegeId':this.collegeId,'applyType':this.applyType }).then(res => {
         this.applyList = res.data
       })
     },
