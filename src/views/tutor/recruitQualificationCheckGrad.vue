@@ -1,16 +1,26 @@
 <template>
   <div class="app-container">
-    <table class="content"  align="left">
-      <tr>
-        <td  style="font-size: 16px;color: red;text-align:left; ">
-          友情提示：建议使用谷歌浏览器chrome,windows自带浏览器Microsoft Edge,360浏览器请选用极速模式<br>
-          说明:<br>
-            &nbsp;&nbsp;1.学院可以批量对申请本学院招生专业的导师的招生专业进行审核通过、审核不通过、取消通过，审核通过后导师的科研成果和申请信息不可以修改，申请专业不可以删除<br>
-            &nbsp;&nbsp;2.学院可以代未提交申请信息的老师添加本单位的本单位的招生专业，该教师汇总表信息为空，请提醒老师尽量在规定时间自己进行招生申请。<br>
-            &nbsp;&nbsp;3.学院可以下载导师上传的附件，可以下载教师简况表、导出所有团队申请信息列表和审核通过的上报研究生院的汇总表。          
-        </td>
-      </tr>
-    </table>
+      <div class="query-container" >
+        学院
+        <el-select v-model="collegeId" @change="changeMajor" placeholder="请选择学院"  style="width: 15%;">
+          <el-option
+            v-for="item in collegeList"
+            :key="item.collegeId"
+            :label="item.collegeName"
+            :value="item.collegeId">
+          </el-option>
+        </el-select>
+        招生类型
+        <el-select v-model="collegeId" @change="changeMajor" placeholder="请选择招生类型"  style="width: 15%;">
+          <el-option
+            v-for="item in collegeList"
+            :key="item.collegeId"
+            :label="item.collegeName"
+            :value="item.collegeId">
+          </el-option>
+        </el-select>
+        <el-button  type="primary" @click="doQuery"  >查询</el-button>
+      </div>
     <div class="table-container">
       <el-table
         :data="applyList"
@@ -195,40 +205,6 @@
     </el-table>
     </div>
     <div align="center">
-      <tr>
-        <td>
-          导师
-          <el-select v-model="personId" filterable placeholder="请选择添加的教师">
-              <el-option
-                v-for="item in personList"
-                :key="item.personId"
-                :label="item.perName"
-                :value="item.personId"
-              />
-          </el-select>
-          类型
-          <el-select v-model="applyType" placeholder="请选择招生类型" style="width: 20%"  @change="doMajorList()">
-            <el-option
-              v-for="item in applyTypeList"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            />
-          </el-select>
-          专业
-          <el-select v-model="majorId" placeholder="请选择专业" style="width: 20%" >
-            <el-option
-              v-for="item in majorList"
-              :key="item.majorId"
-              :label="item.majorName"
-              :value="item.majorId"
-            />
-          </el-select>
-          <el-button type="primary"  @click="doMajorAdd()">添加导师招生专业</el-button>
-        </td>
-      </tr>
-    </div>
-    <div align="center">
       <el-button  type="primary" @click="doCheckSelect(0)" >取消审核</el-button>
       <el-button  type="primary" @click="doCheckSelect(1)" >审核通过</el-button>
       <el-button  type="primary" @click="doCheckSelect(2)" >审核不通过</el-button>
@@ -246,12 +222,10 @@
 <script>
 import XlsxPopulate from 'xlsx-populate';
 import { saveAs } from 'file-saver';
-import { recruitQualificationCheck } from '@/api/tutor'
-import { recruitQualificationCheckSubmit } from '@/api/tutor'
-import { recruitQualificationCheckSubmitSelect } from '@/api/tutor'
-import { recruitQualificationApplyMajorList} from '@/api/tutor'
-import { recruitQualificationCheckMajorAdd } from '@/api/tutor'
-import { recruitQualificationCheckApplyList } from '@/api/tutor'
+import { recruitQualificationCheckGrad } from '@/api/tutor'
+import { recruitQualificationCheckSubmitGrad } from '@/api/tutor'
+import { recruitQualificationCheckSubmitSelectGrad } from '@/api/tutor'
+import { recruitQualificationCheckApplyListGrad } from '@/api/tutor'
 
 export default {
   name: 'recruitQualificationCheckGrad',
@@ -263,12 +237,31 @@ export default {
       applyIds: '',
       qualificationFielName:'简况表.pdf',
       summaryFielName:'申请汇总表.pdf',
-      personId:'',
+      collegeId:'',
+      collegeList:[],
       applyType:'',
-      majorId:'',
-      personList:[],
-      applyTypeList:[],
-      majorList:[]
+      applyTypeList:[
+          {
+            value: '11',
+            label: '曾招收学术博导'
+          }, 
+          {
+            value: '12',
+            label: '曾招收专业博导'
+          },
+          {
+            value: '11N',
+            label: '新申请学术博导'
+          }, 
+          {
+            value: '12N',
+            label: '新申请专业博导'
+          },
+          {
+            value: '2',
+            label: '硕导'
+          }
+        ],
    }
   },
   created() {
@@ -277,42 +270,16 @@ export default {
   methods: {
     fetchData() {
       this.serverAddres = this.GLOBAL.servicePort
-      recruitQualificationCheck({ 'session': document.cookie }).then(res => {
-        this.personId = res.data.personId
-        this.applyType = res.data.applyType
-        this.majorId = res.data.majorId
-        this.applyList = res.data.applyList
-        this.personList = res.data.personList
-        this.applyTypeList = res.data.applyTypeList
-        this.majorList = res.data.majorList
+      recruitQualificationCheckGrad({ 'session': document.cookie }).then(res => {
+        this.collegeList = res.data
       })
     },
     getApplyList() {
-      recruitQualificationCheckApplyList({ 'session': document.cookie }).then(res => {
+      recruitQualificationCheckApplyListGrad({ 'session': document.cookie }).then(res => {
         this.applyList = res.data
       })
     },
-    doMajorList() {
-      recruitQualificationApplyMajorList({ 'session': document.cookie, 'applyType': this.applyType
-      }).then(res => {
-        this.majorId = res.data.majorId
-        this.majorList = res.data.majorList
-      })
-    },
 
-    doMajorAdd() { // 添加申请专业
-      recruitQualificationCheckMajorAdd({ 'session': document.cookie, 'applyType': this.applyType, 'personId': this.personId, 'majorId': this.majorId
-      }).then(res => {
-        if (res.code === '0') {
-          this.$message({
-            message: '提交成功',
-            type: 'success',
-            offset: '10'
-          })
-          this.getApplyList()
-        }
-      })
-    },
     selectionChange(val) {
         this.multipleSelection = val;
     },
@@ -354,7 +321,7 @@ export default {
           type: 'success'
         });
       }else{
-        recruitQualificationCheckSubmitSelect({ 'session': document.cookie, 'applyIds': this.applyIds, 'state': state
+        recruitQualificationCheckSubmitSelectGrad({ 'session': document.cookie, 'applyIds': this.applyIds, 'state': state
         }).then(res => {
           if (res.code === '0') {
             this.$message({
@@ -368,7 +335,7 @@ export default {
       }
     },
     doCheck(majorApplyId,state){
-      recruitQualificationCheckSubmit({ 'session': document.cookie, 'majorApplyId': majorApplyId, 'state': state
+      recruitQualificationCheckSubmitGrad({ 'session': document.cookie, 'majorApplyId': majorApplyId, 'state': state
       }).then(res => {
          if (res.code === '0') {
           this.$message({

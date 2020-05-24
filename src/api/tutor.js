@@ -636,3 +636,35 @@ export function tutorAchievementSourceCheckCheck(data) {
     data
   })
 }
+
+export function recruitQualificationCheckGrad(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationCheckGrad',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitQualificationCheckApplyListGrad(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationCheckApplyListGrad',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitQualificationCheckSubmitGrad(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationCheckSubmitGrad',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitQualificationCheckSubmitSelectGrad(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationCheckSubmitSelectGrad',
+    method: 'POST',
+    data
+  })
+}
