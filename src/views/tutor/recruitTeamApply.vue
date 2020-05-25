@@ -37,8 +37,8 @@
       </tr>
       <tr>
         <td colspan="6">
-          <textarea v-if="isCanEdit===false" placeholder="团队介绍" maxlength="1000"  v-model="form.reviewDes" style="width: 100%;height:150px"  readonly />
-          <textarea v-if="isCanEdit===true" placeholder="团队介绍" maxlength="1000"  v-model="form.reviewDes" style="width: 100%;height:150px"    />
+          <textarea v-if="isCanEdit===false" placeholder="团队介绍" maxlength="1000"  v-model="form.des" style="width: 100%;height:150px"  readonly />
+          <textarea v-if="isCanEdit===true" placeholder="团队介绍" maxlength="1000"  v-model="form.des" style="width: 100%;height:150px"    />
         </td>
       </tr>
     </table>
