@@ -56,6 +56,15 @@
             </template>
           </el-table-column>
           <el-table-column
+            label="出版社"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.publishUnit }}
+            </template>
+          </el-table-column>
+          <el-table-column
             label="出版时间"
             align="center"
             color="black"
@@ -135,6 +144,15 @@
           >
             <template slot-scope="scope">
               {{ scope.row.bookType }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="出版社"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.publishUnit }}
             </template>
           </el-table-column>
           <el-table-column

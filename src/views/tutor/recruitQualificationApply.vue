@@ -263,7 +263,7 @@
             <el-input v-model="form.achieDate3"  placeholder="请输入成果三日期"/>
           </td>
           <td colspan="2" v-else >
-            {{form.achieDate1}}
+            {{form.achieDate3}}
           </td>
         </tr>
         <tr v-if="form.applyKind==='DN'">

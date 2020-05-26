@@ -25,6 +25,12 @@
         </td>
       </tr>
       <tr>
+        <td colspan="1" >出版社</td>
+        <td colspan="1">
+          <el-input  v-model="form.publishUnit" placeholder="请输入出版社" ></el-input>
+        </td>
+      </tr>
+      <tr>
         <td colspan="1" >出版时间</td>
         <td colspan="1">
           <el-date-picker
@@ -85,6 +91,7 @@
             bookName: '',
             bookType: '',
             publishDate: '',
+            publishUnit: '',
             wordCount: '',
             orderName: ''
           },

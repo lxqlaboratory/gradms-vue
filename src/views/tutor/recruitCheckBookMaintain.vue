@@ -65,6 +65,15 @@
       </template>
     </el-table-column>
     <el-table-column
+      label="出版社"
+      align="center"
+      color="black"
+    >
+      <template slot-scope="scope">
+        {{ scope.row.publishUnit }}
+      </template>
+    </el-table-column>
+    <el-table-column
       label="字数"
       align="center"
       color="black"
