@@ -283,7 +283,7 @@ export default {
       }else{
         var dataIds = this.dataSelection[0].rewardId.toString();
         for(var i = 1; i < this.dataSelection.length;i++){
-            dataIds = this.dataIds + '-' + this.dataSelection[i].rewardId.toString()
+            dataIds = dataIds + '-' + this.dataSelection[i].rewardId.toString()
         }
         recruitRewardMaintainDelete({ 'session': document.cookie, 'dataIds': dataIds}).then(res => {
           this.$message({

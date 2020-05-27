@@ -265,7 +265,7 @@ export default {
       }else{
         var dataIds = this.dataSelection[0].projectId.toString();
         for(var i = 1; i < this.dataSelection.length;i++){
-            dataIds = this.dataIds + '-' + this.dataSelection[i].projectId.toString()
+            dataIds = dataIds + '-' + this.dataSelection[i].projectId.toString()
         }
         recruitProjectMaintainDelete({ 'session': document.cookie, 'dataIds': dataIds}).then(res => {
           this.$message({

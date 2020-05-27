@@ -229,7 +229,7 @@ export default {
       }else{
         var dataIds = this.dataSelection[0].patentId.toString();
         for(var i = 1; i < this.dataSelection.length;i++){
-            dataIds = this.dataIds + '-' + this.dataSelection[i].patentId.toString()
+            dataIds = dataIds + '-' + this.dataSelection[i].patentId.toString()
         }
         recruitPatentMaintainDelete({ 'session': document.cookie, 'dataIds': dataIds}).then(res => {
           this.$message({

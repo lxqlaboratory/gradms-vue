@@ -248,7 +248,7 @@ export default {
       }else{
         var dataIds = this.dataSelection[0].bookId.toString();
         for(var i = 1; i < this.dataSelection.length;i++){
-            dataIds = this.dataIds + '-' + this.dataSelection[i].bookId.toString()
+            dataIds = dataIds + '-' + this.dataSelection[i].bookId.toString()
         }
         recruitBookMaintainDelete({ 'session': document.cookie, 'dataIds': dataIds}).then(res => {
           this.$message({
