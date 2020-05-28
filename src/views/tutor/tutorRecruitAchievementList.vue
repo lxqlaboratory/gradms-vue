@@ -462,8 +462,8 @@ export default {
           sheetName: 'sheet2'
         },
         {
-          tHeader: ['项目名称'],
-          filterVal: ['projectName'],
+          tHeader: ['项目名称','项目类别'],
+          filterVal: ['projectName','projectType'],
           tableDatas: this.projectList,
           sheetName: 'sheet3'
         }
