@@ -126,6 +126,15 @@
           </template>
         </el-table-column>
         <el-table-column
+          label="出版社"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.publishUnit }}
+          </template>
+        </el-table-column>
+        <el-table-column
           label="出版时间"
           align="center"
           color="black"
@@ -403,13 +412,12 @@
         </el-table-column>
       </el-table>
     </div>
-    <div v-if="existAttach" align="center">
-      <el-button type="primary">
+    <div  align="center">
+      <el-button v-if="existAttach" type="primary">
         <a :href="serverAddres+'/api/tutor/getTutorRecruitAchievementListByApplyId?personId='+personId" :download="achievementFielName">下载成果附件PDF</a>
       </el-button>
-
+      <el-button type="primary" @click="doExport">成果列表导出</el-button>
     </div>
-    <el-button type="primary" @click="doExport">导出</el-button>
   </div>
 </template>
 
@@ -427,7 +435,8 @@ export default {
       projectList: [],
       rewardList: [],
       patentList: [],
-      achievementFielName: ''
+      achievementFielName: '',
+      achievementExclName: ''
     }
   },
   created() {
@@ -436,7 +445,6 @@ export default {
   methods: {
     fetchData() {
       this.personId = this.$route.query.personId
-      console.log(this.personId)
       tutorRecruitAchievementList({ 'session': document.cookie, 'personId': this.personId }).then(res => {
         this.disserList = res.data.disserList
         this.bookList = res.data.bookList
@@ -445,31 +453,44 @@ export default {
         this.patentList = res.data.patentList
         this.existAttach = res.data.existAttach
         this.achievementFielName = res.data.achievementFielName
+        this.achievementExclName = res.data.achievementExclName
       })
     },
     doExport() {
       var excelDatas = [
         {
-          tHeader: ['论文名称', '刊物名称','收录情况'], // sheet表一头部
-          filterVal: ['disserName', 'publishUnit', 'include'], // 表一的数据字段
+          tHeader: ['论文名称', '刊物名称','收录情况','影响因子','发表时间','刊物级别','作者位次'], // sheet表一头部
+          filterVal: ['disserName','publishUnit','include','impactFactor','publishTime','ranking','orderName'], // 表一的数据字段
           tableDatas: this.disserList, // 表一的整体json数据
-          sheetName: 'sheet1'// 表一的sheet名字
+          sheetName: '论文'// 表一的sheet名字
         },
         {
-          tHeader: ['著作名称', '著作类型','出版时间'],
-          filterVal: ['bookName', 'bookType', 'publishDate'],
+          tHeader: ['著作名称', '著作类型','出版社','出版时间','字数','位次'],
+          filterVal: ['bookName','bookType','publishUnit','publishDate','wordCount','orderName'],
           tableDatas: this.bookList,
-          sheetName: 'sheet2'
+          sheetName: '专著'
         },
         {
-          tHeader: ['项目名称','项目类别'],
-          filterVal: ['projectName','projectType'],
+          tHeader: ['项目名称','项目类别','项目等级','项目经费','批准部门','项目时间','作者位次'],
+          filterVal: ['projectName','projectType','ranking','projectFee','projectSource','projectTime','orderName'],
           tableDatas: this.projectList,
-          sheetName: 'sheet3'
+          sheetName: '项目'
+        },
+        {
+          tHeader: ['奖励项目名称','奖励名称','奖励级别','奖励等级','奖励年度','颁奖部门','证书时间','作者位次'],
+          filterVal: ['rewardProjectName','rewardName','rewardGrade','rewardLevle','rewardYear','rewardDepartment','certificateDate','orderName'],
+          tableDatas: this.rewardList,
+          sheetName: '奖励'
+        },
+        {
+          tHeader: ['专利名称','专利类型','申请时间','授权时间','作者位次'],
+          filterVal: ['patentName','patentType','applyDate','authoriDate','orderName'],
+          tableDatas: this.patentList,
+          sheetName: '专利'
         }
       ]
 
-      this.json2excel(excelDatas, '成果表', true, 'xlsx')
+      this.json2excel(excelDatas, this.achievementExclName, true, 'xlsx')
     },
     json2excel(tableJson, filenames, autowidth, bookTypes) {
       var that = this
