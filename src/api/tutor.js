@@ -644,6 +644,22 @@ export function recruitQualificationCheckGrad(data) {
     data
   })
 }
+export function recruitQualificationCheckGradCheck(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationCheckGradCheck',
+    method: 'POST',
+    data
+  })
+}
+
+
+export function recruitQualificationCheckSubmitSelectGrad(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationCheckSubmitSelectGrad',
+    method: 'POST',
+    data
+  })
+}
 
 export function recruitQualificationCheckApplyListGrad(data) {
   return request({
@@ -661,10 +677,11 @@ export function recruitQualificationCheckSubmitGrad(data) {
   })
 }
 
-export function recruitQualificationCheckSubmitSelectGrad(data) {
+export function recruitQualificationStatistics(data) {
   return request({
-    url: '/api/tutor/recruitQualificationCheckSubmitSelectGrad',
+    url: '/api/tutor/recruitQualificationStatistics',
     method: 'POST',
     data
   })
 }
+

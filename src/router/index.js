@@ -387,6 +387,12 @@ export const constantRoutes = [
         meta: { title: '申请审核研究生院' }
       },
       {
+        path: 'recruitQualificationCheckGradCheck',
+        name: 'recruitQualificationCheckGradCheck',
+        component: () => import('@/views/tutor/recruitQualificationCheckGradCheck'),
+        meta: { title: '申请审核研究生院' }
+      },
+      {
         path: 'recruitQualificationStatistics',
         name: 'recruitQualificationStatistics',
         component: () => import('@/views/tutor/recruitQualificationStatistics'),

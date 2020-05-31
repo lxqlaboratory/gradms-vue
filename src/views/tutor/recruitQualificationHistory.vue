@@ -1,15 +1,6 @@
 <template>
   <div class="app-container">
     <table class="content"  align="left">
-      <tr>
-        <td  style="font-size: 16px;color: red;text-align:left; ">
-          友情提示：建议使用谷歌浏览器chrome,windows自带浏览器Microsoft Edge,360浏览器请选用极速模式<br>
-          说明:<br>
-            &nbsp;&nbsp;1.学院可以批量对申请本学院招生专业的导师的招生专业进行审核通过、审核不通过、取消通过，审核通过后导师的科研成果和申请信息不可以修改，申请专业不可以删除<br>
-            &nbsp;&nbsp;2.学院可以代未提交申请信息的老师添加本单位的本单位的招生专业，该教师汇总表信息为空，请提醒老师尽量在规定时间自己进行招生申请。<br>
-            &nbsp;&nbsp;3.学院可以下载导师上传的附件，可以下载教师简况表、导出所有团队申请信息列表和审核通过的上报研究生院的汇总表。          
-        </td>
-      </tr>
     </table>
     <div class="table-container">
       <el-table
