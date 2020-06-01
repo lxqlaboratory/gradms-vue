@@ -54,9 +54,14 @@
           <td colspan="1" width = "40%" >
             {{form.reviewLevel1}}
           </td>
+          <td>
+              <el-button v-if="form.reviewId1 > 0" type="primary" >
+                <a :href="serverAddres+'/api/thesisreview/thesisReviewOnlineReviewPrint?reviewId='+form.reviewId1" :download="printName1">评阅表一下载</a>
+               </el-button>
+          </td>
         </tr>
         <tr height = "100px" >
-          <td colspan="3">
+          <td colspan="4">
             {{form.reviewDes1}}
           </td>
         </tr>
@@ -68,9 +73,14 @@
           <td colspan="1" width = "40%" >
             {{form.reviewLevel2}}
           </td>
+          <td>
+              <el-button v-if="form.reviewId2  >0 " type="primary" >
+                <a :href="serverAddres+'/api/thesisreview/thesisReviewOnlineReviewPrint?reviewId='+form.reviewId2" :download="printName2">评阅表二下载</a>
+               </el-button>
+          </td>
         </tr>
         <tr height = "100px" >
-          <td colspan="3">
+          <td colspan="4">
             {{form.reviewDes2}}
           </td>
         </tr>
@@ -82,9 +92,14 @@
           <td colspan="1" width = "40%" >
             {{form.reviewLevel3}}
           </td>
+          <td>
+              <el-button v-if="form.reviewId3 >0 " type="primary" >
+                <a :href="serverAddres+'/api/thesisreview/thesisReviewOnlineReviewPrint?reviewId='+form.reviewId1" :download="printName3">评阅表三下载</a>
+               </el-button>
+          </td>
         </tr>
         <tr height = "100px" >
-          <td colspan="3">
+          <td colspan="4">
             {{form.reviewDes3}}
           </td>
         </tr>
@@ -120,9 +135,15 @@ export default {
         reviewDes2:'',
         reviewResult3:'',
         reviewResult3:'',
-        reviewDes3:''
+        reviewDes3:'',
+        reviewId1:'',
+        reviewId2:'',
+        reviewId3:'',
       },
       serverAddres:'',
+      printName1:'评阅一.pdf',
+      printName2:'评阅二.pdf',
+      printName3:'评阅三.pdf',
       directionList:[],
     }
   },
