@@ -55,6 +55,51 @@
           </template>
         </el-table-column>
         <el-table-column
+          label="单位"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.collegeName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="职称"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.age }}
+          </template>
+          <template slot-scope="scope">
+            {{ scope.row.proTechPosition }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="最后学位"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.age }}
+          </template>
+          <template slot-scope="scope">
+            {{ scope.row.lastDegree }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="博导时间"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.age }}
+          </template>
+          <template slot-scope="scope">
+            {{ scope.row.doctorTutorTime }}
+          </template>
+        </el-table-column>
+        <el-table-column
           label="年龄"
           align="center"
           color="black"
@@ -100,7 +145,7 @@
           </template>
         </el-table-column>
        <el-table-column
-          label="审核状态"
+          label="审核数"
           align="center"
           color="black"
         >
@@ -145,6 +190,7 @@
 import XlsxPopulate from 'xlsx-populate';
 import { saveAs } from 'file-saver';
 import { recruitQualificationCheckCampus } from '@/api/tutor'
+import {recruitQualificationCheckSubmitSelectCampus}  from '@/api/tutor'
 
 export default {
   name: 'recruitQualificationCheckCampus',
@@ -215,7 +261,7 @@ export default {
           type: 'success'
         });
       }else{
-        recruitQualificationCheckSubmitSelect({ 'session': document.cookie, 'applyIds': this.applyIds, 'state': state
+        recruitQualificationCheckSubmitSelectCampus({ 'session': document.cookie, 'applyIds': this.applyIds, 'state': state
         }).then(res => {
           if (res.code === '0') {
             this.$message({

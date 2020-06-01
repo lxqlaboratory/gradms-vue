@@ -709,3 +709,10 @@ export function recruitQualificationCheckCampus(data) {
   })
 }
 
+export function recruitQualificationCheckSubmitSelectCampus(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationCheckSubmitSelectCampus',
+    method: 'POST',
+    data
+  })
+}
