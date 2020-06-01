@@ -685,3 +685,27 @@ export function recruitQualificationStatistics(data) {
   })
 }
 
+export function recruitQualificationCheckHospital(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationCheckHospital',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitQualificationCheckSubmitSelectHospital(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationCheckSubmitSelectHospital',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitQualificationCheckCampus(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationCheckCampus',
+    method: 'POST',
+    data
+  })
+}
+

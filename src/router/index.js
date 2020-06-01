@@ -404,6 +404,18 @@ export const constantRoutes = [
         component: () => import('@/views/tutor/recruitQualificationHistory'),
         meta: { title: '招生资格历史查询' }
       },
+      {
+        path: 'recruitQualificationCheckHospital',
+        name: 'recruitQualificationCheckHospital',
+        component: () => import('@/views/tutor/recruitQualificationCheckHospital'),
+        meta: { title: '招生资格审核' }
+      },
+      {
+        path: 'recruitQualificationCheckCampus',
+        name: 'recruitQualificationCheckCampus',
+        component: () => import('@/views/tutor/recruitQualificationCheckCampus'),
+        meta: { title: '招生资格审核' }
+      },
       
     ]
   },
