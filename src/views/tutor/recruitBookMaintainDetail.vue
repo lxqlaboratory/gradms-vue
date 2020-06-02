@@ -55,6 +55,12 @@
           <el-input  v-model="form.orderName" placeholder="请输入作者位次" ></el-input>
         </td>
       </tr>
+      <tr>
+        <td colspan="1">署名单位</td>
+        <td colspan="1">
+          <el-input v-model="form.unit" placeholder="请输入署名单位" />
+        </td>
+      </tr>
     </table>
   </div>
   <div class="buttonCenter"   >

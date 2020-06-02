@@ -68,6 +68,12 @@
           <el-input v-model="form.orderName" placeholder="请输入作者位次" />
         </td>
       </tr>
+      <tr>
+        <td colspan="1">署名单位</td>
+        <td colspan="1">
+          <el-input v-model="form.unit" placeholder="请输入署名单位" />
+        </td>
+      </tr>
     </table>
     <div class="buttonCenter"   >
       <el-button  type="primary" @click="submit" v-if="showB" >保存</el-button>
@@ -106,7 +112,8 @@ export default {
         orderName: '',
         impactFactor: '',
         publishTime: '',
-        include: ''
+        include: '',
+        unit:'',
       },
       serverAddres: '',
       applyTableName:'附件.pdf',
