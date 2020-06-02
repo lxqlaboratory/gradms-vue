@@ -94,7 +94,7 @@
           </td>
           <td>
               <el-button v-if="form.reviewId3 >0 " type="primary" >
-                <a :href="serverAddres+'/api/thesisreview/thesisReviewOnlineReviewPrint?reviewId='+form.reviewId1" :download="printName3">评阅表三下载</a>
+                <a :href="serverAddres+'/api/thesisreview/thesisReviewOnlineReviewPrint?reviewId='+form.reviewId2" :download="printName3">评阅表三下载</a>
                </el-button>
           </td>
         </tr>
