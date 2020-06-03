@@ -64,7 +64,6 @@
       <tr>
         <td colspan="1">作者位次</td>
         <td colspan="1">
-
           <el-input v-model="form.orderName" placeholder="请输入作者位次" />
         </td>
       </tr>
@@ -72,6 +71,17 @@
         <td colspan="1">署名单位</td>
         <td colspan="1">
           <el-input v-model="form.unit" placeholder="请输入署名单位" />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <el-checkbox label="是否研究型论著" v-model="form.isResearchWork" />
+       </td>
+      </tr>
+      <tr>
+        <td colspan="1">备注</td>
+        <td colspan="1">
+          <el-input v-model="form.remark" placeholder="请输入备注信息" />
         </td>
       </tr>
     </table>
@@ -114,6 +124,8 @@ export default {
         publishTime: '',
         include: '',
         unit:'',
+        isResearchWork:'',
+        remark:''
       },
       serverAddres: '',
       applyTableName:'附件.pdf',

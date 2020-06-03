@@ -109,6 +109,15 @@
         {{ scope.row.orderName}}
       </template>
     </el-table-column>
+    <el-table-column
+      label="获奖单位"
+      align="center"
+      color="black"
+    >
+      <template slot-scope="scope">
+        {{ scope.row.unit}}
+      </template>
+    </el-table-column>
   </el-table>
   <div align="center">
     <el-button type="primary" @click="submit" >审核</el-button>

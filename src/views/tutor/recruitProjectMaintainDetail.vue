@@ -42,6 +42,19 @@
         </td>
       </tr>
       <tr>
+        <td colspan="1">项目申请时间</td>
+        <td colspan="1">
+          <el-date-picker
+            v-model="form.projectApplyTime"
+            size="mini"
+            type="date"
+            style="width: 100%"
+            value-format="yyyy-MM-dd"
+            placeholder="选择时间"
+          />
+        </td>
+      </tr>
+      <tr>
         <td colspan="1">项目开始时间</td>
         <td colspan="1">
           <el-date-picker
@@ -77,6 +90,18 @@
         <td colspan="1">承担单位</td>
         <td colspan="1">
           <el-input v-model="form.unit" placeholder="请输入承担单位" />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1">入账单位</td>
+        <td colspan="1">
+          <el-input v-model="form.feeUnit" placeholder="请输入入账单位" />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1">备注</td>
+        <td colspan="1">
+          <el-input v-model="form.remark" placeholder="请输入备注信息" />
         </td>
       </tr>
     </table>
@@ -116,9 +141,12 @@ export default {
         projectFee: '',
         projectSource: '',
         orderName: '',
+        projectApplyTime: '',
         projectStartTime: '',
         projectEndTime: '',
         unit:'',
+        feeUnit:'',
+        remark:'',
       },
       serverAddres: '',
       applyTableName: '附件.pdf',

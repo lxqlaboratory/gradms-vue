@@ -13,7 +13,7 @@
     <tr>
       <td colspan="1" >专利类型</td>
       <td colspan="1">
-        <el-select v-model="form.patentType" placeholder="请选择著作类型" style="width: 100%">
+        <el-select v-model="form.patentType" placeholder="请选择专利类型" style="width: 100%">
           <el-option
             v-for="item in patentTypeList"
             :key="item"
@@ -55,6 +55,18 @@
         <el-input v-model="form.orderName" placeholder="请输入作者位次" ></el-input>
       </td>
     </tr>
+      <tr>
+        <td colspan="1">专利申请单位</td>
+        <td colspan="1">
+          <el-input v-model="form.unit" placeholder="请输入专利申请单位" />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1">备注</td>
+        <td colspan="1">
+          <el-input v-model="form.remark" placeholder="请输入备注信息" />
+        </td>
+      </tr>
   </table>
   <div class="buttonCenter"   >
     <el-button  type="primary" @click="submit" v-if="showB" >保存</el-button>
@@ -90,7 +102,9 @@
             patentType: '',
             applyDate: '',
             authoriDate: '',
-            orderName: ''
+            orderName: '',
+            unit:'',
+            remark:''
           },
           serverAddres: '',
           applyTableName: '附件.pdf',

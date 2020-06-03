@@ -73,6 +73,18 @@
           <el-input v-model="form.rewardDepartment" placeholder="请输入颁奖部门" ></el-input>
         </td>
       </tr>
+      <tr>
+        <td colspan="1">获奖单位</td>
+        <td colspan="1">
+          <el-input v-model="form.unit" placeholder="请输入获奖单位" />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1">备注</td>
+        <td colspan="1">
+          <el-input v-model="form.remark" placeholder="请输入备注信息" />
+        </td>
+      </tr>
     </table>
     <div class="buttonCenter"   >
       <el-button  type="primary" @click="submit" v-if="showB" >保存</el-button>
@@ -112,7 +124,9 @@
             rewardYear: '',
             rewardDepartment: '',
             orderName: '',
-            certificateDate: ''
+            certificateDate: '',
+            unit:'',
+            remark:''
           },
           serverAddres: '',
           applyTableName: '附件.pdf',

@@ -87,6 +87,15 @@
         </template>
       </el-table-column>
       <el-table-column
+        label="署名单位"
+        align="center"
+        color="black"
+      >
+        <template slot-scope="scope">
+          {{ scope.row.unit}}
+        </template>
+      </el-table-column>
+      <el-table-column
         label="操作"
         align="center"
         color="black"

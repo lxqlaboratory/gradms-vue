@@ -96,6 +96,24 @@
         </template>
       </el-table-column>
       <el-table-column
+        label="是否研究型著作"
+        align="center"
+        color="black"
+      >
+        <template slot-scope="scope">
+          {{ scope.row.isResearchWork}}
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="署名单位"
+        align="center"
+        color="black"
+      >
+        <template slot-scope="scope">
+          {{ scope.row.unit}}
+        </template>
+      </el-table-column>
+      <el-table-column
         label="操作"
         align="center"
         color="black"

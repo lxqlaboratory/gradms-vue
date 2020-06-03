@@ -83,6 +83,15 @@
       </template>
     </el-table-column>
     <el-table-column
+      label="申请时间"
+      align="center"
+      color="black"
+    >
+      <template slot-scope="scope">
+        {{ scope.row.projectApplyTime}}
+      </template>
+    </el-table-column>
+    <el-table-column
       label="项目时长"
       align="center"
       color="black"
@@ -98,6 +107,24 @@
     >
       <template slot-scope="scope">
         {{ scope.row.orderName}}
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="承担单位"
+      align="center"
+      color="black"
+    >
+      <template slot-scope="scope">
+        {{ scope.row.unit}}
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="入账单位"
+      align="center"
+      color="black"
+    >
+      <template slot-scope="scope">
+        {{ scope.row.unit}}
       </template>
     </el-table-column>
   </el-table>
