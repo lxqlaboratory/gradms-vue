@@ -61,13 +61,7 @@
           <el-input v-model="form.unit" placeholder="请输入署名单位" />
         </td>
       </tr>
-       <tr>
-        <td colspan="1">备注</td>
-        <td colspan="1">
-          <el-input v-model="form.remark" placeholder="请输入备注信息" />
-        </td>
-      </tr>
-   </table>
+    </table>
   </div>
   <div class="buttonCenter"   >
     <el-button  type="primary" @click="submit" v-if="showB" >保存</el-button>
@@ -107,7 +101,6 @@
             wordCount: '',
             orderName: '',
             unit:'',
-            remark:''
           },
           serverAddres: '',
           applyTableName: '附件.pdf',
