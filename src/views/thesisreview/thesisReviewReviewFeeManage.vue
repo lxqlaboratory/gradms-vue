@@ -123,7 +123,7 @@
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.moneyFax }}
+              {{ scope.row.moneyTax }}
             </template>
           </el-table-column>
          
@@ -132,7 +132,7 @@
       <div align="center">
       <tr>
         <td>
-          <el-button type="primary" @click="exportData()" >数据导出</el-button>
+          <el-button type="primary" @click="doExport()" >数据导出</el-button>
         </td>
       </tr>
       </div>
@@ -141,6 +141,8 @@
 </template>
 
 <script>
+import XlsxPopulate from 'xlsx-populate';
+import { saveAs } from 'file-saver';
 import { thesisReviewReviewFeeManage } from '@/api/thesisreview'
 import { thesisReviewReviewFeeQuery } from '@/api/thesisreview'
 export default {
@@ -168,6 +170,67 @@ export default {
       }).then(res => {
         this.feeList = res.data
       })
+    },
+    doExport(){
+      var filename = "评审费信息表.xlsx";
+      // 工作簿中工作表的名字
+      var sheetName = "评审费信息表";
+
+      // head定义了整个xlsx的顺序，里面的内容时json object的key
+      const header = ["perNum","perName","personUnit", "perIdCard", "bankNo","bankName", "reviewCount","money","moneyTax"];
+      const headerExcel = ["编号","姓名", "单位", "身份证号","银行卡号", "银行名称", "评审分数","金额", "税后金额"];
+
+      const XlsxPopulate = require('xlsx-populate');
+
+      // Load a new blank workbook, refer:https://github.com/dtjohnson/xlsx-populate
+      XlsxPopulate.fromBlankAsync()
+        .then(workbook => {
+
+        // Set worksheet mame
+        var ws = workbook.sheet(0);
+        ws.name(sheetName);
+
+        // Set table name
+        const r = ws.range("A1:I1");
+        r.merged(true);
+        r.value(sheetName);
+        r.style({horizontalAlignment: "center", verticalAlignment : "center"});
+        ws.row(1).height(30);
+
+        // set header
+        ws.cell("A2").value([headerExcel]);
+
+        // set column width, it can be auto adjust with calculate max of data
+        ws.column("A").width(15);
+        ws.column("B").width(25);
+        ws.column("C").width(15);
+        ws.column("D").width(20);
+        ws.column("E").width(20);
+        ws.column("F").width(10);
+        ws.column("G").width(10);
+        ws.column("H").width(10);
+
+        // create data from array of json object to array of array
+        var valueArray = this.feeList.map(
+          item => {
+            var va = [];
+            header.forEach(element => {
+              va.push(item[element])
+            });
+            return va;
+          }
+        )
+
+        // set data
+        ws.cell("A3").value(valueArray);
+
+        // Write to blob.
+        return workbook.outputAsync();
+        }).then(blob => {
+          // wrtie to file
+          saveAs(blob, filename)
+
+        })
     },
   }
 }
