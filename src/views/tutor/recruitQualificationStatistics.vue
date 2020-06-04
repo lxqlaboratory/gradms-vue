@@ -19,6 +19,19 @@
           :value="item.value">
         </el-option>
       </el-select>
+      教师工号
+      <el-input v-model="perNum" placeholder="请输入教师工号" style="width: 15%;"  />
+      教师姓名
+      <el-input v-model="perName" placeholder="请输入教师姓名" style="width: 10%;"  />
+      审核状态
+      <el-select v-model.number="state" placeholder="请选择状态"  style="width: 20%;">
+        <el-option
+          v-for="item in stateList"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
       <el-button type="primary" @click="getApplyList()" >查询</el-button>
       </div>
     <div>
@@ -262,11 +275,24 @@ export default {
       serverAddres:'',
       year:'',
       collegeId:'',
+      perNum:'',
+      perName:'',
+      state:1,
       yearList: [],
       collegeList:[],
       applyList: [],
       applyIds:'',
       qualificationFielName:'简况表.pdf',
+      stateList:[
+          {
+            value: 1,
+            label: '已审核'
+          }, {
+            value: 0,
+            label: '未审核'
+          }
+        ],
+
    }
   },
   created() {
@@ -284,7 +310,7 @@ export default {
       })
     },
     getApplyList() {
-      recruitQualificationStatistics({ 'session': document.cookie, 'year':this.year, 'collegeId':this.collegeId }).then(res => {
+      recruitQualificationStatistics({ 'session': document.cookie, 'year':this.year, 'collegeId':this.collegeId, 'perNum':this.perNum, 'perName':this.perName,'state':this.state }).then(res => {
         this.applyList = res.data.applyList
         this.applyIds = res.data.applyIds
       })

@@ -49,6 +49,15 @@
           </template>
         </el-table-column>
         <el-table-column
+          label="申请人数"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.applyNum }}
+          </template>
+        </el-table-column>
+        <el-table-column
           label="申请博导"
           align="center"
           color="black"
