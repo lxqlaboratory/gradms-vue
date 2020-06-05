@@ -20,11 +20,11 @@
         </el-option>
       </el-select>
       教师工号
-      <el-input v-model="perNum" placeholder="请输入教师工号" style="width: 15%;"  />
+      <el-input v-model="perNum" placeholder="请输入教师工号" style="width: 10%;"  />
       教师姓名
       <el-input v-model="perName" placeholder="请输入教师姓名" style="width: 10%;"  />
       审核状态
-      <el-select v-model.number="state" placeholder="请选择状态"  style="width: 20%;">
+      <el-select v-model.number="state" placeholder="请选择状态"  style="width: 10%;">
         <el-option
           v-for="item in stateList"
           :key="item.value"

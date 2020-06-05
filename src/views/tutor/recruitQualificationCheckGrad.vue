@@ -115,11 +115,12 @@
           label="操作"
           align="center"
           color="black"
+          width = "150"
         >
         <template slot-scope="scope">
           <el-button type="primary" @click="doView(scope.row.collegeId)" >查看审核</el-button>
           <el-button  type="primary" >
-            <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationApplySummaryTablePrintData?collegeId='+scope.row.collegeId" :download="scope.row.summaryFielName">学院汇总表</a>
+            <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationApplySummaryTablePrintData?collegeId='+scope.row.collegeId" :download="scope.row.summaryFielName">汇总表</a>
           </el-button>
         </template>
       </el-table-column>
