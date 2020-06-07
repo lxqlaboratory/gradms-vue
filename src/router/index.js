@@ -380,6 +380,13 @@ export const constantRoutes = [
         component: () => import('@/views/tutor/recruitQualificationNote'),
         meta: { title: '申请备注信息维护' }
       },
+      
+      {
+        path: 'recruitMajorMaintain',
+        name: 'recruitMajorMaintain',
+        component: () => import('@/views/tutor/recruitMajorMaintain'),
+        meta: { title: '招生专业维护' }
+      },
       {
         path: 'recruitQualificationCheckGrad',
         name: 'recruitQualificationCheckGrad',

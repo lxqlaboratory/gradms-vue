@@ -716,3 +716,41 @@ export function recruitQualificationCheckSubmitSelectCampus(data) {
     data
   })
 }
+
+
+export function recruitMajorMaintain(data) {
+  return request({
+    url: '/api/tutor/recruitMajorMaintain',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitMajorMaintainQuery(data) {
+  return request({
+    url: '/api/tutor/recruitMajorMaintainQuery',
+    method: 'POST',
+    data
+  })
+}
+export function recruitMajorMaintainAdd(data) {
+  return request({
+    url: '/api/tutor/recruitMajorMaintainAdd',
+    method: 'POST',
+    data
+  })
+}
+export function recruitMajorMaintainDelete(data) {
+  return request({
+    url: '/api/tutor/recruitMajorMaintainDelete',
+    method: 'POST',
+    data
+  })
+}
+export function recruitMajorMaintainSave(data) {
+  return request({
+    url: '/api/tutor/recruitMajorMaintainSave',
+    method: 'POST',
+    data
+  })
+}
