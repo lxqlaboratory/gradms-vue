@@ -88,9 +88,9 @@
           <el-select v-model="majorId" filterable placeholder="请选择添加的专业">
               <el-option
                 v-for="item in majorList"
-                :key="item.majorId"
-                :label="item.majorName"
-                :value="item.majorId"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
               />
           </el-select>
           <el-button type="primary"  @click="doMajorAdd(0)">添加招生专业</el-button>
@@ -136,6 +136,15 @@ export default {
         this.collegeList44 = res.data.collegeList44
         this.collegeList54 = res.data.collegeList54
       })
+    },
+    getCollege1List(){
+      if(this.collegeId === 44 ) {
+        collegeList1 = collegeList44; 
+      }else if(this.collegeId === 54 ) {
+        collegeList1 = collegeList54; 
+      }else{
+        collegeList1 = []; 
+      }
     },
     doQuery() {
       recruitMajorMaintain({ 'session': document.cookie, 'collegeId':this.collegeId,'collegeId1':this.collegeId1 }).then(res => {
