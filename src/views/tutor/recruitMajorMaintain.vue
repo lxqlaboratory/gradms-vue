@@ -85,14 +85,7 @@
       <tr>
         <td>
           专业
-          <el-select v-model="majorId" filterable placeholder="请选择添加的专业">
-              <el-option
-                v-for="item in majorList"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
-          </el-select>
+         <el-input v-model="najorNum" placeholder="请输入专业代码" />
           <el-button type="primary"  @click="doMajorAdd(0)">添加招生专业</el-button>
           <el-button type="primary"  @click="doMajorAdd(1)">添加博士招生专业</el-button>
           <el-button type="primary"  @click="doMajorAdd(2)">添加硕士招生专业</el-button>
@@ -115,12 +108,11 @@ export default {
     return {
       collegeId:'',
       collegeId1:'',
-      majorId:'',
+      majorNum:'',
       collegeList:[],
       collegeList1:[],
       collegeList44:[],
       collegeList54:[],
-      majorList:[],
       recruitMajorList:[],
    }
   },
@@ -152,13 +144,13 @@ export default {
       })
     },
     doMajorAdd(addType){
-      if(this.collegeId === 'undefined' || this.collegeId <= 0 || this.majorId === 'undefined' || this.majorId < 0){
+      if(this.collegeId === 'undefined' || this.collegeId <= 0 || this.majorNum === 'undefined' || this.majorNum.length == 0){
         this.$message({
           message: '学院和专业为空，不能添加',
           type: 'success'
         });
       }else{
-       recruitMajorMaintain({ 'session': document.cookie, 'collegeId': this.collegeId, 'collegeId1': this.collegeId1,'majorId':this.majorId,"addType":addType}).then(res => {
+       recruitMajorMaintain({ 'session': document.cookie, 'collegeId': this.collegeId, 'collegeId1': this.collegeId1,'majorNum':this.majorNum,"addType":addType}).then(res => {
          this.$message({
            message: '添加成功',
            type: 'success',
