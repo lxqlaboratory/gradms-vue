@@ -19,7 +19,7 @@
             :value="item.value">
           </el-option>
         </el-select>
-        <el-button  type="primary" @click="getMajorList()"  >查询</el-button>
+        <el-button  type="primary" @click="doQuery()"  >查询</el-button>
       </div>
     <div class="table-container">
       <el-table
@@ -43,6 +43,7 @@
           label="专业代码"
           align="center"
           color="black"
+          width="120"
         >
           <template slot-scope="scope">
             {{ scope.row.majorNum }}
@@ -61,7 +62,7 @@
             label="招生专业类型"
             align="center"
             color="black"
-            width="200"
+            width="400"
           >
             <template slot-scope="scope">
               <el-checkbox label="博士招生专业" v-model="scope.row.isDoctor" />
@@ -72,7 +73,7 @@
           label="操作"
           align="center"
           color="black"
-          width = "150"
+          width = "200"
         >
         <template slot-scope="scope">
           <el-button type="primary" @click="doSave(scope.$index)" >修改保存</el-button>
@@ -85,7 +86,7 @@
       <tr>
         <td>
           专业
-         <el-input v-model="najorNum" placeholder="请输入专业代码" />
+          <el-input v-model="majorNum" placeholder="请输入专业代码"  style="width:200px"/>
           <el-button type="primary"  @click="doMajorAdd(0)">添加招生专业</el-button>
           <el-button type="primary"  @click="doMajorAdd(1)">添加博士招生专业</el-button>
           <el-button type="primary"  @click="doMajorAdd(2)">添加硕士招生专业</el-button>
@@ -121,7 +122,6 @@ export default {
   },
   methods: {
     fetchData() {
-      this.serverAddres = this.GLOBAL.servicePort
       recruitMajorMaintain({ 'session': document.cookie }).then(res => {
         this.majorList = res.data.majorList
         this.collegeList = res.data.collegeList
@@ -130,16 +130,18 @@ export default {
       })
     },
     getCollege1List(){
-      if(this.collegeId === 44 ) {
-        collegeList1 = collegeList44; 
-      }else if(this.collegeId === 54 ) {
-        collegeList1 = collegeList54; 
+         console.log(this.collegeId)
+      if(this.collegeId === '44' ) {
+        this.collegeList1 = this.collegeList44; 
+      }else if(this.collegeId === '54' ) {
+        this.collegeList1 = this.collegeList54; 
       }else{
-        collegeList1 = []; 
+        this.collegeList1 = []; 
       }
+      console.log(this.collegeList1)
     },
     doQuery() {
-      recruitMajorMaintain({ 'session': document.cookie, 'collegeId':this.collegeId,'collegeId1':this.collegeId1 }).then(res => {
+      recruitMajorMaintainQuery({ 'session': document.cookie, 'collegeId':this.collegeId,'collegeId1':this.collegeId1 }).then(res => {
         this.recruitMajorList = res.data;
       })
     },
@@ -150,26 +152,32 @@ export default {
           type: 'success'
         });
       }else{
-       recruitMajorMaintain({ 'session': document.cookie, 'collegeId': this.collegeId, 'collegeId1': this.collegeId1,'majorNum':this.majorNum,"addType":addType}).then(res => {
-         this.$message({
-           message: '添加成功',
-           type: 'success',
-           offset: '10'
-         });
-         this.doQuery()
+       recruitMajorMaintainAdd({ 'session': document.cookie, 'collegeId': this.collegeId, 'collegeId1': this.collegeId1,'majorNum':this.majorNum,"addType":addType}).then(res => {
+         if(res.code === '0'){
+          this.$message({
+            message: '添加成功',
+            type: 'success',
+            offset: '10'
+          });
+          this.doQuery()
+         }else {
+            this.$message({
+              message: res.msg,
+              type: 'warning'
+            });
+         }
       })
       }
     },
     doSave(index){
-      var major = recruitMajorList[index];
-      recruitPatentMaintainSave({ 'session': document.cookie, 'major': this.major}).then(res => {
+      var major = this.recruitMajorList[index];
+      recruitMajorMaintainSave({ 'session': document.cookie, 'degreeMajorId': major.degreeMajorId,'isDoctor':major.isDoctor,'isMaster':major.isMaster}).then(res => {
          this.$message({
            message: '保存成功',
            type: 'success',
            offset: '10'
          });
       })
-      }
     },
     doDelete(degreeMajorId){
       this.$confirm('确认删除招生专业吗?', '提示', {
@@ -177,7 +185,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        recruitPatentMaintainDelete({ 'session': document.cookie, 'degreeMajorId': degreeMajorId}).then(res => {
+        recruitMajorMaintainDelete({ 'session': document.cookie, 'degreeMajorId': degreeMajorId}).then(res => {
           this.dialogFormVisible = false
           if(res.code === '0'){
             this.$message({
@@ -200,5 +208,6 @@ export default {
         });
       });
     },
+  }
 }
 </script>
