@@ -161,6 +161,7 @@
         <template slot-scope="scope">
           <el-button type="primary" @click="doView(scope.row.applyId)" >详情</el-button>
           <el-button type="primary" @click="doViewAchievement(scope.row.personId)" >成果</el-button>          
+          <el-button type="primary" @click="doSetNote(scope.row.applyId)" >备注</el-button>          
           <el-button type="primary"   >
             <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationPrintData?applyId='+scope.row.applyId" :download="scope.row.applyTableName">简况表</a>
           </el-button>
@@ -252,6 +253,9 @@ export default {
     },
     doViewAchievement(personId){
       this.$router.push({ path: '/tutor/tutorRecruitAchievementList', query: { personId }})
+    },
+    doSetNote(applyId){
+      this.$router.push({ path: '/tutor/recruitQualificationNote', query: { applyId }})
     },
     doCheckSelect(state){
       this.getSelectApplyIds();
