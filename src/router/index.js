@@ -388,6 +388,12 @@ export const constantRoutes = [
         meta: { title: '招生专业维护' }
       },
       {
+        path: 'recruitQualificationLimit',
+        name: 'recruitQualificationLimit',
+        component: () => import('@/views/tutor/recruitQualificationLimit'),
+        meta: { title: '招生名额维护' }
+      },
+      {
         path: 'recruitQualificationCheckGrad',
         name: 'recruitQualificationCheckGrad',
         component: () => import('@/views/tutor/recruitQualificationCheckGrad'),

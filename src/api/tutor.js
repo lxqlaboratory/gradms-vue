@@ -754,3 +754,35 @@ export function recruitMajorMaintainSave(data) {
     data
   })
 }
+
+
+export function recruitQualificationLimit(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationLimit',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitQualificationLimitAdd(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationLimitAdd',
+    method: 'POST',
+    data
+  })
+}
+export function recruitQualificationLimitDelete(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationLimitDelete',
+    method: 'POST',
+    data
+  })
+}
+export function recruitQualificationLimitSave(data) {
+  return request({
+    url: '/api/tutorrecruitQualificationLimitSave',
+    method: 'POST',
+    data
+  })
+}
+
