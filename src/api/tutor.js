@@ -780,7 +780,7 @@ export function recruitQualificationLimitDelete(data) {
 }
 export function recruitQualificationLimitSave(data) {
   return request({
-    url: '/api/tutorrecruitQualificationLimitSave',
+    url: '/api/tutor/recruitQualificationLimitSave',
     method: 'POST',
     data
   })

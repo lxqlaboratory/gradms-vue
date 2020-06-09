@@ -2,7 +2,7 @@
   <div class="app-container">
     <div class="table-container">
       <el-table
-        :data="recruitMajorList"
+        :data="limitList"
         border
         style="width: 100%;"
         size="mini"
@@ -62,7 +62,7 @@
       <tr>
         <td>
         学院
-        <el-select v-model="collegeId"  placeholder="请选择学院"  style="width: 15%;">
+        <el-select v-model="collegeId"  placeholder="请选择学院"  style="width: 30%;">
           <el-option
             v-for="item in collegeList"
             :key="item.collegeId"
@@ -71,8 +71,20 @@
           </el-option>
         </el-select>
           额定数
-          <el-input v-model="limitNum" placeholder="请输入招生额定数"  style="width:200px"/>
+          <el-input v-model="limitNum" placeholder="请输入招生额定数"  style="width:100px"/>
           <el-button type="primary"  @click="doLimitAdd()">添加</el-button>
+          <el-button>
+            <a href="/downloads/tutor/recruitQualificationLimit.xls" >导入模板下载</a>
+          </el-button>
+          <fileupload
+            url="/api/tutor/importTutorRecruitLimitData"
+            :data="{'docType': xls }"
+            accepttype=".xls"
+            @successcallback="onSuccess"
+            style="float: right"
+            @preview="onPreview"
+          >xueshe导入
+          </fileupload>
         </td>
       </tr>
     </div>
@@ -84,9 +96,11 @@ import { recruitQualificationLimit } from '@/api/tutor'
 import { recruitQualificationLimitAdd } from '@/api/tutor'
 import { recruitQualificationLimitSave } from '@/api/tutor'
 import { recruitQualificationLimitDelete } from '@/api/tutor'
+import fileupload from '../../components/upload/fileupload'
 
 export default {
   name: 'recruitQualificationLimit',
+  components: { fileupload },
   data() {
     return {
       collegeId:'',
@@ -100,7 +114,7 @@ export default {
   },
   methods: {
     fetchData() {
-      recruitMajorMaintain({ 'session': document.cookie }).then(res => {
+      recruitQualificationLimit({ 'session': document.cookie }).then(res => {
         this.collegeList = res.data.collegeList
         this.limitList = res.data.limitList
       })
@@ -168,6 +182,24 @@ export default {
         });
       });
     },
+    onPreview: function(file) {
+    },
+    onSuccess(res, file) {
+        if(res.code === '0'){
+          this.$message({
+            message: '导入成功',
+            type: 'success'
+          });
+          this.fetchData()
+        }
+        else{
+          this.$message({
+            message: res.msg,
+            type: 'error'
+          });
+        }
+    },
+
   }
 }
 </script>
