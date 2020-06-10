@@ -156,7 +156,7 @@
           <td colspan="1" v-else  >
             {{form.projectNum3}}
           </td>
-          <td colspan="1">总经费</td>
+          <td colspan="1">总经费(万元)</td>
           <td colspan="1" v-if="isCanEdit">
             <el-input v-model="form.projectFeeTotal" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入总经费数"/>
           </td>
@@ -165,7 +165,7 @@
           </td>
           </tr>
           <tr>
-          <td colspan="1">可支配经费</td>
+          <td colspan="1">可支配经费(万元)</td>
           <td colspan="1" v-if="isCanEdit">
             <el-input v-model="form.projectFeeBalance" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入可支配经费数"/>
           </td>
