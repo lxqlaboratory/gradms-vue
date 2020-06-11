@@ -67,3 +67,28 @@ export function collegeQueryStudentAbroadApply(data) {
     data
   })
 }
+
+export function newCultivateSchemeInsert(data) {
+  return request({
+    url: '/api/cultivatenew/newCultivateSchemeInsert',
+    method: 'POST',
+    data
+  })
+}
+export function newCultivateSchemeStuTypeChange(data) {
+  return request({
+    url: '/api/cultivatenew/newCultivateSchemeStuTypeChange',
+    method: 'POST',
+    data
+  })
+}
+
+
+export function newCultivateSchemeInsertSubmit(data) {
+  return request({
+    url: '/api/cultivatenew/newCultivateSchemeInsertSubmit',
+    method: 'POST',
+    data
+  })
+}
+

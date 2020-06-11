@@ -132,7 +132,14 @@ export const constantRoutes = [
         name: 'collegeQueryStudentAbroadApply',
         component: () => import('@/views/cultivate/collegeQueryStudentAbroadApply'),
         meta: { title: '培养计划设置查看' }
+      },
+      {
+        path: 'newCultivateSchemeInsert',
+        name: 'newCultivateSchemeInsert',
+        component: () => import('@/views/cultivate/newCultivateSchemeInsert'),
+        meta: { title: '培养方案插入' }
       }
+      
     ]
   },
   {
