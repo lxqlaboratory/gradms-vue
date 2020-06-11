@@ -196,7 +196,7 @@ export default {
   methods: {
     fetchData() {
         this.schemeId = this.$route.query.schemeId
-      newCultivateSchemecultivateInsert({ 'session': document.cookie, 'schemeId': this.schemeId }).then(res => {
+      newCultivateSchemeInsert({ 'session': document.cookie, 'schemeId': this.schemeId }).then(res => {
         this.form = res.data.form
         this.stuTypeCode = res.data.stuTypeCode
         this.stuTypeList = res.data.stuTypeList
@@ -212,7 +212,7 @@ export default {
     },
 
     submit() {
-      newCultivateSchemecultivateInsertSubmit({ 'session': document.cookie, 'schemeId': this.schemeId,'stuTypeCode':this.stuTypeCode,'form': this.form
+      newCultivateSchemeSubmit({ 'session': document.cookie, 'schemeId': this.schemeId,'stuTypeCode':this.stuTypeCode,'form': this.form
       }).then(res => {
         if (res.code === '0') {
           this.$message({

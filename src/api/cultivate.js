@@ -84,9 +84,9 @@ export function newCultivateSchemeStuTypeChange(data) {
 }
 
 
-export function newCultivateSchemeInsertSubmit(data) {
+export function newCultivateSchemeSubmit(data) {
   return request({
-    url: '/api/cultivatenew/newCultivateSchemeInsertSubmit',
+    url: '/api/cultivatenew/newCultivateSchemeSubmit',
     method: 'POST',
     data
   })
