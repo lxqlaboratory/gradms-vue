@@ -205,8 +205,7 @@ export default {
       })
     },
     onStuTypeChange() {
-      newCultivateSchemecultivateInsert({ 'session': document.cookie, 'schemeId': this.schemeId,'stuTypeCode':this.stuTypeCode }).then(res => {
-        this.form = res.data.form
+      newCultivateSchemeStuTypeChange({ 'session': document.cookie, 'stuTypeCode':this.stuTypeCode }).then(res => {
         this.majorList = res.data.majorList
         this.sessionList = res.data.sessionList
       })
