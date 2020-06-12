@@ -148,7 +148,7 @@
       </tr>
       <tr>
         <td colspan="6">
-            <textarea placeholder="请输入备注" maxlength="1000"  v-model="form.note" style="width: 100%;height:60px"/>
+            <textarea placeholder="请输入备注" maxlength="1000"  v-model="form.remark" style="width: 100%;height:60px"/>
 
         </td>
       </tr>
