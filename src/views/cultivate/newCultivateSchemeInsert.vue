@@ -171,6 +171,7 @@ export default {
         majorId: '',
         schemeName: '',
         stuTypeCode: '',
+        startTime:'',
         compulsoryCredit: '',
         totalCredit: '',
         goal:'',
@@ -210,17 +211,43 @@ export default {
     },
 
     submit() {
-      newCultivateSchemeSubmit({ 'session': document.cookie, 'schemeId': this.schemeId,'stuTypeCode':this.stuTypeCode,'form': this.form
-      }).then(res => {
-        if (res.code === '0') {
+      if(this.form.stuTypeCode === 'undefied' || this.form.stuTypeCode===''){
           this.$message({
-            message: '提交成功',
-            type: 'success',
+            message: '请选择学生类别',
+            type: 'warning',
             offset: '10'
           })
-          this.schemeId = res.data;
-        }
-      })
+			}else if(this.form.majorId === 'undefied' || this.form.majorId <0){
+          this.$message({
+            message: '请选择所属专业！',
+            type: 'warning',
+            offset: '10'
+          })
+			}else if(this.form.shemeName === 'undefied' || this.form.shemeName ===''){
+          this.$message({
+            message: '请输入培养方案名称！',
+            type: 'warning',
+            offset: '10'
+          })
+			}else if(this.form.startTime === 'undefied' || this.form.startTime===''){
+          this.$message({
+            message: '请输方案入开始时间！',
+            type: 'warning',
+            offset: '10'
+          })
+			}else {				
+        newCultivateSchemeSubmit({ 'session': document.cookie, 'schemeId': this.schemeId,'stuTypeCode':this.stuTypeCode,'form': this.form
+        }).then(res => {
+          if (res.code === '0') {
+            this.$message({
+              message: '提交成功',
+              type: 'success',
+              offset: '10'
+            })
+            this.schemeId = res.data;
+          }
+        })
+      }
     },
   }
 }
