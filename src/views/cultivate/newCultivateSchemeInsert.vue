@@ -87,6 +87,15 @@
 
         </td>
       </tr>
+      <tr v-for="item in sessionList" >
+        <td  colspan="1" >
+          <el-checkbox  v-model.number="item.isSelect" >{{item.sessionName}}</el-checkbox>
+        </td>
+        <td colspan="5"  >
+          <textarea placeholder="请输入培养环节" maxlength="1000"  v-model="item.content" style="width: 100%;height:60px"/>
+
+        </td>
+      </tr>
       <tr>
         <td style="text-align: left;width: 100%;" colspan="6" >专业实习</td>
       </tr>
@@ -143,19 +152,7 @@
       </tr>
 
     </table>
-    <table class="content" v-for="item in sessionList" >
-      <tr  >
-        <td  style="text-align:left;width: 100%" >
-          <el-checkbox  v-model.number="item.isSelect" >{{item.sessionName}}</el-checkbox>
-        </td>
-      </tr>
-      <tr >
-        <td style="width: 100%" >
-          <textarea placeholder="请输入培养环节" maxlength="1000"  v-model="item.content" style="width: 100%;height:60px"/>
 
-        </td>
-      </tr>
-    </table>
     <div align="center">
       <el-button type="primary" @click="submit">提交</el-button>
     </div>
