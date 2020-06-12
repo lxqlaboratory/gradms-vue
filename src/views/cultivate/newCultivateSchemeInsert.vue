@@ -170,6 +170,7 @@ export default {
       form: {
         majorId: '',
         schemeName: '',
+        stuTypeCode: '',
         compulsoryCredit: '',
         totalCredit: '',
         goal:'',
@@ -183,7 +184,6 @@ export default {
         note:''
       },
       schemeId:'',
-      stuTypeCode: '',
       stuTypeList: [],
       majorList: [],
       sessionList:[]
@@ -197,7 +197,6 @@ export default {
         this.schemeId = this.$route.query.schemeId
       newCultivateSchemeInsert({ 'session': document.cookie, 'schemeId': this.schemeId }).then(res => {
         this.form = res.data.form
-        this.stuTypeCode = res.data.stuTypeCode
         this.stuTypeList = res.data.stuTypeList
         this.majorList = res.data.majorList
         this.sessionList = res.data.sessionList
