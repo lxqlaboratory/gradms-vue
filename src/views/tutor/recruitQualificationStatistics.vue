@@ -1,43 +1,8 @@
 <template>
   <div class="app-container">
-      <div class="query-container">
-      申请年度
-        <el-select v-model="year"  placeholder="请选择申请年度"  style="width: 15%;">
-          <el-option
-            v-for="item in yearList"
-            :key="item"
-            :label="item"
-            :value="item">
-          </el-option>
-        </el-select>
-      学院
-      <el-select v-model="collegeId" placeholder="请选择学院"  style="width: 20%;">
-        <el-option
-          v-for="item in collegeList"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value">
-        </el-option>
-      </el-select>
-      教师工号
-      <el-input v-model="perNum" placeholder="请输入教师工号" style="width: 10%;"  />
-      教师姓名
-      <el-input v-model="perName" placeholder="请输入教师姓名" style="width: 10%;"  />
-      审核状态
-      <el-select v-model.number="state" placeholder="请选择状态"  style="width: 10%;">
-        <el-option
-          v-for="item in stateList"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value">
-        </el-option>
-      </el-select>
-      <el-button type="primary" @click="getApplyList()" >查询</el-button>
-      </div>
-    <div>
     <div class="table-container">
       <el-table
-        :data="applyList"
+        :data="scienceNewList"
         border
         style="width: 100%;"
         size="mini"
@@ -54,7 +19,26 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="工号"
+          label="所属培养单位"
+          
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.applyName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="导师所在工作单位"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.collegeName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="教师编号"
           align="center"
           color="black"
         >
@@ -72,12 +56,42 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="单位"
+          label="性别"
           align="center"
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.collegeName }}
+            {{ scope.row.gender }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="出生年月"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.perBirthDay }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="年龄"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.age }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="最高学位"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.age }}
+          </template>
+          <template slot-scope="scope">
+            {{ scope.row.lastDegree }}
           </template>
         </el-table-column>
         <el-table-column
@@ -93,27 +107,204 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="最后学位"
+          label="一级学科代码"
           align="center"
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.age }}
-          </template>
-          <template slot-scope="scope">
-            {{ scope.row.lastDegree }}
+            {{ scope.row.firSubCode }}
           </template>
         </el-table-column>
         <el-table-column
-          label="博导时间"
+          label="一级学科名称"
           align="center"
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.age }}
+            {{ scope.row.firSubName }}
           </template>
+        </el-table-column>
+        <el-table-column
+          label="二级级学科代码"
+          align="center"
+          color="black"
+        >
           <template slot-scope="scope">
-            {{ scope.row.doctorTutorTime }}
+            {{ scope.row.majorNum }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="二级级学科名称"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.majorName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="近五年发表高水平学术论文"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.disserNum }}
+          </template>
+        </el-table-column>
+       <el-table-column
+          label="近五年出版学术专著(独立或第一主编)"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.bookNum }}
+          </template>
+        </el-table-column>
+       <el-table-column
+          label="近五年获国家发明专利"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.patentNum }}
+          </template>
+        </el-table-column>
+       <el-table-column
+          label="近五年获省部级二等奖以上奖励"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.rewardNum }}
+          </template>
+        </el-table-column>
+       <el-table-column
+          label="近五年作为负责人新申请到国家级项目"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.projectApplyNum1 }}
+          </template>
+        </el-table-column>
+       <el-table-column
+          label="近五年作为负责人新申请到省部级项目"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.projectApplyNum2 }}
+          </template>
+        </el-table-column>
+       <el-table-column
+          label="近五年到账总经费（万元）"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.projectFeeTotal }}
+          </template>
+        </el-table-column>
+       <el-table-column
+          label="目前可支配科研经费（万元）"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.projectFeeBalance }}
+          </template>
+        </el-table-column>
+       <el-table-column
+          label="是否完整培养或协助培养博士研究生"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.isFinshTrain }}
+          </template>
+        </el-table-column>
+       <el-table-column
+          label="备注"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.note }}
+          </template>
+        </el-table-column>
+    </el-table>
+    </div>
+    <div class="table-container">
+      <el-table
+        :data="professionalNewList"
+        border
+        style="width: 100%;"
+        size="mini"
+      >
+        <el-table-column
+          label="序号"
+          fixed="left"
+          width="50"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.$index+1 }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="所属培养单位"
+          
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.applyName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="导师所在工作单位"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.collegeName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="教师编号"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.perNum }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="姓名"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.perName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="性别"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.gender }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="出生年月"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.perBirthDay }}
           </template>
         </el-table-column>
         <el-table-column
@@ -126,48 +317,144 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="导师类型"
+          label="最高学位"
           align="center"
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.applyKindName }}
+            {{ scope.row.age }}
+          </template>
+          <template slot-scope="scope">
+            {{ scope.row.lastDegree }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="职称"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.age }}
+          </template>
+          <template slot-scope="scope">
+            {{ scope.row.proTechPosition }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="一级学科代码"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.firSubCode }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="一级学科名称"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.firSubName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="二级级学科代码"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.majorNum }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="二级级学科名称"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.majorName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="近五年发表高水平学术论文"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.disserNum }}
           </template>
         </el-table-column>
        <el-table-column
-          label="申请类型"
+          label="近五年出版学术专著(独立或第一主编)"
           align="center"
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.applyNames }}
+            {{ scope.row.bookNum }}
           </template>
         </el-table-column>
        <el-table-column
-          label="招生单位"
+          label="近五年获国家发明专利"
           align="center"
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.collegeNames }}
+            {{ scope.row.patentNum }}
           </template>
         </el-table-column>
        <el-table-column
-          label="专业代码"
+          label="近五年获省部级以上奖励"
           align="center"
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.majorNums }}
+            {{ scope.row.rewardNum }}
           </template>
         </el-table-column>
        <el-table-column
-          label="专业名称"
+          label="近五年主持科研项目"
           align="center"
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.majorNames }}
+            {{ scope.row.projectum1 }}
+          </template>
+        </el-table-column>
+       <el-table-column
+          label="近五年主持横向项目"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.projectNum2 }}
+          </template>
+        </el-table-column>
+       <el-table-column
+          label="近五年到账总经费（万元）"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.projectFeeTotal }}
+          </template>
+        </el-table-column>
+       <el-table-column
+          label="目前可支配科研经费（万元）"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.projectFeeBalance }}
+          </template>
+        </el-table-column>
+       <el-table-column
+          label="是否完整培养或协助培养博士研究生"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.isFinshTrain }}
           </template>
         </el-table-column>
        <el-table-column
@@ -179,79 +466,6 @@
             {{ scope.row.note }}
           </template>
         </el-table-column>
-       <el-table-column
-          label="操作"
-          align="center"
-          color="black"
-          width = "120"
-        >
-        <template slot-scope="scope">
-          <el-button type="primary" @click="doView(scope.row.applyId)" >详情</el-button>
-          <el-button type="primary" @click="doViewAchievement(scope.row.personId)" >成果</el-button>          
-          <el-button type="primary"   >
-            <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationPrintData?applyId='+scope.row.applyId" :download="scope.row.applyTableName">简表</a>
-          </el-button>
-          <el-button  type="primary" v-if="scope.row.attachId > 0" >
-                <a :href="serverAddres+'/api/tutor/recruitQualificationAttachDownload?attachId='+scope.row.attachId" :download="scope.row.attachFileName">附件</a>
-          </el-button>
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="专业"
-        align="center"
-        color="black"
-        width="60"
-        type="expand"
-      >
-        <template slot-scope="scope">
-          <el-table
-            border
-            style="width: 100%;"
-            :data="scope.row.mList"
-          >
-           <el-table-column
-              label="申请类型"
-              fixed="left"
-              align="center"
-              color="black"
-            >
-              <template slot-scope="scope">
-                {{ scope.row.applyName }}
-              </template>
-            </el-table-column>
-           <el-table-column
-              label="招生单位"
-              fixed="left"
-              align="center"
-              color="black"
-            >
-              <template slot-scope="scope">
-                {{ scope.row.collegeName }}
-              </template>
-            </el-table-column>
-            <el-table-column
-              label="专业代码"
-              fixed="left"
-              align="center"
-              color="black"
-            >
-              <template slot-scope="scope">
-                {{ scope.row.majorNum }}
-              </template>
-            </el-table-column>
-            <el-table-column
-              label="专业名称"
-              fixed="left"
-              align="center"
-              color="black"
-            >
-              <template slot-scope="scope">
-                {{ scope.row.majorName }}
-              </template>
-            </el-table-column>
-          </el-table>
-        </template>
-      </el-table-column>
     </el-table>
     </div>
     <div align="center">
@@ -273,26 +487,13 @@ export default {
   data() {
     return {
       serverAddres:'',
-      year:'',
-      collegeId:'',
-      perNum:'',
-      perName:'',
-      state:1,
-      yearList: [],
-      collegeList:[],
-      applyList: [],
+      scienceNewList: [],
+      professionalNewList:[],
+      scienceList: [],
+      professionalList:[],
+      masterList: [],
       applyIds:'',
       qualificationFielName:'简况表.pdf',
-      stateList:[
-          {
-            value: 1,
-            label: '已审核'
-          }, {
-            value: 0,
-            label: '未审核'
-          }
-        ],
-
    }
   },
   created() {
@@ -302,24 +503,12 @@ export default {
     fetchData() {
       this.serverAddres = this.GLOBAL.servicePort
       recruitQualificationStatistics({ 'session': document.cookie }).then(res => {
-        this.year = res.data.year
-        this.yearList = res.data.yearList
-        this.collegeList = res.data.collegeList
-        this.applyList = res.data.applyList
-        this.applyIds = res.data.applyIds
+        this.scienceNewList = res.data.scienceNewList
+        this.professionalNewList = res.data.professionalNewList
+        this.scienceList = res.data.scienceList
+        this.professionalList = res.data.professionalList
+        this.masterList = res.data.masterList
       })
-    },
-    getApplyList() {
-      recruitQualificationStatistics({ 'session': document.cookie, 'year':this.year, 'collegeId':this.collegeId, 'perNum':this.perNum, 'perName':this.perName,'state':this.state }).then(res => {
-        this.applyList = res.data.applyList
-        this.applyIds = res.data.applyIds
-      })
-    },
-    doView(applyId){
-      this.$router.push({ path: '/tutor/recruitQualificationApply', query: { applyId }})
-    },
-    doViewAchievement(personId){
-      this.$router.push({ path: '/tutor/tutorRecruitAchievementList', query: { personId }})
     },
     doExport(){
       var filename = "招生申请信息表.xlsx";
@@ -327,12 +516,11 @@ export default {
       var sheetName = "招生申请信息表";
 
       // head定义了整个xlsx的顺序，里面的内容时json object的key
+      const header0 = "山东大学2021年新申请招收博士学术学位研究生人员汇总表（共   人，其中40岁以下    人，兼职     人)" 
       const header = ["perNum","collegeName","perName", "gender", "perBirthday","proTechPosition", "doctorTutorTime","applyKindName","applyNames","collegeNames","majorNums", "majorNames"
       ,"disserNum","bookNum","rewardNum","patentNum","projectNum1","projectNum2","projectNum3","applyProjectNum1","applyProjectNum1","projectFeeTotal","projectFeeBalance"
       ,"doctorNum","masterNum","assistDoctorNum","isNewDoctor","isNewMaster"];
-      const headerExcel = ["教师编号","培养单位","姓名", "性别", "出生年月","专业技术职称", "初次担任博导时间", "导师类型","申请类型","招生学院","二级学科代码", "二级学科名称"
-      ,"论文数", "专著数","奖励数", "专利数","国家项目数", "省部项目数","横向项目数", "国家立项数","省部立项数", "项目总经费","可支配经费"
-      , "指导博士生数","指导硕士生数", "辅助指导博士生数","是否首次申请博导","是否首次申请硕导"];
+      const headerExcel = ["序号","所属培养单位","导师所在工作单位","教师编号","姓名","性别","出生日期","年龄","最高学位","专业技术职务","一级学科名称","一级学科名称","二级学科代码","二级学科名称","近五年发表高水平学术论文","近五年出版学术专著(独立或第一主编)","近五年获国家发明专利","近五年获省部级二等奖以上奖励","近五年作为负责人新申请到国家级项目","近五年作为负责人新申请到省部级项目","近五年到账总经费（万元）","目前可支配科研经费（万元）","是否完整培养或协助培养博士研究生","备注"];
 
       const XlsxPopulate = require('xlsx-populate');
 

@@ -413,6 +413,12 @@ export const constantRoutes = [
         meta: { title: '申请审核研究生院' }
       },
       {
+        path: 'recruitQualificationView',
+        name: 'recruitQualificationView',
+        component: () => import('@/views/tutor/recruitQualificationView'),
+        meta: { title: '招生申请查看' }
+      },
+      {
         path: 'recruitQualificationStatistics',
         name: 'recruitQualificationStatistics',
         component: () => import('@/views/tutor/recruitQualificationStatistics'),

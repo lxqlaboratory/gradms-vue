@@ -677,9 +677,9 @@ export function recruitQualificationCheckSubmitGrad(data) {
   })
 }
 
-export function recruitQualificationStatistics(data) {
+export function recruitQualificationView(data) {
   return request({
-    url: '/api/tutor/recruitQualificationStatistics',
+    url: '/api/tutor/recruitQualificationView',
     method: 'POST',
     data
   })
@@ -786,3 +786,10 @@ export function recruitQualificationLimitSave(data) {
   })
 }
 
+export function recruitQualificationStatistics(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationStatistics',
+    method: 'POST',
+    data
+  })
+}
