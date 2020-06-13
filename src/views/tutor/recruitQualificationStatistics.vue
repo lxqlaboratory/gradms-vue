@@ -1,5 +1,7 @@
 <template>
   <div class="app-container">
+    <el-tabs type="border-card">
+      <el-tab-pane label="表格1标题">
     <div class="table-container">
       <el-table
         :data="scienceNewList"
@@ -20,7 +22,7 @@
         </el-table-column>
         <el-table-column
           label="所属培养单位"
-          
+
           align="center"
           color="black"
         >
@@ -234,6 +236,10 @@
         </el-table-column>
     </el-table>
     </div>
+
+        
+      </el-tab-pane>
+      <el-tab-pane label="表格2标题">
     <div class="table-container">
       <el-table
         :data="professionalNewList"
@@ -254,7 +260,7 @@
         </el-table-column>
         <el-table-column
           label="所属培养单位"
-          
+
           align="center"
           color="black"
         >
@@ -468,12 +474,15 @@
         </el-table-column>
     </el-table>
     </div>
+      </el-tab-pane>
+
     <div align="center">
       <el-button  type="primary" @click="doExport()" >导出招生申请信息表</el-button>
       <el-button  type="primary" >
         <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationListPrintDataByApplyIds?applyIds='+applyIds" :download="qualificationFielName">批量下载简况表</a>
       </el-button>
     </div>
+    </el-tabs>
   </div>
 </template>
 
@@ -516,7 +525,7 @@ export default {
       var sheetName = "招生申请信息表";
 
       // head定义了整个xlsx的顺序，里面的内容时json object的key
-      const header0 = "山东大学2021年新申请招收博士学术学位研究生人员汇总表（共   人，其中40岁以下    人，兼职     人)" 
+      const header0 = "山东大学2021年新申请招收博士学术学位研究生人员汇总表（共   人，其中40岁以下    人，兼职     人)"
       const header = ["perNum","collegeName","perName", "gender", "perBirthday","proTechPosition", "doctorTutorTime","applyKindName","applyNames","collegeNames","majorNums", "majorNames"
       ,"disserNum","bookNum","rewardNum","patentNum","projectNum1","projectNum2","projectNum3","applyProjectNum1","applyProjectNum1","projectFeeTotal","projectFeeBalance"
       ,"doctorNum","masterNum","assistDoctorNum","isNewDoctor","isNewMaster"];

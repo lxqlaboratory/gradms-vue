@@ -236,3 +236,20 @@ div:focus {
     margin-top: 0px!important;
   }
 }
+.el-tabs--border-card {
+  background: transparent!important;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04);
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04);
+  border: 1px solid #336699;
+}
+.el-tabs--border-card>.el-tabs__header {
+  background-color: transparent!important;
+  border-bottom: 1px solid #336699;
+  margin: 0;
+}
+.el-tabs--border-card>.el-tabs__header .el-tabs__item.is-active {
+  color: #333333;
+  background-color: rgb(236,245,255);
+  border-right-color: #336699;
+  border-left-color: #336699;
+}
