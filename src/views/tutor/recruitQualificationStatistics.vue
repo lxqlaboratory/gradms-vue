@@ -21,7 +21,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="所属培养单位"
+          :label="items.headers.ceshi"
 
           align="center"
           color="black"
@@ -507,9 +507,10 @@ export default {
       applyList: [
         {
         paneLabel: '新申请学术博导',
-        headers:[{
-          title9:'最后学位'
-        }],
+        headers:{
+          title9:'最后学位',
+          ceshi:'测试1'
+        },
         dataList:[{
           applyName: '13',
           collegeName: '13',
@@ -522,9 +523,10 @@ export default {
       },
       {
          paneLabel: '新申请博导',
-          headers:[{
-            title9:'博导时间'
-          }],
+          headers:{
+            title9:'博导时间',
+            ceshi:'测试2'
+          },
           dataList:[{
             applyName: '113',
             collegeName: '113',
