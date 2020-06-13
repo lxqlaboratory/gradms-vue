@@ -1,11 +1,10 @@
 <template>
   <div class="app-container">
     <el-tabs type="border-card" >
-
-      <el-tab-pane v-for="items in applyList"  :label="items.doctorLabels">
+      <el-tab-pane v-for="items in applyList"  :label="items.paneLabel">
     <div class="table-container">
       <el-table
-        :data="items.tableList"
+        :data="items.dataList"
         border
         style="width: 100%;"
         size="mini"
@@ -28,7 +27,7 @@
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.applyName }}
+            {{ scope.row.collegeNames }}
           </template>
         </el-table-column>
         <el-table-column
@@ -86,7 +85,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="最高学位"
+          :label="items.headers.title9"
           align="center"
           color="black"
         >
@@ -505,9 +504,13 @@ export default {
       professionalList:[],
       masterList: [],
       applyIds:'',
-      applyList: [{
-        doctorLabels: '新申请学术博导',
-        tableList:[{
+      applyList: [
+        {
+        paneLabel: '新申请学术博导',
+        headers:[{
+          title9:'最后学位'
+        }],
+        dataList:[{
           applyName: '13',
           collegeName: '13',
           perNum: '13'
@@ -517,9 +520,12 @@ export default {
           perNum: '23'
         }]
       },
-        {
-          doctorLabels: '曾招收学术博导',
-          tableList:[{
+      {
+         paneLabel: '新申请博导',
+          headers:[{
+            title9:'博导时间'
+          }],
+          dataList:[{
             applyName: '113',
             collegeName: '113',
             perNum: '113'
@@ -529,30 +535,7 @@ export default {
             perNum: '223'
           }]
         },
-        {
-          doctorLabels: '曾招收专业博导',
-          tableList:[{
-            applyName: '313',
-            collegeName: '313',
-            perNum: '313'
-          }, {
-            applyName: '323',
-            collegeName: '323',
-            perNum: '323'
-          }]
-        },
-        {
-          doctorLabels: '新申请专业博导',
-          tableList:[{
-            applyName: '413',
-            collegeName: '413',
-            perNum: '413'
-          }, {
-            applyName: '423',
-            collegeName: '423',
-            perNum: '423'
-          }]
-        } ],
+       ],
       qualificationFielName:'简况表.pdf'
       // doctorLabels={'新申请学术博导','新申请专业博导','曾招收学术博导','曾招收专业博导'}
    }
