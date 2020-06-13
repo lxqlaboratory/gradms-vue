@@ -1,10 +1,11 @@
 <template>
   <div class="app-container">
-    <el-tabs type="border-card">
-      <el-tab-pane label="表格1标题">
+    <el-tabs type="border-card" >
+
+      <el-tab-pane v-for="items in applyList"  :label="items.doctorLabels">
     <div class="table-container">
       <el-table
-        :data="scienceNewList"
+        :data="items.tableList"
         border
         style="width: 100%;"
         size="mini"
@@ -239,7 +240,9 @@
 
 
       </el-tab-pane>
-      <el-tab-pane label="表格2标题">
+
+
+      <el-tab-pane label="表格类型2">
     <div class="table-container">
       <el-table
         :data="professionalNewList"
@@ -502,8 +505,56 @@ export default {
       professionalList:[],
       masterList: [],
       applyIds:'',
-      qualificationFielName:'简况表.pdf',
-      doctorLabels={'新申请学术博导','新申请专业博导','曾招收学术博导','曾招收专业博导'}
+      applyList: [{
+        doctorLabels: '新申请学术博导',
+        tableList:[{
+          applyName: '13',
+          collegeName: '13',
+          perNum: '13'
+        }, {
+          applyName: '23',
+          collegeName: '23',
+          perNum: '23'
+        }]
+      },
+        {
+          doctorLabels: '曾招收学术博导',
+          tableList:[{
+            applyName: '113',
+            collegeName: '113',
+            perNum: '113'
+          }, {
+            applyName: '223',
+            collegeName: '223',
+            perNum: '223'
+          }]
+        },
+        {
+          doctorLabels: '曾招收专业博导',
+          tableList:[{
+            applyName: '313',
+            collegeName: '313',
+            perNum: '313'
+          }, {
+            applyName: '323',
+            collegeName: '323',
+            perNum: '323'
+          }]
+        },
+        {
+          doctorLabels: '新申请专业博导',
+          tableList:[{
+            applyName: '413',
+            collegeName: '413',
+            perNum: '413'
+          }, {
+            applyName: '423',
+            collegeName: '423',
+            perNum: '423'
+          }]
+        } ],
+      qualificationFielName:'简况表.pdf'
+      // doctorLabels={'新申请学术博导','新申请专业博导','曾招收学术博导','曾招收专业博导'}
    }
   },
   created() {
@@ -512,10 +563,10 @@ export default {
   methods: {
     fetchData() {
       this.serverAddres = this.GLOBAL.servicePort
-      recruitQualificationStatistics({ 'session': document.cookie }).then(res => {
-        this.applyList = res.data.applyList
-        this.masterList = res.data.masterList
-      })
+
+      // recruitQualificationStatistics({ 'session': document.cookie }).then(res => {
+      //   this.masterList = res.data.masterList
+      // })
     },
     doExport(){
       var filename = "招生申请信息表.xlsx";
