@@ -496,13 +496,14 @@ export default {
   data() {
     return {
       serverAddres:'',
-      scienceNewList: [],
+      doctorApplyList: [],
       professionalNewList:[],
       scienceList: [],
       professionalList:[],
       masterList: [],
       applyIds:'',
       qualificationFielName:'简况表.pdf',
+      doctorLabels={'新申请学术博导','新申请专业博导','曾招收学术博导','曾招收专业博导'}
    }
   },
   created() {
@@ -512,10 +513,7 @@ export default {
     fetchData() {
       this.serverAddres = this.GLOBAL.servicePort
       recruitQualificationStatistics({ 'session': document.cookie }).then(res => {
-        this.scienceNewList = res.data.scienceNewList
-        this.professionalNewList = res.data.professionalNewList
-        this.scienceList = res.data.scienceList
-        this.professionalList = res.data.professionalList
+        this.applyList = res.data.applyList
         this.masterList = res.data.masterList
       })
     },
