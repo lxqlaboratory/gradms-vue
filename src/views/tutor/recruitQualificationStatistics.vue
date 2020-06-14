@@ -4,7 +4,7 @@
       <el-tab-pane v-for="items in applyList"  :label="items.paneLabel" :name="items.name" >
     <div align="center">
       {{year}}年{{items.paneLabel}}汇总表 共（{{items.count}}人 ,其中40岁以下{{items.count40}}人 含兼职{{items.countPart}}人)
-    </div>        
+    </div>
     <div class="table-container">
       <el-table
         :data="items.dataList"
@@ -240,7 +240,7 @@
   <el-tab-pane label="申请硕士生人员" name="4" >
     <div align="center">
       {{year}}年申请硕士生人员汇总表 共（{{masterCount}}人 ,其中初次 {{masterCountFirst}}人)
-    </div>        
+    </div>
     <div class="table-container">
       <el-table
         :data="masterList"
@@ -414,7 +414,7 @@
     <div align="center">
       <el-button  type="primary" @click="doExport()" >导出招生申请信息表</el-button>
       <el-button  type="primary" @click="getSelectApplyIds()" >
-        <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationListPrintDataByApplyIds?applyIds='+applyIds" :download="qualificationFielName">批量下载简况表</a>
+        <a ref="temp" :href="serverAddres+'/api/tutor/getTutorRecruitQualificationListPrintDataByApplyIds?applyIds='+applyIds" :download="qualificationFielName">批量下载简况表</a>
       </el-button>
     </div>
     </el-tabs>
@@ -464,7 +464,7 @@ export default {
     handleClick(tab, event) {
         console.log(tab, event);
         this.tableName = tab.name
-    },  
+    },
     getSelectApplyIds(){
         var i = parseInt(this.tableName);
         if(i < 4) {
