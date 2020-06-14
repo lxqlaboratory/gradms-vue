@@ -349,7 +349,7 @@ export default {
         r.merged(true);
         r.value(sheetName);
         r.style({horizontalAlignment: "center", verticalAlignment : "center"});
-        ws.row(1).height(30);
+        ws.row(1).height(20);
 
         // set header
         ws.cell("A2").value([headerExcel]);
