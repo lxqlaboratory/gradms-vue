@@ -413,7 +413,7 @@
 
     <div align="center">
       <el-button  type="primary" @click="doExport()" >导出招生申请信息表</el-button>
-      <el-button  type="primary" >
+      <el-button  type="primary" @click="getSelectApplyIds()" >
         <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationListPrintDataByApplyIds?applyIds='+applyIds" :download="qualificationFielName">批量下载简况表</a>
       </el-button>
     </div>
@@ -464,15 +464,18 @@ export default {
     handleClick(tab, event) {
         console.log(tab, event);
         this.tableName = tab.name
+    },  
+    getSelectApplyIds(){
         var i = parseInt(this.tableName);
         if(i < 4) {
           this.applyIds = this.applyList[i].applyIds;
           this.qualificationFielName=this.applyList[i].paneLabel+"简况表.pdf";
         }else {
-          this.applyIds = masterApplyIds;
+          this.applyIds = this.masterApplyIds;
           this.qualificationFielName="申请硕士生人员简况表.pdf";
         }
-    },  
+        this.$refs.temp.click()
+    },
     doExport(){
       var i = parseInt(this.tableName);
       if(i < 4) {
