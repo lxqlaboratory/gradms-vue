@@ -25,9 +25,9 @@
           <el-select v-model="form.majorId" placeholder="请选择所属专业" style="width: 100%">
             <el-option
               v-for="item in majorList"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              :key="item.majorId"
+              :label="item.majorName"
+              :value="item.majorId"
             />
           </el-select>
         </td>
@@ -96,10 +96,10 @@
 
         </td>
       </tr>
-      <tr>
+      <tr v-if="isProMaster" >
         <td style="text-align: left;width: 100%;" colspan="6" >专业实习</td>
       </tr>
-      <tr>
+      <tr  v-if="isProMaster" >
         <td colspan="6">
             <textarea placeholder="请输入专业实习" maxlength="1000"  v-model="form.practice" style="width: 100%;height:60px"/>
 
@@ -236,7 +236,7 @@ export default {
             offset: '10'
           })
 			}else {				
-        newCultivateSchemeSubmit({ 'session': document.cookie, 'schemeId': this.schemeId,'stuTypeCode':this.stuTypeCode,'form': this.form
+        newCultivateSchemeSubmit({ 'session': document.cookie, 'schemeId': this.schemeId,'form': this.form,'sessionList':this.sessionList
         }).then(res => {
           if (res.code === '0') {
             this.$message({
