@@ -425,11 +425,18 @@ export const constantRoutes = [
         meta: { title: '招生申请统计' }
       },
       {
-        path: 'recruitQualificationHistory',
-        name: 'recruitQualificationHistory',
-        component: () => import('@/views/tutor/recruitQualificationHistory'),
-        meta: { title: '招生资格历史查询' }
+        path: 'recruitQualificationStatisticsCollege',
+        name: 'recruitQualificationStatisticsCollege',
+        component: () => import('@/views/tutor/recruitQualificationStatisticsCollege'),
+        meta: { title: '学院数据汇总' }
       },
+      {
+        path: 'recruitQualificationMaintain',
+        name: 'recruitQualificationMaintain',
+        component: () => import('@/views/tutor/recruitQualificationMaintain'),
+        meta: { title: '学院数据汇总' }
+      },
+      
       {
         path: 'recruitQualificationCheckHospital',
         name: 'recruitQualificationCheckHospital',

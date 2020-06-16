@@ -793,3 +793,11 @@ export function recruitQualificationStatistics(data) {
     data
   })
 }
+export function recruitQualificationStatisticsCollege(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationStatisticsCollege',
+    method: 'POST',
+    data
+  })
+}
+
