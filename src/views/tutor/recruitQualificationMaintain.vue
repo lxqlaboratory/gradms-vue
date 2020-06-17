@@ -170,13 +170,12 @@
 </template>
 
 <script>
-import XlsxPopulate from 'xlsx-populate';
-import { saveAs } from 'file-saver';
 import { recruitQualificationMaintain } from '@/api/tutor'
 import { recruitQualificationMaintainQuery } from '@/api/tutor'
 import { recruitQualificationMaintainSave } from '@/api/tutor'
 import { recruitQualificationMaintainAdd } from '@/api/tutor'
 import { recruitQualificationMaintaindelete } from '@/api/tutor'
+import { getPersonNameMapListByPerNumName } from '@/api/personinfo'
 
 export default {
   name: 'recruitQualificationMaintain',
@@ -231,7 +230,7 @@ export default {
     doAdd(){
       if(this.personId === 'undefined' || this.personId <= 0 || this.year === 'undefined' || this.tutorType ==='undefined'){
         this.$message({
-          message: '学院和限额为空，不能添加',
+          message: '老师，年度和导师类型不能为空，添加失败',
           type: 'success'
         });
       }else{
@@ -254,7 +253,7 @@ export default {
     },
     doSave(index){
       var tutor = this.tutorList[index];
-      recruitQualificationMaintainSave({ 'session': document.cookie
+      recruitQualificationMaintainSave({ 'session': document.cookie,"qId":tutor.qId
       , 'isScienceDoctor': tutor.isScienceDoctor
       , 'isProfessionalDoctor': tutor.isProfessionalDoctor
       , 'isScienceMaster': tutor.isScienceMaster
@@ -273,7 +272,6 @@ export default {
         type: 'warning'
       }).then(() => {
         recruitQualificationMaintainDelete({ 'session': document.cookie, 'qId': qId}).then(res => {
-          this.dialogFormVisible = false
           if(res.code === '0'){
             this.$message({
               message: '删除成功',
