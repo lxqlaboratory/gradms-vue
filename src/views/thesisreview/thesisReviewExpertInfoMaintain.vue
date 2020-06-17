@@ -51,7 +51,7 @@
         </td>
         <td colspan="1" >银行卡号</td>
         <td colspan="1">
-          <el-input v-model="form.bankNo" placeholder="请输入恩行账号" ></el-input>
+          <el-input v-model="form.bankNo" placeholder="请输入银行账号" ></el-input>
         </td>
       </tr>
     </table>

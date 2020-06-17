@@ -83,7 +83,7 @@
             @successcallback="onSuccess"
             style="float: right"
             @preview="onPreview"
-          >xueshe导入
+          >导入
           </fileupload>
         </td>
       </tr>

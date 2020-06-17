@@ -801,3 +801,41 @@ export function recruitQualificationStatisticsCollege(data) {
   })
 }
 
+export function recruitQualificationMaintain(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationMaintain',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitQualificationMaintainQuery(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationMaintainQuery',
+    method: 'POST',
+    data
+  })
+}
+export function recruitQualificationMaintainSave(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationMaintainSave',
+    method: 'POST',
+    data
+  })
+}
+export function recruitQualificationMaintainAdd(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationMaintainAdd',
+    method: 'POST',
+    data
+  })
+}
+export function recruitQualificationMaintainDelete(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationMaintainDelete',
+    method: 'POST',
+    data
+  })
+}
+
+
