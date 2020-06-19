@@ -502,8 +502,14 @@ export const constantRoutes = [
         name: 'scanCodeTermRegister',
         component: () => import('@/views/student/scanCodeTermRegister'),
         meta: { title: '学生注册' }
+      },
+      {
+        path: 'loanInfoImportForLeaving',
+        name: 'loanInfoImportForLeaving',
+        component: () => import('@/views/student/loanInfoImportForLeaving'),
+        meta: { title: '贷款数据导入' }
       }
-
+      
     ]
   },
   {

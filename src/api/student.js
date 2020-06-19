@@ -117,3 +117,11 @@ export function scanCodeFreshRegisterSubmit(data) {
     data
   })
 }
+
+export function loanInfoImportForLeaving(data) {
+  return request({
+    url: '/api/student/loanInfoImportForLeaving',
+    method: 'POST',
+    data
+  })
+}

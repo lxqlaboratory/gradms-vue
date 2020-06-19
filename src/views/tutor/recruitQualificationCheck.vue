@@ -54,6 +54,15 @@
           </template>
         </el-table-column>
         <el-table-column
+          label="出生日期"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.perBirthday }}
+          </template>
+        </el-table-column>
+        <el-table-column
           label="年龄"
           align="center"
           color="black"
@@ -69,6 +78,15 @@
         >
           <template slot-scope="scope">
             {{ scope.row.applyNames }}
+          </template>
+        </el-table-column>
+       <el-table-column
+          label="通过类型"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.checkNames }}
           </template>
         </el-table-column>
        <el-table-column
@@ -115,7 +133,7 @@
         <template slot-scope="scope">
           <el-button type="primary" @click="doView(scope.row.applyId)" >详情</el-button>
           <el-button type="primary" @click="doViewAchievement(scope.row.personId)" >成果</el-button>          
-          <el-button type="primary" @click="doSetNote(scope.row.applyId)" >备注</el-button>          
+          <el-button v-if="!isLock" type="primary" @click="doSetNote(scope.row.applyId)" >备注</el-button>          
           <el-button type="primary"   >
             <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationPrintData?applyId='+scope.row.applyId" :download="scope.row.applyTableName">简况表</a>
           </el-button>
@@ -177,7 +195,7 @@
                 {{ scope.row.stateName }}
               </template>
             </el-table-column>
-           <el-table-column
+           <el-table-column  v-if="!isLock" 
               label="操作"
               fixed="left"
               align="center"
@@ -194,7 +212,7 @@
       </el-table-column>
     </el-table>
     </div>
-    <div align="center">
+    <div align="center" v-if="!isLock"  >
       <tr>
         <td>
           导师
@@ -229,9 +247,9 @@
       </tr>
     </div>
     <div align="center">
-      <el-button  type="primary" @click="doCheckSelect(0)" >取消审核</el-button>
-      <el-button  type="primary" @click="doCheckSelect(1)" >审核通过</el-button>
-      <el-button  type="primary" @click="doCheckSelect(2)" >审核不通过</el-button>
+      <el-button  v-if="!isLock" type="primary" @click="doCheckSelect(0)" >取消审核</el-button>
+      <el-button  v-if="!isLock" type="primary" @click="doCheckSelect(1)" >审核通过</el-button>
+      <el-button  v-if="!isLock" type="primary" @click="doCheckSelect(2)" >审核不通过</el-button>
       <el-button  type="primary" @click="doExport()" >导出招生申请信息表</el-button>
       <el-button  type="primary" @click="doGetSelectApplyIds" >
         <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationListPrintDataByApplyIds?applyIds='+applyIds" :download="qualificationFielName">批量下载简况表</a>
@@ -266,6 +284,7 @@ export default {
       personId:'',
       applyType:'',
       majorId:'',
+      isLock:false,
       personList:[],
       applyTypeList:[],
       majorList:[]
@@ -279,6 +298,7 @@ export default {
       this.serverAddres = this.GLOBAL.servicePort
       recruitQualificationCheck({ 'session': document.cookie }).then(res => {
         this.personId = res.data.personId
+        this.isLock = res.data.isLock;
         this.applyType = res.data.applyType
         this.majorId = res.data.majorId
         this.applyList = res.data.applyList

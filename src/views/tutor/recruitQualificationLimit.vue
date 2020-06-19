@@ -36,13 +36,22 @@
             {{ scope.row.collegeName }}
           </template>
         </el-table-column>
-          <el-table-column
+        <el-table-column
             label="招生额定数"
             align="center"
             color="black"
           >
             <template slot-scope="scope">
               <el-input v-model="scope.row.limitNum" placeholder="请输入招生额定数"  style="width:200px"/>
+            </template>
+        </el-table-column>
+        <el-table-column
+            label="是否审核锁定"
+            align="center"
+            color="black"
+          >
+            <template slot-scope="scope">
+              <el-checkbox label="审核锁定" v-model="scope.row.isLock" />
             </template>
         </el-table-column>
        <el-table-column
@@ -145,7 +154,7 @@ export default {
     },
     doSave(index){
       var limit = this.limitList[index];
-      recruitQualificationLimitSave({ 'session': document.cookie, 'limitId': limit.limitId,'limitNum':limit.limitNum}).then(res => {
+      recruitQualificationLimitSave({ 'session': document.cookie, 'limitId': limit.limitId,'limitNum':limit.limitNum,'isLock':limit.isLock}).then(res => {
          this.$message({
            message: '保存成功',
            type: 'success',
