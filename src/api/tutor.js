@@ -837,5 +837,13 @@ export function recruitQualificationMaintainDelete(data) {
     data
   })
 }
+export function recruitQualificationTransToLib(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationTransToLib',
+    method: 'POST',
+    data
+  })
+}
+
 
 

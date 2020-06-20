@@ -122,6 +122,14 @@
           <el-button  type="primary" >
             <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationApplySummaryTablePrintData?collegeId='+scope.row.collegeId" :download="scope.row.summaryFielName">汇总表</a>
           </el-button>
+            <el-date-picker
+              v-model="tutorTime"
+              size="mini"
+              type="date"
+              value-format="yyyy-MM-dd"
+              placeholder="选择导师时间"
+            />
+         <el-button type="primary" @click="transIntoLib()" >转入导师资格库</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -133,6 +141,7 @@
 import XlsxPopulate from 'xlsx-populate';
 import { saveAs } from 'file-saver';
 import { recruitQualificationCheckGrad } from '@/api/tutor'
+import { recruitQualificationTransToLib } from '@/api/tutor'
 
 export default {
   name: 'recruitQualificationCheckGrad',
@@ -140,6 +149,7 @@ export default {
     return {
       serverAddres:'',
       summaryFielName:'申请汇总表.pdf',
+      tutorTime:'',
       year:'',
       yearList:[],
       collegeList:[]
@@ -164,6 +174,11 @@ export default {
     },
     doView(collegeId){
       this.$router.push({ path: '/tutor/recruitQualificationCheckGradCheck', query: { 'collegeId':collegeId }})
+    },
+    transIntoLib() {
+      recruitQualificationTransToLib({ 'session': document.cookie, 'year':this.year,'tutorTime':tutorTime}).then(res => {
+        this.applyList = res.data
+      })
     },
   }
 }

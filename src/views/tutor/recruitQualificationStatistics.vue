@@ -409,7 +409,175 @@
         </el-table-column>
     </el-table>
     </div>
-      </el-tab-pane>
+  </el-tab-pane>
+  <el-tab-pane label="招收博士生人员名单" name="5" >
+    <div align="center">
+      {{year}}年招收博士生人员名单 共（{{dNameCount}}人 ,其中兼职 {{dNameCountPart}}人)
+    </div>
+    <div class="table-container">
+      <el-table
+        :data="dNameList"
+        border
+        style="width: 100%;"
+        size="mini"
+      >
+        <el-table-column
+          label="序号"
+          fixed="left"
+          width="50"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.$index+1 }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="所属培养单位"
+
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.collegeNames }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="姓名"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.perName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="一级学科名称/专业学科名称"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.firSubCode }}/{{ scope.row.firSubName }}
+          </template>
+        </el-table-column>
+       <el-table-column
+          label="备注"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.note }}
+          </template>
+        </el-table-column>
+    </el-table>
+    </div>
+  </el-tab-pane>
+  <el-tab-pane label="招收硕士生人员名单" name="6" >
+    <div align="center">
+      {{year}}年招收培养硕士研究生人员名单
+    </div>
+    <div class="table-container">
+      <el-table
+        :data="mNameList"
+        border
+        style="width: 100%;"
+        size="mini"
+      >
+        <el-table-column
+          label="序号"
+          fixed="left"
+          width="50"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.$index+1 }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="所属培养单位"
+
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.collegeNames }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="姓名"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.perName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="招生类别"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.tutor }}
+          </template>
+        </el-table-column>
+    </el-table>
+    </div>
+  </el-tab-pane>
+  <el-tab-pane label="招收硕士生人员名单" name="7" >
+    <div align="center">
+      {{year}}年招新增博导人员名单
+    </div>
+    <div class="table-container">
+      <el-table
+        :data="ndNameList"
+        border
+        style="width: 100%;"
+        size="mini"
+      >
+        <el-table-column
+          label="序号"
+          fixed="left"
+          width="50"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.$index+1 }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="所属培养单位"
+
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.collegeNames }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="姓名"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.perName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="招生类别"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.tutor }}
+          </template>
+        </el-table-column>
+    </el-table>
+    </div>
+  </el-tab-pane>
 
     <div align="center">
       <el-button  type="primary" @click="doExport()" >导出招生申请信息表</el-button>
@@ -435,9 +603,14 @@ export default {
       masterCount:'',
       masterCountFirst:'',
       masterApplyIds:'',
+      dNameCount:'',
+      dNameCountPart:'',
       qualificationFielName:'',
       applyIds:'',
       tableName:'0',
+      dNameList:[],
+      mNameList:[],
+      ndNameList:[],
       applyList: [],
       masterList: []
    }
