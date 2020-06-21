@@ -122,18 +122,19 @@
           <el-button  type="primary" >
             <a :href="serverAddres+'/api/tutor/getTutorRecruitQualificationApplySummaryTablePrintData?collegeId='+scope.row.collegeId" :download="scope.row.summaryFielName">汇总表</a>
           </el-button>
-            <el-date-picker
-              v-model="tutorTime"
-              size="mini"
-              type="date"
-              value-format="yyyy-MM-dd"
-              placeholder="选择导师时间"
-            />
-         <el-button type="primary" @click="transIntoLib()" >转入导师资格库</el-button>
         </template>
       </el-table-column>
     </el-table>
     </div>
+    <div align="center">
+      <el-date-picker
+        v-model="tutorTime"
+        size="mini"
+        type="date"
+        value-format="yyyy-MM-dd"
+        placeholder="选择导师时间"
+      />
+    <el-button type="primary" @click="transIntoLib()" >转入导师资格库</el-button>    </div>
   </div>
 </template>
 
@@ -176,9 +177,32 @@ export default {
       this.$router.push({ path: '/tutor/recruitQualificationCheckGradCheck', query: { 'collegeId':collegeId }})
     },
     transIntoLib() {
-      recruitQualificationTransToLib({ 'session': document.cookie, 'year':this.year,'tutorTime':tutorTime}).then(res => {
-        this.applyList = res.data
-      })
+          this.$confirm('确认去全部审核通过，申请新信息转入招生资格库吗?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            recruitQualificationTransToLib({'session': document.cookie, 'year':this.year,'tutorTime':this.tutorTime}).then(res => {
+              if(res.code === '0')
+              {
+                this.$message({
+                  message: "转入成功",
+                  type: 'sucess'
+                });
+                this.fetchData();
+              }else {
+                this.$message({
+                  message: res.msg,
+                  type: 'warning'
+                });
+              }
+            })
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消转入'
+            });
+          });
     },
   }
 }
