@@ -457,7 +457,7 @@
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.firSubCode }}/{{ scope.row.firSubName }}
+            {{ scope.row.firSub}}
           </template>
         </el-table-column>
        <el-table-column
@@ -472,60 +472,7 @@
     </el-table>
     </div>
   </el-tab-pane>
-  <el-tab-pane label="招收硕士生人员名单" name="6" >
-    <div align="center">
-      {{year}}年招收培养硕士研究生人员名单
-    </div>
-    <div class="table-container">
-      <el-table
-        :data="mNameList"
-        border
-        style="width: 100%;"
-        size="mini"
-      >
-        <el-table-column
-          label="序号"
-          fixed="left"
-          width="50"
-          align="center"
-          color="black"
-        >
-          <template slot-scope="scope">
-            {{ scope.$index+1 }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="所属培养单位"
-
-          align="center"
-          color="black"
-        >
-          <template slot-scope="scope">
-            {{ scope.row.collegeNames }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="姓名"
-          align="center"
-          color="black"
-        >
-          <template slot-scope="scope">
-            {{ scope.row.perName }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="招生类别"
-          align="center"
-          color="black"
-        >
-          <template slot-scope="scope">
-            {{ scope.row.tutor }}
-          </template>
-        </el-table-column>
-    </el-table>
-    </div>
-  </el-tab-pane>
-  <el-tab-pane label="招收硕士生人员名单" name="7" >
+  <el-tab-pane label="新增博导人员名单" name="6" >
     <div align="center">
       {{year}}年招新增博导人员名单
     </div>
@@ -567,12 +514,12 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="招生类别"
+          label="一级学科名称/专业学科名称"
           align="center"
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.tutor }}
+            {{ scope.row.firSub }}
           </template>
         </el-table-column>
     </el-table>
@@ -603,13 +550,14 @@ export default {
       masterCount:'',
       masterCountFirst:'',
       masterApplyIds:'',
+      dNameApplyIds:'',
+      ndNameApplyIds:'',
       dNameCount:'',
       dNameCountPart:'',
       qualificationFielName:'',
       applyIds:'',
       tableName:'0',
       dNameList:[],
-      mNameList:[],
       ndNameList:[],
       applyList: [],
       masterList: []
@@ -626,12 +574,17 @@ export default {
          this.year = res.data.year
          this.masterCount = res.data.masterCount
          this.masterCountFirst = res.data.masterCountFirst
+         this.dNameCount = res.data.dNameCount;
+         this.dNameCountPart = res.data.dNameCountPart
          this.masterApplyIds = res.data.masterApplyIds
+         this.dNameApplyIds = res.data.dNameApplyIds
+         this.ndNameApplyIds = res.data.ndNameApplyIds
          this.applyList = res.data.applyList
          this.masterList = res.data.masterList
+         this.dNameList = res.data.dNameList
+         this.ndNameList = res.data.ndNameList
          this.applyIds = this.applyList[0].applyIds;
          this.qualificationFielName=this.applyList[0].paneLabel+"简况表.pdf";
-
        })
     },
     handleClick(tab, event) {
@@ -643,9 +596,15 @@ export default {
         if(i < 4) {
           this.applyIds = this.applyList[i].applyIds;
           this.qualificationFielName=this.applyList[i].paneLabel+"简况表.pdf";
-        }else {
+        }else if(i===4){
           this.applyIds = this.masterApplyIds;
           this.qualificationFielName="申请硕士生人员简况表.pdf";
+        }else if(i===5){
+          this.applyIds = this.dNameApplyIds;
+          this.qualificationFielName="招生博士生人员简况表.pdf";
+        }else {
+          this.applyIds = this.ndNameApplyIds;
+          this.qualificationFielName="新增加博士生人员简况表.pdf";
         }
         this.$refs.temp.click()
     },
@@ -661,8 +620,12 @@ export default {
         headerExcel[17] = this.applyList[i].headers.T15;
         headerExcel[18] = this.applyList[i].headers.T16;
         this.doExportDoctor(i,headerExcel);
-      }else {
+      }else if(i === 4){
         this.doExportMaster();
+      }else if(i=== 5) {
+        this.doExportName();
+      }else {
+        this.doExportNameNew();
       }
     },
     doExportDoctor(i,headerExcel){
@@ -774,6 +737,96 @@ export default {
             ws.column("O").width(10);
             ws.column("P").width(10);
             var valueArray = this.masterList.map(
+              item => {
+                var va = [];
+                header.forEach(element => {
+                  va.push(item[element])
+                });
+                return va;
+              }
+            )
+            ws.cell("A3").value(valueArray);
+          return workbook.outputAsync();
+        }).then(blob => {
+          // wrtie to file
+          saveAs(blob, filename)
+        })
+    },
+
+    doExportName(){
+      var filename = "招收博士生人员名单.xlsx";
+      // 工作簿中工作表的名字
+      var sheetName = "招收博士生人员名单";
+      var headerExcel = ["所属培养单位","姓名","一级学科名称/专业学科名称","备注"];
+      const header = ["collegeNames","perName", "firSub","note"];
+      const XlsxPopulate = require('xlsx-populate');
+
+      // Load a new blank workbook, refer:https://github.com/dtjohnson/xlsx-populate
+      XlsxPopulate.fromBlankAsync()
+        .then(workbook => {
+          var title;
+          var ws;
+          var r;
+          var haders;
+          title = this.year+"年招收博士生人员名单 共（"+this.dNameCount+"人 ,其中兼职"+this.dNameCountPart+"人)";
+            ws = workbook.sheet(0);
+            ws.name(sheetName);
+            r = ws.range("A1:D1");
+            r.merged(true);
+            r.value(title);
+            r.style({horizontalAlignment: "center", verticalAlignment : "center"});
+            ws.row(1).height(20);
+            ws.cell("A2").value([headerExcel]);
+            ws.column("A").width(20);
+            ws.column("B").width(10);
+            ws.column("C").width(20);
+            ws.column("D").width(20);
+            var valueArray = this.dNameList.map(
+              item => {
+                var va = [];
+                header.forEach(element => {
+                  va.push(item[element])
+                });
+                return va;
+              }
+            )
+            ws.cell("A3").value(valueArray);
+          return workbook.outputAsync();
+        }).then(blob => {
+          // wrtie to file
+          saveAs(blob, filename)
+        })
+    },
+
+    doExportNameNew(){
+      var filename = "招收博士生人员名单.xlsx";
+      // 工作簿中工作表的名字
+      var sheetName = "招收博士生人员名单";
+      var headerExcel = ["所属培养单位","姓名","一级学科名称/专业学科名称","备注"];
+      const header = ["collegeNames","perName", "firSub","note"];
+      const XlsxPopulate = require('xlsx-populate');
+
+      // Load a new blank workbook, refer:https://github.com/dtjohnson/xlsx-populate
+      XlsxPopulate.fromBlankAsync()
+        .then(workbook => {
+          var title;
+          var ws;
+          var r;
+          var haders;
+          title = this.year+"年新增招收博士生人员名单";
+            ws = workbook.sheet(0);
+            ws.name(sheetName);
+            r = ws.range("A1:D1");
+            r.merged(true);
+            r.value(title);
+            r.style({horizontalAlignment: "center", verticalAlignment : "center"});
+            ws.row(1).height(20);
+            ws.cell("A2").value([headerExcel]);
+            ws.column("A").width(20);
+            ws.column("B").width(10);
+            ws.column("C").width(20);
+            ws.column("D").width(20);
+            var valueArray = this.ndNameList.map(
               item => {
                 var va = [];
                 header.forEach(element => {
