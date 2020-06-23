@@ -125,3 +125,11 @@ export function loanInfoImportForLeaving(data) {
     data
   })
 }
+export function loanInfoImportForLeavingSet(data) {
+  return request({
+    url: '/api/student/loanInfoImportForLeavingSet',
+    method: 'POST',
+    data
+  })
+}
+
