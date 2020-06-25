@@ -612,13 +612,14 @@ export default {
       var i = parseInt(this.tableName);
       if(i < 4) {
         var headerExcel = ["所属培养单位","导师所在工作单位","教师编号","姓名","性别","出生日期","年龄","T8","专业技术职务",
-            "一级学科名称","一级学科名称","T9","T10","近五年发表高水平学术论文","近五年出版学术专著(独立或第一主编)","近五年获国家发明专利","近五年获省部级二等奖以上奖励","T15","T16",
+            "一级学科名称","一级学科名称","T9","T10","近五年发表高水平学术论文","近五年出版学术专著(独立或第一主编)","近五年获省部级二等奖以上奖励","近五年获国家发明专利","T15","T16",
             "近五年到账总经费（万元）","目前可支配科研经费（万元）","T19","备注"];
         headerExcel[7] = this.applyList[i].headers.T8;
         headerExcel[11] = this.applyList[i].headers.T9;
         headerExcel[12] = this.applyList[i].headers.T10;
         headerExcel[17] = this.applyList[i].headers.T15;
         headerExcel[18] = this.applyList[i].headers.T16;
+        headerExcel[21] = this.applyList[i].headers.T19;
         this.doExportDoctor(i,headerExcel);
       }else if(i === 4){
         this.doExportMaster();
