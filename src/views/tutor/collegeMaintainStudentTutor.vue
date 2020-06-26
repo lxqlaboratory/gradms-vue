@@ -155,9 +155,7 @@
         </el-table-column>
         </el-table>
       </div>
-    <div align="center">
-      <tr>
-        <td>
+    <div class="buttonCenter"  >
           <el-button type="primary" @click="submitTableData">提交</el-button>
           <el-button>
           <a href="/downloads/tutor/tutuorAndStuInfoList.xls" >导入模板下载</a>
@@ -167,12 +165,10 @@
             :data="{'docType': xls }"
             accepttype=".xls"
             @successcallback="onSuccess"
-            style="float: right"
             @preview="onPreview"
           >学生导师关系导入
           </fileupload>
-          </td>
-        </tr>
+          <el-button type="primary" @click="clearTutor">清空学生导师</el-button>
     </div>
   </div>
 </template>
@@ -182,6 +178,7 @@ import { collegeMaintainStudentTutorInit } from '@/api/tutor'
 import { collegeMaintainStudentTutorMajor} from '@/api/tutor'
 import { collegeMaintainStudentTutorQuery} from '@/api/tutor'
 import { collegeMaintainStudentTutorSubmit} from '@/api/tutor'
+import {collegeMaintainStudentTutorClear } from '@/api/tutor'
 import fileupload from '../../components/upload/fileupload'
 export default {
   name: 'CollegeMaintainStudentTutor',
@@ -229,7 +226,6 @@ export default {
       })
     },
     submitTableData() {
-      console.log(this.studentList)
       collegeMaintainStudentTutorSubmit({ 'session': document.cookie, 'studentList': this.studentList }).then(res => {
         console.log(res);
         if(res.code === '0'){
@@ -246,6 +242,34 @@ export default {
           });
         }
       })
+    },
+    clearTutor() {
+      this.$confirm('确认清除学生的导师吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        collegeMaintainStudentTutorClear({ 'session': document.cookie, 'studentList': this.studentList }).then(res => {
+          if(res.code === '0'){
+            this.$message({
+              message: '清除成功',
+              type: 'success',
+              offset: '10'
+            });
+            this.doQuery()
+          }else {
+            this.$message({
+              message: res.msg,
+              type: 'warning'
+            });
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'warning',
+          message: '已取消清楚'
+        });
+      });
     },
     onPreview: function(file) {
     },

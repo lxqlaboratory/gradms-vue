@@ -86,6 +86,13 @@ export function collegeMaintainStudentTutorSubmit(data) {
     data
   })
 }
+export function collegeMaintainStudentTutorClear(data) {
+  return request({
+    url: '/api/tutor/collegeMaintainStudentTutorClear',
+    method: 'POST',
+    data
+  })
+}
 
 
 export function studentViewCollegeTutorInit(data) {
