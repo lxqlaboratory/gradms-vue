@@ -97,6 +97,7 @@ export default {
       affairIds: '',
       handoverListFielName:'试题交接单.pdf',
       contactFielName:'联系方式.pdf',
+      serverAddres:'',
    }
   },
   created() {

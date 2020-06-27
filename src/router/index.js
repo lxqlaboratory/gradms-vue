@@ -508,8 +508,13 @@ export const constantRoutes = [
         name: 'loanInfoImportForLeaving',
         component: () => import('@/views/student/loanInfoImportForLeaving'),
         meta: { title: '贷款数据导入' }
+      },
+      {
+        path: 'achievementRewardApplyInfoView',
+        name: 'achievementRewardApplyInfoView',
+        component: () => import('@/views/student/achievementRewardApplyInfoView'),
+        meta: { title: '贷款数据导入' }
       }
-      
     ]
   },
   {

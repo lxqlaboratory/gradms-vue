@@ -133,3 +133,11 @@ export function loanInfoImportForLeavingSet(data) {
   })
 }
 
+export function achievementRewardApplyInfoView(data) {
+  return request({
+    url: '/api/student/achievementRewardApplyInfoView',
+    method: 'POST',
+    data
+  })
+}
+
