@@ -800,6 +800,13 @@ export function recruitQualificationStatistics(data) {
     data
   })
 }
+export function recruitQualificationStatisticsClass(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationStatistics',
+    method: 'POST',
+    data
+  })
+}
 export function recruitQualificationStatisticsCollege(data) {
   return request({
     url: '/api/tutor/recruitQualificationStatisticsCollege',
