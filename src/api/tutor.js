@@ -802,7 +802,7 @@ export function recruitQualificationStatistics(data) {
 }
 export function recruitQualificationStatisticsClass(data) {
   return request({
-    url: '/api/tutor/recruitQualificationStatistics',
+    url: '/api/tutor/recruitQualificationStatisticsClass',
     method: 'POST',
     data
   })

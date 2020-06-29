@@ -434,7 +434,7 @@ export const constantRoutes = [
         path: 'recruitQualificationStatisticsClass',
         name: 'recruitQualificationStatisticsClass',
         component: () => import('@/views/tutor/recruitQualificationStatisticsClass'),
-        meta: { title: '学院数据汇总' }
+        meta: { title: '申请分类统计' }
       },
       
       {
