@@ -237,7 +237,7 @@
     </el-table>
     </div>
   </el-tab-pane>
-  <el-tab-pane label="申请硕士生人员" name="5" >
+  <el-tab-pane label="申请硕士生人员" name="7" >
     <div align="center">
       {{year}}年申请硕士生人员汇总表 共（{{masterCount}}人 ,其中初次 {{masterCountFirst}}人)
     </div>
@@ -410,7 +410,7 @@
     </el-table>
     </div>
   </el-tab-pane>
-  <el-tab-pane label="招收博士生人员名单" name="6" >
+  <el-tab-pane label="招收博士生人员名单" name="8" >
     <div align="center">
       {{year}}年招收博士生人员名单 共（{{dNameCount}}人 ,其中兼职 {{dNameCountPart}}人)
     </div>
@@ -472,7 +472,7 @@
     </el-table>
     </div>
   </el-tab-pane>
-  <el-tab-pane label="新增博导人员名单" name="7" >
+  <el-tab-pane label="新增博导人员名单" name="9" >
     <div align="center">
       {{year}}年招新增博导人员名单
     </div>
@@ -593,13 +593,13 @@ export default {
     },
     getSelectApplyIds(){
         var i = parseInt(this.tableName);
-        if(i < 5) {
+        if(i < 7) {
           this.applyIds = this.applyList[i].applyIds;
           this.qualificationFielName=this.applyList[i].paneLabel+"简况表.pdf";
-        }else if(i===5){
+        }else if(i===7){
           this.applyIds = this.masterApplyIds;
           this.qualificationFielName="申请硕士生人员简况表.pdf";
-        }else if(i===6){
+        }else if(i===8){
           this.applyIds = this.dNameApplyIds;
           this.qualificationFielName="招生博士生人员简况表.pdf";
         }else {
@@ -610,7 +610,7 @@ export default {
     },
     doExport(){
       var i = parseInt(this.tableName);
-      if(i < 5) {
+      if(i < 7) {
         var headerExcel = ["所属培养单位","导师所在工作单位","教师编号","姓名","性别","出生日期","年龄","T8","专业技术职务",
             "一级学科名称","一级学科名称","T9","T10","近五年发表高水平学术论文","近五年出版学术专著(独立或第一主编)","近五年获省部级二等奖以上奖励","近五年获国家发明专利","T15","T16",
             "近五年到账总经费（万元）","目前可支配科研经费（万元）","T19","备注"];
@@ -621,9 +621,9 @@ export default {
         headerExcel[18] = this.applyList[i].headers.T16;
         headerExcel[21] = this.applyList[i].headers.T19;
         this.doExportDoctor(i,headerExcel);
-      }else if(i === 5){
+      }else if(i === 7){
         this.doExportMaster();
-      }else if(i=== 6) {
+      }else if(i=== 8) {
         this.doExportName();
       }else {
         this.doExportNameNew();
