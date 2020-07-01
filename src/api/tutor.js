@@ -667,6 +667,13 @@ export function recruitQualificationCheckSubmitSelectGrad(data) {
     data
   })
 }
+export function recruitQualificationCheckSubmitSelectGradCollege(data) {
+  return request({
+    url: '/api/tutor/recruitQualificationCheckSubmitSelectGradCollege',
+    method: 'POST',
+    data
+  })
+}
 
 export function recruitQualificationCheckApplyListGrad(data) {
   return request({
@@ -683,6 +690,7 @@ export function recruitQualificationCheckSubmitGrad(data) {
     data
   })
 }
+
 
 export function recruitQualificationView(data) {
   return request({

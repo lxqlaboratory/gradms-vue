@@ -16,9 +16,15 @@
       <el-table
         :data="collegeList"
         border
+        ref="multipleTable"
+        @selection-change="selectionChange">
         style="width: 100%;"
         size="mini"
       >
+      <el-table-column
+        type="selection"
+        width="55">
+      </el-table-column>
         <el-table-column
           label="序号"
           fixed="left"
@@ -127,6 +133,9 @@
     </el-table>
     </div>
     <div align="center">
+      <el-button  type="primary" @click="doCheckSelect(0)" >取消审核</el-button>
+      <el-button  type="primary" @click="doCheckSelect(1)" >审核通过</el-button>
+      <el-button  type="primary" @click="doCheckSelect(2)" >审核不通过</el-button>
       <el-date-picker
         v-model="tutorTime"
         size="mini"
@@ -142,6 +151,8 @@
 import XlsxPopulate from 'xlsx-populate';
 import { saveAs } from 'file-saver';
 import { recruitQualificationCheckGrad } from '@/api/tutor'
+import { recruitQualificationCheckSubmitSelectGradCollege } from '@/api/tutor'
+
 import { recruitQualificationTransToLib } from '@/api/tutor'
 
 export default {
@@ -176,6 +187,38 @@ export default {
     doView(collegeId){
       this.$router.push({ path: '/tutor/recruitQualificationCheckGradCheck', query: { 'collegeId':collegeId }})
     },
+    selectionChange(val) {
+        this.multipleSelection = val;
+    },
+    doCheckSelect(state){
+      var collegeIds = ''
+      for(var i = 0; i < this.multipleSelection.length;i++){
+        if(i===0) {
+          collegeIds =  this.multipleSelection[0].collegeId.toString()
+        }else{
+          collegeIds = collegeIds + ',' + this.multipleSelection[i].collegeId.toString()
+        }
+      }
+      if(collegeIds=== ''){
+        this.$message({
+          message: '选择不能为空',
+          type: 'success'
+        });
+      }else{
+        console.log(collegeIds)
+        recruitQualificationCheckSubmitSelectGradCollege({ 'session': document.cookie, 'collegeIds': collegeIds, 'state': state
+        }).then(res => {
+          if (res.code === '0') {
+            this.$message({
+              message: '提交成功',
+              type: 'success',
+              offset: '10'
+            })
+            this.doQuery();
+          }
+        })
+      }
+    },  
     transIntoLib() {
           this.$confirm('确认去全部审核通过，申请新信息转入招生资格库吗?', '提示', {
             confirmButtonText: '确定',

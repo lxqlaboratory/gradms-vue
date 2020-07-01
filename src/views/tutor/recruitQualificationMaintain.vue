@@ -11,7 +11,7 @@
           </el-option>
         </el-select>
       导师类型
-      <el-select v-model.number="tutorType" placeholder="请选择导师类型"  style="width: 8%;">
+      <el-select v-model="tutorType" placeholder="请选择导师类型"  style="width: 8%;">
         <el-option
           v-for="item in tutorTypeList"
           :key="item.value"
@@ -174,7 +174,7 @@ import { recruitQualificationMaintain } from '@/api/tutor'
 import { recruitQualificationMaintainQuery } from '@/api/tutor'
 import { recruitQualificationMaintainSave } from '@/api/tutor'
 import { recruitQualificationMaintainAdd } from '@/api/tutor'
-import { recruitQualificationMaintaindelete } from '@/api/tutor'
+import { recruitQualificationMaintainDelete } from '@/api/tutor'
 import { getPersonNameMapListByPerNumName } from '@/api/personinfo'
 
 export default {
@@ -186,15 +186,17 @@ export default {
       perNum:'',
       perName:'',
       tutorType:'',
+      personId:'',
       yearList: [],
       collegeList:[],
       tutorList:[],
+      selectList:[],
       tutorTypeList:[
           {
-            value: 1,
+            value: '1',
             label: '博导'
           }, {
-            value: 2,
+            value: '2',
             label: '硕导'
           }
         ],
@@ -213,8 +215,9 @@ export default {
       })
     },
     getTutorList() {
-      recruitQualificationMaintainQuery({ 'session': document.cookie, 'year':this.year, 'collegeId':this.collegeId, 'perNum':this.perNum, 'perName':this.perName,'state':this.state }).then(res => {
-        this.tutorList = res.data
+      recruitQualificationMaintainQuery({ 'session': document.cookie, 'year':this.year, 'collegeId':this.collegeId, 'perNum':this.perNum, 'perName':this.perName,'tutorType':this.tutorType }).then(res => {
+        this.tutorList = res.data.tutorList
+        this.selectList = res.data.selectList
       })
     },
     getPersonList(numName) {
@@ -228,9 +231,12 @@ export default {
       }
     },
     doAdd(){
-      if(this.personId === 'undefined' || this.personId <= 0 || this.year === 'undefined' || this.tutorType ==='undefined'){
+      console.log(this.personId)
+      console.log(this.year)
+      console.log(this.tutorType)
+      if(this.personId === undefined || this.personId <= 0 || this.year === undefined || this.year === '' || this.tutorType ===undefined || this.tutorType === ''){
         this.$message({
-          message: '老师，年度和导师类型不能为空，添加失败',
+          message: '导师，年度和导师类型不能为空，添加失败',
           type: 'success'
         });
       }else{
@@ -241,7 +247,7 @@ export default {
             type: 'success',
             offset: '10'
           });
-          this.fetchData()
+          this.getTutorList()
          }else {
             this.$message({
               message: res.msg,
@@ -253,7 +259,7 @@ export default {
     },
     doSave(index){
       var tutor = this.tutorList[index];
-      recruitQualificationMaintainSave({ 'session': document.cookie,"qId":tutor.qId
+      recruitQualificationMaintainSave({ 'session': document.cookie,'qId':tutor.qId
       , 'isScienceDoctor': tutor.isScienceDoctor
       , 'isProfessionalDoctor': tutor.isProfessionalDoctor
       , 'isScienceMaster': tutor.isScienceMaster
@@ -266,19 +272,20 @@ export default {
       })
     },
     doDelete(qId){
-      this.$confirm('确认删除招生限额吗?', '提示', {
+      this.$confirm('确认删除招生资格吗?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        recruitQualificationMaintainDelete({ 'session': document.cookie, 'qId': qId}).then(res => {
+        console.log(qId)
+        recruitQualificationMaintainDelete({ 'session': document.cookie,'qId':qId}).then(res => {
           if(res.code === '0'){
             this.$message({
               message: '删除成功',
               type: 'success',
               offset: '10'
             });
-            this.fetchData()
+            this.getTutorList();
           }else {
             this.$message({
               message: res.msg,
