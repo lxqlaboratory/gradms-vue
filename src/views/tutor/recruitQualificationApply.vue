@@ -274,6 +274,10 @@
             <textarea  placeholder="近五年代表性科研成果简介之三：" maxlength="1000"  v-model="form.achieContent3" style="width: 100%;height:80px"   readonly />
           </td>
         </tr>
+        <tr>
+          <td colspan="2" >申请过程信息提示</td>
+          <td colspan="8" >{{form.stateInfo}}</td>
+        </tr>
       </table>
     </div>
     <div class="buttonCenter" v-if="isCanEdit"  >
@@ -444,7 +448,8 @@ export default {
         achieName3: '',
         achieDate3: '',
         achieContent3: '',
-        attachId:null
+        attachId:null,
+        stateInfo:''
       },
       isDisable: false,
       serverAddres:'',
