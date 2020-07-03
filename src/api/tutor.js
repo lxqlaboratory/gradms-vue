@@ -867,5 +867,36 @@ export function recruitQualificationTransToLib(data) {
   })
 }
 
+export function recruitOutstandingMaintain(data) {
+  return request({
+    url: '/api/tutor/recruitOutstandingMaintain',
+    method: 'POST',
+    data
+  })
+}
+
+export function recruitOutstandingMaintainAdd(data) {
+  return request({
+    url: '/api/tutor/recruitOutstandingMaintainAdd',
+    method: 'POST',
+    data
+  })
+}
+export function recruitOutstandingMaintainSave(data) {
+  return request({
+    url: '/api/tutor/recruitOutstandingMaintainSave',
+    method: 'POST',
+    data
+  })
+}
+export function recruitOutstandingMaintainDelete(data) {
+  return request({
+    url: '/api/tutor/recruitOutstandingMaintainDelete',
+    method: 'POST',
+    data
+  })
+}
+
+
 
 
