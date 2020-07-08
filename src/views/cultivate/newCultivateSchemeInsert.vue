@@ -89,7 +89,10 @@
       </tr>
       <tr v-for="item in sessionList"  >
         <td  colspan="1" style="text-align: left">
-          <el-checkbox  v-model.number="item.isSelect" >{{item.sessionName}}</el-checkbox>
+          <el-checkbox  v-model.number="item.isSelect" >
+          前沿讲座<br>
+            2.0学分
+          </el-checkbox>
         </td>
         <td colspan="5"  >
           <textarea placeholder="请输入培养环节" maxlength="1000"  v-model="item.content" style="width: 100%;height:60px"/>
@@ -252,4 +255,22 @@ export default {
   }
 }
 </script>
-
+<style lang="scss">
+  .el-checkbox {
+    color: #333333;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-right: 30px;
+  .el-checkbox__input {
+    cursor: pointer;
+    outline: 0;
+    line-height: 1;
+    vertical-align: 15px;
+  }
+  }
+</style>
