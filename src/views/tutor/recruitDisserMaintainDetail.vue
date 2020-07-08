@@ -17,6 +17,24 @@
         </td>
       </tr>
       <tr>
+        <td colspan="1">卷</td>
+        <td colspan="1">
+          <el-input v-model="form.volNum" placeholder="请输入期刊卷" />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1">期</td>
+        <td colspan="1">
+          <el-input v-model="form.issueNum" placeholder="请输入期刊期" />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1">页</td>
+        <td colspan="1">
+          <el-input v-model="form.publishUnit" placeholder="请输入期刊页" />
+        </td>
+      </tr>
+      <tr>
         <td colspan="1">收录情况</td>
         <td colspan="1">
           <el-select v-model="form.include" placeholder="请选择申请类型" style="width: 100%">

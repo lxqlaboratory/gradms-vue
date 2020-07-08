@@ -5,6 +5,12 @@
         <td colspan="2" style="font-size: 16px;font-weight: bold;color: #304156 ">申请项目添加</td>
       </tr>
       <tr>
+        <td colspan="1">项目编号</td>
+        <td colspan="1">
+          <el-input v-model="form.projectNum" placeholder="请输入项目编号" />
+        </td>
+      </tr>
+      <tr>
         <td colspan="1">项目名称</td>
         <td colspan="1">
           <el-input v-model="form.projectName" placeholder="请输入项目名称" />
@@ -33,6 +39,12 @@
         <td colspan="1">项目经费</td>
         <td colspan="1">
           <el-input  v-model="form.projectFee" placeholder="请输入项目经费" />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1">可支配经费</td>
+        <td colspan="1">
+          <el-input  v-model="form.projectBalance" placeholder="请输入项目可支配经费" />
         </td>
       </tr>
       <tr>

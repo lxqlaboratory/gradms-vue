@@ -67,6 +67,14 @@
         <template slot-scope="scope">
           {{ scope.row.authoriDate}}
         </template>
+      <el-table-column
+        label="授权部门"
+        align="center"
+        color="black"
+      >
+        <template slot-scope="scope">
+          {{ scope.row.approvalDepartment}}
+        </template>
       </el-table-column>
       <el-table-column
         label="作者位次"

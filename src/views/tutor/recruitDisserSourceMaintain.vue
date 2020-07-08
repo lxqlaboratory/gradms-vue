@@ -51,6 +51,33 @@
         </template>
       </el-table-column>
       <el-table-column
+        label="卷"
+        align="center"
+        color="black"
+      >
+        <template slot-scope="scope">
+          {{ scope.row.volNum }}
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="期"
+        align="center"
+        color="black"
+      >
+        <template slot-scope="scope">
+          {{ scope.row.issueNum }}
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="页"
+        align="center"
+        color="black"
+      >
+        <template slot-scope="scope">
+          {{ scope.row.pageNo }}
+        </template>
+      </el-table-column>
+      <el-table-column
         label="收录情况"
         align="center"
         color="black"

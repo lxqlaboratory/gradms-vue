@@ -50,6 +50,12 @@
       </td>
     </tr>
     <tr>
+      <td colspan="1" >授权部门</td>
+      <td colspan="1">
+        <el-input  v-model="form.approvalDepartment" placeholder="请输入授权部门" ></el-input>
+      </td>
+    </tr>
+    <tr>
       <td colspan="1" >作者位次</td>
       <td colspan="1">
         <el-input v-model="form.orderName" placeholder="请输入作者位次" ></el-input>

@@ -33,6 +33,15 @@
           </template>
         </el-table-column>
         <el-table-column
+          label="项目编号"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.projectNum }}
+          </template>
+        </el-table-column>
+        <el-table-column
           label="项目名称"
           align="center"
           color="black"
@@ -66,6 +75,15 @@
         >
           <template slot-scope="scope">
             {{ scope.row.projectFee }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="可支配经费"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.projectBalance }}
           </template>
         </el-table-column>
         <el-table-column
