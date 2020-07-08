@@ -87,8 +87,8 @@
 
         </td>
       </tr>
-      <tr v-for="item in sessionList" >
-        <td  colspan="1" >
+      <tr v-for="item in sessionList"  >
+        <td  colspan="1" style="text-align: left">
           <el-checkbox  v-model.number="item.isSelect" >{{item.sessionName}}</el-checkbox>
         </td>
         <td colspan="5"  >
@@ -235,7 +235,7 @@ export default {
             type: 'warning',
             offset: '10'
           })
-			}else {				
+			}else {
         newCultivateSchemeSubmit({ 'session': document.cookie, 'schemeId': this.schemeId,'form': this.form,'sessionList':this.sessionList
         }).then(res => {
           if (res.code === '0') {
