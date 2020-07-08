@@ -70,6 +70,15 @@
         </td>
       </tr>
       <tr>
+        <td style="text-align: left;width: 100%;" colspan="6" >培养方式</td>
+      </tr>
+      <tr>
+        <td colspan="6">
+            <textarea placeholder="请输入学习年限" maxlength="1000"  v-model="form.culWay" style="width: 100%;height:60px"/>
+
+        </td>
+      </tr>
+      <tr>
         <td style="text-align: left;width: 100%;" colspan="6" >学习年限</td>
       </tr>
       <tr>
@@ -207,7 +216,7 @@ export default {
       })
     },
     onStuTypeChange() {
-      newCultivateSchemeStuTypeChange({ 'session': document.cookie, 'stuTypeCode':this.stuTypeCode }).then(res => {
+      newCultivateSchemeStuTypeChange({ 'session': document.cookie, 'stuTypeCode':this.form.stuTypeCode }).then(res => {
         this.majorList = res.data.majorList
         this.sessionList = res.data.sessionList
       })
