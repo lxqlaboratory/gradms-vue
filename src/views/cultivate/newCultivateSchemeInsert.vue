@@ -99,8 +99,8 @@
       <tr v-for="item in sessionList"  >
         <td  colspan="1" style="text-align: left">
           <el-checkbox  v-model.number="item.isSelect" >
-          前沿讲座<br>
-            2.0学分
+            {{item.sessionName}}<br>
+            {{item.credit}}
           </el-checkbox>
         </td>
         <td colspan="5"  >
