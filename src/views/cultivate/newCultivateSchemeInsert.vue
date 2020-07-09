@@ -74,7 +74,7 @@
       </tr>
       <tr>
         <td colspan="6">
-            <textarea placeholder="请输入学习年限" maxlength="1000"  v-model="form.culWay" style="width: 100%;height:60px"/>
+            <textarea placeholder="请输入培养方式" maxlength="1000"  v-model="form.culWay" style="width: 100%;height:60px"/>
 
         </td>
       </tr>
