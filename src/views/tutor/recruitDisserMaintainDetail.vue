@@ -31,7 +31,7 @@
       <tr>
         <td colspan="1">页</td>
         <td colspan="1">
-          <el-input v-model="form.publishUnit" placeholder="请输入期刊页" />
+          <el-input v-model="form.pageNo" placeholder="请输入期刊页" />
         </td>
       </tr>
       <tr>
