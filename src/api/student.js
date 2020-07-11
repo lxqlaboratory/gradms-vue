@@ -141,3 +141,10 @@ export function achievementRewardApplyInfoView(data) {
   })
 }
 
+export function researchAssistantSummary(data) {
+  return request({
+    url: '/api/student/researchAssistantSummary',
+    method: 'POST',
+    data
+  })
+}
