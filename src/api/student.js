@@ -141,9 +141,17 @@ export function achievementRewardApplyInfoView(data) {
   })
 }
 
-export function researchAssistantSummary(data) {
+export function researchAssistantSummaryInit(data) {
   return request({
-    url: '/api/student/researchAssistantSummary',
+    url: '/api/student/researchAssistantSummaryInit',
+    method: 'POST',
+    data
+  })
+}
+
+export function researchAssistantSummaryQuery(data) {
+  return request({
+    url: '/api/student/researchAssistantSummaryQuery',
     method: 'POST',
     data
   })
