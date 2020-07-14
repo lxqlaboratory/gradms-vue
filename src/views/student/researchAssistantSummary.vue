@@ -1,8 +1,17 @@
 <template>
   <div class="app-container">
     <div class="query-container">
+      统计类型
+      <el-select v-model="statisType" placeholder="请选择类型" style="width: 8%;">
+        <el-option
+          v-for="item in statisTypeList"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
       开始年月
-      <el-select v-model.number="startYear" placeholder="请开始年" style="width: 6%;">
+      <el-select v-model.number="startYear" placeholder="开始年" style="width: 5%;">
         <el-option
           v-for="item in yearList"
           :key="item"
@@ -10,7 +19,7 @@
           :value="item"
         />
       </el-select>
-      <el-select v-model.number="startMonth" placeholder="请开始月" style="width: 4%;">
+      <el-select v-model.number="startMonth" placeholder="开始月" style="width: 4%;">
         <el-option
           v-for="item in monthList"
           :key="item"
@@ -19,7 +28,7 @@
         />
       </el-select>
       截至年月
-      <el-select v-model.number="endYear" placeholder="请截至年" style="width: 6%;">
+      <el-select v-model.number="endYear" placeholder="截至年" style="width: 5%;">
         <el-option
           v-for="item in yearList"
           :key="item"
@@ -27,7 +36,7 @@
           :value="item"
         />
       </el-select>
-      <el-select v-model.number="endMonth" placeholder="请截至月" style="width: 4%;">
+      <el-select v-model.number="endMonth" placeholder="截至月" style="width: 4%;">
         <el-option
           v-for="item in monthList"
           :key="item"
@@ -54,7 +63,7 @@
         />
       </el-select>
       年级
-      <el-select v-model="grade" placeholder="请选择年级" style="width: 6%;">
+      <el-select v-model="grade" placeholder="请选择年级" style="width: 5%;">
         <el-option
           v-for="item in gradeList"
           :key="item.value"
@@ -65,7 +74,7 @@
       学号
       <el-input v-model="perNum" placeholder="请输入学号" style="width: 8%;" />
       姓名
-      <el-input v-model="perName" placeholder="请输入姓名" style="width: 6%;" />
+      <el-input v-model="perName" placeholder="请输入姓名" style="width: 5%;" />
       <el-button type="primary" @click="doQuery">查询</el-button>
     </div>
     <div class="table-container">
@@ -142,6 +151,15 @@
              align="center"
             >
           </el-table-column>
+        <el-table-column
+            label="合计"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.sum }}
+           </template>
+         </el-table-column>
         </el-table>
     </div>
     <div align="center">
@@ -164,6 +182,7 @@ export default {
   name: 'researchAssistantSummary',
   data() {
     return {
+      statisType:'1',
       startYear:0,
       startMonth:1,
       endYear:0,
@@ -173,6 +192,16 @@ export default {
       grade:'',
       perNum:'',
       perName:'',
+      statisTypeList:[
+          {
+            value: '1',
+            label: '国家助学金'
+          }, {
+            value: '2',
+            label: '学校助学金'
+          }
+        ],
+
       stuTypeList:[],
       collegeList:[],
       gradeList:[],
@@ -202,12 +231,13 @@ export default {
       })
     },
     doQuery() {
-      researchAssistantSummaryQuery({ 'session': document.cookie, 
+      researchAssistantSummaryQuery({ 'session': document.cookie, 'statisType':this.statisType,
       'startYear':this.startYear,'startMonth':this.startMonth,'endYear':this.endYear,'endMonth':this.endMonth,
       'stuTypeCode': this.stuTypeCode,'collegeId':this.collegeId, 'grade': this.grade, 
       'perNum': this.perNum, 'perName': this.perName
       }).then(res => {
-        this.dataList = res.data
+        this.cols = res.data.cols
+        this.dataList = res.data.dataList
       })
     },
         doExport(){
@@ -233,6 +263,8 @@ export default {
           header.push(this.cols[i].prop);
           headerExcel.push(this.cols[i].label);
         }
+        header.push("sum");
+        headerExcel.push("合计");
         // set header
         ws.cell("A1").value([headerExcel]);
         // create data from array of json object to array of array
