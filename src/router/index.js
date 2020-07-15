@@ -526,13 +526,31 @@ export const constantRoutes = [
         path: 'achievementRewardApplyInfoView',
         name: 'achievementRewardApplyInfoView',
         component: () => import('@/views/student/achievementRewardApplyInfoView'),
-        meta: { title: '贷款数据导入' }
+        meta: { title: '奖励成果信息查看' }
       },
       {
         path: 'researchAssistantSummary',
         name: 'researchAssistantSummary',
         component: () => import('@/views/student/researchAssistantSummary'),
-        meta: { title: '贷款数据导入' }
+        meta: { title: '助学金发放汇总' }
+      },
+      {
+        path: 'studentAssManageMoneySummary',
+        name: 'studentAssManageMoneySummary',
+        component: () => import('@/views/student/studentAssManageMoneySummary'),
+        meta: { title: '助管补贴发放汇总' }
+      },
+      {
+        path: 'studentScholshipHistorySummary',
+        name: 'studentScholshipHistorySummary',
+        component: () => import('@/views/student/studentScholshipHistorySummary'),
+        meta: { title: '奖学金汇总' }
+      },
+      {
+        path: 'achievementRewardHistorySummary',
+        name: 'achievementRewardHistorySummary',
+        component: () => import('@/views/student/researchAssistantSummary'),
+        meta: { title: '奖励成果汇总' }
       }
     ]
   },

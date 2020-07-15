@@ -156,3 +156,51 @@ export function researchAssistantSummaryQuery(data) {
     data
   })
 }
+
+export function studentAssManageMoneySummaryInit(data) {
+  return request({
+    url: '/api/student/studentAssManageMoneySummaryInit',
+    method: 'POST',
+    data
+  })
+}
+
+export function studentAssManageMoneySummaryQuery(data) {
+  return request({
+    url: '/api/student/studentAssManageMoneySummaryQuery',
+    method: 'POST',
+    data
+  })
+}
+
+export function studentScholshipHistorySummaryInit(data) {
+  return request({
+    url: '/api/studentstudentScholshipHistorySummaryInit',
+    method: 'POST',
+    data
+  })
+}
+
+export function studentScholshipHistorySummaryQuery(data) {
+  return request({
+    url: '/api/studentstudentScholshipHistorySummaryQuery',
+    method: 'POST',
+    data
+  })
+}
+
+export function achievementRewardHistorySummaryInit(data) {
+  return request({
+    url: '/api/student/achievementRewardHistorySummaryInit',
+    method: 'POST',
+    data
+  })
+}
+
+export function achievementRewardHistorySummaryQuery(data) {
+  return request({
+    url: '/api/student/achievementRewardHistorySummaryQuery',
+    method: 'POST',
+    data
+  })
+}
