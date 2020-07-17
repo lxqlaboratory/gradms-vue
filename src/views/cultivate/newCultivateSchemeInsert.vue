@@ -197,6 +197,7 @@ export default {
         note:''
       },
       schemeId:'',
+      isProMaster:false,
       stuTypeList: [],
       majorList: [],
       sessionList:[]
@@ -209,6 +210,7 @@ export default {
     fetchData() {
         this.schemeId = this.$route.query.schemeId
       newCultivateSchemeInsert({ 'session': document.cookie, 'schemeId': this.schemeId }).then(res => {
+        this.isProMaster = res.data.isProMaster
         this.form = res.data.form
         this.stuTypeList = res.data.stuTypeList
         this.majorList = res.data.majorList
