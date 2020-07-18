@@ -1,74 +1,22 @@
 <template>
   <div class="app-container">
     <div class="query-container">
-      统计类型
-      <el-select v-model="statisType" placeholder="请选择类型" style="width: 8%;">
+      成果类型
+      <el-select v-model="rewardCode" multiple placeholder="请选择类型" style="width: 30%;">
         <el-option
-          v-for="item in statisTypeList"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
+          v-for="item in rewardCodeList"
+          :key="item.name.zh"
+          :label="item.name.zh"
+          :value="item.name.zh"
         />
       </el-select>
-      开始年月
-      <el-select v-model.number="startYear" placeholder="开始年" style="width: 5%;">
+      年度
+      <el-select v-model.number="year" placeholder="年度" style="width: 5%;">
         <el-option
           v-for="item in yearList"
           :key="item"
           :label="item"
           :value="item"
-        />
-      </el-select>
-      <el-select v-model.number="startMonth" placeholder="开始月" style="width: 4%;">
-        <el-option
-          v-for="item in monthList"
-          :key="item"
-          :label="item"
-          :value="item"
-        />
-      </el-select>
-      截至年月
-      <el-select v-model.number="endYear" placeholder="截至年" style="width: 5%;">
-        <el-option
-          v-for="item in yearList"
-          :key="item"
-          :label="item"
-          :value="item"
-        />
-      </el-select>
-      <el-select v-model.number="endMonth" placeholder="截至月" style="width: 4%;">
-        <el-option
-          v-for="item in monthList"
-          :key="item"
-          :label="item"
-          :value="item"
-        />
-      </el-select>
-      学生类型
-      <el-select v-model="stuTypeCode" placeholder="请选择学生类型" style="width: 8%;" @change="changeMajor">
-        <el-option
-          v-for="item in stuTypeList"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        />
-      </el-select>
-      学院
-      <el-select v-model="collegeId" placeholder="请选择学院" style="width: 12%;">
-        <el-option
-          v-for="item in collegeList"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        />
-      </el-select>
-      年级
-      <el-select v-model="grade" placeholder="请选择年级" style="width: 5%;">
-        <el-option
-          v-for="item in gradeList"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
         />
       </el-select>
       学号
@@ -123,8 +71,7 @@
             color="black"
           >
            <template slot-scope="scope">
-             {{ scope.row.stuTypeName
-              }}
+             {{ scope.row.stuTypeName}}
            </template>
          </el-table-column>
         <el-table-column
@@ -182,31 +129,12 @@ export default {
   name: 'achievementRewardHistorySummary',
   data() {
     return {
-      statisType:'1',
-      startYear:0,
-      startMonth:1,
-      endYear:0,
-      endMonth:12,
-      stuTypeCode:'',
-      collegeId:'',
-      grade:'',
+      year:'',
       perNum:'',
       perName:'',
-      statisTypeList:[
-          {
-            value: '1',
-            label: '国家助学金'
-          }, {
-            value: '2',
-            label: '学校助学金'
-          }
-        ],
-
-      stuTypeList:[],
-      collegeList:[],
-      gradeList:[],
+      rewardCode:[],
+      rewardCodeList:[],
       yearList:[],
-      monthList:[],
       dataList:[],
       cols:[],
     }
@@ -217,23 +145,15 @@ export default {
   methods: {
     fetchData() {
       achievementRewardHistorySummaryInit({ 'session': document.cookie }).then(res => {
-        this.startYear = res.data.startYear
-        this.startMonth = res.data.startMonth
-        this.endYear = res.data.endYear
-        this.endMonth = res.data.endMonth
-        this.yearList = res.data.yearList;
-        this.monthList = res.data.monthList
-        this.gradeList = res.data.gradeList
-        this.stuTypeList = res.data.stuTypeList
-        this.collegeList= res.data.collegeList 
+        this.year = res.data.year
+        this.rewardCodeList = res.data.rewardCodeList
+        this.yearList = res.data.yearList
         this.cols = res.data.cols
         this.dataList = res.data.dataList
       })
     },
     doQuery() {
-      achievementRewardHistorySummaryQuery({ 'session': document.cookie, 'statisType':this.statisType,
-      'startYear':this.startYear,'startMonth':this.startMonth,'endYear':this.endYear,'endMonth':this.endMonth,
-      'stuTypeCode': this.stuTypeCode,'collegeId':this.collegeId, 'grade': this.grade, 
+      achievementRewardHistorySummaryQuery({ 'session': document.cookie, 'rewardCode':this.rewardCode,'year':this.year,
       'perNum': this.perNum, 'perName': this.perName
       }).then(res => {
         this.cols = res.data.cols

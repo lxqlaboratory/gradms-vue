@@ -549,7 +549,7 @@ export const constantRoutes = [
       {
         path: 'achievementRewardHistorySummary',
         name: 'achievementRewardHistorySummary',
-        component: () => import('@/views/student/researchAssistantSummary'),
+        component: () => import('@/views/student/achievementRewardHistorySummary'),
         meta: { title: '奖励成果汇总' }
       }
     ]
