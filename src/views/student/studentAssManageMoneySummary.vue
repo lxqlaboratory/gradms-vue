@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <div class="query-container">
-      统计类型
-      <el-select v-model="statisType" placeholder="请选择类型" style="width: 8%;">
+      岗位类型
+      <el-select v-model="postTypeCode" placeholder="请选择类型" style="width: 8%;">
         <el-option
-          v-for="item in statisTypeList"
+          v-for="item in postTypeCodeList"
           :key="item.value"
           :label="item.label"
           :value="item.value"
@@ -44,28 +44,10 @@
           :value="item"
         />
       </el-select>
-      学生类型
-      <el-select v-model="stuTypeCode" placeholder="请选择学生类型" style="width: 8%;" @change="changeMajor">
-        <el-option
-          v-for="item in stuTypeList"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        />
-      </el-select>
       学院
       <el-select v-model="collegeId" placeholder="请选择学院" style="width: 12%;">
         <el-option
           v-for="item in collegeList"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        />
-      </el-select>
-      年级
-      <el-select v-model="grade" placeholder="请选择年级" style="width: 5%;">
-        <el-option
-          v-for="item in gradeList"
           :key="item.value"
           :label="item.label"
           :value="item.value"
@@ -182,33 +164,32 @@ export default {
   name: 'studentAssManageMoneySummary',
   data() {
     return {
-      statisType:'1',
+      postTypeCode:'01',
       startYear:0,
       startMonth:1,
       endYear:0,
       endMonth:12,
-      stuTypeCode:'',
       collegeId:'',
-      grade:'',
       perNum:'',
       perName:'',
-      statisTypeList:[
-          {
-            value: '1',
-            label: '国家助学金'
-          }, {
-            value: '2',
-            label: '学校助学金'
-          }
-        ],
 
-      stuTypeList:[],
       collegeList:[],
-      gradeList:[],
       yearList:[],
       monthList:[],
       dataList:[],
       cols:[],
+      postTypeCodeList:[
+          {
+            value: '01',
+            label: '助管'
+          }, {
+            value: '02',
+            label: '本科生辅导员助理'
+          }, {
+            value: '03',
+            label: '本科生辅导员助理'
+          }
+        ],
     }
   },
   created() {
@@ -224,17 +205,15 @@ export default {
         this.yearList = res.data.yearList;
         this.monthList = res.data.monthList
         this.gradeList = res.data.gradeList
-        this.stuTypeList = res.data.stuTypeList
         this.collegeList= res.data.collegeList 
         this.cols = res.data.cols
         this.dataList = res.data.dataList
       })
     },
     doQuery() {
-      studentAssManageMoneySummaryQuery({ 'session': document.cookie, 'statisType':this.statisType,
+      studentAssManageMoneySummaryQuery({ 'session': document.cookie,'postTypeCode':this.postTypeCode,
       'startYear':this.startYear,'startMonth':this.startMonth,'endYear':this.endYear,'endMonth':this.endMonth,
-      'stuTypeCode': this.stuTypeCode,'collegeId':this.collegeId, 'grade': this.grade, 
-      'perNum': this.perNum, 'perName': this.perName
+      'collegeId':this.collegeId,'perNum': this.perNum, 'perName': this.perName
       }).then(res => {
         this.cols = res.data.cols
         this.dataList = res.data.dataList

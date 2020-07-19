@@ -1,6 +1,15 @@
 <template>
   <div class="app-container">
     <div class="query-container">
+      统计方式
+      <el-select v-model="statisType" placeholder="请选择类型" style="width: 8%;">
+        <el-option
+          v-for="item in statisTypeList"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
       成果类型
       <el-select v-model="rewardCode" multiple placeholder="请选择类型" style="width: 30%;">
         <el-option
@@ -11,12 +20,12 @@
         />
       </el-select>
       年度
-      <el-select v-model.number="year" placeholder="年度" style="width: 5%;">
+      <el-select v-model="year" placeholder="年度" style="width: 5%;">
         <el-option
           v-for="item in yearList"
-          :key="item"
-          :label="item"
-          :value="item"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
         />
       </el-select>
       学号
@@ -129,6 +138,7 @@ export default {
   name: 'achievementRewardHistorySummary',
   data() {
     return {
+      statisType:'1',
       year:'',
       perNum:'',
       perName:'',
@@ -137,6 +147,15 @@ export default {
       yearList:[],
       dataList:[],
       cols:[],
+      statisTypeList:[
+          {
+            value: '1',
+            label: '获奖次数'
+          }, {
+            value: '2',
+            label: '获奖金额'
+          }
+        ],
     }
   },
   created() {
@@ -153,7 +172,7 @@ export default {
       })
     },
     doQuery() {
-      achievementRewardHistorySummaryQuery({ 'session': document.cookie, 'rewardCode':this.rewardCode,'year':this.year,
+      achievementRewardHistorySummaryQuery({ 'session': document.cookie, 'statisType':this.statisType, 'rewardCode':this.rewardCode,'year':this.year,
       'perNum': this.perNum, 'perName': this.perName
       }).then(res => {
         this.cols = res.data.cols

@@ -175,7 +175,7 @@ export function studentAssManageMoneySummaryQuery(data) {
 
 export function studentScholshipHistorySummaryInit(data) {
   return request({
-    url: '/api/studentstudentScholshipHistorySummaryInit',
+    url: '/api/student/studentScholshipHistorySummaryInit',
     method: 'POST',
     data
   })
@@ -183,7 +183,7 @@ export function studentScholshipHistorySummaryInit(data) {
 
 export function studentScholshipHistorySummaryQuery(data) {
   return request({
-    url: '/api/studentstudentScholshipHistorySummaryQuery',
+    url: '/api/student/studentScholshipHistorySummaryQuery',
     method: 'POST',
     data
   })

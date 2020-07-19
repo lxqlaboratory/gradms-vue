@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="query-container">
-      统计类型
+      统计方式
       <el-select v-model="statisType" placeholder="请选择类型" style="width: 8%;">
         <el-option
           v-for="item in statisTypeList"
@@ -10,42 +10,26 @@
           :value="item.value"
         />
       </el-select>
-      开始年月
-      <el-select v-model.number="startYear" placeholder="开始年" style="width: 5%;">
+      类型
+      <el-select v-model="scholarType" multiple placeholder="请选择类型" style="width: 8%;">
+        <el-option
+          v-for="item in scholarTypeList"
+          :key="item.value"
+          :label="item.name.zh"
+          :value="item.value"
+        />
+      </el-select>
+      年度
+      <el-select v-model="year" placeholder="选择年度" style="width: 5%;">
         <el-option
           v-for="item in yearList"
-          :key="item"
-          :label="item"
-          :value="item"
-        />
-      </el-select>
-      <el-select v-model.number="startMonth" placeholder="开始月" style="width: 4%;">
-        <el-option
-          v-for="item in monthList"
-          :key="item"
-          :label="item"
-          :value="item"
-        />
-      </el-select>
-      截至年月
-      <el-select v-model.number="endYear" placeholder="截至年" style="width: 5%;">
-        <el-option
-          v-for="item in yearList"
-          :key="item"
-          :label="item"
-          :value="item"
-        />
-      </el-select>
-      <el-select v-model.number="endMonth" placeholder="截至月" style="width: 4%;">
-        <el-option
-          v-for="item in monthList"
-          :key="item"
-          :label="item"
-          :value="item"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
         />
       </el-select>
       学生类型
-      <el-select v-model="stuTypeCode" placeholder="请选择学生类型" style="width: 8%;" @change="changeMajor">
+      <el-select v-model="stuTypeCode" placeholder="请选择学生类型" style="width: 8%;" >
         <el-option
           v-for="item in stuTypeList"
           :key="item.value"
@@ -183,32 +167,29 @@ export default {
   data() {
     return {
       statisType:'1',
-      startYear:0,
-      startMonth:1,
-      endYear:0,
-      endMonth:12,
+      scholarType:[],
+      year:'',
       stuTypeCode:'',
       collegeId:'',
       grade:'',
       perNum:'',
       perName:'',
-      statisTypeList:[
-          {
-            value: '1',
-            label: '国家助学金'
-          }, {
-            value: '2',
-            label: '学校助学金'
-          }
-        ],
-
+      scholarTypeList:[],
       stuTypeList:[],
       collegeList:[],
       gradeList:[],
       yearList:[],
-      monthList:[],
       dataList:[],
       cols:[],
+      statisTypeList:[
+          {
+            value: '1',
+            label: '获奖次数'
+          }, {
+            value: '2',
+            label: '获奖金额'
+          }
+        ],
     }
   },
   created() {
@@ -217,12 +198,9 @@ export default {
   methods: {
     fetchData() {
       studentScholshipHistorySummaryInit({ 'session': document.cookie }).then(res => {
-        this.startYear = res.data.startYear
-        this.startMonth = res.data.startMonth
-        this.endYear = res.data.endYear
-        this.endMonth = res.data.endMonth
+        this.year = res.data.year
+        this.scholarTypeList = res.data.scholarTypeList
         this.yearList = res.data.yearList;
-        this.monthList = res.data.monthList
         this.gradeList = res.data.gradeList
         this.stuTypeList = res.data.stuTypeList
         this.collegeList= res.data.collegeList 
@@ -231,8 +209,7 @@ export default {
       })
     },
     doQuery() {
-      studentScholshipHistorySummaryQuery({ 'session': document.cookie, 'statisType':this.statisType,
-      'startYear':this.startYear,'startMonth':this.startMonth,'endYear':this.endYear,'endMonth':this.endMonth,
+      studentScholshipHistorySummaryQuery({ 'session': document.cookie, 'statisType':this.statisType, 'scholarType':this.scholarType,'year':this.year,
       'stuTypeCode': this.stuTypeCode,'collegeId':this.collegeId, 'grade': this.grade, 
       'perNum': this.perNum, 'perName': this.perName
       }).then(res => {
