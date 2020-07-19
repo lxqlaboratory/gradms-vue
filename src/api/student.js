@@ -204,3 +204,11 @@ export function achievementRewardHistorySummaryQuery(data) {
     data
   })
 }
+
+export function studentTrainInfoStatisticsStudentNumber(data) {
+  return request({
+    url: '/api/student/studentTrainInfoStatisticsStudentNumber',
+    method: 'POST',
+    data
+  })
+}

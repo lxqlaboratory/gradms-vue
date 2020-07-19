@@ -551,6 +551,12 @@ export const constantRoutes = [
         name: 'achievementRewardHistorySummary',
         component: () => import('@/views/student/achievementRewardHistorySummary'),
         meta: { title: '奖励成果汇总' }
+      },
+      {
+        path: 'studentTrainInfoStatisticsStudentNumber',
+        name: 'studentTrainInfoStatisticsStudentNumber',
+        component: () => import('@/views/student/studentTrainInfoStatisticsStudentNumber'),
+        meta: { title: '奖励成果汇总' }
       }
     ]
   },
