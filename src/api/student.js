@@ -205,6 +205,38 @@ export function achievementRewardHistorySummaryQuery(data) {
   })
 }
 
+export function studentTrainInfoStatisticsStudentClass(data) {
+  return request({
+    url: '/api/student/studentTrainInfoStatisticsStudentClass',
+    method: 'POST',
+    data
+  })
+}
+
+export function studentTrainInfoStatisticsMajor(data) {
+  return request({
+    url: '/api/student/studentTrainInfoStatisticsMajor',
+    method: 'POST',
+    data
+  })
+}
+
+export function studentTrainInfoStatisticsGrade(data) {
+  return request({
+    url: '/api/student/studentTrainInfoStatisticsGrade',
+    method: 'POST',
+    data
+  })
+}
+
+export function studentTrainInfoStatisticsCampus(data) {
+  return request({
+    url: '/api/student/studentTrainInfoStatisticsCampus',
+    method: 'POST',
+    data
+  })
+}
+
 export function studentTrainInfoStatisticsStudentNumber(data) {
   return request({
     url: '/api/student/studentTrainInfoStatisticsStudentNumber',
@@ -212,3 +244,4 @@ export function studentTrainInfoStatisticsStudentNumber(data) {
     data
   })
 }
+

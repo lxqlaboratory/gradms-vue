@@ -556,7 +556,31 @@ export const constantRoutes = [
         path: 'studentTrainInfoStatisticsStudentNumber',
         name: 'studentTrainInfoStatisticsStudentNumber',
         component: () => import('@/views/student/studentTrainInfoStatisticsStudentNumber'),
-        meta: { title: '奖励成果汇总' }
+        meta: { title: '在校生人数统计' }
+      },
+      {
+        path: 'studentTrainInfoStatisticsStudentClass',
+        name: 'studentTrainInfoStatisticsStudentClass',
+        component: () => import('@/views/student/studentTrainInfoStatisticsStudentClass'),
+        meta: { title: '学生分类统计' }
+      },
+      {
+        path: 'studentTrainInfoStatisticsMajor',
+        name: 'studentTrainInfoStatisticsMajor',
+        component: () => import('@/views/student/studentTrainInfoStatisticsMajor'),
+        meta: { title: '专业分类统计' }
+      },
+      {
+        path: 'studentTrainInfoStatisticsGrade',
+        name: 'studentTrainInfoStatisticsGrade',
+        component: () => import('@/views/student/studentTrainInfoStatisticsGrade'),
+        meta: { title: '分年级统计' }
+      },
+      {
+        path: 'studentTrainInfoStatisticsCampus',
+        name: 'studentTrainInfoStatisticsCampus',
+        component: () => import('@/views/student/studentTrainInfoStatisticsCampus'),
+        meta: { title: '校区学生统计' }
       }
     ]
   },

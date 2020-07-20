@@ -52,11 +52,11 @@
 <script>
 import XlsxPopulate from 'xlsx-populate';
 import { saveAs } from 'file-saver';
-import { studentTrainInfoStatisticsStudentNumber } from '@/api/student'
+import { studentTrainInfoStatisticsCampus } from '@/api/student'
 
 
 export default {
-  name: 'studentTrainInfoStatisticsStudentNumber',
+  name: 'studentTrainInfoStatisticsCampus',
   data() {
     return {
       stuType:'1',
@@ -65,15 +65,15 @@ export default {
       stuTypeList:[
         {
           value:'1',
-          label:'研究生'
+          laebl:'研究生'
         },
         {
           value:'2',
-          label:'留学生'
+          laebl:'留学生'
         },
         {
           value:'3',
-          label:'全部'
+          laebl:'全部'
         }
       ]
     }
@@ -83,7 +83,7 @@ export default {
   },
   methods: {
     fetchData() {
-      studentTrainInfoStatisticsStudentNumber({ 'session': document.cookie,'stuType':this.stuType}).then(res => {
+      studentTrainInfoStatisticsStudentNumber({ 'session': document.cookie,'stuTypes':this.stuType}).then(res => {
         this.cols = res.data.cols
         this.dataList = res.data.dataList
       })

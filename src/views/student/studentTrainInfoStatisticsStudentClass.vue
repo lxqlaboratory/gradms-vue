@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
-        <div class="query-container">
-      统计方式
-      <el-select v-model="stuType"  placeholder="请选择统计方式" style="width: 15%;">
+    <div class="query-container">
+      学院
+      <el-select v-model="collegeIds" multiple placeholder="请选择学院" style="width: 15%;">
         <el-option
-          v-for="item in stuTypeList"
+          v-for="item in collegeList"
           :key="item.value"
           :label="item.label"
           :value="item.value"
@@ -15,30 +15,50 @@
     <div class="table-container">
       <el-table :data="dataList" style="width: 100%">
         <el-table-column
-            label="学生类型"
+          label="序号"
+          fixed="left"
+          width="70"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.$index+1 }}
+          </template>
+        </el-table-column>
+         <el-table-column
+            label="学院编号"
             align="center"
             color="black"
           >
            <template slot-scope="scope">
-             {{ scope.row.stuTypeName }}
+             {{ scope.row.collegeNum }}
            </template>
          </el-table-column>
+         <el-table-column
+            label="学院名称"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.collegeName }}
+           </template>
+         </el-table-column>
+         <el-table-column
+            label="年级"
+            align="center"
+            color="black"
+          >
+          <template slot-scope="scope">
+            {{ scope.row.grade }}
+          </template>
+        </el-table-column>
          <el-table-column
             v-for="col in cols"
             :prop="col.prop" :label="col.label" 
              align="center"
             >
           </el-table-column>
-        <el-table-column
-            label="合计"
-            align="center"
-            color="black"
-          >
-           <template slot-scope="scope">
-             {{ scope.row.sum }}
-           </template>
-         </el-table-column>
-        </el-table>
+      </el-table>
     </div>
     <div align="center">
       <tr>
@@ -52,30 +72,17 @@
 <script>
 import XlsxPopulate from 'xlsx-populate';
 import { saveAs } from 'file-saver';
-import { studentTrainInfoStatisticsStudentNumber } from '@/api/student'
+import { studentTrainInfoStatisticsStudentClass } from '@/api/student'
 
 
 export default {
-  name: 'studentTrainInfoStatisticsStudentNumber',
+  name: 'studentTrainInfoStatisticsStudentClass',
   data() {
     return {
-      stuType:'1',
-      dataList:[],
+      collegeIds:[],
+      collegeList:[],
       cols:[],
-      stuTypeList:[
-        {
-          value:'1',
-          label:'研究生'
-        },
-        {
-          value:'2',
-          label:'留学生'
-        },
-        {
-          value:'3',
-          label:'全部'
-        }
-      ]
+      dataList:[],
     }
   },
   created() {
@@ -83,7 +90,8 @@ export default {
   },
   methods: {
     fetchData() {
-      studentTrainInfoStatisticsStudentNumber({ 'session': document.cookie,'stuType':this.stuType}).then(res => {
+      studentTrainInfoStatisticsStudentClass({ 'session': document.cookie,'collegeIds':this.collegeIds}).then(res => {
+        this.collegeList = res.data.collegeList
         this.cols = res.data.cols
         this.dataList = res.data.dataList
       })
@@ -111,8 +119,6 @@ export default {
           header.push(this.cols[i].prop);
           headerExcel.push(this.cols[i].label);
         }
-        header.push("sum");
-        headerExcel.push("合计");
         // set header
         ws.cell("A1").value([headerExcel]);
         // create data from array of json object to array of array
