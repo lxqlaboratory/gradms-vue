@@ -1,10 +1,33 @@
 <template>
   <div class="app-container">
     <div class="query-container">
-      学生类型
-      <el-select v-model="stuTypeCode" multiple placeholder="请学生类型" style="width: 15%;">
+      <el-select v-model="stuType"  placeholder="请学生类型" style="width: 15%;">
         <el-option
           v-for="item in stuTypeList"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
+      <el-select v-model="degreeType"  placeholder="请学生类型" style="width: 15%;">
+        <el-option
+          v-for="item in degreeTypeList"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
+      <el-select v-model="trainType" multiple placeholder="请学生类型" style="width: 15%;">
+        <el-option
+          v-for="item in trainTypeList"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
+      <el-select v-model="studyType" multiple placeholder="请学生类型" style="width: 15%;">
+        <el-option
+          v-for="item in studyTypeList"
           :key="item.value"
           :label="item.label"
           :value="item.value"
@@ -163,9 +186,51 @@ export default {
   name: 'studentTrainInfoStatisticsGrade',
   data() {
     return {
-      collegeIds:[],
-      collegeList:[],
+      stuType:'1',
+      degreeType:'1',
+      trainType:'1',
+      studyType:'1',
       dataList:[],
+      stuTypeList:[
+        {
+          value:'1',
+          label:'博士'
+        },
+        {
+          value:'2',
+          label:'硕士'
+        }
+      ],
+      degreeTypeList:[
+        {
+          value:'1',
+          label:'学术'
+        },
+        {
+          value:'2',
+          label:'专业'
+        }
+      ],
+      trainTypeList:[
+        {
+          value:'1',
+          label:'非定向'
+        },
+        {
+          value:'2',
+          label:'定向'
+        }
+      ],
+      studyTypeList:[
+        {
+          value:'1',
+          label:'全日制'
+        },
+        {
+          value:'2',
+          label:'非全日制'
+        }
+      ]
     }
   },
   created() {
@@ -173,8 +238,8 @@ export default {
   },
   methods: {
     fetchData() {
-      studentTrainInfoStatisticsGrade({ 'session': document.cookie,'collegeIds':this.collegeIds}).then(res => {
-        this.collegeList = res.data.collegeList
+      studentTrainInfoStatisticsGrade({ 'session': document.cookie,
+      'stuType':this.stuType,'degreeType':this.degreeType,'trainType':this.trainType,'studyType':this.studyType}).then(res => {
         this.dataList = res.data.dataList
       })
     },
