@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
         <div class="query-container">
-      统计方式
-      <el-select v-model="stuType"  placeholder="请选择统计方式" style="width: 15%;">
+      校区
+      <el-select v-model="campusNum"  placeholder="请选择校区" style="width: 15%;">
         <el-option
-          v-for="item in stuTypeList"
+          v-for="item in campusList"
           :key="item.value"
           :label="item.label"
           :value="item.value"
@@ -15,21 +15,69 @@
     <div class="table-container">
       <el-table :data="dataList" style="width: 100%">
         <el-table-column
-            label="学生类型"
+            label="培养单位"
             align="center"
             color="black"
           >
            <template slot-scope="scope">
-             {{ scope.row.stuTypeName }}
+             {{ scope.row.collegeName }}
+           </template>
+         </el-table-column>
+        <el-table-column
+            label="全日制硕士"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.master }}
+           </template>
+         </el-table-column>
+        <el-table-column
+            label="非全日制硕士"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.materN }}
+           </template>
+         </el-table-column>
+        <el-table-column
+            label="全日制博士"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.doctor }}
+           </template>
+         </el-table-column>
+        <el-table-column
+            label="非全日制博士"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.doctorN }}
            </template>
          </el-table-column>
          <el-table-column
-            v-for="col in cols"
-            :prop="col.prop" :label="col.label" 
-             align="center"
-            >
-          </el-table-column>
+            label="外籍硕士"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.masterW }}
+           </template>
+         </el-table-column>
         <el-table-column
+            label="外籍博士"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.masterW }}
+           </template>
+         </el-table-column>
+         <el-table-column
             label="合计"
             align="center"
             color="black"
@@ -59,23 +107,9 @@ export default {
   name: 'studentTrainInfoStatisticsCampus',
   data() {
     return {
-      stuType:'1',
+      campusNum:'01',
+      campuList:[],
       dataList:[],
-      cols:[],
-      stuTypeList:[
-        {
-          value:'1',
-          laebl:'研究生'
-        },
-        {
-          value:'2',
-          laebl:'留学生'
-        },
-        {
-          value:'3',
-          laebl:'全部'
-        }
-      ]
     }
   },
   created() {
@@ -83,8 +117,7 @@ export default {
   },
   methods: {
     fetchData() {
-      studentTrainInfoStatisticsStudentNumber({ 'session': document.cookie,'stuTypes':this.stuType}).then(res => {
-        this.cols = res.data.cols
+      studentTrainInfoStatisticsCampus({ 'session': document.cookie,'campusNum':this.campusNum}).then(res => {
         this.dataList = res.data.dataList
       })
     },
