@@ -1,21 +1,40 @@
 <template>
   <div class="app-container">
         <div class="query-container">
-      校区
-      <el-select v-model="campusNum"  placeholder="请选择校区" style="width: 15%;">
+      <el-select v-model="campusNums" multiple placeholder="请选择校区" style="width: 70%;">
         <el-option
           v-for="item in campusList"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
+          :key="item.campusNum"
+          :label="item.campusName"
+          :value="item.campusNum"
         />
       </el-select>
-      <el-button type="primary" @click="fetchData">查询</el-button>
+      <el-button type="primary" @click="doQuery">查询</el-button>
     </div>
     <div class="table-container">
       <el-table :data="dataList" style="width: 100%">
         <el-table-column
-            label="培养单位"
+          label="序号"
+          fixed="left"
+          width="70"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.$index+1 }}
+          </template>
+        </el-table-column>
+         <el-table-column
+            label="校区"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.campusName }}
+           </template>
+         </el-table-column>
+         <el-table-column
+            label="学院"
             align="center"
             color="black"
           >
@@ -23,70 +42,13 @@
              {{ scope.row.collegeName }}
            </template>
          </el-table-column>
-        <el-table-column
-            label="全日制硕士"
-            align="center"
-            color="black"
-          >
-           <template slot-scope="scope">
-             {{ scope.row.master }}
-           </template>
-         </el-table-column>
-        <el-table-column
-            label="非全日制硕士"
-            align="center"
-            color="black"
-          >
-           <template slot-scope="scope">
-             {{ scope.row.materN }}
-           </template>
-         </el-table-column>
-        <el-table-column
-            label="全日制博士"
-            align="center"
-            color="black"
-          >
-           <template slot-scope="scope">
-             {{ scope.row.doctor }}
-           </template>
-         </el-table-column>
-        <el-table-column
-            label="非全日制博士"
-            align="center"
-            color="black"
-          >
-           <template slot-scope="scope">
-             {{ scope.row.doctorN }}
-           </template>
-         </el-table-column>
          <el-table-column
-            label="外籍硕士"
-            align="center"
-            color="black"
-          >
-           <template slot-scope="scope">
-             {{ scope.row.masterW }}
-           </template>
-         </el-table-column>
-        <el-table-column
-            label="外籍博士"
-            align="center"
-            color="black"
-          >
-           <template slot-scope="scope">
-             {{ scope.row.masterW }}
-           </template>
-         </el-table-column>
-         <el-table-column
-            label="合计"
-            align="center"
-            color="black"
-          >
-           <template slot-scope="scope">
-             {{ scope.row.sum }}
-           </template>
-         </el-table-column>
-        </el-table>
+            v-for="col in cols"
+            :prop="col.prop" :label="col.label" 
+             align="center"
+            >
+          </el-table-column>
+      </el-table>
     </div>
     <div align="center">
       <tr>
@@ -107,8 +69,9 @@ export default {
   name: 'studentTrainInfoStatisticsCampus',
   data() {
     return {
-      campusNum:'01',
-      campuList:[],
+      campusNums:[],
+      campusList:[],
+      cols:[],
       dataList:[],
     }
   },
@@ -117,7 +80,15 @@ export default {
   },
   methods: {
     fetchData() {
-      studentTrainInfoStatisticsCampus({ 'session': document.cookie,'campusNum':this.campusNum}).then(res => {
+      studentTrainInfoStatisticsCampus({ 'session': document.cookie}).then(res => {
+        this.campusList = res.data.campusList
+        this.cols = res.data.cols
+        this.dataList = res.data.dataList
+      })
+    },
+    doQuery() {
+      studentTrainInfoStatisticsCampus({ 'session': document.cookie,'campusNums':this.campusNums}).then(res => {
+        this.cols = res.data.cols
         this.dataList = res.data.dataList
       })
     },
@@ -137,15 +108,13 @@ export default {
         // Set worksheet mame
         var ws = workbook.sheet(0);
         ws.name(sheetName);
-        var header = ["stuTypeName"];
-        var headerExcel = ["学生类型"];
+        var header = ["campusName","collegeName"];
+        var headerExcel = ["校区","学院"];
         var i;
         for(i = 0; i < this.cols.length;i++) {
           header.push(this.cols[i].prop);
           headerExcel.push(this.cols[i].label);
         }
-        header.push("sum");
-        headerExcel.push("合计");
         // set header
         ws.cell("A1").value([headerExcel]);
         // create data from array of json object to array of array

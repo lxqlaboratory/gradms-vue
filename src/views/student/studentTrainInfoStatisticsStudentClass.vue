@@ -1,16 +1,15 @@
 <template>
   <div class="app-container">
     <div class="query-container">
-      学院
-      <el-select v-model="collegeIds" multiple placeholder="请选择学院" style="width: 15%;">
+      <el-select v-model="collegeIds" multiple placeholder="请选择学院" style="width: 70%;">
         <el-option
           v-for="item in collegeList"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
+          :key="item.collegeId"
+          :label="item.collegeName"
+          :value="item.collegeId"
         />
       </el-select>
-      <el-button type="primary" @click="fetchData">查询</el-button>
+      <el-button type="primary" @click="doQuery">查询</el-button>
     </div>
     <div class="table-container">
       <el-table :data="dataList" style="width: 100%">
@@ -90,8 +89,14 @@ export default {
   },
   methods: {
     fetchData() {
-      studentTrainInfoStatisticsStudentClass({ 'session': document.cookie,'collegeIds':this.collegeIds}).then(res => {
+      studentTrainInfoStatisticsStudentClass({ 'session': document.cookie}).then(res => {
         this.collegeList = res.data.collegeList
+        this.cols = res.data.cols
+        this.dataList = res.data.dataList
+      })
+    },
+    doQuery() {
+      studentTrainInfoStatisticsStudentClass({ 'session': document.cookie,'collegeIds':this.collegeIds}).then(res => {
         this.cols = res.data.cols
         this.dataList = res.data.dataList
       })
@@ -112,8 +117,8 @@ export default {
         // Set worksheet mame
         var ws = workbook.sheet(0);
         ws.name(sheetName);
-        var header = ["stuTypeName"];
-        var headerExcel = ["学生类型"];
+        var header = ["collegeNum","collegeName","grade"];
+        var headerExcel = ["学院编号","学院名称","年级"];
         var i;
         for(i = 0; i < this.cols.length;i++) {
           header.push(this.cols[i].prop);
