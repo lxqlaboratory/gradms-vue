@@ -20,7 +20,7 @@
         />
       </el-select>
       年度
-      <el-select v-model="year" placeholder="年度" style="width: 5%;">
+      <el-select v-model="years" multiple placeholder="年度" style="width: 20%;">
         <el-option
           v-for="item in yearList"
           :key="item.value"
@@ -84,12 +84,12 @@
            </template>
          </el-table-column>
         <el-table-column
-            label="身份证号"
+            label="证件号码"
             align="center"
             color="black"
           >
            <template slot-scope="scope">
-             {{ scope.row.perIdCard }}
+             {{ scope.row.perIdCard}}
            </template>
          </el-table-column>
         <el-table-column
@@ -98,9 +98,10 @@
             color="black"
           >
            <template slot-scope="scope">
-             {{ scope.row.zxjh }}
+             {{ scope.row.zxjh}}
            </template>
          </el-table-column>
+         
          <el-table-column
             v-for="col in cols"
             :prop="col.prop" :label="col.label" 
@@ -139,7 +140,7 @@ export default {
   data() {
     return {
       statisType:'1',
-      year:'',
+      years:[],
       perNum:'',
       perName:'',
       rewardCode:[],
@@ -164,7 +165,6 @@ export default {
   methods: {
     fetchData() {
       achievementRewardHistorySummaryInit({ 'session': document.cookie }).then(res => {
-        this.year = res.data.year
         this.rewardCodeList = res.data.rewardCodeList
         this.yearList = res.data.yearList
         this.cols = res.data.cols
@@ -172,7 +172,7 @@ export default {
       })
     },
     doQuery() {
-      achievementRewardHistorySummaryQuery({ 'session': document.cookie, 'statisType':this.statisType, 'rewardCode':this.rewardCode,'year':this.year,
+      achievementRewardHistorySummaryQuery({ 'session': document.cookie, 'statisType':this.statisType, 'rewardCode':this.rewardCode,'years':this.years,
       'perNum': this.perNum, 'perName': this.perName
       }).then(res => {
         this.cols = res.data.cols
@@ -196,7 +196,7 @@ export default {
         var ws = workbook.sheet(0);
         ws.name(sheetName);
         var header = ["perNum","perName","collegeName","stuTypeName","perIdCard","zxjh"];
-        var headerExcel = ["学号","姓名","学院", "学生类型","身份证号","专项计划"];
+        var headerExcel = ["学号","姓名","学院", "学生类型","证件号码","专项计划"];
         var i;
         for(i = 0; i < this.cols.length;i++) {
           header.push(this.cols[i].prop);
