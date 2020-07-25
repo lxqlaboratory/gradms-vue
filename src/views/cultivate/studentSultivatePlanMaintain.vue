@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div v-show="show">
-      <div v-if="showprompt" style="color: red;text-align: center">您没有培养计划！</div>
+      <div v-if="showprompt" style="color: red;text-align: center">{{prompt}}</div>
       <div v-else>
     <table  class="headline">
       <tr><td><div style="color: red;text-align: left">培养环节</div></td></tr>
