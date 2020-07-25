@@ -1,8 +1,11 @@
 <template>
   <div class="app-container">
     <div v-show="show">
-      <div v-if="showprompt" style="color: red;text-align: center">{{prompt}}</div>
-      <div v-else>
+      <table  class="headline">
+        <tr><td><div style="color: red;text-align: left">{{prompt}}</div></td></tr>
+      </table>
+    </div>
+    <div v-if="isCanEdit">
     <table  class="headline">
       <tr><td><div style="color: red;text-align: left">培养环节</div></td></tr>
     </table>
@@ -26,11 +29,13 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="形式"
+          label="培养环节名称"
           align="center"
           color="black"
         >
-
+          <template slot-scope="scope">
+            {{ scope.row.sessionName }}
+          </template>
         </el-table-column>
         <el-table-column
           label="学分"
@@ -38,23 +43,25 @@
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.credit }}
+            {{ scope.row.sessionCredit }}
           </template>
         </el-table-column>
         <el-table-column
-          label="描述"
+          label="要求"
           align="center"
           color="black"
         >
+          <template slot-scope="scope">
+            {{ scope.row.sessionContent }}
+          </template>
 
         </el-table-column>
-
       </el-table>
     </div>
 
 
     <table  class="headline">
-      <tr><td><div style="color: red;text-align: left">{{ message }}</div></td></tr>
+      <tr><td><div style="color: red;text-align: left">培养计划课程</div></td></tr>
     </table>
     <div  class="table-container">
       <el-table
@@ -90,7 +97,6 @@
           label="课程号"
           align="center"
           color="black"
-          width="80"
         >
           <template slot-scope="scope">
             {{ scope.row.courseNum }}
@@ -109,7 +115,6 @@
           label="学分"
           align="center"
           color="black"
-          width="50"
         >
           <template slot-scope="scope">
             {{ scope.row.credit }}
@@ -137,7 +142,6 @@
           label="是否公选课"
           align="center"
           color="black"
-          width="100"
         >
           <template slot-scope="scope">
             {{ scope.row.courseAttribute }}
@@ -147,10 +151,27 @@
           label="教学任务"
           align="center"
           color="black"
-          width="100"
         >
           <template slot-scope="scope">
             {{ scope.row.courseIndex }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="选课学期"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.selectTermName.zh }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="开课学院"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.taskCollegeName }}
           </template>
         </el-table-column>
         <el-table-column
@@ -199,7 +220,6 @@
           label=""
           align="center"
           color="black"
-          width="80"
         >
           <template slot-scope="scope">
             {{ scope.row.courseNum }}
@@ -218,7 +238,6 @@
           label=""
           align="center"
           color="black"
-          width="50"
         >
           <template slot-scope="scope">
             {{ scope.row.credit }}
@@ -246,7 +265,6 @@
           label=""
           align="center"
           color="black"
-          width="100"
         >
           <template slot-scope="scope">
             {{ scope.row.courseAttribute }}
@@ -256,10 +274,27 @@
           label=""
           align="center"
           color="black"
-          width="100"
         >
           <template slot-scope="scope">
             {{ scope.row.courseIndex }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label=""
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.selectTermName.zh }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label=""
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.taskCollegeName }}
           </template>
         </el-table-column>
         <el-table-column
@@ -308,7 +343,6 @@
           label=""
           align="center"
           color="black"
-          width="80"
         >
           <template slot-scope="scope">
             {{ scope.row.courseNum }}
@@ -327,7 +361,6 @@
           label=""
           align="center"
           color="black"
-          width="50"
         >
           <template slot-scope="scope">
             {{ scope.row.credit }}
@@ -355,7 +388,6 @@
           label=""
           align="center"
           color="black"
-          width="100"
         >
           <template slot-scope="scope">
             {{ scope.row.courseAttribute }}
@@ -365,10 +397,28 @@
           label=""
           align="center"
           color="black"
-          width="100"
         >
           <template slot-scope="scope">
             {{ scope.row.courseIndex }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label=""
+          align="center"
+          color="black"
+          width="100"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.selectTermName.zh }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label=""
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.taskCollegeName }}
           </template>
         </el-table-column>
         <el-table-column
@@ -423,7 +473,6 @@
           label="课程号"
           align="center"
           color="black"
-          width="80"
         >
           <template slot-scope="scope">
             {{ scope.row.courseNum }}
@@ -442,7 +491,6 @@
           label="学分"
           align="center"
           color="black"
-          width="50"
         >
           <template slot-scope="scope">
             {{ scope.row.credit }}
@@ -470,10 +518,18 @@
           label="是否公选课"
           align="center"
           color="black"
-          width="100"
         >
           <template slot-scope="scope">
             {{ scope.row.isPubSelectCourse.zh }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="要求"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.demand }}
           </template>
         </el-table-column>
         <el-table-column
@@ -522,7 +578,6 @@
           label="课程号"
           align="center"
           color="black"
-          width="80"
         >
           <template slot-scope="scope">
             {{ scope.row.courseNum }}
@@ -541,7 +596,6 @@
           label="学分"
           align="center"
           color="black"
-          width="50"
         >
           <template slot-scope="scope">
             {{ scope.row.credit }}
@@ -569,10 +623,18 @@
           label="是否公选课"
           align="center"
           color="black"
-          width="100"
         >
           <template slot-scope="scope">
             {{ scope.row.isPubSelectCourse.zh }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="要求"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.demand }}
           </template>
         </el-table-column>
         <el-table-column
@@ -621,7 +683,6 @@
           label="课程号"
           align="center"
           color="black"
-          width="80"
         >
           <template slot-scope="scope">
             {{ scope.row.courseNum }}
@@ -640,7 +701,6 @@
           label="学分"
           align="center"
           color="black"
-          width="50"
         >
           <template slot-scope="scope">
             {{ scope.row.credit }}
@@ -668,10 +728,18 @@
           label="是否公选课"
           align="center"
           color="black"
-          width="100"
         >
           <template slot-scope="scope">
             {{ scope.row.isPubSelectCourse.zh }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="要求"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.demand }}
           </template>
         </el-table-column>
         <el-table-column
@@ -685,9 +753,6 @@
         </el-table-column>
       </el-table>
     </div>
-    <div v-show="tip" style="color: red;text-align: center">制定培养计划完毕，确保”培养计划课程“栏中课程无误后，无需提交，需联系导师审核通过后方可打印！</div>
-
-      </div>
     </div>
   </div>
 </template>
@@ -702,10 +767,10 @@ export default {
   data() {
     return {
         serverAddres:'',
-        message:'',
+        courseMessage:'',
         show: false,
+        isCanEdit:true,
         prompt: '',
-        showprompt: true,
         planCourseList1: [],
         planCourseList2: [],
         planCourseList3: [],
@@ -731,18 +796,16 @@ export default {
           window.location.href = this.serverAddres+ '/cultivatenew/newCultivate_selectCourseShow.do'
         }else {
           this.show = true
+          this.isCanEdit =res.data.isCanEdit
           this.prompt = res.data.prompt
-          if(this.prompt.length === 0){
-            this.showprompt = false
-          }
-          this.planCourseList1 = res.data.planData.CourseList11
-          this.planCourseList2 = res.data.planData.CourseList12
-          this.planCourseList3 = res.data.planData.CourseList13
-          this.schemeCourseList1 = res.data.schemeData.requiredList
-          this.schemeCourseList2 = res.data.schemeData.optionalList
-          this.schemeCourseList3 = res.data.schemeData.buxiuList
-          this.message = res.data.planData.message
           this.sessionList = res.data.sessionList
+          this.courseMessage = res.data.courseMessage
+          this.planCourseList1 = res.data.planCourseList1
+          this.planCourseList2 = res.data.planCourseList2
+          this.planCourseList3 = res.data.planCourseList3
+          this.schemeCourseList1 = res.data.schemeCourseList1
+          this.schemeCourseList2 = res.data.schemeCourseList2
+          this.schemeCourseList3 = res.data.schemeCourseList3
         }
       })
     },
