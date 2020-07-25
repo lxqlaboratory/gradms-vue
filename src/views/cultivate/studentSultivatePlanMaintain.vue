@@ -697,6 +697,7 @@ export default {
   name: 'StudentSultivatePlanMaintainVue',
   data() {
     return {
+        serverAddres:'',
         message:'',
         planCourseList1: [],
         planCourseList2: [],
@@ -704,7 +705,7 @@ export default {
         schemeCourseList1: [],
         schemeCourseList2: [],
         schemeCourseList3: [],
-        planState:'',
+        planState:0,
         sessionList: '',
         tip: true
     }
@@ -715,18 +716,21 @@ export default {
   methods: {
 
     fetchData() {
+      this.serverAddres = this.GLOBAL.servicePort
       newPlanSelectCourse({ 'session': document.cookie }).then(res => {
-        this.planCourseList1 = res.data.planData.CourseList11
-        this.planCourseList2 = res.data.planData.CourseList12
-        this.planCourseList3 = res.data.planData.CourseList13
-        this.schemeCourseList1 = res.data.schemeData.requiredList
-        this.schemeCourseList2 = res.data.schemeData.optionalList
-        this.schemeCourseList3 = res.data.schemeData.buxiuList
-        this.message = res.data.planData.message
         this.planState =  res.data.planState
-        this.sessionList = res.data.sessionList
-        if(this.planState === '1'){
-          this.$router.push({ path: 'cultivatenew/newCultivate_selectCourseShow.do'})
+        console.log(this.planState)
+        if(this.planState === 1){
+          this.$router.push({ path: this.serverAddres+'/cultivatenew/newCultivate_selectCourseShow.do'})
+        }else {
+          this.planCourseList1 = res.data.planData.CourseList11
+          this.planCourseList2 = res.data.planData.CourseList12
+          this.planCourseList3 = res.data.planData.CourseList13
+          this.schemeCourseList1 = res.data.schemeData.requiredList
+          this.schemeCourseList2 = res.data.schemeData.optionalList
+          this.schemeCourseList3 = res.data.schemeData.buxiuList
+          this.message = res.data.planData.message
+          this.sessionList = res.data.sessionList
         }
       })
     },
