@@ -1,7 +1,8 @@
 <template>
   <div class="app-container">
-
-
+    <div v-show="show">
+      <div v-if="showprompt" style="color: red;text-align: center">您没有培养计划！</div>
+      <div v-else>
     <table  class="headline">
       <tr><td><div style="color: red;text-align: left">培养环节</div></td></tr>
     </table>
@@ -685,6 +686,9 @@
       </el-table>
     </div>
     <div v-show="tip" style="color: red;text-align: center">制定培养计划完毕，确保”培养计划课程“栏中课程无误后，无需提交，需联系导师审核通过后方可打印！</div>
+
+      </div>
+    </div>
   </div>
 </template>
 
@@ -699,6 +703,9 @@ export default {
     return {
         serverAddres:'',
         message:'',
+        show: false,
+        prompt: '',
+        showprompt: true,
         planCourseList1: [],
         planCourseList2: [],
         planCourseList3: [],
@@ -719,10 +726,15 @@ export default {
       this.serverAddres = this.GLOBAL.servicePort
       newPlanSelectCourse({ 'session': document.cookie }).then(res => {
         this.planState =  res.data.planState
-        console.log(this.planState)
         if(this.planState === 1){
-          this.$router.push({ path: this.serverAddres+'/cultivatenew/newCultivate_selectCourseShow.do'})
+          this.show = false
+          window.location.href = this.serverAddres+ '/cultivatenew/newCultivate_selectCourseShow.do'
         }else {
+          this.show = true
+          this.prompt = res.data.prompt
+          if(this.prompt.length === 0){
+            this.showprompt = false
+          }
           this.planCourseList1 = res.data.planData.CourseList11
           this.planCourseList2 = res.data.planData.CourseList12
           this.planCourseList3 = res.data.planData.CourseList13
