@@ -308,7 +308,7 @@
         </el-table-column>
       </el-table>
     </div>
-    <div  class="table-container">
+    <div  class="table-container" v-show="showplanCourseList3">
       <el-table
         :show-header="false"
         :data="planCourseList3"
@@ -771,6 +771,7 @@ export default {
         show: false,
         isCanEdit:true,
         prompt: '',
+        showplanCourseList3: true,
         planCourseList1: [],
         planCourseList2: [],
         planCourseList3: [],
@@ -803,6 +804,11 @@ export default {
           this.planCourseList1 = res.data.planCourseList1
           this.planCourseList2 = res.data.planCourseList2
           this.planCourseList3 = res.data.planCourseList3
+          if(this.planCourseList3.length === 0){
+            this.showplanCourseList3 = false
+          }else {
+            this.showplanCourseList3 = true
+          }
           this.schemeCourseList1 = res.data.schemeCourseList1
           this.schemeCourseList2 = res.data.schemeCourseList2
           this.schemeCourseList3 = res.data.schemeCourseList3
