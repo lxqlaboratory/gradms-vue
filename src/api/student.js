@@ -29,9 +29,16 @@ export function studentCetScoreMaintainSubmit(data) {
     data
   })
 }
-export function englishScoreMaintenanceInit(data) {
+export function collegeCetScoreMaintain(data) {
   return request({
-    url: '/api/student/englishScoreMaintenanceInit',
+    url: '/api/student/collegeCetScoreMaintain',
+    method: 'POST',
+    data
+  })
+}
+export function collegeCetScoreMaintainSubmit(data) {
+  return request({
+    url: '/api/student/collegeCetScoreMaintainSubmit',
     method: 'POST',
     data
   })

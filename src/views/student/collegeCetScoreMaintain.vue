@@ -1,135 +1,121 @@
 <template>
   <div class="app-container">
-    <div style="margin-left: 30px">
-      <table class="content" style="width: 1000px;margin: 15px auto;">
-        <tr>
-          <td colspan="1">专业</td>
-          <td colspan="1">
-            <el-select v-model="queryList.majorId" placeholder="请选择">
-              <el-option
-                v-for="item in majorList"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
-            </el-select>
-          </td>
-          <td colspan="1">学号</td>
-          <td colspan="1">
-            <el-input v-model="queryList.perNum" />
-          </td>
-          <td colspan="1">姓名</td>
-          <td colspan="3">
-            <el-input v-model="queryList.perName" />
-          </td>
-        </tr>
-      </table>
-      <div align="center">
-        <el-button type="primary" @click="select()">查询</el-button>
+      <div class="query-container" >
+        专业
+        <el-select v-model.number="majorId"  placeholder="请选择专业"  style="width: 15%;">
+          <el-option
+            v-for="item in majorList"
+            :key="item.majorId"
+            :label="item.majorName"
+            :value="item.majorId">
+          </el-option>
+        </el-select>
+        学号
+         <el-input v-model="perNum" placeholder="请输入学号"  style="width: 15%;" />
+        姓名
+        <el-input v-model="perNum" placeholder="请输入姓名"  style="width: 15%;" />
+        <el-button  type="primary" @click="doQuery()"  >查询</el-button>
       </div>
-      <div>
-        <div class="table-container">
-          <el-table
-            :data="datalist"
-            border
-            style="width: 100%;"
-            size="mini"
-          >
-            <el-table-column
-              label="序号"
-              fixed="left"
-              width="70"
-              align="center"
-              color="black"
-            >
-              <template slot-scope="scope">
-                {{ scope.$index+1 }}
-              </template>
-            </el-table-column>
-            <el-table-column
-              label="学号"
-              align="center"
-              color="black"
-            >
-              <template slot-scope="scope">
-                {{ scope.row.perNum }}
-              </template>
-            </el-table-column>
-            <el-table-column
-              label="姓名"
-              align="center"
-              color="black"
-            >
-              <template slot-scope="scope">
-                {{ scope.row.perName }}
-              </template>
-            </el-table-column>
-            <el-table-column
-              label="学生类型"
-              align="center"
-              color="black"
-            >
-              <template slot-scope="scope">
-                {{ scope.row.stuTypeName }}
-              </template>
-            </el-table-column>
-            <el-table-column
-              label="专业"
-              align="center"
-              color="black"
-            >
-              <template slot-scope="scope">
-                {{ scope.row.majorName }}
-              </template>
-            </el-table-column>
-            <el-table-column
-              label="四级成绩"
-              align="center"
-              color="black"
-            >
-              <template slot-scope="scope">
-                {{ scope.row.cet4 }}
-              </template>
-            </el-table-column>
-            <el-table-column
-              label="六级成绩"
-              align="center"
-              color="black"
-            >
-              <template slot-scope="scope">
-                {{ scope.row.cet6 }}
-              </template>
-            </el-table-column>
-            <el-table-column
-              label="修改时间"
-              align="center"
-              color="black"
-            >
-              <template slot-scope="scope">
-                {{ scope.row.cetCheckTime }}
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
-      </div>
+    <div class="table-container">
+      <el-table
+        :data="scoreList"
+        border
+        ref="multipleTable"
+        @selection-change="selectionChange">
+        style="width: 100%;"
+        size="mini"
+      >
+      <el-table-column
+        type="selection"
+        width="55">
+      </el-table-column>
+        <el-table-column
+          label="序号"
+          fixed="left"
+          width="50"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.$index+1 }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="学号"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.perNum }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="姓名"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.perNum }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="专业"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.majorName }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="四级成绩"
+          align="center"
+          color="black"
+          width= "120"
+        >
+          <template slot-scope="scope">
+             <el-input v-model.number="scope.row.cet4"   style="width: 95%;" />
+          </template>
+        </el-table-column>
+       <el-table-column
+          label="六级成绩"
+          align="center"
+          color="black"
+          width= "120"
+        >
+          <template slot-scope="scope">
+             <el-input v-model.number="scope.row.cet6"   style="width: 95%;" />
+          </template>
+        </el-table-column>
+       <el-table-column
+          label="审核时间"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.cetCheckTime }}
+          </template>
+      </el-table-column>
+    </el-table>
     </div>
+    <div align="center">
+      <el-button  type="primary" @click="doSubmit" >提交保存</el-button>
   </div>
 </template>
 
 <script>
 import { collegeCetScoreMaintain } from '@/api/student'
+import { collegeCetScoreMaintainSubmit } from '@/api/student'
 export default {
   data() {
     return {
-      queryList: {
-        majorId: '',
-        perNum: '',
-        perName: ''
-      },
+      majorId: -1,
+      perNum: '',
+      perName: '',
+      multipleSelection: [],
       majorList: [],
-      datalist: [],
-      flag: ''
-    }
+      scoreList: [],
+     }
   },
   created() {
     this.fetchData()
@@ -138,13 +124,38 @@ export default {
     fetchData() {
       collegeCetScoreMaintain({ 'session': document.cookie }).then(res => {
         this.majorList = res.data.majorList
+        this.scoreList = res.data.scoreList
       })
     },
-    select() {
-      collegeCetScoreMaintain({ 'session': document.cookie, 'flag': '1', 'queryList': this.queryList }).then(res => {
-        this.datalist = res.data.scoreList
+    doQuery() {
+      collegeCetScoreMaintain({ 'session': document.cookie, 'majorId': this.majorId, 'perNum': this.perNum, 'perName':this.perName}).then(res => {
+        this.scoreList = res.data.scoreList
       })
-    }
+    },
+    selectionChange(val) {
+        this.multipleSelection = val;
+    },
+    doSubmit(){
+      console.log(this.multipleSelection)
+      if(this.multipleSelection === 'undefined' || this.multipleSelection.length=== 0){
+        this.$message({
+          message: '选择不能为空',
+          type: 'success'
+        });
+      }else{
+        collegeCetScoreMaintainSubmit({ 'session': document.cookie, 'scoreList': this.multipleSelection}).then(res => {
+          if (res.code === '0') {
+            this.$message({
+              message: '提交成功',
+              type: 'success',
+              offset: '10'
+            })
+            this.doQuery();
+          }
+        })
+      }
+    },  
+
   }
 }
 </script>

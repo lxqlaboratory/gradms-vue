@@ -22,9 +22,9 @@
           <el-input v-model.number="cet6" placeholder="请输入六级成绩" />
         </td>
       </tr>
-      <tr style="font-size: 24px;font-weight: bold;height: 32px">
-        <td colspan="4">
-          <el-button type="primary" size="mini" @click="doSubmit()">修改</el-button>
+      <tr>
+        <td colspan="4"  style="font-size: 24px;font-weight: bold;height: 32px;text-align:center;" >
+          <el-button type="primary" size="mini" @click="doSubmit()">提交</el-button>
         </td>
       </tr>
     </table>
