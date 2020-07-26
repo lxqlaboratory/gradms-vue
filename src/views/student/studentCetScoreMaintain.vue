@@ -1,6 +1,6 @@
 <template>
   <div v-if="isCanEdit" class="app-container">
-    <table class="table-container" align="left">
+    <table class="table-container" >
       <tr>
         <td style="font-size: 16px;color: black;text-align:left; " colspan="4">
           <h4 style="color: red;text-align: left;font-weight: bold">提示:</h4>
@@ -30,7 +30,7 @@
     </table>
   </div>
   <div v-else class="app-container">
-    <table class="table-container" align="left">
+    <table class="table-container" >
       <tr>
         <td style="font-size: 16px;color: black;text-align:left; " colspan="1">
           <h4 style="color: red;text-align: left;font-weight: bold">{{prompt}}</h4>
@@ -64,9 +64,9 @@ export default {
         this.prompt = res.data.prompt
         this.cet4 = res.data.cet4
         this.cet6 = res.data.cet6
-        if(this.prompt === '') 
+        if(this.prompt === '')
           this.isCanEdit = true;
-        else 
+        else
           this.isCanEdit = false;
       })
     },
