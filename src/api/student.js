@@ -15,23 +15,16 @@ export function studentBaseInfoMaintain(data) {
     data
   })
 }
-export function getCetScore(data) {
+export function studentCetScoreMaintain(data) {
   return request({
-    url: '/api/student/getCetScore',
+    url: '/api/student/studentCetScoreMaintain',
     method: 'POST',
     data
   })
 }
-export function getCetInitInfo(data) {
+export function studentCetScoreMaintainSubmit(data) {
   return request({
-    url: '/api/student/getCetInitInfo',
-    method: 'POST',
-    data
-  })
-}
-export function updateCetScore(data) {
-  return request({
-    url: '/api/student/updateCetScore',
+    url: '/api/student/studentCetScoreMaintainSubmit',
     method: 'POST',
     data
   })

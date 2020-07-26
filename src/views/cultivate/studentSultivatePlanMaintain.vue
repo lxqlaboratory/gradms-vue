@@ -31,6 +31,7 @@
         <el-table-column
           label="培养环节名称"
           align="center"
+          width="120"
           color="black"
         >
           <template slot-scope="scope">
@@ -41,6 +42,7 @@
           label="学分"
           align="center"
           color="black"
+          width="50"
         >
           <template slot-scope="scope">
             {{ scope.row.sessionCredit }}
@@ -114,6 +116,7 @@
         <el-table-column
           label="学分"
           align="center"
+          width="50"
           color="black"
         >
           <template slot-scope="scope">
@@ -177,10 +180,11 @@
         <el-table-column
           label="操作"
           align="center"
+          width="80"
           color="black"
         >
           <template slot-scope="scope">
-            <el-button type="primary" size="mini" @click="delete1(scope.row.planCourseId)">删除</el-button>
+            <el-button type="primary" size="mini" @click="deleteCourse(scope.row.planCourseId)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -237,6 +241,7 @@
         <el-table-column
           label=""
           align="center"
+          width="50"
           color="black"
         >
           <template slot-scope="scope">
@@ -300,10 +305,11 @@
         <el-table-column
           label=""
           align="center"
+          width="80"
           color="black"
         >
           <template slot-scope="scope">
-            <el-button type="primary" size="mini" @click="delete1(scope.row.planCourseId)">删除</el-button>
+            <el-button type="primary" size="mini" @click="deleteCourse(scope.row.planCourseId)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -360,6 +366,7 @@
         <el-table-column
           label=""
           align="center"
+          width="50"
           color="black"
         >
           <template slot-scope="scope">
@@ -406,7 +413,6 @@
           label=""
           align="center"
           color="black"
-          width="100"
         >
           <template slot-scope="scope">
             {{ scope.row.selectTermName.zh }}
@@ -425,9 +431,10 @@
           label=""
           align="center"
           color="black"
+          width="80"
         >
           <template slot-scope="scope">
-            <el-button type="primary" size="mini" @click="delete1(scope.row.planCourseId)">删除</el-button>
+            <el-button type="primary" size="mini" @click="deleteCourse(scope.row.planCourseId)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -536,9 +543,10 @@
           label="操作"
           align="center"
           color="black"
+          width="80"
         >
           <template slot-scope="scope">
-            <el-button type="primary" size="mini" @click="add1(scope.row.courseNum)">增加</el-button>
+            <el-button type="primary" size="mini" @click="addCourse(scope.row.courseNum)">增加</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -640,10 +648,11 @@
         <el-table-column
           label="操作"
           align="center"
+          width="80"
           color="black"
         >
           <template slot-scope="scope">
-            <el-button type="primary" size="mini" @click="add1(scope.row.courseNum)">增加</el-button>
+            <el-button type="primary" size="mini" @click="addCourse(scope.row.courseNum)">增加</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -745,10 +754,11 @@
         <el-table-column
           label="操作"
           align="center"
+          width="80"
           color="black"
         >
           <template slot-scope="scope">
-            <el-button type="primary" size="mini" @click="add1(scope.row.courseNum)">增加</el-button>
+            <el-button type="primary" size="mini" @click="addCourse(scope.row.courseNum)">增加</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -815,8 +825,8 @@ export default {
         }
       })
     },
-    delete1(planCourseId) {
-      studentSultivatePlanCourseDelete({ 'session': document.cookie, 'form': this.form, 'cultPlanId': planCourseId
+    deleteCourse(planCourseId) {
+      studentSultivatePlanCourseDelete({ 'session': document.cookie, 'form': this.form, 'planCourseId': planCourseId
       }).then(res => {
         if (res.code === '1') {
           this.$message({
@@ -835,7 +845,7 @@ export default {
         this.fetchData()
       })
     },
-    add1(courseNum) {
+    addCourse(courseNum) {
       studentSultivatePlanCourseAdd({ 'session': document.cookie, 'form': this.form, 'courseNum': courseNum
       }).then(res => {
         if (res.code === '0') {

@@ -1,8 +1,8 @@
 <template>
-  <div v-show="showTable" class="app-container">
-    <table class="content" align="left">
+  <div v-if="isCanEdit" class="app-container">
+    <table class="table-container" align="left">
       <tr>
-        <td style="font-size: 16px;color: black;text-align:left; " colspan="2">
+        <td style="font-size: 16px;color: black;text-align:left; " colspan="4">
           <h4 style="color: red;text-align: left;font-weight: bold">提示:</h4>
           1.英语分级教学文件请见研究生院网站。<br><br>
           2.仅面向全体学术学位硕士研究生。<br><br>
@@ -14,56 +14,64 @@
       </tr>
       <tr style="font-size: 24px;font-weight: bold;height: 32px">
         <td colspan="1">四级成绩</td>
-        <td colspan="1">六级成绩</td>
-      </tr>
-      <tr>
         <td colspan="1">
-          <el-input v-model="cet4" placeholder="请输入四级成绩" />
+          <el-input v-model.number="cet4" placeholder="请输入四级成绩" />
         </td>
+        <td colspan="1">六级成绩</td>
         <td colspan="1">
-          <el-input v-model="cet6" placeholder="请输入六级成绩" />
+          <el-input v-model.number="cet6" placeholder="请输入六级成绩" />
+        </td>
+      </tr>
+      <tr style="font-size: 24px;font-weight: bold;height: 32px">
+        <td colspan="4">
+          <el-button type="primary" size="mini" @click="doSubmit()">修改</el-button>
         </td>
       </tr>
     </table>
-    <div align="center" style="margin: 15px auto">
-      <el-button type="primary" size="mini" @click="update1()">修改</el-button>
-    </div>
   </div>
+  <div v-else class="app-container">
+    <table class="table-container" align="left">
+      <tr>
+        <td style="font-size: 16px;color: black;text-align:left; " colspan="1">
+          <h4 style="color: red;text-align: left;font-weight: bold">{{prompt}}</h4>
+        </td>
+      </tr>
+    </table>
+  </div>
+
 </template>
 
 <script>
-import { updateCetScore } from '@/api/student'
-import { getCetInitInfo } from '@/api/student'
+import { studentCetScoreMaintain } from '@/api/student'
+import { studentCetScoreMaintainSubmit } from '@/api/student'
 import { getCetScore } from '@/api/student'
 export default {
+  name: 'studentCetScoreMaintain',
   data() {
     return {
-      showTable: true,
-      cet4: '',
-      cet6: ''
+      isCanEdit:false,
+      prompt:'',
+      cet4: 0,
+      cet6: 0
     }
   },
   created() {
-    this.judge()
+    this.fetchData()
   },
   methods: {
-    judge() {
-      getCetInitInfo({ 'session': document.cookie }).then(res => {
-        if (res.code === '1') {
-          this.$message({
-            message: res.msg,
-            type: 'error',
-            offset: '10'
-          })
-          this.showTable = false
-        }
-        if (res.code === '0') {
-          this.fetchData()
-        }
+    fetchData() {
+      studentCetScoreMaintain({ 'session': document.cookie }).then(res => {
+        this.prompt = res.data.prompt
+        this.cet4 = res.data.cet4
+        this.cet6 = res.data.cet6
+        if(this.prompt === '') 
+          this.isCanEdit = true;
+        else 
+          this.isCanEdit = false;
       })
     },
-    update1() {
-      updateCetScore({ 'session': document.cookie, 'cet4': this.cet4, 'cet6': this.cet6 }).then(res => {
+    doSubmit() {
+      studentCetScoreMaintainSubmit({ 'session': document.cookie, 'cet4': this.cet4, 'cet6': this.cet6 }).then(res => {
         if (res.code === '1') {
           this.$message({
             message: res.msg,
@@ -78,24 +86,8 @@ export default {
             offset: '10'
           })
         }
-        this.fetchData()
       })
     },
-    fetchData() {
-      getCetScore({ 'session': document.cookie }).then(res => {
-        getCetInitInfo({ 'session': document.cookie }).then(res => {
-          if (res.code === '1') {
-            this.$message({
-              message: res.msg,
-              type: 'error',
-              offset: '10'
-            })
-          }
-        })
-        this.cet4 = res.data.data[0][0]
-        this.cet6 = res.data.data[0][1]
-      })
-    }
   }
 }
 </script>

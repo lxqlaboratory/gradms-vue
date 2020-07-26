@@ -490,13 +490,13 @@ export const constantRoutes = [
         path: 'studentCetScoreMaintain',
         name: 'studentCetScoreMaintain',
         component: () => import('@/views/student/studentCetScoreMaintain'),
-        meta: { title: '学生基本信息维护' }
+        meta: { title: '学术型硕士英语分级' }
       },
       {
         path: 'collegeCetScoreMaintain',
         name: 'collegeCetScoreMaintain',
         component: () => import('@/views/student/collegeCetScoreMaintain'),
-        meta: { title: '学生基本信息维护' }
+        meta: { title: '学生四六级成绩维护' }
       },
       {
         path: 'instructorStudentQuery',
