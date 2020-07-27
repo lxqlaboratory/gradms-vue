@@ -134,6 +134,7 @@
         </el-table-column>
     </el-table>
   </div>
+  </div>
 </template>
 
 <script>
@@ -170,7 +171,7 @@ export default {
       })
     },
     doQuery() {
-      newCultivateCourseQuery({ 'session': document.cookie, 
+      newCultivateCourseQuery({ 'session': document.cookie,
       'collegeId': this.collegeId,'courseAttribute':this.courseAttribute,'courseType':this.courseType,'courseNum':this.courseNum,'courseName':this.courseName }).then(res => {
           this.dataList = res.data
       })

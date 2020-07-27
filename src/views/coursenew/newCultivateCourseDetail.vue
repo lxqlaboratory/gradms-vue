@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <table class="content"   >
-        <tr>
+        <tr style="height: 40px">
           <td colspan="1">课程号</td>
           <td colspan="1">
             {{ detileForm.courseNum }}
@@ -15,7 +15,7 @@
             {{ detileForm.courseAttribute }}
           </td>
         </tr>
-        <tr>
+        <tr style="height: 40px">
           <td colspan="1">课程名</td>
           <td colspan="1">
             {{ detileForm.courseName }}
@@ -29,7 +29,7 @@
             {{ detileForm.collegeName }}
           </td>
         </tr>
-        <tr>
+        <tr style="height: 40px">
           <td colspan="1">开课学期</td>
           <td colspan="1">
             {{ detileForm.termCode }}
@@ -43,7 +43,7 @@
             {{ detileForm.credit }}
           </td>
         </tr>
-        <tr>
+        <tr style="height: 40px">
           <td colspan="1">讲课学时</td>
           <td colspan="1">
             {{ detileForm.teachingHour }}
@@ -57,7 +57,7 @@
             {{ detileForm.onComputerHour }}
           </td>
         </tr>
-        <tr>
+        <tr style="height: 40px">
           <td colspan="1">课程属性</td>
           <td colspan="1">
             {{ detileForm.courseAttribute }}
@@ -71,7 +71,7 @@
             {{ detileForm.teachLanguage }}
           </td>
         </tr>
-        <tr>
+        <tr style="height: 40px">
           <td colspan="1">学期持续数</td>
           <td colspan="1">
             {{ detileForm.termCount }}
@@ -85,7 +85,7 @@
             {{ detileForm.achieveModelNum }}
           </td>
         </tr>
-        <tr>
+        <tr style="height: 40px">
           <td colspan="1">课程负责人</td>
           <td colspan="1">
             {{ detileForm.managerName }}
@@ -99,41 +99,41 @@
             {{ detileForm.teachGroup }}
           </td>
         </tr>
-        <tr>
+        <tr style="height: 40px">
           <td colspan="1">教材</td>
           <td colspan="5">
             {{ detileForm.book }}
           </td>
         </tr>
-        <tr>
+        <tr style="height: 40px">
           <td colspan="1">教材主页</td>
           <td colspan="5" />
         </tr>
-        <tr>
+        <tr style="height: 40px">
           <td colspan="1">参考书目</td>
           <td colspan="5">
             {{ detileForm.reference }}
           </td>
         </tr>
-        <tr>
+        <tr style="height: 40px">
           <td colspan="1">预修要求</td>
           <td colspan="5">
             {{ detileForm.preparatoryDemand }}
           </td>
         </tr>
-        <tr>
+        <tr style="height: 40px">
           <td colspan="1">课程说明</td>
           <td colspan="5">
             {{ detileForm.briefIntroduction }}
           </td>
         </tr>
-        <tr>
+        <tr style="height: 40px">
           <td colspan="1" style="width: 15%">教学大纲</td>
           <td colspan="5">
             {{ detileForm.subSpec }}
           </td>
         </tr>
-        <tr>
+        <tr style="height: 40px">
           <td colspan="1">备注</td>
           <td colspan="5">
             {{ detileForm.remark }}
@@ -154,7 +154,7 @@ export default {
         remark: '',
         onComputerHour: '',
         teachingWay:'',
-        courseNum:'', 
+        courseNum:'',
         collegeName: '',
         courseType: '',
         courseName: '',
@@ -173,7 +173,7 @@ export default {
         reference: '',
         preparatoryDemand: '',
         briefIntroduction: '',
-        subSpec:'', 
+        subSpec:'',
         collegeCheckAdvice: '',
         graduateCheckAdvice: '',
         achieveModelNum: '',
