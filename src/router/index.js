@@ -51,6 +51,19 @@ export const constantRoutes = [
     },
     children: [
       {
+        path: 'newCultivateCourseQuery',
+        name: 'newCultivateCourseQuery',
+        component: () => import('@/views/coursenew/newCultivateCourseQuery'),
+        meta: { title: '课程查询' }
+      },
+      {
+        path: 'newCultivateCourseDetail',
+        name: 'newCultivateCourseDetail',
+        component: () => import('@/views/coursenew/newCultivateCourseDetail'),
+        meta: { title: '课程详情' }
+      },
+
+      {
         path: 'studentViewTeachingSchedule',
         name: 'studentViewTeachingSchedule',
         component: () => import('@/views/coursenew/studentViewTeachingSchedule'),

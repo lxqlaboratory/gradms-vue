@@ -199,16 +199,16 @@ export function collegeWorkOutTeachingScheduleTaskList(data) {
   })
 }
 
-export function allCourseQueryInit(data) {
+export function newCultivateCourseQueryInit(data) {
   return request({
-    url: '/api/coursenew/allCourseQueryInit',
+    url: '/api/coursenew/newCultivateCourseQueryInit',
     method: 'POST',
     data
   })
 }
-export function allCourseQueryDoQuery(data) {
+export function newCultivateCourseQuery(data) {
   return request({
-    url: '/api/coursenew/allCourseQueryDoQuery',
+    url: '/api/coursenew/newCultivateCourseQuery',
     method: 'POST',
     data
   })

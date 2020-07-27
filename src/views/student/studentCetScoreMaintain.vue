@@ -12,7 +12,7 @@
           6.只能填写三位以下的数字格式。<br><br>
         </td>
       </tr>
-      <tr style="font-size: 24px;font-weight: bold;height: 32px">
+      <tr >
         <td colspan="1">四级成绩</td>
         <td colspan="1">
           <el-input v-model.number="cet4" placeholder="请输入四级成绩" />
@@ -23,7 +23,7 @@
         </td>
       </tr>
       <tr>
-        <td colspan="4"  style="font-size: 24px;font-weight: bold;height: 32px;text-align:center;" >
+        <td colspan="4"  style="text-align:center;" >
           <el-button type="primary" size="mini" @click="doSubmit()">提交</el-button>
         </td>
       </tr>

@@ -2,16 +2,9 @@ import request from '@/utils/request'
 
 
 
-export function newPlanSelectCourse(data) {
-  return request({
-    url: '/api/cultivatenew/newPlanSelectCourse',
-    method: 'POST',
-    data
-  })
-}
 export function studentSultivatePlanMaintain(data) {
   return request({
-    url: '/api/cultivate/studentSultivatePlanMaintain',
+    url: '/api/cultivatenew/studentSultivatePlanMaintain',
     method: 'POST',
     data
   })
@@ -19,6 +12,13 @@ export function studentSultivatePlanMaintain(data) {
 export function studentSultivatePlanCourseAdd(data) {
   return request({
     url: '/api/cultivatenew/studentSultivatePlanCourseAdd',
+    method: 'POST',
+    data
+  })
+}
+export function studentSultivatePlanCourseAddOther(data) {
+  return request({
+    url: '/api/cultivatenew/studentSultivatePlanCourseAddOther',
     method: 'POST',
     data
   })
@@ -31,16 +31,17 @@ export function studentSultivatePlanCourseDelete(data) {
     data
   })
 }
-export function acrossCourseQueryInit(data) {
+export function studentSultivatePlanPublicCourseQuery(data) {
   return request({
-    url: '/api/cultivatenew/acrossCourseQueryInit',
+    url: '/api/cultivatenew/studentSultivatePlanPublicCourseQuery',
     method: 'POST',
     data
   })
 }
-export function publicCourseQueryDoQuery(data) {
+
+export function studentSultivatePlanaCrossCourseQuery(data) {
   return request({
-    url: '/api/cultivatenew/publicCourseQueryDoQuery',
+    url: '/api/cultivatenew/studentSultivatePlanaCrossCourseQuery',
     method: 'POST',
     data
   })
@@ -48,13 +49,6 @@ export function publicCourseQueryDoQuery(data) {
 export function newCultivateCourseDetail(data) {
   return request({
     url: '/api/cultivatenew/newCultivateCourseDetail',
-    method: 'POST',
-    data
-  })
-}
-export function newCultivateSelectPublicCourse(data) {
-  return request({
-    url: '/api/cultivatenew/newCultivateSelectPublicCourse',
     method: 'POST',
     data
   })
