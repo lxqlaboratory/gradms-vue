@@ -43,6 +43,8 @@ export function collegeCetScoreMaintainSubmit(data) {
     data
   })
 }
+
+
 export function instructorViewStudentInit(data) {
   return request({
     url: '/api/instructor/instructorViewStudentInit',

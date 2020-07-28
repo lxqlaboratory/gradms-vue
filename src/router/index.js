@@ -151,8 +151,13 @@ export const constantRoutes = [
         name: 'newCultivateSchemeInsert',
         component: () => import('@/views/cultivate/newCultivateSchemeInsert'),
         meta: { title: '培养方案插入' }
-      }
-      
+      },
+      {
+        path: 'collegeCheckCultivatePlan',
+        name: 'collegeCheckCultivatePlan',
+        component: () => import('@/views/cultivate/collegeCheckCultivatePlan'),
+        meta: { title: '学院审核培养计划' }
+      }      
     ]
   },
   {

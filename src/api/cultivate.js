@@ -86,3 +86,31 @@ export function newCultivateSchemeSubmit(data) {
   })
 }
 
+export function collegeCheckCultivatePlan(data) {
+  return request({
+    url: '/api/cultivatenew/collegeCheckCultivatePlan',
+    method: 'POST',
+    data
+  })
+}
+export function collegeCheckCultivatePlanMajor(data) {
+  return request({
+    url: '/api/cultivatenew/collegeCheckCultivatePlanMajor',
+    method: 'POST',
+    data
+  })
+}
+export function collegeCheckCultivatePlanQuery(data) {
+  return request({
+    url: '/api/cultivatenew/collegeCheckCultivatePlanQuery',
+    method: 'POST',
+    data
+  })
+}
+export function collegeCheckCultivatePlanCheck(data) {
+  return request({
+    url: '/api/cultivatenew/collegeCheckCultivatePlanCheck',
+    method: 'POST',
+    data
+  })
+}
