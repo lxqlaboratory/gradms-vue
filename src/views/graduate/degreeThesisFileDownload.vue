@@ -99,7 +99,7 @@
           align="center"
           color="black"
         >
-          <template v-if="scope.row.reviewFileId !== 0" slot-scope="scope">
+          <template v-if="scope.row.reviewFileId > 0" slot-scope="scope">
             <el-button type="primary"   >
                 <a :href="serverAddres+'/api/attachment/downloadAttachmentFile?attachId='+scope.row.reviewFileId" :download="scope.row.reviewFileName">{{scope.row.reviewFileLabel}}</a>
             </el-button>
@@ -132,7 +132,7 @@
                 <a :href="serverAddres+'/api/attachment/downloadAttachmentFile?attachId='+scope.row.degreeFileId" :download="scope.row.degreeFileName">{{scope.row.degreeFileLabel}}</a>
             </el-button>
           </template>
-          <template v-else  slot-scope="scope">
+          <template v-else slot-scope="scope">
             {{ scope.row.degreeFileLabel }}
           </template>
       </el-table-column>
@@ -199,12 +199,15 @@ export default {
     getSelectPersonIds(type){
       this.personIds = ''
       for(var i = 0; i < this.multipleSelection.length;i++){
-          if(type===1 && this.multipleSelection[i].reviewFileId > 0 || )
-        if(personIds==='') {
-          this.personIds =  this.multipleSelection[i].personId.toString()
-        }else{
-          this.personIds = this.personIds + '-' + this.multipleSelection[i].personId.toString()
-        }
+          if(type===1 && this.multipleSelection[i].reviewFileId > 0 ||
+           type===2 && this.multipleSelection[i].checkFileId > 0 || 
+           type===3 && this.multipleSelection[i].degreeFileId > 0 ) {
+            if(personIds==='') {
+              this.personIds =  this.multipleSelection[i].personId.toString()
+            }else{
+              this.personIds = this.personIds + '-' + this.multipleSelection[i].personId.toString()
+            }
+          }
       }
       if(this.personIds=== ''){
         this.$message({
