@@ -99,13 +99,15 @@
           align="center"
           color="black"
         >
-          <template v-if="scope.row.reviewFileId > 0" slot-scope="scope">
-            <el-button type="primary"   >
-                <a :href="serverAddres+'/api/attachment/downloadAttachmentFile?attachId='+scope.row.reviewFileId" :download="scope.row.reviewFileName">{{scope.row.reviewFileLabel}}</a>
-            </el-button>
-          </template>
-          <template v-else slot-scope="scope">
-            {{ scope.row.reviewFileLabel }}
+          <template slot-scope="scope">
+            <span v-if="scope.row.reviewFileId > 0" >
+              <el-button   type="primary"   >
+                  <a :href="serverAddres+'/api/attachment/downloadAttachmentFile?attachId='+scope.row.reviewFileId" :download="scope.row.reviewFileName">{{scope.row.reviewFileLabel}}</a>
+              </el-button>
+            </span>
+            <span v-else >
+              {{scope.row.reviewFileLabel}}
+            </span>
           </template>
         </el-table-column>
         <el-table-column
@@ -113,12 +115,12 @@
           align="center"
           color="black"
         >
-        <template v-if="scope.row.checkFileId > 0" slot-scope="scope">
+        <template v-if="scope.row.checkFileId !== 0" slot-scope="scope">
             <el-button type="primary"   >
                 <a :href="serverAddres+'/api/attachment/downloadAttachmentFile?attachId='+scope.row.checkFileId" :download="scope.row.checkFileName">{{scope.row.checkFileLabel}}</a>
             </el-button>
           </template>
-          <template v-else slot-scope="scope">
+          <template v-if="scope.row.checkFileId === 0" slot-scope="scope">
             {{ scope.row.checkFileLabel }}
           </template>
         </el-table-column>
@@ -127,12 +129,12 @@
           align="center"
           color="black"
         >
-          <template v-if="scope.row.degreeFileId > 0" slot-scope="scope">
+          <template v-if="scope.row.degreeFileId !== 0" slot-scope="scope">
             <el-button type="primary"   >
                 <a :href="serverAddres+'/api/attachment/downloadAttachmentFile?attachId='+scope.row.degreeFileId" :download="scope.row.degreeFileName">{{scope.row.degreeFileLabel}}</a>
             </el-button>
           </template>
-          <template v-else slot-scope="scope">
+          <template v-if="scope.row.degreeFileId === 0" slot-scope="scope">
             {{ scope.row.degreeFileLabel }}
           </template>
       </el-table-column>
@@ -140,13 +142,13 @@
     </div>
     <div align="center">
           <el-button  type="primary" @click="getSelectPersonIds(1)" >
-            <a :href="serverAddres+'/api/graduate/degreeThesisFileDownloadBat?type=1&personIds'+personIds" :download="downloadFielName">批量下载评阅论文</a>
+            <a :href="serverAddres+'/api/graduate/degreeThesisFileDownloadBat?type=1&personIds='+personIds" :download="reviewFileName">批量下载评阅论文</a>
           </el-button>
           <el-button  type="primary" @click="getSelectPersonIds(2)" >
-            <a :href="serverAddres+'/api/graduate/degreeThesisFileDownloadBat?type=2&personIds'+personIds" :download="downloadFielName">批量下载查重论文</a>
+            <a :href="serverAddres+'/api/graduate/degreeThesisFileDownloadBat?type=2&personIds='+personIds" :download="checkFileName">批量下载查重论文</a>
           </el-button>
           <el-button  type="primary" @click="getSelectPersonIds(3)" >
-            <a :href="serverAddres+'/api/graduate/degreeThesisFileDownloadBat?type=3&personIds'+personIds" :download="downloadFielName">批量下载学位论文</a>
+            <a :href="serverAddres+'/api/graduate/degreeThesisFileDownloadBat?type=3&personIds='+personIds" :download="degreeFileName">批量下载学位论文</a>
           </el-button>
   </div>
 </template>
@@ -169,6 +171,9 @@ export default {
       stuTypeList:[],
       majorList: [],
       dataList: [],
+      reviewFileName:'评阅论文.zip',
+      checkFileName:'查重论文.zip',
+      degreeFileName:'学位论文.zip',
      }
   },
   created() {
@@ -202,16 +207,17 @@ export default {
           if(type===1 && this.multipleSelection[i].reviewFileId > 0 ||
            type===2 && this.multipleSelection[i].checkFileId > 0 || 
            type===3 && this.multipleSelection[i].degreeFileId > 0 ) {
-            if(personIds==='') {
+            if(this.personIds==='') {
               this.personIds =  this.multipleSelection[i].personId.toString()
             }else{
               this.personIds = this.personIds + '-' + this.multipleSelection[i].personId.toString()
             }
           }
       }
+      console.log(this.personIds);
       if(this.personIds=== ''){
         this.$message({
-          message: '选择不能为空',
+          message: '选择可下载的文件为空, 下载失败',
           type: 'success'
         });
       }else{
