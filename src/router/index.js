@@ -628,6 +628,12 @@ export const constantRoutes = [
         name: 'degreeNotNormalDegreeStudentQuery',
         component: () => import('@/views/graduate/degreeNotNormalDegreeStudentQuery'),
         meta: { title: '未正常授位学生查询' }
+      },
+      {
+        path: 'degreeThesisFileDownload',
+        name: 'degreeThesisFileDownload',
+        component: () => import('@/views/graduate/degreeThesisFileDownload'),
+        meta: { title: '学生论文下载' }
       }
     ]
   },

@@ -115,7 +115,7 @@ export default {
         this.multipleSelection = val;
     },
     getSelectAffairIds(){
-      affairIds = ''
+      this.affairIds = ''
       for(var i = 0; i < this.multipleSelection.length;i++){
         if(i===0) {
           this.affairIds =  this.multipleSelection[0].affairId.toString()

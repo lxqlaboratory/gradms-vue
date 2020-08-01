@@ -57,7 +57,7 @@
       </tr>
       <tr>
         <td  colspan="6">
-            <textarea placeholder="请输入培养目标" maxlength="1000"  v-model="form.goal" style="width: 100%;height:60px"/>
+            <textarea placeholder="请输入培养目标" maxlength="10000"  v-model="form.goal" style="width: 100%;height:60px"/>
         </td>
       </tr>
       <tr>
@@ -65,7 +65,7 @@
       </tr>
       <tr>
         <td colspan="6">
-            <textarea placeholder="请输入研究生方向/领域简介" maxlength="1000"  v-model="form.direction" style="width: 100%;height:60px"/>
+            <textarea placeholder="请输入研究生方向/领域简介" maxlength="10000"  v-model="form.direction" style="width: 100%;height:60px"/>
 
         </td>
       </tr>
@@ -74,7 +74,7 @@
       </tr>
       <tr>
         <td colspan="6">
-            <textarea placeholder="请输入培养方式" maxlength="1000"  v-model="form.culWay" style="width: 100%;height:60px"/>
+            <textarea placeholder="请输入培养方式" maxlength="10000"  v-model="form.culWay" style="width: 100%;height:60px"/>
 
         </td>
       </tr>
@@ -83,7 +83,7 @@
       </tr>
       <tr>
         <td colspan="6">
-            <textarea placeholder="请输入学习年限" maxlength="1000"  v-model="form.studyYears" style="width: 100%;height:60px"/>
+            <textarea placeholder="请输入学习年限" maxlength="10000"  v-model="form.studyYears" style="width: 100%;height:60px"/>
 
         </td>
       </tr>
@@ -92,7 +92,7 @@
       </tr>
       <tr>
         <td colspan="6">
-            <textarea placeholder="请输入应修总学分与课程设置" maxlength="1000"  v-model="form.creditReq" style="width: 100%;height:60px"/>
+            <textarea placeholder="请输入应修总学分与课程设置" maxlength="10000"  v-model="form.creditReq" style="width: 100%;height:60px"/>
 
         </td>
       </tr>
@@ -104,7 +104,7 @@
           </el-checkbox>
         </td>
         <td colspan="5"  >
-          <textarea placeholder="请输入培养环节" maxlength="1000"  v-model="item.content" style="width: 100%;height:60px"/>
+          <textarea placeholder="请输入培养环节" maxlength="10000"  v-model="item.content" style="width: 100%;height:60px"/>
 
         </td>
       </tr>
@@ -113,7 +113,7 @@
       </tr>
       <tr  v-if="isProMaster" >
         <td colspan="6">
-            <textarea placeholder="请输入专业实习" maxlength="1000"  v-model="form.practice" style="width: 100%;height:60px"/>
+            <textarea placeholder="请输入专业实习" maxlength="10000"  v-model="form.practice" style="width: 100%;height:60px"/>
 
         </td>
       </tr>
@@ -122,7 +122,7 @@
       </tr>
       <tr>
         <td colspan="6">
-            <textarea placeholder="请输入中期考核" maxlength="1000"  v-model="form.middleCheck" style="width: 100%;height:60px"/>
+            <textarea placeholder="请输入中期考核" maxlength="10000"  v-model="form.middleCheck" style="width: 100%;height:60px"/>
 
         </td>
       </tr>
@@ -131,7 +131,7 @@
       </tr>
       <tr>
         <td colspan="6">
-            <textarea placeholder="请输入科学研究与学位论文" maxlength="1000"  v-model="form.thesis" style="width: 100%;height:60px"/>
+            <textarea placeholder="请输入科学研究与学位论文" maxlength="10000"  v-model="form.thesis" style="width: 100%;height:60px"/>
 
         </td>
       </tr>
@@ -140,7 +140,7 @@
       </tr>
       <tr>
         <td colspan="6">
-            <textarea placeholder="请输入毕业及学位授予" maxlength="1000"  v-model="form.gradDegree" style="width: 100%;height:60px"/>
+            <textarea placeholder="请输入毕业及学位授予" maxlength="10000"  v-model="form.gradDegree" style="width: 100%;height:60px"/>
 
         </td>
       </tr>
@@ -149,7 +149,7 @@
       </tr>
       <tr>
         <td colspan="6">
-            <textarea placeholder="请输入参考文献" maxlength="1000"  v-model="form.literature" style="width: 100%;height:60px"/>
+            <textarea placeholder="请输入参考文献" maxlength="10000"  v-model="form.literature" style="width: 100%;height:60px"/>
 
         </td>
       </tr>
@@ -158,7 +158,7 @@
       </tr>
       <tr>
         <td colspan="6">
-            <textarea placeholder="请输入备注" maxlength="1000"  v-model="form.remark" style="width: 100%;height:60px"/>
+            <textarea placeholder="请输入备注" maxlength="10000"  v-model="form.remark" style="width: 100%;height:60px"/>
 
         </td>
       </tr>

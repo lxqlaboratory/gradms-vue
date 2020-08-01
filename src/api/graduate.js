@@ -48,3 +48,28 @@ export function uploadStateGraphImageData(data) {
     data
   })
 }
+
+
+export function degreeThesisFileDownload(data) {
+  return request({
+    url: '/api/graduate/degreeThesisFileDownload',
+    method: 'POST',
+    data
+  })
+}
+
+export function degreeThesisFileDownloadMajor(data) {
+  return request({
+    url: '/api/graduate/degreeThesisFileDownloadMajor',
+    method: 'POST',
+    data
+  })
+}
+
+export function degreeThesisFileDownloadQuery(data) {
+  return request({
+    url: '/api/graduate/degreeThesisFileDownloadQuery',
+    method: 'POST',
+    data
+  })
+}
