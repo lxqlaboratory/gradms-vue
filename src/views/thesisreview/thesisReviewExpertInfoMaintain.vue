@@ -45,6 +45,23 @@
         </td>
       </tr>
       <tr>
+        <td colspan="1" >职称</td>
+        <td colspan="1">
+          <el-select v-model="form.proTechPositionCode" placeholder="请选择职称" style="width: 90%;">
+            <el-option
+              v-for="item in form.proTechPositionCodeList"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+        </td>
+        <td colspan="2">
+             <el-checkbox label="是否博士生导师" v-model="form.isDoctorTutor" />
+             <el-checkbox label="是否硕士生导师" v-model="form.isMasterTutor" />
+        </td>
+      </tr>
+      <tr>
         <td colspan="1" >开户银行</td>
         <td colspan="1">
           <el-input v-model="form.bankName" placeholder="请输入开户银行" ></el-input>
@@ -78,6 +95,8 @@ export default {
         email:'',
         majorName:'',
         researchDirection:'',
+        isDoctorTutor:false,
+        isMasterTutor:false,
         bankNo:'',
         bankName:'',
         isManage:false

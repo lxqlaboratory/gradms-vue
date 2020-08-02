@@ -750,10 +750,16 @@ export const constantRoutes = [
       },
 
       {
+        path: 'thesisReviewReviewModeSet',
+        name: 'thesisReviewReviewModeSet',
+        component: () => import('@/views/thesisreview/thesisReviewReviewModeSet'),
+        meta: { title: '评阅费用管理' }
+      },
+      {
         path: 'thesisReviewReviewFeeManage',
         name: 'thesisReviewReviewFeeManage',
         component: () => import('@/views/thesisreview/thesisReviewReviewFeeManage'),
-        meta: { title: '评阅费用管理' }
+        meta: { title: '评阅方式设置' }
       }
     ]
   },

@@ -373,3 +373,26 @@ export function thesisReviewTutorQueryStudentReviewInfo(data) {
   })
 }
 
+export function thesisReviewReviewModeSet(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewReviewModeSet',
+    method: 'POST',
+    data
+  })
+}
+
+export function thesisReviewReviewModeSetModify(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewReviewModeSetModify',
+    method: 'POST',
+    data
+  })
+}
+export function thesisReviewReviewModeSetSet(data) {
+  return request({
+    url: '/api/thesisreview/thesisReviewReviewModeSetSet',
+    method: 'POST',
+    data
+  })
+}
+
