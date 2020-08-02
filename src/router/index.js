@@ -599,6 +599,12 @@ export const constantRoutes = [
         name: 'studentTrainInfoStatisticsCampus',
         component: () => import('@/views/student/studentTrainInfoStatisticsCampus'),
         meta: { title: '校区学生统计' }
+      },
+      {
+        path: 'degreeArchivesVolumnContent',
+        name: 'degreeArchivesVolumnContent',
+        component: () => import('@/views/student/degreeArchivesVolumnContent'),
+        meta: { title: '' }
       }
     ]
   },

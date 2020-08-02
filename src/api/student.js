@@ -246,4 +246,18 @@ export function studentTrainInfoStatisticsStudentNumber(data) {
     data
   })
 }
+export function degreeArchivesVolumnContent(data) {
+  return request({
+    url: '/api/student/degreeArchivesVolumnContent',
+    method: 'POST',
+    data
+  })
+}
+export function degreeArchivesVolumnContentQuery(data) {
+  return request({
+    url: '/api/student/degreeArchivesVolumnContentQuery',
+    method: 'POST',
+    data
+  })
+}
 
