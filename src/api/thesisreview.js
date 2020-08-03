@@ -380,14 +380,14 @@ export function thesisReviewReviewModeSet(data) {
     data
   })
 }
-
-export function thesisReviewReviewModeSetModify(data) {
+export function thesisReviewReviewModeSetQuery(data) {
   return request({
-    url: '/api/thesisreview/thesisReviewReviewModeSetModify',
+    url: '/api/thesisreview/thesisReviewReviewModeSet',
     method: 'POST',
     data
   })
 }
+
 export function thesisReviewReviewModeSetSet(data) {
   return request({
     url: '/api/thesisreview/thesisReviewReviewModeSetSet',

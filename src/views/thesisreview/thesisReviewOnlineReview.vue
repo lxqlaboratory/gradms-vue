@@ -49,7 +49,7 @@
             width="300"
           >
             <template slot-scope="scope">
-              <el-button type="text" @click="updateExpertInfo(scope.row.reviewId)" >{{ scope.row.thesisName }}</el-button>
+              {{ scope.row.thesisName }}
             </template>
           </el-table-column>
           <el-table-column
