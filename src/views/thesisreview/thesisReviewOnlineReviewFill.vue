@@ -1,30 +1,34 @@
 <template>
   <div class="app-container">
     <table class="content">
-      <tr>
-        <td colspan="6" style="font-size: 12px;color:black;text-align:left;">
-          	评阅提纲:<br>
-            &nbsp;&nbsp;1.论文选题所具有的理论意义或实用价值；揭示所涉及专业的内在规律；有无新意；<br>
-            &nbsp;&nbsp;2.对国内外学术和实务动态、本学科领域前沿知识及本专业理论与技术的了解程度；对文献资料和事实材料（如案例背景）的掌握及综述能力；<br>
-            &nbsp;&nbsp;3.基础理论和专业知识水平；发现、分析、解决问题能力；科学研究工作的能力或独立担负专门工作的能力；调查报告的广度或案例研究的深度；研究论文的新见解、新观点、新方法、新数据、新资料；研究成果的理论或实用价值；<br>
-            &nbsp;&nbsp;4.概念清晰与分析严谨的程度；材料的真实性和结论的合理性；论文规范性与文字、图表表达能力；<br>
-            &nbsp;&nbsp;5.论文是否达到硕士专业学位论文水平要求；是否同意组织论文答辩。
-		  </td>
+      <tr height= "40">
+        <td colspan="6" style="font-size: 16px;color:black;" >对 学 位 论 文 的 评 价</td>
       </tr>
-      <tr>
-        <td colspan="1" >论文名称</td>
-        <td colspan="5">
-          {{form.thesisName}}
+      <tr  >
+        <td colspan="1">评审项目</td>
+        <td colspan="4">评审要素</td>
+        <td colspan="1">评价等级</td>
+      </tr>
+      <tr  v-for="evaluate in evaluateList"    >
+        <td colspan="1" >{{evaluate.project}}</td>
+        <td colspan="4"  v-html='evaluate.factor' style="text-align:left;" ></td>
+        <td colspan="4">
+          <el-select v-model="evaluate.value"  placeholder="请选择评价等级" style="width: 100%">
+            <el-option
+              v-for="item in valueList"
+              :key="item"
+              :label="item"
+              :value="item">
+            </el-option>
+          </el-select>
         </td>
       </tr>
       <tr>
-        <td colspan="1" >评阅意见</td>
         <td colspan="6">
-            <textarea placeholder="请输入评阅意见" maxlength="1000"  v-model="form.reviewDes" style="width: 100%;height:300px"/>
-
+            <textarea placeholder="对论文的总体评阅意见及修改意见或有待商榷的问题：" maxlength="1000"  v-model="form.reviewDes" style="width: 100%;height:300px"/>
         </td>
       </tr>
-      <tr>
+      <tr height= "40" >
         <td colspan="1" >对学位论文的总体评价等级</td>
         <td colspan="1">
           <el-select v-model="form.reviewLevel"  placeholder="请选择总体评价等级" style="width: 100%">
@@ -84,7 +88,9 @@ export default {
       },
       resultList:[],
       levelList:[],
-      familiarList:[]
+      familiarList:[],
+      evaluateList:[],
+      valueList:['A','B','C','D']
     }
   },
   created() {
@@ -97,10 +103,11 @@ export default {
         this.resultList = res.data.resultList
         this.levelList = res.data.levelList
         this.familiarList = res.data.familiarList
+        this.evaluateList = res.data.evaluateList
       })
     },
     save(){
-      thesisReviewOnlineReviewFillSubmit({'session': document.cookie , 'form': this.form,'reviewState':0
+      thesisReviewOnlineReviewFillSubmit({'session': document.cookie , 'form': this.form,'reviewState':0,'evaluateList':this.evaluateList
       }).then(res => {
        if(res.code === '0'){
           this.$message({
@@ -134,7 +141,7 @@ export default {
           });
         }
         else{
-          thesisReviewOnlineReviewFillSubmit({'session': document.cookie , 'form': this.form,'reviewState':1
+          thesisReviewOnlineReviewFillSubmit({'session': document.cookie , 'form': this.form,'reviewState':1,'evaluateList':this.evaluateList
           }).then(res => {
             if(res.code === '0'){
               this.$message({
