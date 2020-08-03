@@ -136,7 +136,6 @@ export default {
         this.multipleSelection = val;
     },
     doSubmit(){
-      console.log(this.multipleSelection)
       if(this.multipleSelection === 'undefined' || this.multipleSelection.length=== 0){
         this.$message({
           message: '选择不能为空',

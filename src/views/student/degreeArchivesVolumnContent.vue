@@ -2,9 +2,9 @@
   <div class="app-container">
       <div class="query-container">
         学位授予时间
-        <el-select v-model="stuTypeCode" @change="changeMajor" placeholder="请选择学位授予时间"  style="width: 8%;">
+        <el-select v-model="degreeDate"  placeholder="请选择学位授予时间"  style="width: 8%;">
           <el-option
-            v-for="item in stuTypeList"
+            v-for="item in dateList"
             :key="item.value"
             :label="item.label"
             :value="item.value">
@@ -13,7 +13,7 @@
         学生类型
         <el-select v-model="stuTypeCode" placeholder="请选择学生类型"  style="width: 12%;">
           <el-option
-            v-for="item in stuTypes"
+            v-for="item in stuTypeList"
             :key="item.value"
             :label="item.label"
             :value="item.value">
@@ -25,13 +25,19 @@
         <el-table
           :data="studentList"
           border
+          ref="multipleTable"
+          @selection-change="selectionChange">
           style="width: 100%;"
           size="mini"
         >
           <el-table-column
+            type="selection"
+            width="55">
+          </el-table-column>
+          <el-table-column
             label="序号"
             fixed="left"
-            width="50"
+            width="70"
             align="center"
             color="black"
           >
@@ -43,7 +49,6 @@
             label="学号"
             align="center"
             color="black"
-            width="120"
           >
             <template slot-scope="scope">
               {{ scope.row.perNum }}
@@ -53,7 +58,6 @@
             label="姓名"
             align="center"
             color="black"
-            width="70"
           >
             <template slot-scope="scope">
               {{ scope.row.perName }}
@@ -65,28 +69,17 @@
             color="black"
           >
             <template slot-scope="scope">
-              {{ scope.row.stuTypeName }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="专业"
-            align="center"
-            color="black"
-          >
-            <template slot-scope="scope">
-              {{ scope.row.stuTypeName }}
+              {{ scope.row.stuType }}
             </template>
           </el-table-column>
         <el-table-column
             label="操作"
             align="center"
             color="black"
-            width="300"
         >
             <template slot-scope="scope">
-            <el-button type="primary" v-if="scope.row.reviewState==='提交'"  >
-                <a :href="serverAddres+'/api/thesisreview/thesisReviewOnlineReviewPrint?reviewId='+scope.row.reviewId" :download="scope.row.printName">评阅表下载</a>
-            </el-button>
+              <el-button type="primary" @click="doEdit(scope.row.personId)">编辑</el-button>
+              <el-button type="primary" @click="doPrint(scope.row.personId)">打印</el-button>
             </template>
         </el-table>
       </div>
@@ -102,8 +95,8 @@
             @preview="onPreview"
           >学生卷内目录
           </fileupload>
-          <el-button type="primary" @click="submitTableData">补录卷内目录</el-button>
-          <el-button type="primary" @click="clearTutor">打印卷卷内目录</el-button>
+          <el-button type="primary" @click="doAdd">补录卷内目录</el-button>
+          <el-button type="primary" @click="selectPrint">打印卷内目录</el-button>
     </div>
   </div>
 </template>
@@ -117,27 +110,11 @@ export default {
   components: { fileupload },
   data() {
     return {
+      serverAddres:'',
       degreeDate:'',
       stuTypeCode:'',
-      stuTypes:[
-        {
-          value:'01',
-          label:'博士',
-        },
-        {
-          value:'02',
-          label:'硕士',
-        },
-        {
-          value:'03',
-          label:'在职工程硕士',
-        },
-        {
-          value:'04',
-          label:'同等学历硕士',
-        }
-      ],
-      degreeDateList:[],
+      dateList:[],
+      stuTypeList:[],
       studentList:[]
     }
   },
@@ -146,9 +123,42 @@ export default {
   },
   methods: {
     fetchData() {
+      this.serverAddres = this.GLOBAL.servicePort
       degreeArchivesVolumnContent({ 'session': document.cookie }).then(res => {
-        this.degreeDateList = res.data
+        this.dateList = res.data.dateList
+        this.stuTypeList = res.data.stuTypeList
       })
+    },
+    selectionChange(val) {
+        this.multipleSelection = val;
+    },
+    doEdit(personId){
+          window.location.href = this.serverAddres+ '/archives/archives_initPrintInfo.do?personId=' + personId
+    },
+    doPrint(personId){
+          window.location.href = this.serverAddres+ '/archives/archives_printLetter.do?exportName=archivesPrint&&exportType=1094&&doctype=pdf&&fileName=juanneimulu.pdf&personId='+personId
+    },
+    doAdd(){
+          window.location.href = this.serverAddres+ '/archives/archives_initAddInfo.do?degreeDate="+degreeDate='+this.degreeDate
+    },
+    selectPrint(){
+      var personIds= ''
+      for(var i = 0; i < this.multipleSelection.length;i++){
+        if(i===0) {
+          personIds =  this.multipleSelection[0].personId
+        }else{
+          personIds = personIds + '-' + this.multipleSelection[i].personId
+        }
+      }
+      
+      if(personIds=== ''){
+        this.$message({
+          message: '选择不能为空',
+          type: 'success'
+        });
+      }else{
+          window.location.href = this.serverAddres+ '/archives/archives_printLetter.do?exportName=archivesPrint&&exportType=1094&&doctype=pdf&&fileName=juanneimulu.pdf&personIds='+personIds
+      }
     },
     doQuery(){
       degreeArchivesVolumnContentQuery({ 'session': document.cookie, 'stuTypeCode': this.stuTypeCode,
