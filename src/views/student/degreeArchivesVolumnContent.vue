@@ -93,7 +93,7 @@
             accepttype=".xls"
             @successcallback="onSuccess"
             @preview="onPreview"
-          >学生卷内目录
+          >导入学生卷内目录
           </fileupload>
           <el-button type="primary" @click="doAdd">补录卷内目录</el-button>
           <el-button type="primary" @click="selectPrint">打印卷内目录</el-button>
