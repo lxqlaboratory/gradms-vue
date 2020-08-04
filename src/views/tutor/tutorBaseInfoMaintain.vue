@@ -2,10 +2,10 @@
   <div class="app-container">
 
     <table class="content">
-      <tr>
+      <tr height = "30" >
         <td colspan="5" style="font-size: 16px;font-weight: bold;color: #304156 ">基本信息</td>
       </tr>
-      <tr height = "40" >
+      <tr height = "30" >
         <td colspan="1" >编号</td>
         <td colspan="1">
           {{form.perNum}}
@@ -16,16 +16,6 @@
         </td>
         <td colspan="1" rowspan="3" width ="120px" >
           <img :src="signature" alt="点击上传签名图片"  @click="upload" style="width: 200px;height: 100px">
-<!--          <fileupload-->
-<!--            url="/api/tutor/tutorAchievementSourceAttachUpload"-->
-<!--            :data="{'tableName': 'book'}"-->
-<!--            accepttype=".jpg"-->
-<!--            ref="import"-->
-<!--            style="display: none"-->
-<!--            @successcallback="on-success"-->
-<!--            @preview="onPreview"-->
-<!--          >-->
-<!--          </fileupload>-->
           <el-upload
             :on-preview="handlePreview"
             :on-remove="handleRemove"
@@ -162,11 +152,11 @@
         </td>
       </tr>
       <tr>
-        <td colspan="5" >个人简介</td>
+        <td colspan="5" height = "30" >个人简介</td>
       </tr>
       <tr>
         <td colspan="5">
-             <tinymce v-model="form.personIntroduction" :height="300" />
+             <tinymce v-model="form.personIntroduction" :height="250" />
         </td>
       </tr>
     </table>
@@ -207,7 +197,7 @@ export default {
           lastDegree:'',
           lastStudyLevel:''
         },
-       url: '/api/instructor/importDegreeCollegeStuAndInstructorData',
+        url: '/api/tutor/importTutorSignatureFile',
         serverAddres:'',
         signature:'',
         genderCodeList: [],
@@ -229,7 +219,6 @@ export default {
         this.lastDegreeList = res.data.lastDegreeList
         this.form = res.data.form
         this.signature = res.data.signature
-        console.log(this.signature)
       })
     },
     submit(){
