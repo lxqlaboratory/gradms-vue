@@ -14,10 +14,7 @@
           {{form.perName}}
         </td>
         <td colspan="1" rowspan="3" width ="120px" >
-            <el-image
-                :src="signature"
-              >
-            </el-image>
+          <img :src="signature">
         </td>
       </tr>
       <tr>
