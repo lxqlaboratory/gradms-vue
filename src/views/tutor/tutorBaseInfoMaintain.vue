@@ -180,10 +180,9 @@
 import { tutorBaseInfoMaintainInit } from '@/api/tutor'
 import { tutorBaseInfoMaintain } from '@/api/tutor'
 import Tinymce from '@/components/Tinymce'
-import fileupload from "@/components/upload/fileupload";
 export default {
   name: 'tutorBaseInfoMaintain',
-  components: { Tinymce ,fileupload},
+  components: { Tinymce },
   data() {
     return {
         form:{
@@ -208,8 +207,8 @@ export default {
           lastDegree:'',
           lastStudyLevel:''
         },
-      url: '/api/instructor/importDegreeCollegeStuAndInstructorData',
-      serverAddres:'',
+       url: '/api/instructor/importDegreeCollegeStuAndInstructorData',
+        serverAddres:'',
         signature:'',
         genderCodeList: [],
         proTechPositionCodeList: [],
@@ -257,7 +256,6 @@ export default {
       console.log(file);
     },
     onSuccess(response, file, fileList) {
-      console.log(file)
       if(response.code === '0'){
         this.$message({
           message: '上传成功',
