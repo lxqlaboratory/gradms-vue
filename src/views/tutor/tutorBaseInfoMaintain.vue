@@ -1,5 +1,6 @@
 <template>
   <div class="app-container">
+
     <table class="content">
       <tr>
         <td colspan="5" style="font-size: 16px;font-weight: bold;color: #304156 ">基本信息</td>
@@ -14,7 +15,30 @@
           {{form.perName}}
         </td>
         <td colspan="1" rowspan="3" width ="120px" >
-          <img :src="signature">
+          <img :src="signature" alt="点击上传签名图片"  @click="upload" style="width: 200px;height: 100px">
+<!--          <fileupload-->
+<!--            url="/api/tutor/tutorAchievementSourceAttachUpload"-->
+<!--            :data="{'tableName': 'book'}"-->
+<!--            accepttype=".jpg"-->
+<!--            ref="import"-->
+<!--            style="display: none"-->
+<!--            @successcallback="on-success"-->
+<!--            @preview="onPreview"-->
+<!--          >-->
+<!--          </fileupload>-->
+          <el-upload
+            :on-preview="handlePreview"
+            :on-remove="handleRemove"
+            :action="serverAddres+url"
+            :data="{'tableName': 'book'}"
+            accepttype=".jpg"
+            :multiple="false"
+            :on-success="onSuccess"
+
+            style="display: none"
+           >
+            <el-button size="small" type="primary" ref="import"></el-button>
+          </el-upload>
         </td>
       </tr>
       <tr>
@@ -156,9 +180,10 @@
 import { tutorBaseInfoMaintainInit } from '@/api/tutor'
 import { tutorBaseInfoMaintain } from '@/api/tutor'
 import Tinymce from '@/components/Tinymce'
+import fileupload from "@/components/upload/fileupload";
 export default {
   name: 'tutorBaseInfoMaintain',
-  components: { Tinymce },
+  components: { Tinymce ,fileupload},
   data() {
     return {
         form:{
@@ -183,6 +208,8 @@ export default {
           lastDegree:'',
           lastStudyLevel:''
         },
+      url: '/api/instructor/importDegreeCollegeStuAndInstructorData',
+      serverAddres:'',
         signature:'',
         genderCodeList: [],
         proTechPositionCodeList: [],
@@ -195,6 +222,7 @@ export default {
   },
   methods: {
     fetchData() {
+      this.serverAddres = this.GLOBAL.servicePort
       tutorBaseInfoMaintainInit({ 'session': document.cookie ,'personId': this.$route.query.personId }).then(res => {
         this.genderCodeList = res.data.genderCodeList
         this.proTechPositionCodeList = res.data.proTechPositionCodeList
@@ -217,6 +245,32 @@ export default {
          });
        }
       })
+
+    },
+    upload(){
+      this.$refs.import.$el.click()
+    },
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview(file) {
+      console.log(file);
+    },
+    onSuccess(response, file, fileList) {
+      console.log(file)
+      if(response.code === '0'){
+        this.$message({
+          message: '上传成功',
+          type: 'success'
+        });
+        this.fetchData()
+      }
+      else{
+        this.$message({
+          message: response.msg,
+          type: 'error'
+        });
+      }
     }
   }
 }
