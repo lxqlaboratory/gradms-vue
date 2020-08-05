@@ -282,12 +282,10 @@ export default {
           this.fetchData()
         }
         else{
-          this.$message({
-            message: res.msg,
-            type: 'error'
-          });
+          this.$alert( res.msg, '导入错误信息', {
+          dangerouslyUseHTMLString: true
+          });          
         }
-
     },
 
   }
