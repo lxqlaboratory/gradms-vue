@@ -197,7 +197,7 @@ export default {
           lastDegree:'',
           lastStudyLevel:''
         },
-        url: '/api/tutor/importTutorSignatureFile',
+        url: '',
         serverAddres:'',
         signature:'',
         genderCodeList: [],
@@ -219,6 +219,7 @@ export default {
         this.lastDegreeList = res.data.lastDegreeList
         this.form = res.data.form
         this.signature = res.data.signature
+        this.url = '/api/tutor/uploadTutorSignatureImage?personId=' +this.form.personId 
       })
     },
     submit(){

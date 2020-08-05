@@ -119,7 +119,42 @@ export default {
       })
     },
     submit(){
-        if(this.form.reviewResult === undefined) {
+        if(this.evaluateList[0].value === undefined) {
+                this.$message({
+            message: this.evaluateList[0].project +'不能为空',
+            type: 'success',
+            offset: '10'
+          });
+        }
+        else if(this.evaluateList[1].value === undefined) {
+                this.$message({
+            message: this.evaluateList[1].project +'不能为空',
+            type: 'success',
+            offset: '10'
+          });
+        }
+        else if(this.evaluateList[2].value === undefined) {
+                this.$message({
+            message: this.evaluateList[2].project +'不能为空',
+            type: 'success',
+            offset: '10'
+          });
+        }
+        else if(this.evaluateList[3].value === undefined) {
+                this.$message({
+            message: this.evaluateList[3].project +'不能为空',
+            type: 'success',
+            offset: '10'
+          });
+        }
+        else if(this.evaluateList[4].value === undefined) {
+                this.$message({
+            message: this.evaluateList[4].project +'不能为空',
+            type: 'success',
+            offset: '10'
+          });
+        }
+        else if(this.form.reviewResult === undefined) {
                 this.$message({
             message: '对学位论文的总体评价等级不能为空',
             type: 'success',

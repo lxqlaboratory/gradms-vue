@@ -2,7 +2,7 @@
   <div class="app-container">
     <table class="content">
       <tr>
-        <td colspan="4" style="font-size: 16px;font-weight: bold;color: #304156 ">基本信息</td>
+        <td colspan="5" style="font-size: 16px;font-weight: bold;color: #304156 ">基本信息</td>
       </tr>
       <tr>
         <td colspan="1" >帐号</td>
@@ -12,6 +12,22 @@
         <td colspan="1" >姓名</td>
         <td colspan="1">
           <el-input v-model="form.perName" placeholder="请输入姓名" ></el-input>
+        </td>
+        <td colspan="1" rowspan="3" width ="120px" >
+          <img :src="signature" alt="点击上传签名图片"  @click="upload" style="width: 200px;height: 100px">
+          <el-upload
+            :on-preview="handlePreview"
+            :on-remove="handleRemove"
+            :action="serverAddres+url"
+            :data="{'tableName': 'book'}"
+            accepttype=".jpg"
+            :multiple="false"
+            :on-success="onSuccess"
+
+            style="display: none"
+           >
+            <el-button size="small" type="primary" ref="import"></el-button>
+          </el-upload>
         </td>
       </tr>
       <tr>
@@ -40,7 +56,7 @@
           <el-input v-model="form.majorName" placeholder="请输入专业" ></el-input>
         </td>
         <td colspan="1" >研究方向</td>
-        <td colspan="1">
+        <td colspan="2">
           <el-input v-model="form.researchDirection" placeholder="请输入研究方向" ></el-input>
         </td>
       </tr>
@@ -56,7 +72,7 @@
             />
           </el-select>
         </td>
-        <td colspan="2">
+        <td colspan="3">
              <el-checkbox label="是否博士生导师" v-model="form.isDoctorTutor" />
              <el-checkbox label="是否硕士生导师" v-model="form.isMasterTutor" />
         </td>
@@ -67,7 +83,7 @@
           <el-input v-model="form.bankName" placeholder="请输入开户银行" ></el-input>
         </td>
         <td colspan="1" >银行卡号</td>
-        <td colspan="1">
+        <td colspan="2">
           <el-input v-model="form.bankNo" placeholder="请输入银行账号" ></el-input>
         </td>
       </tr>
@@ -101,6 +117,9 @@ export default {
         bankName:'',
         isManage:false
       },
+      url: '',
+      serverAddres:'',
+      signature:'',
       isDisable: false
     }
   },
@@ -110,7 +129,9 @@ export default {
   methods: {
     fetchData() {
       thesisReviewExpertInfoMaintain({ 'session': document.cookie ,'personId': this.$route.query.personId }).then(res => {
-        this.form = res.data
+        this.form = res.data.form
+        this.signature = res.data.signature
+        this.url = '/api/tutor/uploadTutorSignatureImage?personId=' +this.form.personId 
       })
     },
     submit(){
@@ -147,6 +168,54 @@ export default {
 //        this.$router.push({ path: 'thesisReviewExpertManage'})
 //       }
       })
+    },
+    upload(){
+      this.$refs.import.$el.click()
+    },
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview(file) {
+      console.log(file);
+    },
+    onSuccess(response, file, fileList) {
+      if(response.code === '0'){
+        this.$message({
+          message: '上传成功',
+          type: 'success'
+        });
+        this.fetchData()
+      }
+      else{
+        this.$message({
+          message: response.msg,
+          type: 'error'
+        });
+      }
+    },
+    upload(){
+      this.$refs.import.$el.click()
+    },
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview(file) {
+      console.log(file);
+    },
+    onSuccess(response, file, fileList) {
+      if(response.code === '0'){
+        this.$message({
+          message: '上传成功',
+          type: 'success'
+        });
+        this.fetchData()
+      }
+      else{
+        this.$message({
+          message: response.msg,
+          type: 'error'
+        });
+      }
     }
   }
 }
