@@ -875,7 +875,7 @@ export function recruitOutstandingMaintain(data) {
   })
 }
 
-export function recruitOutstandingMaintainAdd(data) {
+export function recruitOutstandingMaintainInfo(data) {
   return request({
     url: '/api/tutor/recruitOutstandingMaintainAdd',
     method: 'POST',
@@ -889,14 +889,41 @@ export function recruitOutstandingMaintainSave(data) {
     data
   })
 }
-export function recruitOutstandingMaintainDelete(data) {
+
+export function tutorAccountMaintain(data) {
   return request({
-    url: '/api/tutor/recruitOutstandingMaintainDelete',
+    url: '/api/tutor/tutorAccountMaintain',
+    method: 'POST',
+    data
+  })
+}
+export function tutorAccountMaintainQuery(data) {
+  return request({
+    url: '/api/tutor/tutorAccountMaintainQuery',
+    method: 'POST',
+    data
+  })
+}
+export function tutorAccountMaintainDelete(data) {
+  return request({
+    url: '/api/tutor/tutorAccountMaintainDelete',
     method: 'POST',
     data
   })
 }
 
-
-
+export function tutorAccountMaintainReplace(data) {
+  return request({
+    url: '/api/tutor/tutorAccountMaintainReplace',
+    method: 'POST',
+    data
+  })
+}
+export function tutorAccountMaintainUpdate(data) {
+  return request({
+    url: '/api/tutor/tutorAccountMaintainUpdate',
+    method: 'POST',
+    data
+  })
+}
 

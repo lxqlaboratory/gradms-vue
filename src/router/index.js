@@ -230,6 +230,12 @@ export const constantRoutes = [
         meta: { title: '导师查询浏览' }
       },
       {
+        path: 'tutorAccountMaintain',
+        name: 'tutorAccountMaintain',
+        component: () => import('@/views/tutor/tutorAccountMaintain'),
+        meta: { title: '教师账户维护' }
+      },
+      {
         path: 'tutorBaseInfoMaintain',
         name: 'tutorBaselInfoMaintain',
         component: () => import('@/views/tutor/tutorBaseInfoMaintain'),
