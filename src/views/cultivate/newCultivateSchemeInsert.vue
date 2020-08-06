@@ -61,12 +61,15 @@
         </td>
       </tr>
       <tr>
-        <td style="text-align: left;width: 100%;" colspan="6" >研究生方向/领域简介</td>
+        <td v-if="isProMaster" style="text-align: left;width: 100%;" colspan="6" >培养方向</td>
+        <td v-else style="text-align: left;width: 100%;" colspan="6" >研究方向</td>
       </tr>
       <tr>
-        <td colspan="6">
-            <textarea placeholder="请输入研究生方向/领域简介" maxlength="10000"  v-model="form.direction" style="width: 100%;height:60px"/>
-
+        <td v-if="isProMaster" colspan="6">
+            <textarea placeholder="请输入培养方向" maxlength="10000"  v-model="form.direction" style="width: 100%;height:60px"/>
+        </td>
+        <td v-else colspan="6">
+            <textarea placeholder="请输入研究方向" maxlength="10000"  v-model="form.direction" style="width: 100%;height:60px"/>
         </td>
       </tr>
       <tr>
@@ -108,15 +111,6 @@
 
         </td>
       </tr>
-      <tr v-if="isProMaster" >
-        <td style="text-align: left;width: 100%;" colspan="6" >专业实习</td>
-      </tr>
-      <tr  v-if="isProMaster" >
-        <td colspan="6">
-            <textarea placeholder="请输入专业实习" maxlength="10000"  v-model="form.practice" style="width: 100%;height:60px"/>
-
-        </td>
-      </tr>
       <tr>
         <td style="text-align: left;width: 100%;" colspan="6" >中期考核</td>
       </tr>
@@ -126,13 +120,16 @@
 
         </td>
       </tr>
-      <tr>
-        <td style="text-align: left;width: 100%;" colspan="6"> 科学研究与学位论文</td>
+      <tr  >
+        <td v-if="isProMaster" style="text-align: left;width: 100%;" colspan="6">创新成果与学位论文</td>
+        <td v-else style="text-align: left;width: 100%;" colspan="6"> 科学研究与学位论文</td>
       </tr>
       <tr>
-        <td colspan="6">
+        <td v-if="isProMaster" colspan="6">
+            <textarea placeholder="请输入创新成果与学位论文" maxlength="10000"  v-model="form.thesis" style="width: 100%;height:60px"/>
+        </td>
+        <td v-else colspan="6">
             <textarea placeholder="请输入科学研究与学位论文" maxlength="10000"  v-model="form.thesis" style="width: 100%;height:60px"/>
-
         </td>
       </tr>
       <tr>
