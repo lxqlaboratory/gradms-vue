@@ -904,6 +904,13 @@ export function tutorAccountMaintainQuery(data) {
     data
   })
 }
+export function tutorAccountMaintainInfo(data) {
+  return request({
+    url: '/api/tutor/tutorAccountMaintainInfo',
+    method: 'POST',
+    data
+  })
+}
 export function tutorAccountMaintainDelete(data) {
   return request({
     url: '/api/tutor/tutorAccountMaintainDelete',
@@ -912,9 +919,9 @@ export function tutorAccountMaintainDelete(data) {
   })
 }
 
-export function tutorAccountMaintainReplace(data) {
+export function tutorAccountMaintainMerge(data) {
   return request({
-    url: '/api/tutor/tutorAccountMaintainReplace',
+    url: '/api/tutor/tutorAccountMaintainMerge',
     method: 'POST',
     data
   })
@@ -930,6 +937,14 @@ export function tutorAccountMaintainUpdate(data) {
 export function tutorAccountMaintainSet(data) {
   return request({
     url: '/api/tutor/tutorAccountMaintainSet',
+    method: 'POST',
+    data
+  })
+}
+
+export function tutorAccountMaintainAdd(data) {
+  return request({
+    url: '/api/tutor/tutorAccountMaintainAdd',
     method: 'POST',
     data
   })

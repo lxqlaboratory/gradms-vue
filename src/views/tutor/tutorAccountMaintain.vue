@@ -186,7 +186,8 @@
         </table>
         <div align="center">
             <el-button type="primary" @click="doAdd">新建账号</el-button>
-            <el-button type="primary" @click="doModify">修改保存</el-button>
+            <el-button type="primary" @click="doUpdate">修改保存</el-button>
+            <el-button type="primary" @click="doMerge">修改保存</el-button>
         </div>
     </div>
 </template>
@@ -196,9 +197,10 @@ import { tutorAccountMaintain } from '@/api/tutor'
 import { tutorAccountMaintainQuery } from '@/api/tutor'
 import { tutorAccountMaintainInfo } from '@/api/tutor'
 import { tutorAccountMaintainUpdate } from '@/api/tutor'
-import { tutorAccountMaintainReplace } from '@/api/tutor'
+import { tutorAccountMaintainMerge } from '@/api/tutor'
 import { tutorAccountMaintainDelete } from '@/api/tutor'
 import { tutorAccountMaintainSet} from '@/api/tutor'
+import { tutorAccountMaintainAdd} from '@/api/tutor'
 export default {
     name:'tutorAccountMaintain',
   data() {
@@ -311,8 +313,8 @@ export default {
         });
       });
     },
-    doModify() {
-      tutorAccountMaintainModify({ 'session': document.cookie, 'form': this.form}).then(res => {
+    doUpdate() {
+      tutorAccountMaintainUpdate({ 'session': document.cookie, 'form': this.form}).then(res => {
         if(res.code === '0'){
           this.$message({
             message: '修改成功',
@@ -329,7 +331,7 @@ export default {
       })
     },
     doAdd() {
-      tutorAccountMaintainModify({ 'session': document.cookie, 'form': this.form}).then(res => {
+      tutorAccountMaintainAdd({ 'session': document.cookie, 'form': this.form}).then(res => {
         if(res.code === '0'){
           this.$message({
             message: '修改成功',
@@ -345,7 +347,6 @@ export default {
         }
       })
     },
-
     doDelete(personId){
         this.$confirm('确认要删除教师的的账号吗?', '提示', {
         confirmButtonText: '确定',
@@ -376,10 +377,10 @@ export default {
       });
     },
     doMerge() {
-      tutorAccountMaintainModify({ 'session': document.cookie, 'form': this.form}).then(res => {
+      tutorAccountMaintainMerge({ 'session': document.cookie, 'form': this.form}).then(res => {
         if(res.code === '0'){
           this.$message({
-            message: '修改成功',
+            message: '合并成功',
             type: 'success',
             offset: '10'
           });
@@ -392,7 +393,6 @@ export default {
         }
       })
     },
-
   }
 }
 </script>
