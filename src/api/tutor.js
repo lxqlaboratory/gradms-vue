@@ -927,3 +927,10 @@ export function tutorAccountMaintainUpdate(data) {
   })
 }
 
+export function tutorAccountMaintainSet(data) {
+  return request({
+    url: '/api/tutor/tutorAccountMaintainSet',
+    method: 'POST',
+    data
+  })
+}

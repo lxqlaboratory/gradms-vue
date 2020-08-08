@@ -46,6 +46,15 @@
           </template>
         </el-table-column>
         <el-table-column
+          label="学院"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.collegeName }}
+          </template>
+        </el-table-column>
+        <el-table-column
           label="登录账号"
           align="center"
           color="black"
@@ -63,15 +72,34 @@
             {{ scope.row.perIdCard }}
           </template>
         </el-table-column>
+        <el-table-column
+          label="账户状态"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.accountState }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="数据状态"
+          align="center"
+          color="black"
+        >
+          <template slot-scope="scope">
+            {{ scope.row.dataState }}
+          </template>
+        </el-table-column>
         <el-table-column  
             label="操作"
-            fixed="left"
             align="center"
             color="black"
             >
         <template slot-scope="scope">
+            <el-button v-if="isNormal" type="primary" @click="setAccountState(scope.row.personId,0)" >禁止登录</el-button>
+            <el-button v-if="!isNormal" type="primary" @click="setAccountState(scope.row.personId,1)" >正常登录</el-button>
             <el-button  type="primary" @click="doEdit(scope.row.personId)" >编辑</el-button>
-            <el-button  type="primary" @click="doDelete(scope.row.personId)" >删除</el-button>
+            <el-button v-if="!isNormal" type="primary" @click="doDelete(scope.row.personId)" >删除</el-button>
         </template>
         </el-table-column>
     </el-table>
@@ -123,43 +151,42 @@
         <tr>
             <td colspan="1">学院</td>
             <td colspan="1">
-               <el-select v-model="form.collegeId"  placeholder="请选择学院"  @change="getCollege1List()" style="width: 95%;">
+               <el-select v-model.number="form.collegeId"  placeholder="请选择学院"  @change="getCollege1List()" style="width: 95%;">
                     <el-option
                         v-for="item in collegeList"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
+                        :key="item.collegeId"
+                        :label="item.collegeName"
+                        :value="item.collegeId">
                     </el-option>
                 </el-select>
             </td>
             <td colspan="1">二级单位</td>
             <td colspan="1">
-               <el-select v-model="form.collegeId1"  placeholder="请选择二级单位"  @change="getCollege1List()" style="width: 95%;">
+               <el-select v-model.number="form.collegeId1"  placeholder="请选择二级单位"  @change="getCollege1List()" style="width: 95%;">
                     <el-option
                         v-for="item in collegeList1"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
+                        :key="item.collegeId"
+                        :label="item.collegeName"
+                        :value="item.collegeId">
                     </el-option>
                 </el-select>
             </td>
             <td colspan="1">临床医院</td>
             <td colspan="1">
-               <el-select v-model="form.collegeId2"  placeholder="请选择临床医院"  @change="getCollege2List()" style="width: 95%;">
+               <el-select v-model.number="form.collegeId2"  placeholder="请选择临床医院"  @change="getCollege2List()" style="width: 95%;">
                     <el-option
                         v-for="item in collegeList2"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
+                        :key="item.collegeId"
+                        :label="item.collegeName"
+                        :value="item.collegeId">
                     </el-option>
                 </el-select>
             </td>
         </tr>
         </table>
         <div align="center">
-            <el-button type="primary" @click="doNew">新建账号</el-button>
+            <el-button type="primary" @click="doAdd">新建账号</el-button>
             <el-button type="primary" @click="doModify">修改保存</el-button>
-            <el-button type="primary" @click="doReplace">账号替换</el-button>
         </div>
     </div>
 </template>
@@ -171,11 +198,13 @@ import { tutorAccountMaintainInfo } from '@/api/tutor'
 import { tutorAccountMaintainUpdate } from '@/api/tutor'
 import { tutorAccountMaintainReplace } from '@/api/tutor'
 import { tutorAccountMaintainDelete } from '@/api/tutor'
+import { tutorAccountMaintainSet} from '@/api/tutor'
 export default {
     name:'tutorAccountMaintain',
   data() {
     return {
         form:{
+            personId:'',
             oldPerNum: '',
             oldPerName: '',
             oldPerIdcard: '',
@@ -200,11 +229,11 @@ export default {
         tutorList:[],
         genderList:[
             {
-                value:'0',
+                value:'1',
                 label:'男'
             },
             {
-                value:'1',
+                value:'2',
                 label:'女'
             },
         ],
@@ -250,33 +279,119 @@ export default {
     },    
     doEdit(personId) {
       tutorAccountMaintainInfo({ 'session': document.cookie, 'personId': this.personId}).then(res => {
-        this.form = res.data.form;
+        this.form = res.data;
       })
     },
-    doDelete(personId) {
-      tutorAccountMaintainDelete({ 'session': document.cookie, 'personId': this.personId}).then(res => {
-        this.form = res.data.form;
-      })
-    },
-    doNew(){
-      if(this.multipleSelection === 'undefined' || this.multipleSelection.length=== 0){
-        this.$message({
-          message: '选择不能为空',
-          type: 'success'
-        });
-      }else{
-        collegeCetScoreMaintainSubmit({ 'session': document.cookie, 'scoreList': this.multipleSelection}).then(res => {
-          if (res.code === '0') {
+    setAccountState(personId, state){
+        this.$confirm('确认要设置教师的账号登录状态吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        tutorAccountMaintainSet({ 'session': document.cookie, 'personId': personId,'state':state}).then(res => {
+          this.dialogFormVisible = false
+          if(res.code === '0'){
             this.$message({
-              message: '提交成功',
+              message: '设置成功',
               type: 'success',
               offset: '10'
-            })
-            this.doQuery();
+            });
+            this.doQuery()
+          }else {
+            this.$message({
+              message: res.msg,
+              type: 'warning'
+            });
           }
         })
-      }
-    },  
+      }).catch(() => {
+        this.$message({
+          type: 'warning',
+          message: '已取消设置'
+        });
+      });
+    },
+    doModify() {
+      tutorAccountMaintainModify({ 'session': document.cookie, 'form': this.form}).then(res => {
+        if(res.code === '0'){
+          this.$message({
+            message: '修改成功',
+            type: 'success',
+            offset: '10'
+          });
+          this.doQuery()
+        }else {
+          this.$message({
+            message: res.msg,
+            type: 'warning'
+          });
+        }
+      })
+    },
+    doAdd() {
+      tutorAccountMaintainModify({ 'session': document.cookie, 'form': this.form}).then(res => {
+        if(res.code === '0'){
+          this.$message({
+            message: '修改成功',
+            type: 'success',
+            offset: '10'
+          });
+          this.doQuery()
+        }else {
+          this.$message({
+            message: res.msg,
+            type: 'warning'
+          });
+        }
+      })
+    },
+
+    doDelete(personId){
+        this.$confirm('确认要删除教师的的账号吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        tutorAccountMaintainDelete({ 'session': document.cookie, 'personId': personId}).then(res => {
+          this.dialogFormVisible = false
+          if(res.code === '0'){
+            this.$message({
+              message: '删除成功',
+              type: 'success',
+              offset: '10'
+            });
+            this.doQuery()
+          }else {
+            this.$message({
+              message: res.msg,
+              type: 'warning'
+            });
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'warning',
+          message: '已取消删除'
+        });
+      });
+    },
+    doMerge() {
+      tutorAccountMaintainModify({ 'session': document.cookie, 'form': this.form}).then(res => {
+        if(res.code === '0'){
+          this.$message({
+            message: '修改成功',
+            type: 'success',
+            offset: '10'
+          });
+          this.doQuery()
+        }else {
+          this.$message({
+            message: res.msg,
+            type: 'warning'
+          });
+        }
+      })
+    },
 
   }
 }
