@@ -138,6 +138,29 @@
             {{ scope.row.degreeFileLabel }}
           </template>
       </el-table-column>
+      <el-table-column
+          label="答辩材料下载"
+          align="center"
+          color="black"
+        >
+          <template v-if="scope.row.degreeFileId !== 0" slot-scope="scope">
+            <el-button type="primary"   >
+                <a :href="serverAddres+'/degree/degree_graduation_audit_form_download.do?personId='+scope.row.personId" :download="scope.row.degreeFileName">毕业审批表</a>
+            </el-button>
+            <el-button type="primary"   >
+                <a :href="serverAddres+'/degreethesis/degree_thesisApplyDownload.do?perNum='+scope.row.perNum" :download="scope.row.degreeFileName">答辩申请书</a>
+            </el-button>
+            <el-button type="primary"   >
+                <a :href="serverAddres+'/degree/degree_graduation_audit_form_download.do?personId='+scope.row.personId" :download="scope.row.degreeFileName">毕业审批表</a>
+            </el-button>
+            <el-button type="primary"   >
+                <a :href="serverAddres+'/degree/degree_graduation_audit_form_download.do?personId='+scope.row.personId" :download="scope.row.degreeFileName">毕业审批表</a>
+            </el-button>
+            <el-button type="primary"   >
+                <a :href="serverAddres+'/degree/degree_graduation_audit_form_download.do?personId='+scope.row.personId" :download="scope.row.degreeFileName">毕业审批表</a>
+            </el-button>
+          </template>
+      </el-table-column>
     </el-table>
     </div>
     <div align="center">
