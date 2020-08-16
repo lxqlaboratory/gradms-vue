@@ -142,22 +142,29 @@
           label="答辩材料下载"
           align="center"
           color="black"
+          width = "200"
         >
-          <template v-if="scope.row.degreeFileId !== 0" slot-scope="scope">
+          <template  slot-scope="scope">
             <el-button type="primary"   >
-                <a :href="serverAddres+'/degree/degree_graduation_audit_form_download.do?personId='+scope.row.personId" :download="scope.row.degreeFileName">毕业审批表</a>
+                <a :href="serverAddres+'/degreethesis/degree_thesisApplyDownload.do?degreeApplyType=0&perNum='+scope.row.perNum" :download="scope.row.xwsqs">学位申请书</a>
             </el-button>
             <el-button type="primary"   >
-                <a :href="serverAddres+'/degreethesis/degree_thesisApplyDownload.do?perNum='+scope.row.perNum" :download="scope.row.degreeFileName">答辩申请书</a>
+                <a :href="serverAddres+'/degreethesis/degree_thesisApprovalDownload.do?perNum='+scope.row.perNum" :download="scope.row.xwsps">学位审批书</a>
             </el-button>
             <el-button type="primary"   >
-                <a :href="serverAddres+'/degree/degree_graduation_audit_form_download.do?personId='+scope.row.personId" :download="scope.row.degreeFileName">毕业审批表</a>
+                <a :href="serverAddres+'/degreethesis/degree_thesisAnswerRecordDownload.do?perNum='+scope.row.perNum" :download="scope.row.dbjlz">答辩记录纸</a>
             </el-button>
             <el-button type="primary"   >
-                <a :href="serverAddres+'/degree/degree_graduation_audit_form_download.do?personId='+scope.row.personId" :download="scope.row.degreeFileName">毕业审批表</a>
+                <a :href="serverAddres+'/degree/degree_graduation_audit_form_download.do?personId='+scope.row.personId" :download="scope.row.byspb">毕业审批表</a>
             </el-button>
-            <el-button type="primary"   >
-                <a :href="serverAddres+'/degree/degree_graduation_audit_form_download.do?personId='+scope.row.personId" :download="scope.row.degreeFileName">毕业审批表</a>
+            <el-button v-if="scope.row.isDoctor" type="primary"   >
+                <a :href="serverAddres+'/degree/degree_print_apply_table.do?perNum='+scope.row.perNum" :download="scope.row.bssqdjb">博士申请登记表</a>
+            </el-button>
+            <el-button v-if="scope.row.isDoctor" type="primary"   >
+                <a :href="serverAddres+'/degree/degree_research_reward_form_download.do?personId='+scope.row.personId" :download="scope.row.kyjlqkb">科研和奖励情况表</a>
+            </el-button>
+            <el-button v-if="scope.row.isDoctor" type="primary"   >
+                <a :href="serverAddres+'/degree/downLoadZiPingBiao.do?personId='+scope.row.personId" :download="scope.row.bszpb">博士自评表</a>
             </el-button>
           </template>
       </el-table-column>
@@ -165,13 +172,37 @@
     </div>
     <div align="center">
           <el-button  type="primary" @click="getSelectPersonIds(1)" >
-            <a :href="serverAddres+'/api/graduate/degreeThesisFileDownloadBat?type=1&personIds='+personIds" :download="reviewFileName">批量下载评阅论文</a>
+            <a :href="serverAddres+'/api/graduate/degreeThesisFileDownloadBat?type=1&personIds='+personIds" :download="reviewFileName">评阅论文</a>
           </el-button>
           <el-button  type="primary" @click="getSelectPersonIds(2)" >
-            <a :href="serverAddres+'/api/graduate/degreeThesisFileDownloadBat?type=2&personIds='+personIds" :download="checkFileName">批量下载查重论文</a>
+            <a :href="serverAddres+'/api/graduate/degreeThesisFileDownloadBat?type=2&personIds='+personIds" :download="checkFileName">查重论文</a>
           </el-button>
           <el-button  type="primary" @click="getSelectPersonIds(3)" >
-            <a :href="serverAddres+'/api/graduate/degreeThesisFileDownloadBat?type=3&personIds='+personIds" :download="degreeFileName">批量下载学位论文</a>
+            <a :href="serverAddres+'/api/graduate/degreeThesisFileDownloadBat?type=3&personIds='+personIds" :download="degreeFileName">学位论文</a>
+          </el-button>
+          <el-button  type="primary" @click="getSelectPersonIds(0)" >
+            <a :href="serverAddres+'/api/graduate/degreeThesisMaterialDownload?type=1&personIds='+personIds" :download="xwsqs">学位申请书</a>
+          </el-button>
+          <el-button  type="primary" @click="getSelectPersonIds(0)" >
+            <a :href="serverAddres+'/api/graduate/degreeThesisMaterialDownload?type=2&personIds='+personIds" :download="xwsps">学位审批书</a>
+          </el-button>
+          <el-button  type="primary" @click="getSelectPersonIds(0)" >
+            <a :href="serverAddres+'/api/graduate/degreeThesisMaterialDownload?type=3&personIds='+personIds" :download="dbjlz">答辩记录纸</a>
+          </el-button>
+          <el-button  type="primary" @click="getSelectPersonIds(0)" >
+            <a :href="serverAddres+'/api/graduate/degreeThesisMaterialDownload?type=4&personIds='+personIds" :download="byspb">毕业审批表</a>
+          </el-button>
+          <el-button  type="primary" @click="getSelectPersonIds(4)" >
+            <a :href="serverAddres+'/api/graduate/degreeThesisMaterialDownload?type=5&personIds='+personIds" :download="bssqdjb">博士申请登记表</a>
+          </el-button>
+          <el-button  type="primary" @click="getSelectPersonIds(4)" >
+            <a :href="serverAddres+'/api/graduate/degreeThesisMaterialDownload?type=6&personIds='+personIds" :download="kyjlqkb">科研和奖励情况表</a>
+          </el-button>
+          <el-button  type="primary" @click="getSelectPersonIds(4)" >
+            <a :href="serverAddres+'/api/graduate/degreeThesisMaterialDownload?type=7&personIds='+personIds" :download="bszpb">博士自评表</a>
+          </el-button>
+          <el-button  type="primary" @click="getSelectPersonIds(0)" >
+            <a :href="serverAddres+'/api/graduate/degreeThesisMaterialDownloadAll?&personIds='+personIds" :download="dbcl">答辩材料</a>
           </el-button>
   </div>
 </template>
@@ -197,6 +228,15 @@ export default {
       reviewFileName:'评阅论文.zip',
       checkFileName:'查重论文.zip',
       degreeFileName:'学位论文.zip',
+      xwsqs:'学位申请书.zip',
+      xwsps:'学位审批书.zip',
+      dbjlz:'答辩记录纸.zip',
+      byspb:'毕业审批表.zip',
+      bssqdjb:'博士申请登记表.zip',
+      kyjlqkb:'科研和奖励情况表.zip',
+      bszpb:'博士自评表.zip',
+      dbcl:'答辩材料.zip',
+      
      }
   },
   created() {
@@ -229,7 +269,9 @@ export default {
       for(var i = 0; i < this.multipleSelection.length;i++){
           if(type===1 && this.multipleSelection[i].reviewFileId > 0 ||
            type===2 && this.multipleSelection[i].checkFileId > 0 || 
-           type===3 && this.multipleSelection[i].degreeFileId > 0 ) {
+           type===3 && this.multipleSelection[i].degreeFileId > 0 ||
+           type===4 && this.multipleSelection[i].isDoctort ||
+           type===0 ) {
             if(this.personIds==='') {
               this.personIds =  this.multipleSelection[i].personId.toString()
             }else{
