@@ -1,6 +1,15 @@
 <template>
   <div class="app-container">
       <div class="query-container" >
+        学位进程
+        <el-select v-model="processId"  placeholder="请选择学位进程"  style="width: 15%;">
+          <el-option
+            v-for="item in processList"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
         学生类型
         <el-select v-model="stuTypeCode"  placeholder="请选择学生类型" @change="getMajor()" style="width: 15%;">
           <el-option
@@ -146,25 +155,25 @@
         >
           <template  slot-scope="scope">
             <el-button type="primary"   >
-                <a :href="serverAddres+'/degreethesis/degree_thesisApplyDownload.do?degreeApplyType=0&perNum='+scope.row.perNum" :download="scope.row.xwsqs">学位申请书</a>
+                <a :href="serverAddres+'/api/graduate/degreeThesisApplyDownload?perNum='+scope.row.perNum" :download="scope.row.xwsqs">学位申请书</a>
             </el-button>
             <el-button type="primary"   >
-                <a :href="serverAddres+'/degreethesis/degree_thesisApprovalDownload.do?perNum='+scope.row.perNum" :download="scope.row.xwsps">学位审批书</a>
+                <a :href="serverAddres+'/api/graduate/degreeThesisApprovalDownload?perNum='+scope.row.perNum" :download="scope.row.xwsps">学位审批书</a>
             </el-button>
             <el-button type="primary"   >
-                <a :href="serverAddres+'/degreethesis/degree_thesisAnswerRecordDownload.do?perNum='+scope.row.perNum" :download="scope.row.dbjlz">答辩记录纸</a>
+                <a :href="serverAddres+'/api/graduate/degreethesisAnswerRecordDownload?perNum='+scope.row.perNum" :download="scope.row.dbjlz">答辩记录纸</a>
             </el-button>
             <el-button type="primary"   >
-                <a :href="serverAddres+'/degree/degree_graduation_audit_form_download.do?personId='+scope.row.personId" :download="scope.row.byspb">毕业审批表</a>
+                <a :href="serverAddres+'/api/graduate/degreeGraduationAuditFormDownload?personId='+scope.row.personId" :download="scope.row.byspb">毕业审批表</a>
             </el-button>
             <el-button v-if="scope.row.isDoctor" type="primary"   >
-                <a :href="serverAddres+'/degree/degree_print_apply_table.do?perNum='+scope.row.perNum" :download="scope.row.bssqdjb">博士申请登记表</a>
+                <a :href="serverAddres+'/api/graduate/degreePrintApplyTable?perNum='+scope.row.perNum" :download="scope.row.bssqdjb">博士申请登记表</a>
             </el-button>
             <el-button v-if="scope.row.isDoctor" type="primary"   >
-                <a :href="serverAddres+'/degree/degree_research_reward_form_download.do?personId='+scope.row.personId" :download="scope.row.kyjlqkb">科研和奖励情况表</a>
+                <a :href="serverAddres+'/api/graduate/degreeResearchRewardFormDownload?personId='+scope.row.personId" :download="scope.row.kyjlqkb">科研和奖励情况表</a>
             </el-button>
             <el-button v-if="scope.row.isDoctor" type="primary"   >
-                <a :href="serverAddres+'/degree/downLoadZiPingBiao.do?personId='+scope.row.personId" :download="scope.row.bszpb">博士自评表</a>
+                <a :href="serverAddres+'/api/graduate/downLoadZiPingBiao?personId='+scope.row.personId" :download="scope.row.bszpb">博士自评表</a>
             </el-button>
           </template>
       </el-table-column>
@@ -216,12 +225,14 @@ export default {
   data() {
     return {
       serverAddres:'',
+      processId:'',
       stuTypeCode:'',
       majorId: '',
       perNum: '',
       perName: '',
       personIds:'',
       multipleSelection: [],
+      processList:[],
       stuTypeList:[],
       majorList: [],
       dataList: [],
@@ -246,6 +257,8 @@ export default {
     fetchData() {
       this.serverAddres = this.GLOBAL.servicePort
       degreeThesisFileDownload({ 'session': document.cookie }).then(res => {
+        this.processId = res.data.processId
+        this.processList = res.data.processList
         this.stuTypeList = res.data.stuTypeList
         this.majorList = res.data.majorList
         this.dataList = res.data.dataList

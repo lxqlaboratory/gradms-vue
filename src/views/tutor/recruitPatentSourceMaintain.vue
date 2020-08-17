@@ -67,6 +67,7 @@
         <template slot-scope="scope">
           {{ scope.row.authoriDate}}
         </template>
+      </el-table-column>
       <el-table-column
         label="授权部门"
         align="center"
