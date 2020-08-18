@@ -124,12 +124,12 @@
           align="center"
           color="black"
         >
-        <template v-if="scope.row.checkFileId !== 0" slot-scope="scope">
+        <template v-if="scope.row.checkFileId > 0" slot-scope="scope">
             <el-button type="primary"   >
                 <a :href="serverAddres+'/api/attachment/downloadAttachmentFile?attachId='+scope.row.checkFileId" :download="scope.row.checkFileName">{{scope.row.checkFileLabel}}</a>
             </el-button>
           </template>
-          <template v-if="scope.row.checkFileId === 0" slot-scope="scope">
+          <template v-else slot-scope="scope">
             {{ scope.row.checkFileLabel }}
           </template>
         </el-table-column>
@@ -138,12 +138,12 @@
           align="center"
           color="black"
         >
-          <template v-if="scope.row.degreeFileId !== 0" slot-scope="scope">
+          <template v-if="scope.row.degreeFileId > 0" slot-scope="scope">
             <el-button type="primary"   >
                 <a :href="serverAddres+'/api/attachment/downloadAttachmentFile?attachId='+scope.row.degreeFileId" :download="scope.row.degreeFileName">{{scope.row.degreeFileLabel}}</a>
             </el-button>
           </template>
-          <template v-if="scope.row.degreeFileId === 0" slot-scope="scope">
+          <template v-else slot-scope="scope">
             {{ scope.row.degreeFileLabel }}
           </template>
       </el-table-column>
