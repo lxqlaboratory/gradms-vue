@@ -71,6 +71,7 @@
           label="姓名"
           align="center"
           color="black"
+          width = "80"
         >
           <template slot-scope="scope">
             {{ scope.row.perName }}
@@ -151,7 +152,7 @@
           label="答辩材料下载"
           align="center"
           color="black"
-          width = "200"
+          width = "300"
         >
           <template  slot-scope="scope">
             <el-button type="primary"   >
@@ -174,6 +175,9 @@
             </el-button>
             <el-button v-if="scope.row.isDoctor" type="primary"   >
                 <a :href="serverAddres+'/api/graduate/downLoadZiPingBiao?personId='+scope.row.personId" :download="scope.row.bszpb">博士自评表</a>
+            </el-button>
+            <el-button v-if="scope.row.comAttachIds!==''" type="primary"   >
+                <a :href="serverAddres+'/api/graduate/downLoadCommentPaper?comAttachIds='+scope.row.comAttachIds" :download="scope.row.pys">评阅书</a>
             </el-button>
           </template>
       </el-table-column>
@@ -209,6 +213,9 @@
           </el-button>
           <el-button  type="primary" @click="getSelectPersonIds(4)" >
             <a :href="serverAddres+'/api/graduate/degreeThesisMaterialDownload?type=7&personIds='+personIds" :download="bszpb">博士自评表</a>
+          </el-button>
+          <el-button  type="primary" @click="getSelectPersonIds(5)" >
+            <a :href="serverAddres+'/api/graduate/degreeThesisMaterialDownload?type=8&personIds='+personIds" :download="pys">评阅书</a>
           </el-button>
           <el-button  type="primary" @click="getSelectPersonIds(0)" >
             <a :href="serverAddres+'/api/graduate/degreeThesisMaterialDownloadAll?&personIds='+personIds" :download="dbcl">答辩材料</a>
@@ -246,8 +253,8 @@ export default {
       bssqdjb:'博士申请登记表.zip',
       kyjlqkb:'科研和奖励情况表.zip',
       bszpb:'博士自评表.zip',
-      dbcl:'答辩材料.zip',
-      
+      pys:'评阅数.zip',
+      dbcl:'答辩材料.zip',      
      }
   },
   created() {
@@ -270,7 +277,7 @@ export default {
       })
     },
     doQuery() {
-      degreeThesisFileDownloadQuery({ 'session': document.cookie,'stuTypeCode':this.stuTypeCode, 'majorId': this.majorId, 'perNum': this.perNum, 'perName':this.perName}).then(res => {
+      degreeThesisFileDownloadQuery({ 'session': document.cookie,'processId':this.processId,'stuTypeCode':this.stuTypeCode, 'majorId': this.majorId, 'perNum': this.perNum, 'perName':this.perName}).then(res => {
         this.dataList = res.data
       })
     },
@@ -284,6 +291,7 @@ export default {
            type===2 && this.multipleSelection[i].checkFileId > 0 || 
            type===3 && this.multipleSelection[i].degreeFileId > 0 ||
            type===4 && this.multipleSelection[i].isDoctort ||
+           type===5 && this.multipleSelection[i].comAttachIds !== '' ||          
            type===0 ) {
             if(this.personIds==='') {
               this.personIds =  this.multipleSelection[i].personId.toString()
