@@ -162,7 +162,7 @@
             </td>
             <td colspan="1">二级单位</td>
             <td colspan="1">
-               <el-select v-model.number="form.collegeId1"  placeholder="请选择二级单位"  @change="getCollege1List()" style="width: 95%;">
+               <el-select v-model.number="form.collegeId1"  placeholder="请选择二级单位"  @change="getCollege2List()" style="width: 95%;">
                     <el-option
                         v-for="item in collegeList1"
                         :key="item.collegeId"
@@ -173,7 +173,7 @@
             </td>
             <td colspan="1">临床医院</td>
             <td colspan="1">
-               <el-select v-model.number="form.collegeId2"  placeholder="请选择临床医院"  @change="getCollege2List()" style="width: 95%;">
+               <el-select v-model.number="form.collegeId2"  placeholder="请选择临床医院"  style="width: 95%;">
                     <el-option
                         v-for="item in collegeList2"
                         :key="item.collegeId"
@@ -257,9 +257,9 @@ export default {
       })
     },    
     getCollege1List(){
-        if(this.form.collegeId === '44' ) {
+        if(this.form.collegeId === 44 ) {
             this.collegeList1 = this.collegeList44; 
-        }else if(this.form.collegeId === '54' ) {
+        }else if(this.form.collegeId === 54 ) {
             this.collegeList1 = this.collegeList54; 
         }else{
             this.collegeList1 = []; 
@@ -267,7 +267,7 @@ export default {
         this.collegeList2 = []; 
     },
     getCollege2List(){
-        if(this.form.collegeId1 === '143' ) {
+        if(this.form.collegeId1 === 143 ) {
             this.collegeList2 = this.collegeList143; 
         }else{
             this.collegeList2 = []; 
@@ -277,11 +277,15 @@ export default {
       tutorAccountMaintainQuery({ 'session': document.cookie, 'perIdCard': this.perIdCard, 'perNum': this.perNum, 'perName':this.perName}).then(res => {
         this.tutorList = res.data.tutorList;
         this.form = res.data.form;
-      })
+        this.getCollege1List();
+        this.getCollege2List();
+    })
     },    
     doEdit(personId) {
       tutorAccountMaintainInfo({ 'session': document.cookie, 'personId': this.personId}).then(res => {
         this.form = res.data;
+        this.getCollege1List();
+        this.getCollege2List();
       })
     },
     setAccountState(personId, state){
