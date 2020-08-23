@@ -92,9 +92,23 @@
         </td>
       </tr>
       <tr>
-        <td colspan="2">
-          <el-checkbox label="是否研究型论著" v-model="form.isResearchWork" />
+        <td colspan="1">文章类型</td>
+        <td colspan="1">
+          <el-select v-model="form.achievementType" placeholder="请选择文章类型" style="width: 100%">
+            <el-option
+              v-for="item in achievementTypeList"
+              :key="item"
+              :label="item"
+              :value="item"
+            />
+          </el-select>
        </td>
+      </tr>
+      <tr>
+        <td colspan="1">检索查询链接</td>
+        <td colspan="1">
+          <el-input v-model="form.webLink" placeholder="请输入检索查询链接" />
+        </td>
       </tr>
       <tr>
         <td colspan="1">备注</td>
@@ -133,6 +147,7 @@ export default {
     return {
       includeList: [],
       rankingList: [],
+      achievementTypeList: [],
       form: {
         disserName: '',
         ranking: '',
@@ -142,7 +157,8 @@ export default {
         publishTime: '',
         include: '',
         unit:'',
-        isResearchWork:'',
+        achievementType:'',
+        webLink:'',
         remark:''
       },
       serverAddres: '',
@@ -173,6 +189,7 @@ export default {
       recruitDisserSourceMaintainFill({ 'session': document.cookie,'disserId': this.disserId  }).then(res => {
         this.includeList = res.data.includeList
         this.rankingList = res.data.rankingList
+        this.achievementTypeList = res.data.achievementTypeList
         this.form = res.data.form
       })
     },

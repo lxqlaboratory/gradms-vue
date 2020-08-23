@@ -123,12 +123,12 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="是否研究型著作"
+        label="文章类型"
         align="center"
         color="black"
       >
         <template slot-scope="scope">
-          {{ scope.row.isResearchWork}}
+          {{ scope.row.achievementType}}
         </template>
       </el-table-column>
       <el-table-column
