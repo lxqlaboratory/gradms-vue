@@ -165,6 +165,13 @@
           </td>
           </tr>
           <tr>
+          <td colspan="1">横向经费(万元)</td>
+          <td colspan="1" v-if="isCanEdit">
+            <el-input v-model="form.projectFeeTotal2" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入横向费数"/>
+          </td>
+          <td colspan="1" v-else  >
+            {{form.projectFeeTotal2}}
+          </td>
           <td colspan="1">可支配经费(万元)</td>
           <td colspan="1" v-if="isCanEdit">
             <el-input v-model="form.projectFeeBalance" oninput="value=value.replace(/[^\d.]/g,'')" placeholder="请输入可支配经费数"/>
@@ -187,10 +194,10 @@
               {{form.masterNum}}
             </td>
           <td colspan="1">协助指导博士生数</td>
-          <td colspan="3" v-if="isCanEdit">
+          <td colspan="1" v-if="isCanEdit">
             <el-input v-model.number="form.assistDoctorNum" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入协助指导博士生数"/>
           </td>
-            <td colspan="3" v-else  >
+            <td colspan="1" v-else  >
               {{form.assistDoctorNum}}
             </td>
         </tr>
@@ -434,6 +441,7 @@ export default {
         applyProjectNum1: 0,
         applyProjectNum2: 0,
         projectFeeTotal: 0,
+        projectFeeTotal2: 0,
         projectFeeBalance: 0,
         doctorNum: 0,
         masterNum: 0,
