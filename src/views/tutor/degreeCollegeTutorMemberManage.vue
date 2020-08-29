@@ -100,7 +100,7 @@ export default {
   name: 'DegreeCollegeTutorMemberManage',
   data() {
     return {
-      memberType:'',
+      memberType:this.$route.query.memberType,
       typeList:[],
       memberList:[]
     }
@@ -110,7 +110,7 @@ export default {
   },
   methods: {
     fetchData() {
-      degreeCollegeTutorMemberManageInit({ 'session': document.cookie }).then(res => {
+      degreeCollegeTutorMemberManageInit({ 'session': document.cookie,'memberType': this.memberType }).then(res => {
         this.memberList = res.data.memberList
         this.typeList = res.data.typeList
         this.memberType=res.data.memberType

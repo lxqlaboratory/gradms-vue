@@ -113,7 +113,7 @@
             </td>
             <td colspan="1">登录账号</td>
             <td colspan="1">
-               {{ form.loginName }}
+              <el-input v-model="form.loginName" placeholder="请输入新教工号编号" />
             </td>
             <td colspan="1">姓名</td>
             <td colspan="1">
@@ -187,7 +187,7 @@
         <div align="center">
             <el-button type="primary" @click="doAdd">新建账号</el-button>
             <el-button type="primary" @click="doUpdate">修改保存</el-button>
-            <el-button type="primary" @click="doMerge">修改保存</el-button>
+            <el-button type="primary" @click="doMerge">合并账号</el-button>
         </div>
     </div>
 </template>
