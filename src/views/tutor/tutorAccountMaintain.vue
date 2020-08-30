@@ -381,7 +381,7 @@ export default {
       });
     },
     doMerge() {
-      tutorAccountMaintainMerge({ 'session': document.cookie, 'personId': this.form.personId,'perNum': this.form.perNum}).then(res => {
+      tutorAccountMaintainMerge({ 'session': document.cookie, 'personId': this.form.personId,'perNum': this.form.loginName}).then(res => {
         if(res.code === '0'){
           this.$message({
             message: '合并成功',
