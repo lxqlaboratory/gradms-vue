@@ -96,6 +96,15 @@
         </template>
       </el-table-column>
       <el-table-column
+        label="审核备注"
+        align="center"
+        color="black"
+      >
+        <template slot-scope="scope">
+          {{ scope.row.checkNote}}
+        </template>
+      </el-table-column>
+      <el-table-column
         label="操作"
         align="center"
         color="black"
