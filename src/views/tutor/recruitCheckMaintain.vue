@@ -118,7 +118,7 @@
             <el-button type="text" @click="project(scope.row.personId)"  >项目</el-button>
             <el-button type="text" @click="book(scope.row.personId)" >专著</el-button>
             <el-button type="text" @click="patent(scope.row.personId)" >专利</el-button>
-            <el-button type="text" @click="rweard(scope.row.personId)" >获奖</el-button>
+            <el-button type="text" @click="reward(scope.row.personId)" >获奖</el-button>
           </template>
         </el-table-column>
       </el-table>
