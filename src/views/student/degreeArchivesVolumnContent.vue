@@ -136,7 +136,7 @@ export default {
           window.location.href = this.serverAddres+ '/archives/archives_initPrintInfo.do?personId=' + personId
     },
     doPrint(personId){
-          window.location.href = this.serverAddres+ '/archives/archives_printLetter.do?exportName=archivesPrint&&exportType=1094&&doctype=pdf&&fileName=juanneimulu.pdf&personId='+personId
+          window.location.href = this.serverAddres+ '/archives/archives_printLetter.do?exportName=archivesPrint&exportType=1094&&doctype=pdf&fileName=juanneimulu.pdf&personId='+personId
     },
     doAdd(){
           window.location.href = this.serverAddres+ '/archives/archives_initAddInfo.do?degreeDate='+this.degreeDate+'&stuType='+this.stuTypeCode
