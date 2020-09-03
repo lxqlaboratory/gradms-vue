@@ -119,6 +119,15 @@
       </template>
     </el-table-column>
     <el-table-column
+      label="查看修改"
+      align="center"
+      color="black"
+    >
+      <template slot-scope="scope">
+        <el-button type="text" @click="modfiyDiss(scope.row.disserId)">详细</el-button>
+      </template>
+    </el-table-column>
+    <el-table-column
       label="操作"
       align="center"
       color="black"
@@ -174,6 +183,9 @@
             this.List = res.data
 
           })
+        },
+        modfiyDiss(disserId){
+          this.$router.push({ path: 'recruitDisserMaintainDetail', query: { 'disserId': disserId ,'state': 0 }})
         },
         doQuery(){
           tutorAchievementSourceCheckPerson({'session': document.cookie,'achievementName':this.achievementName,'checkState':this.checkState,'personId': this.$route.query.personId ,'tableName': this.$route.query.tableName  }).then(res => {
