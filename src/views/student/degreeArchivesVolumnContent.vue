@@ -2,7 +2,7 @@
   <div class="app-container">
       <div class="query-container">
         学位授予时间
-        <el-select v-model="degreeDate"  placeholder="请选择学位授予时间"  style="width: 8%;">
+        <el-select v-model="degreeDate"  placeholder="请选择学位授予时间"  style="width: 20%;">
           <el-option
             v-for="item in dateList"
             :key="item.value"
@@ -11,7 +11,7 @@
           </el-option>
         </el-select>
         学生类型
-        <el-select v-model="stuTypeCode" placeholder="请选择学生类型"  style="width: 12%;">
+        <el-select v-model="stuTypeCode" placeholder="请选择学生类型"  style="width: 20%;">
           <el-option
             v-for="item in stuTypeList"
             :key="item.value"
