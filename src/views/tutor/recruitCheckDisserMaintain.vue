@@ -118,9 +118,34 @@
         {{ scope.row.unit}}
       </template>
     </el-table-column>
+    <el-table-column
+      label="查看修改"
+      align="center"
+      color="black"
+    >
+      <template slot-scope="scope">
+        <el-button type="text" @click="modfiyDiss(scope.row.disserId)">详细</el-button>
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="操作"
+      align="center"
+      color="black"
+    >
+      <template slot-scope="scope">
+        <el-button type="primary"  v-if="scope.row.attachId" >
+          <a :href="serverAddres+'/api/attachment/downloadAttachmentFile?attachId='+scope.row.attachId" :download="scope.row.disserId+'.pdf'">下载论文</a>
+        </el-button>
+        <span  v-else >
+          未上传
+        </span>
+      </template>
+    </el-table-column>
   </el-table>
   <div align="center">
-    <el-button type="primary" @click="submit" >审核</el-button>
+    <el-button type="primary" @click="submit" >审核通过</el-button>
+    <el-button type="primary" @click="notPass" >取消审核</el-button>
+    <el-input v-model="checkNote" placeholder="请输入审核备注" style="width: 20%;"  />
   </div>
 </div>
 </template>
@@ -132,6 +157,8 @@
         name: "recruitCheckDisserMaintain",
       data() {
         return {
+          checkNote: '',
+          serverAddres:'',
           List:[],
           sourceSelection:'',
           checkState:'',
@@ -150,11 +177,15 @@
       },
       methods: {
         fetchData() {
+          this.serverAddres = this.GLOBAL.servicePort
           console.log(this.$route.query.personId)
           tutorAchievementSourceCheckPerson({'session': document.cookie,'personId': this.$route.query.personId ,'tableName': this.$route.query.tableName  }).then(res => {
             this.List = res.data
 
           })
+        },
+        modfiyDiss(disserId){
+          this.$router.push({ path: 'recruitDisserMaintainDetail', query: { 'disserId': disserId ,'state': 0 }})
         },
         doQuery(){
           tutorAchievementSourceCheckPerson({'session': document.cookie,'achievementName':this.achievementName,'checkState':this.checkState,'personId': this.$route.query.personId ,'tableName': this.$route.query.tableName  }).then(res => {
@@ -170,10 +201,26 @@
           for(var i = 1; i < this.sourceSelection.length;i++){
             achievementIds = achievementIds + '-' + this.sourceSelection[i].disserId.toString()
           }
-          tutorAchievementSourceCheckCheck({'session': document.cookie,'checkState': 1,'tableName': this.$route.query.tableName, 'achievementIds': achievementIds }).then(res => {
+          tutorAchievementSourceCheckCheck({'session': document.cookie,'checkState': 1,'tableName': this.$route.query.tableName, 'achievementIds': achievementIds ,'checkNote':this.checkNote}).then(res => {
             if(res.msg==='sucess'){
               this.$message({
                 message: '审核通过',
+                type: 'success'
+              });
+              this.$router.push({ path: 'recruitCheckMaintain'})
+            }
+
+          })
+        },
+        notPass(){
+          var achievementIds = this.sourceSelection[0].disserId.toString();
+          for(var i = 1; i < this.sourceSelection.length;i++){
+            achievementIds = achievementIds + '-' + this.sourceSelection[i].disserId.toString()
+          }
+          tutorAchievementSourceCheckCheck({'session': document.cookie,'checkState': 0,'tableName': this.$route.query.tableName, 'achievementIds': achievementIds ,'checkNote':this.checkNote}).then(res => {
+            if(res.msg==='sucess'){
+              this.$message({
+                message: '取消审核',
                 type: 'success'
               });
               this.$router.push({ path: 'recruitCheckMaintain'})

@@ -151,6 +151,7 @@ export default {
         projectType: '',
         ranking: '',
         projectFee: '',
+        projectBalance:'',
         projectSource: '',
         orderName: '',
         projectApplyTime: '',

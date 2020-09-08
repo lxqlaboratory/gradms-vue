@@ -91,7 +91,7 @@
       <fileupload
         v-if="showB&&showD"
         url="/api/tutor/tutorAchievementSourceAttachUpload"
-        :data="{'tableName': 'reeard','achievementId':rewardId}"
+        :data="{'tableName': 'reward','achievementId':rewardId}"
         accepttype=".pdf"
         @successcallback="onSuccess"
         @preview="onPreview"

@@ -55,7 +55,7 @@
           color="black"
         >
           <template slot-scope="scope">
-            {{ scope.row.perNum }}
+            {{ scope.row.perName }}
           </template>
         </el-table-column>
         <el-table-column

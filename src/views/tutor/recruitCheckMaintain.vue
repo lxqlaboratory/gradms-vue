@@ -118,7 +118,7 @@
             <el-button type="text" @click="project(scope.row.personId)"  >项目</el-button>
             <el-button type="text" @click="book(scope.row.personId)" >专著</el-button>
             <el-button type="text" @click="patent(scope.row.personId)" >专利</el-button>
-            <el-button type="text" @click="reeard(scope.row.personId)" >获奖</el-button>
+            <el-button type="text" @click="reward(scope.row.personId)" >获奖</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -165,8 +165,8 @@
         patent(personId){
           this.$router.push({ path: 'recruitCheckPatentMaintain',query: { 'personId':personId,'tableName':'patent'} })
         },
-        reeard(personId){
-          this.$router.push({ path: 'recruitCheckRewardMaintain',query: { 'personId':personId,'tableName':'reeard'} })
+        reward(personId){
+          this.$router.push({ path: 'recruitCheckRewardMaintain',query: { 'personId':personId,'tableName':'reward'} })
         }
       }
     }
