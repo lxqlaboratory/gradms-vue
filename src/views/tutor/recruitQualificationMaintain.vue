@@ -32,6 +32,7 @@
       <el-input v-model="perNum" placeholder="请输入教师工号" style="width: 8%;"  />
       教师姓名
       <el-input v-model="perName" placeholder="请输入教师姓名" style="width: 8%;"  />
+      <el-checkbox label="仅指导在职" v-model="isTutorPartStudent" />     
       <el-button type="primary" @click="getTutorList()" >查询</el-button>
       </div>
     <div>
@@ -127,6 +128,7 @@
               <el-checkbox label="专博" v-model="scope.row.isProfessionalDoctor" />
               <el-checkbox label="学硕" v-model="scope.row.isScienceMaster" />
               <el-checkbox label="专硕" v-model="scope.row.isProfessionalMaster" />
+              <el-checkbox label="仅指导在职学生" v-model="scope.row.isTutorPartStudent" />
           </template>
         </el-table-column>
        <el-table-column
@@ -186,6 +188,7 @@ export default {
       perNum:'',
       perName:'',
       tutorType:'',
+      isTutorPartStudent:false,
       personId:'',
       yearList: [],
       collegeList:[],
@@ -240,7 +243,7 @@ export default {
           type: 'success'
         });
       }else{
-       recruitQualificationMaintainAdd({ 'session': document.cookie, 'personId': this.personId, 'year': this.year, 'tutorType': this.tutorType}).then(res => {
+       recruitQualificationMaintainAdd({ 'session': document.cookie, 'personId': this.personId, 'year': this.year, 'tutorType': this.tutorType,'isTutorPartStudent':this.isTutorPartStudent}).then(res => {
          if(res.code === '0'){
           this.$message({
             message: '添加成功',
@@ -263,7 +266,8 @@ export default {
       , 'isScienceDoctor': tutor.isScienceDoctor
       , 'isProfessionalDoctor': tutor.isProfessionalDoctor
       , 'isScienceMaster': tutor.isScienceMaster
-      , 'isProfessionalMaster': tutor.isProfessionalMaster}).then(res => {
+      , 'isProfessionalMaster': tutor.isProfessionalMaster
+      , 'isTutorPartStudent': tutor.isTutorPartStudent}).then(res => {
          this.$message({
            message: '保存成功',
            type: 'success',

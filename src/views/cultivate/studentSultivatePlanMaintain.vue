@@ -12,7 +12,6 @@
     <div  class="table-container">
       <el-table
         :data="sessionList"
-        :span-method="objectSpanMethod4"
         border
         style="width: 100%;margin-top: -6px"
         size="mini"
@@ -56,7 +55,6 @@
           <template slot-scope="scope">
             {{ scope.row.sessionContent }}
           </template>
-
         </el-table-column>
       </el-table>
     </div>
