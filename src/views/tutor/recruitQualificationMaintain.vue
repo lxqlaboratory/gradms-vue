@@ -218,7 +218,7 @@ export default {
       })
     },
     getTutorList() {
-      recruitQualificationMaintainQuery({ 'session': document.cookie, 'year':this.year, 'collegeId':this.collegeId, 'perNum':this.perNum, 'perName':this.perName,'tutorType':this.tutorType }).then(res => {
+      recruitQualificationMaintainQuery({ 'session': document.cookie, 'year':this.year, 'collegeId':this.collegeId, 'perNum':this.perNum, 'perName':this.perName,'tutorType':this.tutorType,'isTutorPartStudent':this.isTutorPartStudent }).then(res => {
         this.tutorList = res.data.tutorList
         this.selectList = res.data.selectList
       })
