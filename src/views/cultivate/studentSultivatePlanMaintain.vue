@@ -781,7 +781,7 @@
       课程名
       <el-input v-model="courseName" placeholder="请输入课程名"  style="width: 15%;" />
       <el-button type="primary" size="mini" @click="publicCourseQuery()">公共选修课查询</el-button>
-      <el-button type="primary" size="mini" @click="acrossCourseQuery()">跨学选课查询</el-button>
+      <el-button type="primary" size="mini" @click="acrossCourseQuery()">跨学院选课查询</el-button>
     </div>
     <div class="table-container">
       <el-table
