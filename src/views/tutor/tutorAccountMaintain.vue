@@ -117,7 +117,7 @@
             </td>
             <td colspan="1">姓名</td>
             <td colspan="1">
-               {{ form.perName }}
+              <el-input v-model="form.perName" placeholder="请输入姓名" />
             </td>
         </tr>
         <tr>
