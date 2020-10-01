@@ -7,7 +7,7 @@
         <el-option
           v-for="item in configList"
           :key="item.configId"
-          :label="item.stuTypeNames"
+          :label="item.configName"
           :value="item.configId">
         </el-option>
       </el-select>
