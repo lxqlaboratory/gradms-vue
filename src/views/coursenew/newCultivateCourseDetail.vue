@@ -94,7 +94,7 @@
           <td colspan="1">
             {{ detileForm.basicFaceCode }}
           </td>
-          <td colspan="1">课程负责人</td>
+          <td colspan="1">课程组</td>
           <td colspan="1">
             {{ detileForm.teachGroup }}
           </td>
