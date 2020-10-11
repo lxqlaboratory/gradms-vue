@@ -492,6 +492,12 @@ export const constantRoutes = [
         component: () => import('@/views/tutor/tutorTrainQuestionStatistics'),
         meta: { title: '导师培训统计' }
       },
+      {
+        path: 'tutorTrainQuestionStatisticsCollege',
+        name: 'tutorTrainQuestionStatisticsCollege',
+        component: () => import('@/views/tutor/tutorTrainQuestionStatisticsCollege'),
+        meta: { title: '导师培训统计' }
+      },
       
     ]
   },
