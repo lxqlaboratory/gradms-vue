@@ -949,3 +949,18 @@ export function tutorAccountMaintainAdd(data) {
     data
   })
 }
+
+export function tutorTrainQuestionStatistics(data) {
+  return request({
+    url: '/api/tutor/tutorTrainQuestionStatistics',
+    method: 'POST',
+    data
+  })
+}
+export function tutorTrainQuestionStatisticsQuery(data) {
+  return request({
+    url: '/api/tutor/tutorTrainQuestionStatisticsQuery',
+    method: 'POST',
+    data
+  })
+}

@@ -486,6 +486,12 @@ export const constantRoutes = [
         component: () => import('@/views/tutor/recruitQualificationCheckCampus'),
         meta: { title: '招生资格审核' }
       },
+      {
+        path: 'tutorTrainQuestionStatistics',
+        name: 'tutorTrainQuestionStatistics',
+        component: () => import('@/views/tutor/tutorTrainQuestionStatistics'),
+        meta: { title: '导师培训统计' }
+      },
       
     ]
   },
