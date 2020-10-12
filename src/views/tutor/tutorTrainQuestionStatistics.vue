@@ -36,21 +36,21 @@
            </template>
          </el-table-column>
         <el-table-column
-            label="导师类型"
-            align="center"
-            color="black"
-          >
-           <template slot-scope="scope">
-             {{ scope.row.tutorTypeName }}
-           </template>
-         </el-table-column>
-        <el-table-column
             label="学院"
             align="center"
             color="black"
           >
            <template slot-scope="scope">
              {{ scope.row.collegeName }}
+           </template>
+         </el-table-column>
+        <el-table-column
+            label="导师数"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.total }}
            </template>
          </el-table-column>
          <el-table-column
@@ -66,12 +66,12 @@
 <script>
 import XlsxPopulate from 'xlsx-populate';
 import { saveAs } from 'file-saver';
-import { tutorTrainQuestionStatistics } from '@/api/student'
-import { tutorTrainQuestionStatisticsQuery } from '@/api/student'
+import { tutorTrainQuestionStatistics } from '@/api/tutor'
+import { tutorTrainQuestionStatisticsQuery } from '@/api/tutor'
 
 
 export default {
-  name: 'studentAssManageMoneySummary',
+  name: 'tutorTrainQuestionStatistics',
   data() {
     return {
       tutorType:'1',
@@ -87,6 +87,7 @@ export default {
             label: '硕导'
           }
         ],
+        dataList:[],
     }
   },
   created() {
@@ -104,8 +105,7 @@ export default {
     doQuery() {
       tutorTrainQuestionStatisticsQuery({ 'session': document.cookie,'tutorType':this.tutorType,'collegeId':this.collegeId
       }).then(res => {
-        this.cols = res.data.cols
-        this.dataList = res.data.dataList
+        this.dataList = res.data
       })
     },
     doExport(){
