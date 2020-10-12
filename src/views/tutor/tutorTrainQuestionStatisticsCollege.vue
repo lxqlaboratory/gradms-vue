@@ -1,27 +1,5 @@
 <template>
   <div class="app-container">
-    <div class="query-container">
-      导师类型
-      <el-select v-model="tutorType" placeholder="请选择类型" style="width: 8%;">
-        <el-option
-          v-for="item in tutorTypeList"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        />
-      </el-select>
-      学院
-      <el-select v-model="collegeId" placeholder="请选择学院" style="width: 12%;">
-        <el-option
-          v-for="item in collegeList"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        />
-      </el-select>
-      <el-button type="primary" @click="doQuery">查询</el-button>
-      <el-button type="primary" @click="doExport">导出</el-button>
-    </div>
     <div class="table-container">
       <el-table :data="dataList" style="width: 100%">
         <el-table-column
@@ -36,21 +14,21 @@
            </template>
          </el-table-column>
         <el-table-column
-            label="导师类型"
+            label="编号"
             align="center"
             color="black"
           >
            <template slot-scope="scope">
-             {{ scope.row.tutorTypeName }}
+             {{ scope.row.perNum }}
            </template>
          </el-table-column>
         <el-table-column
-            label="学院"
+            label="姓名"
             align="center"
             color="black"
           >
            <template slot-scope="scope">
-             {{ scope.row.collegeName }}
+             {{ scope.row.perName }}
            </template>
          </el-table-column>
          <el-table-column
