@@ -971,4 +971,11 @@ export function tutorTrainQuestionStatisticsCollege(data) {
     data
   })
 }
+export function tutorTrainQuestionStatisticsAnswer(data) {
+  return request({
+    url: '/api/tutor/tutorTrainQuestionStatisticsAnswer',
+    method: 'POST',
+    data
+  })
+}
 

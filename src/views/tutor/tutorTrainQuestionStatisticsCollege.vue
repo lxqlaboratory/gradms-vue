@@ -72,8 +72,9 @@
             align="center"
             color="black"
           >
-           <template slot-scope="scope">
-             {{ scope.row.detail }}
+           <template slot-scope="scope"
+             align="center">
+            <el-button type="text" @click="answerView('测试',8)" > {{ scope.row.perName }}</el-button>
            </template>
          </el-table-column>
         </el-table>
@@ -102,6 +103,9 @@ export default {
       tutorTrainQuestionStatisticsCollege({ 'session': document.cookie,'collegeId':this.collegeId,'tutorType':this.tutorType }).then(res => {
         this.dataList = res.data
       })
+    },
+    answerView(groupName,groupAnswerId){
+            this.$router.push({ path: '/tutor/tutorTrainQuestionStatisticsAnswer', query: { 'groupName':groupName,'groupAnswerId':groupAnswerId}})
     },
   }
 }
