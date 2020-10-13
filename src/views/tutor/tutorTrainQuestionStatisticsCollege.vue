@@ -31,21 +31,57 @@
              {{ scope.row.perName }}
            </template>
          </el-table-column>
-         <el-table-column
-            v-for="col in cols"
-            :prop="col.prop" :label="col.label" 
-             align="center"
-            >
-          </el-table-column>
+        <el-table-column
+            label="已完成答卷"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.finishCount }}
+           </template>
+         </el-table-column>
+        <el-table-column
+            label="正确率"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.okTatio }}
+           </template>
+         </el-table-column>
+        <el-table-column
+            label="正在答卷中"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.answerCount }}
+           </template>
+         </el-table-column>
+        <el-table-column
+            label="未开始答卷"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.undonCount }}
+           </template>
+         </el-table-column>
+        <el-table-column
+            label="答卷详情"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.detail }}
+           </template>
+         </el-table-column>
         </el-table>
     </div>
   </div>
 </template>
 <script>
-import XlsxPopulate from 'xlsx-populate';
-import { saveAs } from 'file-saver';
-import { tutorTrainQuestionStatisticsCollege } from '@/api/student'
-
+import { tutorTrainQuestionStatisticsCollege } from '@/api/tutor'
 
 export default {
   name: 'tutorTrainQuestionStatisticsCollege',
@@ -53,82 +89,20 @@ export default {
     return {
       tutorType:'1',
       collegeId:'',
-      collegeList:[],
-      cols:[],
-      tutorTypeList:[
-          {
-            value: '1',
-            label: '博导'
-          }, {
-            value: '2',
-            label: '硕导'
-          }
-        ],
+      dataList:[],
     }
   },
   created() {
+    this.tutorType =  this.$route.query.tutorType
+    this.collegeId =  this.$route.query.collegeId
     this.fetchData()
   },
   methods: {
     fetchData() {
-      tutorTrainQuestionStatistics({ 'session': document.cookie }).then(res => {
-        this.collegeList= res.data.collegeList 
-        this.tutorType = res.data.tutorType
-        this.cols = res.data.cols
-        this.dataList = res.data.dataList
+      tutorTrainQuestionStatisticsCollege({ 'session': document.cookie,'collegeId':this.collegeId,'tutorType':this.tutorType }).then(res => {
+        this.dataList = res.data
       })
     },
-    doQuery() {
-      tutorTrainQuestionStatisticsQuery({ 'session': document.cookie,'tutorType':this.tutorType,'collegeId':this.collegeId
-      }).then(res => {
-        this.cols = res.data.cols
-        this.dataList = res.data.dataList
-      })
-    },
-    doExport(){
-      var filename = "统计信息表.xlsx";
-      var sheetName = "统计信息表";
-      const XlsxPopulate = require('xlsx-populate');
-      XlsxPopulate.fromBlankAsync()
-        .then(workbook => {
-
-        // Set worksheet mame
-        var ws = workbook.sheet(0);
-        ws.name(sheetName);
-        var header = ["perNum","perName","collegeName","stuTypeName","perIdCard","zxjh"];
-        var headerExcel = ["学号","姓名","学院", "学生类型","身份证号","专项计划"];
-        var i;
-        for(i = 0; i < this.cols.length;i++) {
-          header.push(this.cols[i].prop);
-          headerExcel.push(this.cols[i].label);
-        }
-        header.push("sum");
-        headerExcel.push("合计");
-        // set header
-        ws.cell("A1").value([headerExcel]);
-        // create data from array of json object to array of array
-        var valueArray = this.dataList.map(
-          item => {
-            var va = [];
-            header.forEach(element => {
-              va.push(item[element])
-            });
-            return va;
-          }
-        )
-
-        // set data
-        ws.cell("A2").value(valueArray);
-
-        // Write to blob.
-        return workbook.outputAsync();
-        }).then(blob => {
-          // wrtie to file
-          saveAs(blob, filename)
-
-        })
-    },
-
   }
 }
 </script>

@@ -41,7 +41,7 @@
             color="black"
           >
            <template slot-scope="scope">
-             {{ scope.row.collegeName }}
+            <el-button type="text" @click="collegeView(scope.row.collegeId)" > {{ scope.row.collegeName }}</el-button>
            </template>
          </el-table-column>
         <el-table-column
@@ -107,6 +107,9 @@ export default {
       }).then(res => {
         this.dataList = res.data
       })
+    },
+    collegeView(collegeId){
+            this.$router.push({ path: '/tutor/tutorTrainQuestionStatisticsCollege', query: { 'collegeId':collegeId,'tutorType':this.tutorType}})
     },
     doExport(){
       var filename = "统计信息表.xlsx";

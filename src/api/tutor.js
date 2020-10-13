@@ -964,3 +964,11 @@ export function tutorTrainQuestionStatisticsQuery(data) {
     data
   })
 }
+export function tutorTrainQuestionStatisticsCollege(data) {
+  return request({
+    url: '/api/tutor/tutorTrainQuestionStatisticsCollege',
+    method: 'POST',
+    data
+  })
+}
+
