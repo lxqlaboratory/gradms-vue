@@ -39,21 +39,12 @@
            </template>
          </el-table-column>
          <el-table-column
-            label="学院编号"
+            label="专项计划"
             align="center"
             color="black"
           >
            <template slot-scope="scope">
-             {{ scope.row.collegeNum }}
-           </template>
-         </el-table-column>
-         <el-table-column
-            label="学院名称"
-            align="center"
-            color="black"
-          >
-           <template slot-scope="scope">
-             {{ scope.row.collegeName }}
+             {{ scope.row.zxjh }}
            </template>
          </el-table-column>
          <el-table-column
@@ -124,8 +115,8 @@ export default {
         // Set worksheet mame
         var ws = workbook.sheet(0);
         ws.name(sheetName);
-        var header = ["majorNum","majorName","collegeNum","collegeName","grade"];
-        var headerExcel = ["专业代码","专业名称","学院编码","学院名称","年级"];
+        var header = ["majorNum","majorName","zxjh","grade"];
+        var headerExcel = ["专业代码","专业名称","zxjh","年级"];
         var i;
         for(i = 0; i < this.cols.length;i++) {
           header.push(this.cols[i].prop);
