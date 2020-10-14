@@ -64,7 +64,7 @@
             color="black"
           >
            <template slot-scope="scope">
-             {{ scope.row.undonCount }}
+             {{ scope.row.undoneCount }}
            </template>
          </el-table-column>
         <el-table-column
