@@ -74,7 +74,9 @@
           >
            <template slot-scope="scope"
              align="center">
-            <el-button type="text" @click="answerView('测试',8)" > {{ scope.row.perName }}</el-button>
+             <div v-for="items in scope.row.answerList" :key="items">
+              <el-button type="text" @click="answerView(items.groupName,items.groupAnswerId)" > {{ items.groupName }}</el-button>
+             </div>
            </template>
          </el-table-column>
         </el-table>

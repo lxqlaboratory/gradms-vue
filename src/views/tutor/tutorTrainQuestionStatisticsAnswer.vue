@@ -87,7 +87,10 @@ export default {
   },
   methods: {
     fetchData() {
-      this.groupName = this.$route.groupName
+
+      this.groupName = this.$route.query.groupName
+      
+
       tutorTrainQuestionStatisticsAnswer({ 'session': document.cookie, 'groupAnswerId':this.$route.query.groupAnswerId }).then(res => {
         this.questionNum = res.data.questionNum
         this.okNum = res.data.okNum
