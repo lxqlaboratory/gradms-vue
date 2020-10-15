@@ -39,12 +39,21 @@
            </template>
          </el-table-column>
          <el-table-column
-            label="专项计划"
+            label="学院编号"
             align="center"
             color="black"
           >
            <template slot-scope="scope">
-             {{ scope.row.zxjh }}
+             {{ scope.row.collegeNum }}
+           </template>
+         </el-table-column>
+         <el-table-column
+            label="学院名称"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.collegeName }}
            </template>
          </el-table-column>
          <el-table-column

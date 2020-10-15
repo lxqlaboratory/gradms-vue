@@ -49,6 +49,42 @@
           </template>
         </el-table-column>
          <el-table-column
+            label="培养单位"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.collegeName }}
+           </template>
+         </el-table-column>
+         <el-table-column
+            label="学科门类"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.subSort }}
+           </template>
+         </el-table-column>
+         <el-table-column
+            label="一级学科"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.firSubName }}
+           </template>
+         </el-table-column>
+        <el-table-column
+            label="一级学科代码"
+            align="center"
+            color="black"
+          >
+           <template slot-scope="scope">
+             {{ scope.row.firSubCode }}
+           </template>
+         </el-table-column>
+         <el-table-column
             label="专业名称"
             align="center"
             color="black"
@@ -75,42 +111,6 @@
              {{ scope.row.classYear }}
            </template>
          </el-table-column>
-         <el-table-column
-            label="专项计划"
-            align="center"
-            color="black"
-          >
-           <template slot-scope="scope">
-             {{ scope.row.zxjh }}
-           </template>
-         </el-table-column>
-         <el-table-column
-            label="毕业数"
-            align="center"
-            color="black"
-          >
-          <template slot-scope="scope">
-            {{ scope.row.graduate }}
-          </template>
-          </el-table-column>
-         <el-table-column
-            label="授学位数"
-            align="center"
-            color="black"
-          >
-          <template slot-scope="scope">
-            {{ scope.row.graduate }}
-          </template>
-          </el-table-column>
-         <el-table-column
-            label="招生数"
-            align="center"
-            color="black"
-          >
-          <template slot-scope="scope">
-            {{ scope.row.grade1 }}
-          </template>
-          </el-table-column>
          <el-table-column
             label="应届生"
             align="center"
