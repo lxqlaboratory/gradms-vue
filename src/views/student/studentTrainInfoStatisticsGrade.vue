@@ -259,8 +259,8 @@ export default {
         // Set worksheet mame
         var ws = workbook.sheet(0);
         ws.name(sheetName);
-        var header = ["collegeName","subSort","firSubName","firSubCode","majorName","majorNum","classYear","newGraduate","grade1","grade2","grade3","grade4","grade5"];
-        var headerExcel = ["培养单位","学科门类","一级学科","一级学科代码","专业名称","专业代码","学制","应届生","一年级","二年级","三年级","四年级","五年级及以上"];
+        var header = ["majorName","majorNum","classYear","zxjh","graduate","graduate","grade1","newGraduate","grade1","grade2","grade3","grade4","grade5"];
+        var headerExcel = ["专业名称","专业代码","学制","专项计划","毕业生","授学位数","招生数","应届生","一年级","二年级","三年级","四年级","五年级及以上"];
         // set header
         ws.cell("A1").value([headerExcel]);
         // create data from array of json object to array of array
